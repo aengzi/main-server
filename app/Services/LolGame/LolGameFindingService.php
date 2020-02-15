@@ -1,0 +1,50 @@
+<?php
+
+namespace App\Services\LolGame;
+
+use App\Service;
+use App\Models\LolGame;
+use App\Services\FindingService;
+
+class LolGameFindingService extends Service
+{
+    public static function getArrBindNames()
+    {
+        return [
+            'result'
+                => 'lol_game for {{id}}'
+        ];
+    }
+
+    public static function getArrCallbackLists()
+    {
+        return [];
+    }
+
+    public static function getArrLoaders()
+    {
+        return [
+            'model_class' => [function () {
+
+                return LolGame::class;
+            }]
+        ];
+    }
+
+    public static function getArrPromiseLists()
+    {
+        return [];
+    }
+
+    public static function getArrRuleLists()
+    {
+        return [];
+    }
+
+    public static function getArrTraits()
+    {
+        return [
+            FindingService::class
+        ];
+    }
+}

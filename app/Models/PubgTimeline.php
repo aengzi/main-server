@@ -1,0 +1,26 @@
+<?php
+
+namespace App\Models;
+
+use App\Model;
+
+class PubgTimeline extends Model
+{
+    public $incrementing = true;
+    public $guarded = ['id'];
+    protected $casts = [
+        'game_id' => 'integer'
+    ];
+    protected $fillable = [
+        'game_id',
+        'type',
+        'elapsed_sec'
+    ];
+    protected $hidden = [
+    ];
+
+    public function getExpandable()
+    {
+        return [];
+    }
+}

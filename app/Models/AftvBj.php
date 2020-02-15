@@ -1,0 +1,38 @@
+<?php
+
+namespace App\Models;
+
+use App\Model;
+use App\Models\AftvBcast;
+
+class AftvBj extends Model
+{
+    public $incrementing = false;
+    protected $keyType = 'string';
+    protected $casts = [
+        'station_id' => 'integer',
+        'bbs_id' => 'integer'
+    ];
+    protected $fillable = [
+        'id',
+        'nick',
+        'station_id',
+        'bbs_id',
+        'children_check',
+        'gdrive_id'
+    ];
+    protected $hidden = [
+        'children_check',
+        'gdrive_id'
+    ];
+
+    public function bcasts()
+    {
+        return $this->hasMany(AftvBcast::class, 'bj_user_id', 'id');
+    }
+
+    public function getExpandable()
+    {
+        return ['bcasts'];
+    }
+}
