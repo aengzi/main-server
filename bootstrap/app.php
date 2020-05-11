@@ -46,6 +46,7 @@ $app = new Laravel\Lumen\Application(
 
 $app->withFacades();
 $app->withEloquent();
+$app->useStoragePath(env('APP_STORAGE', base_path() . '/storage'));
 
 config([
     'database.connections.mysql.options' => [
