@@ -13,59 +13,69 @@
 
 use Illuminate\Support\Facades\DB;
 
-$router->group([
-    'middleware' => [
-        App\Http\Middleware\ApiMiddleware::class,
-        App\Http\Middleware\AuthTokenMiddleware::class
-    ]
-], function () use ($router) {
+$addRoutes = function () use ($router) {
 
-    $router->get('auth/user', 'AuthUserController@index');
-    $router->get('aftv-bcasts', 'AftvBcastController@index');
-    $router->get('aftv-bcasts/{id}', 'AftvBcastController@show');
-    $router->get('aftv-reviews/{id}', 'AftvReviewController@show');
-    $router->get('clips', 'ClipController@index');
-    $router->delete('clips/{id}', 'ClipController@destroy');
-    $router->get('clips/{id}', 'ClipController@show');
-    $router->get('comment-replies', 'CommentReplyController@index');
-    $router->post('comment-replies', 'CommentReplyController@store');
-    $router->patch('comment-replies/{id}', 'CommentReplyController@update');
-    $router->delete('comment-replies/{id}', 'CommentReplyController@destroy');
-    $router->get('comment-threads', 'CommentThreadController@index');
-    $router->post('comment-threads', 'CommentThreadController@store');
-    $router->patch('comment-threads/{id}', 'CommentThreadController@update');
-    $router->delete('comment-threads/{id}', 'CommentThreadController@destroy');
-    $router->get('dislikes', 'DislikeController@index');
-    $router->post('dislikes', 'DislikeController@store');
-    $router->delete('dislikes/{id}', 'DislikeController@destroy');
-    $router->post('email/sign-up', 'SignUpEmailController@store');
-    $router->post('email/change-email', 'ChangeEmailEmailController@store');
-    $router->get('likes', 'LikeController@index');
-    $router->post('likes', 'LikeController@store');
-    $router->delete('likes/{id}', 'LikeController@destroy');
-    $router->get('lol-champions', 'LolChampionController@index');
-    $router->get('lol-games', 'LolGameController@index');
-    $router->get('lol-games/{id}', 'LolGameController@show');
-    $router->get('posts', 'PostController@index');
-    $router->post('posts', 'PostController@store');
-    $router->get('posts/{id}', 'PostController@show');
-    $router->delete('posts/{id}', 'PostController@destroy');
-    $router->patch('posts/{id}', 'PostController@update');
-    $router->get('pubg-games', 'PubgGameController@index');
-    $router->get('pubg-games/{id}', 'PubgGameController@show');
-    $router->post('pwd-resets', 'PwdResetController@store');
-    $router->patch('pwd-resets/{id}', 'PwdResetController@update');
-    $router->post('sign-in', 'SignInController@store');
-    $router->post('sign-up', 'SignUpController@store');
-    $router->post('temp/clips', 'TempClipController@store');
-    $router->get('users', 'UserController@index');
-    $router->patch('users/{id}', 'UserController@update');
-    $router->get('users/{id}', 'UserController@show');
-    $router->post('user/clips', 'UserClipController@store');
-    $router->get('vods/{id}', 'VodController@show');
-    $router->get('watchable/lol-champions', 'WatchableLolChampionController@index');
-    $router->get('youtube/videos', 'YtbVideoController@index');
-    $router->get('youtube/videos/{id}', 'YtbVideoController@show');
-    $router->get('youtube/comment/threads', 'YtbCommentThreadController@index');
-    $router->get('youtube/comment/replies', 'YtbCommentReplyController@index');
+    $router->group([
+        'middleware' => [
+            App\Http\Middleware\ApiMiddleware::class,
+            App\Http\Middleware\AuthTokenMiddleware::class
+        ]
+    ], function () use ($router) {
+
+        $router->get('auth/user', 'AuthUserController@index');
+        $router->get('aftv-bcasts', 'AftvBcastController@index');
+        $router->get('aftv-bcasts/{id}', 'AftvBcastController@show');
+        $router->get('aftv-reviews/{id}', 'AftvReviewController@show');
+        $router->get('clips', 'ClipController@index');
+        $router->delete('clips/{id}', 'ClipController@destroy');
+        $router->get('clips/{id}', 'ClipController@show');
+        $router->get('comment-replies', 'CommentReplyController@index');
+        $router->post('comment-replies', 'CommentReplyController@store');
+        $router->patch('comment-replies/{id}', 'CommentReplyController@update');
+        $router->delete('comment-replies/{id}', 'CommentReplyController@destroy');
+        $router->get('comment-threads', 'CommentThreadController@index');
+        $router->post('comment-threads', 'CommentThreadController@store');
+        $router->patch('comment-threads/{id}', 'CommentThreadController@update');
+        $router->delete('comment-threads/{id}', 'CommentThreadController@destroy');
+        $router->get('dislikes', 'DislikeController@index');
+        $router->post('dislikes', 'DislikeController@store');
+        $router->delete('dislikes/{id}', 'DislikeController@destroy');
+        $router->post('email/sign-up', 'SignUpEmailController@store');
+        $router->post('email/change-email', 'ChangeEmailEmailController@store');
+        $router->get('likes', 'LikeController@index');
+        $router->post('likes', 'LikeController@store');
+        $router->delete('likes/{id}', 'LikeController@destroy');
+        $router->get('lol-champions', 'LolChampionController@index');
+        $router->get('lol-games', 'LolGameController@index');
+        $router->get('lol-games/{id}', 'LolGameController@show');
+        $router->get('posts', 'PostController@index');
+        $router->post('posts', 'PostController@store');
+        $router->get('posts/{id}', 'PostController@show');
+        $router->delete('posts/{id}', 'PostController@destroy');
+        $router->patch('posts/{id}', 'PostController@update');
+        $router->get('pubg-games', 'PubgGameController@index');
+        $router->get('pubg-games/{id}', 'PubgGameController@show');
+        $router->post('pwd-resets', 'PwdResetController@store');
+        $router->patch('pwd-resets/{id}', 'PwdResetController@update');
+        $router->post('sign-in', 'SignInController@store');
+        $router->post('sign-up', 'SignUpController@store');
+        $router->post('temp/clips', 'TempClipController@store');
+        $router->get('users', 'UserController@index');
+        $router->patch('users/{id}', 'UserController@update');
+        $router->get('users/{id}', 'UserController@show');
+        $router->post('user/clips', 'UserClipController@store');
+        $router->get('vods/{id}', 'VodController@show');
+        $router->get('watchable/lol-champions', 'WatchableLolChampionController@index');
+        $router->get('youtube/videos', 'YtbVideoController@index');
+        $router->get('youtube/videos/{id}', 'YtbVideoController@show');
+        $router->get('youtube/comment/threads', 'YtbCommentThreadController@index');
+        $router->get('youtube/comment/replies', 'YtbCommentReplyController@index');
+    });
+};
+
+$router->group(array('domain' => '//aengzi.{region}.r.appspot.com', 'prefix' => 'api'), function () use ($addRoutes)
+{
+    $addRoutes();
 });
+
+$addRoutes();
