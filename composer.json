@@ -35,7 +35,6 @@
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump"
         ],
         "post-install-cmd": [
-            "chmod -R 777 bootstrap\/cache",
             "chmod -R 777 /tmp"
         ],
         "post-root-package-install": [
