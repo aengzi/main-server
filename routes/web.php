@@ -15,7 +15,13 @@ use Illuminate\Support\Facades\DB;
 
 $addRoutes = function () use ($router) {
 
+    $prefix = str_replace('/', DIRECTORY_SEPARATOR, $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR);
+    $prefix = str_replace($prefix, '', __FILE__);
+    $prefix = str_replace('routes'.DIRECTORY_SEPARATOR.'web.php', '', $prefix);
+    $prefix = rtrim($prefix, DIRECTORY_SEPARATOR);
+
     $router->group([
+        'prefix' => $prefix,
         'middleware' => [
             App\Http\Middleware\ApiMiddleware::class,
             App\Http\Middleware\AuthTokenMiddleware::class
