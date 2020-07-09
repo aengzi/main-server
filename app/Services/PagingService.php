@@ -18,14 +18,21 @@ class PagingService extends Service {
     public static function getArrCallbackLists()
     {
         return [
+            'query.limit' => ['query', 'limit', function ($query, $limit) {
+
+                $query->limit($limit);
+            }],
+
             'query.skip' => ['query', 'skip', function ($query, $skip) {
 
                 $query->skip($skip);
             }],
 
-            'query.limit' => ['query', 'limit', function ($query, $limit) {
+            'select_query.fields' => ['select_query', 'available_fields', 'fields', function ($selectQuery, $availableFields, $fields='') {
 
-                $query->take($limit);
+                $fields = $fields ? preg_split('/\s*,\s*/', $fields) : $availableFields;
+
+                $selectQuery->select($fields);
             }]
         ];
     }
@@ -55,12 +62,11 @@ class PagingService extends Service {
                 return 1;
             }],
 
-            'skip' => ['page', 'limit', function ($page, $limit) {
-
-                return ( $page - 1 ) * $limit;
-            }],
-
             'result' => ['limit', 'page', 'query', 'select_query', function ($limit, $page, $query, $selectQuery) {
+
+                $query = (clone $query)->toBase();
+                $query->limit = null;
+                $query->offset = null;
 
                 return app()->makeWith(LengthAwarePaginator::class, [
                     'items' => $selectQuery->get(),
@@ -72,7 +78,29 @@ class PagingService extends Service {
                         'pageName' => 'page',
                     ]
                 ]);
-            }]
+            }],
+
+            'select_query' => ['query', 'skip', 'limit', function ($query, $skip, $limit) {
+
+                $model       = $query->getModel();
+                $selectQuery = $model->query();
+                $query       = (clone $query)->select($model->getKeyName());
+                $ids         = $query->get()->modelKeys();
+
+                $selectQuery->whereIn($model->getKeyName(), $ids);
+
+                if ( ! empty($ids) )
+                {
+                    $selectQuery->orderByRaw('FIELD('.$model->getKeyName().','.implode(',', $ids).')');
+                }
+
+                return $selectQuery;
+            }],
+
+            'skip' => ['page', 'limit', function ($page, $limit) {
+
+                return ( $page - 1 ) * $limit;
+            }],
         ];
     }
 

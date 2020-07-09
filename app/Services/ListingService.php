@@ -27,11 +27,11 @@ class ListingService extends Service
     public static function getArrCallbackLists()
     {
         return [
-            'select_query.fields' => ['select_query', 'available_fields', 'fields', function ($selectQuery, $availableFields, $fields='') {
+            'query.fields' => ['query', 'available_fields', 'fields', function ($query, $availableFields, $fields='') {
 
                 $fields = $fields ? preg_split('/\s*,\s*/', $fields) : $availableFields;
 
-                $selectQuery->select($fields);
+                $query->select($fields);
             }],
 
             'query.group_by' => ['query', 'group_by', function ($query, $groupBy) {
@@ -138,25 +138,9 @@ class ListingService extends Service
                 return $query;
             }],
 
-            'result' => ['select_query', function ($selectQuery) {
+            'result' => ['query', function ($query) {
 
-                return $selectQuery->get();
-            }],
-
-            'select_query' => ['query', function ($query) {
-
-                $model       = $query->getModel();
-                $selectQuery = $model->query();
-                $ids         = $query->get()->modelKeys();
-
-                $selectQuery->whereIn($model->getKeyName(), $ids);
-
-                if ( ! empty($ids) )
-                {
-                    $selectQuery->orderByRaw('FIELD('.$model->getKeyName().','.implode(',', $ids).')');
-                }
-
-                return $selectQuery;
+                return $query->get();
             }]
         ];
     }
