@@ -18,11 +18,9 @@ class AftvBj extends Model
         'nick',
         'station_id',
         'bbs_id',
-        'children_check',
         'gdrive_id'
     ];
     protected $hidden = [
-        'children_check',
         'gdrive_id'
     ];
 

@@ -21,11 +21,9 @@ class AftvBcast extends Model
         'duration',
         'started_at',
         'ended_at',
-        'children_check',
         'gdrive_id'
     ];
     protected $hidden = [
-        'children_check',
         'gdrive_id'
     ];
 

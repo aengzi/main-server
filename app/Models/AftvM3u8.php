@@ -29,13 +29,11 @@ class AftvM3u8 extends Model
         'ts_count',
         'duration',
         'gdrive_id',
-        'children_check'
     ];
     protected $hidden = [
         'chunk_data',
         'play_data',
         'gdrive_id',
-        'children_check'
     ];
 
     public function bcast()
