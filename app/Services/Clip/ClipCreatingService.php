@@ -4,6 +4,7 @@ namespace App\Services\Clip;
 
 use App\Service;
 use App\Models\AftvFile;
+use App\Models\AftvM3u8;
 use App\Models\Vod;
 use Google\Cloud\Storage\StorageClient;
 use Illuminate\Support\Str;
@@ -13,17 +14,14 @@ class ClipCreatingService extends Service
     public static function getArrBindNames()
     {
         return [
-            'diff_timestamp'
-                => 'diff timestamp between {{started_at}} and {{ended_at}}',
+            'diff_sec'
+                => 'second between {{start_sec}} and {{end_sec}}',
 
             'vod'
                 => 'vod for {{vod_id}}',
 
-            'vod_ended_at'
-                => 'ended_at of {{vod}}',
-
-            'vod_started_at'
-                => 'started_at of {{vod}}'
+            'vod_duration'
+                => 'duration of {{vod}}',
         ];
     }
 
@@ -76,39 +74,91 @@ class ClipCreatingService extends Service
     public static function getArrLoaders()
     {
         return [
-            'diff_timestamp' => ['started_at', 'ended_at', function ($startedAt, $endedAt) {
+            'diff_sec' => ['start_sec', 'end_sec', function ($startSec, $endSec) {
 
-                $time      = 0;
-                $endTime   = new \DateTime($endedAt);
-                $startTime = new \DateTime($startedAt);
-                $interval  = $startTime->diff($endTime);
-                $time      = $time + $interval->d * 60 * 60 * 24;
-                $time      = $time + $interval->h * 60 * 60;
-                $time      = $time + $interval->i * 60;
-                $time      = $time + $interval->s;
-                $time      = $time + $interval->f;
-
-                return $time;
+                return $endSec - $startSec;
             }],
 
-            'duration' => ['files', function ($files) {
+            'started_at' => ['vod', 'start_sec', function ($vod, $startSec) {
 
-                $endTime   = new \DateTime($files->first()->started_at);
-                $startTime = new \DateTime($files->last()->ended_at);
-                $interval  = $startTime->diff($endTime);
-                $time      = 0;
-                $time      = $time + $interval->d * 60 * 60 * 24;
-                $time      = $time + $interval->h * 60 * 60;
-                $time      = $time + $interval->i * 60;
-                $time      = $time + $interval->s;
-                $time      = $time + $interval->f;
+                $matches = [];
+                preg_match_all('/\#EXTINF:(\d*\.\d*)/', $vod->data, $matches);
+                $minSec  = 0;
 
-                return $time;
+                foreach ( $matches[1] as $i => $sec )
+                {
+                    $minSec += $sec;
+                    if ( $minSec >= $startSec )
+                    {
+                        $index = $i;
+                        break;
+                    }
+                }
+
+                $matches    = [];
+                preg_match_all('/http.+\.ts/', $vod->data, $matches);
+                $url        = $matches[0][$index];
+                $matches    = [];
+                preg_match_all('/(\d{9})_(\d{1,})/', $url, $matches);
+                $bcastId    = $matches[1][0];
+                $m3u8Index  = $matches[2][0];
+                $fM3u8      = AftvM3u8::where([
+                    'bcast_id'   => $bcastId,
+                    'm3u8_index' => $m3u8Index
+                ])->first();
+                $matches    = [];
+                preg_match_all('/'.str_replace('###', '(\d+)', $fM3u8->file_prefix).'/', $url, $matches);
+                $fileIndex  = $matches[1][0];
+
+                return AftvFile::where([
+                    'bcast_id'   => $bcastId,
+                    'm3u8_index' => $m3u8Index,
+                    'file_index' => $fileIndex
+                ])->first()->started_at;
             }],
 
-            'files' => ['started_at', 'ended_at', function ($startedAt, $endedAt) {
+            'ended_at' => ['vod', 'end_sec', function ($vod, $endSec) {
+
+                $matches = [];
+                preg_match_all('/\#EXTINF:(\d*\.\d*)/', $vod->data, $matches);
+                $minSec  = 0;
+
+                foreach ( $matches[1] as $i => $sec )
+                {
+                    $minSec += $sec;
+                    if ( $minSec >= $endSec )
+                    {
+                        $index = $i;
+                        break;
+                    }
+                }
+
+                $matches    = [];
+                preg_match_all('/http.+\.ts/', $vod->data, $matches);
+                $url        = $matches[0][$index];
+                $matches    = [];
+                preg_match_all('/(\d{9})_(\d{1,})/', $url, $matches);
+                $bcastId    = $matches[1][0];
+                $m3u8Index  = $matches[2][0];
+                $fM3u8      = AftvM3u8::where([
+                    'bcast_id'   => $bcastId,
+                    'm3u8_index' => $m3u8Index
+                ])->first();
+                $matches    = [];
+                preg_match_all('/'.str_replace('###', '(\d+)', $fM3u8->file_prefix).'/', $url, $matches);
+                $fileIndex  = $matches[1][0];
+
+                return AftvFile::where([
+                    'bcast_id'   => $bcastId,
+                    'm3u8_index' => $m3u8Index,
+                    'file_index' => $fileIndex
+                ])->first()->ended_at;
+            }],
+
+            'files' => ['vod', 'started_at', 'ended_at', function ($vod, $startedAt, $endedAt) {
 
                 return AftvFile::query()
+                    ->where('bcast_id', $vod->bcast_id)
                     ->where('started_at', '<=', $endedAt)
                     ->where('ended_at', '>=', $startedAt)
                     ->orderBy('started_at', 'asc')
@@ -135,14 +185,9 @@ class ClipCreatingService extends Service
                 return Vod::find($vodId);
             }],
 
-            'vod_ended_at' => ['vod', function ($vod) {
+            'vod_duration' => ['vod', function ($vod) {
 
-                return $vod->ended_at;
-            }],
-
-            'vod_started_at' => ['vod', function ($vod) {
-
-                return $vod->started_at;
+                return $vod->sum('duration');
             }]
         ];
     }
@@ -151,21 +196,21 @@ class ClipCreatingService extends Service
     {
         return [
             'files'
-                => ['diff_timestamp:valid_all']
+                => ['diff_sec:valid_all']
         ];
     }
 
     public static function getArrRuleLists()
     {
         return [
-            'diff_timestamp'
+            'diff_sec'
                 => ['integer', 'min:15', 'max:300'],
 
-            'ended_at'
-                => ['required', 'string', 'date_format:Y-m-d H:i:s', 'after_or_equal:{{vod_started_at}}'],
+            'end_sec'
+                => ['required', 'integer', 'gt:{{start_sec}}', 'lte:{{vod_duration}}'],
 
-            'started_at'
-                => ['required', 'string', 'date_format:Y-m-d H:i:s', 'before_or_equal:{{vod_ended_at}}'],
+            'start_sec'
+                => ['required', 'integer', 'gt:0'],
 
             'vod'
                 => ['not_null'],

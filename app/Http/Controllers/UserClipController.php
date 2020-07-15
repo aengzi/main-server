@@ -11,10 +11,10 @@ class UserClipController extends Controller
     public function store()
     {
         return [UserClipCreatingService::class, [
-            'ended_at'
-                => $this->input('ended_at'),
-            'started_at'
-                => $this->input('started_at'),
+            'end_sec'
+                => $this->input('end_sec'),
+            'start_sec'
+                => $this->input('start_sec'),
             'title'
                 => $this->input('title'),
             'vod_id'
@@ -22,10 +22,10 @@ class UserClipController extends Controller
             'token'
                 => Request::bearerToken() ? Request::bearerToken() : new \stdClass
         ], [
-            'ended_at'
-                => '[ended_at]',
-            'started_at'
-                => '[started_at]',
+            'end_sec'
+                => '[end_sec]',
+            'start_sec'
+                => '[start_sec]',
             'title'
                 => '[title]',
             'vod_id'

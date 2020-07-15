@@ -11,17 +11,17 @@ class TempClipController extends Controller
     public function store()
     {
         return [TempClipCreatingService::class, [
-            'started_at'
-                => $this->input('started_at'),
-            'ended_at'
-                => $this->input('ended_at'),
+            'start_sec'
+                => $this->input('start_sec'),
+            'end_sec'
+                => $this->input('end_sec'),
             'vod_id'
                 => $this->input('vod_id')
         ], [
-            'started_at'
-                => '[started_at]',
-            'ended_at'
-                => '[ended_at]',
+            'start_sec'
+                => '[start_sec]',
+            'end_sec'
+                => '[end_sec]',
             'vod_id'
                 => '[vod_id]'
         ]];
