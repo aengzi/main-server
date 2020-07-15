@@ -32,7 +32,7 @@ class TempClipCreatingService extends Service
                 $item->forceFill([
                     'id'           => Str::random(25),
                     'related_type' => 'temp',
-                    'review_id'    => $vod->review_id,
+                    'bcast_id'     => $vod->bcast_id,
                     'started_at'   => $files->first()->started_at,
                     'ended_at'     => $files->last()->ended_at,
                     'data'         => $m3u8String,

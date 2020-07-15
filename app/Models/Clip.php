@@ -23,7 +23,7 @@ class Clip extends Model
 
     public function getExpandable()
     {
-        return ['user', 'vod', 'vod.like', 'vod.review', 'vod.review.bj'];
+        return ['user', 'vod', 'vod.like', 'vod.bcast', 'vod.bcast.bj'];
     }
 
     public function user()

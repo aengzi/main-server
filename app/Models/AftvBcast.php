@@ -6,7 +6,6 @@ use App\Model;
 use App\Models\AftvBj;
 use App\Models\AftvFile;
 use App\Models\AftvM3u8;
-use App\Models\AftvReview;
 use App\Models\Vod;
 
 class AftvBcast extends Model
@@ -42,23 +41,13 @@ class AftvBcast extends Model
         return $this->hasMany(AftvM3u8::class, 'bcast_id', 'id');
     }
 
-    public function reviews()
+    public function vod()
     {
-        return $this->hasMany(AftvReview::class, 'bcast_id', 'id');
+        return $this->morphOne(Vod::class, 'related');
     }
-
-    // public function vod()
-    // {
-    //     return $this->belongsTo(Vod::class, 'vod_id', 'id');
-    // }
-
-    // public function getM3u8UrlAttribute()
-    // {
-    //     return 'https://storage.googleapis.com/aengzi.com/vods/'.$this->vod_id.'/file.m3u8';
-    // }
 
     public function getExpandable()
     {
-        return ['bj', 'm3u8s', 'reviews', 'reviews.vod'];
+        return ['bj', 'm3u8s', 'vod', 'vod.like'];
     }
 }

@@ -25,25 +25,19 @@ class AftvBcastPagingService extends Service
                 {
                     if ( $column == 'like_count' ) {
 
-                        $model1 = $query->getModel();
-                        $key1   = $model1->getTable().'.'.$model1->getKeyName();
-                        $table2 = app(AftvReview::class)->getTable();
-                        $table3 = app(Vod::class)->getTable();
-                        $type   = array_flip(Relation::morphMap())[get_class(AftvReview::class)];
+                        $model  = $query->getModel();
+                        $pKey   = $model->getTable().'.'.$model->getKeyName();
+                        $vTable = app(Vod::class)->getTable();
+                        $type   = array_flip(Relation::morphMap())[AftvBcast::class];
 
-                        $query->join($table2, function ($join) use ($key1, $table2) {
-
-                            $join->on($key1, '=', $table2.'.bcast_id');
-                        });
-                        $query->leftJoin($table3, function ($join) use ($table2, $table3, $type) {
+                        $query->leftJoin($vTable, function ($join) use ($pKey, $vTable, $type) {
 
                             $join
-                                ->on($table2.'.id', '=', $table3.'.related_id')
-                                ->where($table3.'.related_type', $type);
+                                ->on($pKey, '=', $vTable.'.related_id')
+                                ->where($vTable.'.related_type', $type);
                         });
 
-                        $query->groupBy($table2.'.bcast_id');
-                        $query->orderByRaw('sum('.$table3.'.like_count) '.$order);
+                        $query->orderBy($vTable.'.like_count', $order);
 
                     } else {
 

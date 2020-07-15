@@ -47,7 +47,7 @@ class PubgGame extends Model
 
     public function getExpandable()
     {
-        return ['metas', 'vod', 'vod.like', 'vod.review', 'vod.review.bj', 'timelines'];
+        return ['metas', 'vod', 'vod.like', 'vod.bcast', 'vod.bcast.bj', 'timelines'];
     }
 
     public function getThumbnailAttribute($value)

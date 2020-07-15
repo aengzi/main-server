@@ -28,7 +28,7 @@ class UserClipCreatingService extends Service
                 return Vod::create([
                     'related_type' => 'clip',
                     'related_id'   => $result->getKey(),
-                    'review_id'    => $vod->review_id,
+                    'bcast_id'     => $vod->bcast_id,
                     'started_at'   => $files->first()->started_at,
                     'ended_at'     => $files->last()->ended_at,
                     'data'         => $m3u8String,

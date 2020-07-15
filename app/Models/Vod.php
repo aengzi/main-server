@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Model;
-use App\Models\AftvReview;
+use App\Models\AftvBcast;
 use App\Models\Like;
 use App\Models\CommentThread;
 
@@ -13,7 +13,7 @@ class Vod extends Model
     public $guarded = ['id'];
     protected $appends = ['m3u8_url', 'thumbnail'];
     protected $casts = [
-        'review_id' => 'integer'
+        'bcast_id' => 'integer'
     ];
     protected $fillable = [
         'related_id',
@@ -22,7 +22,7 @@ class Vod extends Model
         'title',
         'like_count',
         'thread_count',
-        'review_id',
+        'bcast_id',
         'duration',
         'started_at',
         'ended_at'
@@ -33,7 +33,7 @@ class Vod extends Model
 
     public function getExpandable()
     {
-        return ['like', 'related', 'review'];
+        return ['like', 'related', 'bcast'];
     }
 
     public function related()
@@ -41,9 +41,9 @@ class Vod extends Model
         return $this->morphTo('related');
     }
 
-    public function review()
+    public function bcast()
     {
-        return $this->belongsTo(AftvReview::class, 'review_id', 'id');
+        return $this->belongsTo(AftvBcast::class, 'bcast_id', 'id');
     }
 
     public function like()
