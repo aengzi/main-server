@@ -41,11 +41,7 @@ class ClipCreatingService extends Service
                 ]);
                 $bucket = $storage->bucket($bucketName);
                 $bucket->upload($m3u8String, [
-                    'name' => 'vods/'.$clipVod->getKey().'/file.m3u8',
-                    'metadata' => [
-                        'started_at' => $files->first()->started_at,
-                        'ended_at'   => $files->last()->ended_at
-                    ]
+                    'name' => 'vods/'.$clipVod->getKey().'/file.m3u8'
                 ]);
 
                 if ( $clipVod->related_type == 'temp' )
@@ -53,15 +49,15 @@ class ClipCreatingService extends Service
                     return;
                 }
 
-                $prefix = storage_path('temp/'.Str::random(32).'/');
-                $tsData = shell_exec('curl "'.$files->first()->url.'"');
-                exec('mkdir -p '.$prefix);
+                $prefix = storage_path(Str::random(32));
+                $tsData = file_get_contents($files->first()->url);
                 file_put_contents($prefix.'video.ts', $tsData);
                 exec('ffmpeg -i '.$prefix.'video.ts -ss 00:00:00.000 -vframes 1 -q:v 1 '.$prefix.'origin.jpg -nostats -loglevel 0 -y');
                 $bucket->upload(fopen($prefix.'origin.jpg', 'r'), [
                     'name' => 'vods/'.$clipVod->getKey().'/origin.jpg'
                 ]);
-                exec('rm -rf '.$prefix);
+                unlink($prefix.'video.ts');
+                unlink($prefix.'origin.jpg');
             }],
 
             'clip_vod.result' => ['clip_vod', 'result', function ($clipVod, $result) {

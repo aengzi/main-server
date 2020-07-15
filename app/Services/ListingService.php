@@ -49,7 +49,7 @@ class ListingService extends Service
                 }
             }],
 
-            'result' => ['result', 'expands', function ($result, $expands) {
+            'result.expands' => ['result', 'expands', function ($result, $expands) {
 
                 $expands = preg_split('/\s*,\s*/', $expands);
 
@@ -77,16 +77,16 @@ class ListingService extends Service
                 return inst($modelClass)->getExpandable();
             }],
 
-            'available_group_by' => [function () {
-
-                return [];
-            }],
-
             'available_fields' => ['model_class', function ($model_class) {
 
                 $model = inst($model_class);
 
                 return array_diff(array_merge($model->getFillable(), $model->getGuarded()), $model->getHidden());
+            }],
+
+            'available_group_by' => [function () {
+
+                return [];
             }],
 
             'available_order_by' => ['model_class', function ($modelClass) {
