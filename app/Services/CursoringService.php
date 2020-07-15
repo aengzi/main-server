@@ -42,9 +42,7 @@ class CursoringService extends Service
                 return $modelClass::find($cursorId);
             }],
 
-            'result' => ['model_class', 'query', 'order_by_array', 'limit', 'fields', 'cursor', function ($modelClass, $query, $orderByArray, $limit, $fields, $cursor='') {
-
-                $fields = preg_split('/\s*,\s*/', $fields);
+            'result' => ['model_class', 'query', 'order_by_array', 'limit', 'cursor', function ($modelClass, $query, $orderByArray, $limit, $cursor='') {
 
                 if ( $cursor )
                 {
@@ -81,7 +79,7 @@ class CursoringService extends Service
 
                         array_pop($wheres);
 
-                        $list   = $newQuery->limit($limit)->get($fields);
+                        $list   = $newQuery->limit($limit);
                         $limit  = $limit - count($list);
                         $result = array_merge($result, $list->all());
                     }
@@ -90,7 +88,7 @@ class CursoringService extends Service
                 }
                 else
                 {
-                    return $query->limit($limit)->get($fields);
+                    return $query->limit($limit)->get();
                 }
             }]
         ];
