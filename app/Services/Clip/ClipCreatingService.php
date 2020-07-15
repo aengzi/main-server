@@ -37,7 +37,7 @@ class ClipCreatingService extends Service
 
                 $bucketName = $clipVod->getBucketNameAttribute();
                 $storage = new StorageClient([
-                    'keyFilePath' => storage_path('app/administrator@aengzi.json')
+                    'keyFilePath' => storage_path('app'.DIRECTORY_SEPARATOR.'administrator@aengzi.json')
                 ]);
                 $bucket = $storage->bucket($bucketName);
                 $bucket->upload($m3u8String, [
