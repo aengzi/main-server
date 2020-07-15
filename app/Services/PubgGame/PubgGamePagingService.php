@@ -50,6 +50,8 @@ class PubgGamePagingService extends Service
 
             'query.order_by_array' => ['query', 'order_by_array', function ($query, $orderByArray) {
 
+                unset($orderByArray[$query->getModel()->getKeyName()]);
+
                 if ( ! array_key_exists('started_at', $orderByArray) )
                 {
                     $orderByArray['started_at'] = 'desc';
