@@ -91,6 +91,14 @@ class PagingService extends Service {
 
                 if ( ! empty($ids) )
                 {
+                    if ( $model->getKeyType() == 'string' )
+                    {
+                        foreach ( $ids as $i => $id )
+                        {
+                            $ids[$i] = '\''.$id.'\'';
+                        }
+                    }
+
                     $selectQuery->orderByRaw('FIELD('.$model->getKeyName().','.implode(',', $ids).')');
                 }
 
