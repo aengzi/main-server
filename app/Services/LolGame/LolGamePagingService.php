@@ -114,6 +114,14 @@ class LolGamePagingService extends Service
     public static function getArrLoaders()
     {
         return [
+            'available_fields' => ['model_class', function ($modelClass) {
+
+                $model  = inst($modelClass);
+                $fields = array_merge($model->getFillable(), $model->getGuarded());
+
+                return array_diff($fields, ['matches']);
+            }],
+
             'available_order_by' => [function () {
 
                 return [
