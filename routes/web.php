@@ -12,6 +12,7 @@
 */
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Request;
 
 $addRoutes = function () use ($router) {
 
@@ -19,6 +20,39 @@ $addRoutes = function () use ($router) {
     $prefix = str_replace($prefix, '', __FILE__);
     $prefix = str_replace('routes'.DIRECTORY_SEPARATOR.'web.php', '', $prefix);
     $prefix = rtrim($prefix, DIRECTORY_SEPARATOR);
+
+    $router->group([
+        'prefix' => $prefix,
+    ], function () use ($router) {
+
+        foreach ( ['get', 'post', 'patch', 'delete'] as $method )
+        {
+            $router->{$method}('1.0/{path:.+}', function ($path) use ($method) {
+
+                $curl = curl_init();
+                curl_setopt($curl, CURLOPT_URL, 'http://34.64.94.163/1.0/'.$path.'?'.$_SERVER['QUERY_STRING']);
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($curl, CURLOPT_CUSTOMREQUEST, strtoupper($method));
+
+                if ( !empty(Request::all()) )
+                {
+                    curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query(Request::all()));
+                }
+
+                if ( !empty(Request::header()) )
+                {
+                    $headers = [];
+                    foreach ( array_keys(Request::header()) as $key )
+                    {
+                        array_push($headers, $key.':'.Request::header($key));
+                    }
+                    curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+                }
+
+                return htmlspecialchars(curl_exec($curl), ENT_NOQUOTES);
+            });
+        }
+    });
 
     $router->group([
         'prefix' => $prefix,
