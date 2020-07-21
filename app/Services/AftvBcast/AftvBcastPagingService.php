@@ -19,6 +19,17 @@ class AftvBcastPagingService extends Service
     public static function getArrCallbackLists()
     {
         return [
+            'query.vod.related_id' => ['query', function ($query) {
+
+                $type     = array_flip(Relation::morphMap())[AftvBcast::class];
+                $subQuery = Vod::query()
+                    ->select('related_id')
+                    ->where('related_type', $type)
+                    ->getQuery();
+
+                $query->whereIn($query->getModel()->getKeyName(), $subQuery);
+            }],
+
             'query.order_by_array' => ['query', 'order_by_array', function ($query, $orderByArray) {
 
                 foreach ( $orderByArray as $column => $order )
