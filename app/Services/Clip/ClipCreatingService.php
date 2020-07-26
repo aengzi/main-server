@@ -168,6 +168,17 @@ class ClipCreatingService extends Service
                 for ( $i = 0; $i < $files->count(); $i++ )
                 {
                     $file = $files->get($i);
+
+                    if ( $i != 0 )
+                    {
+                        if ( $file->bcast_id != $files->get($i-1)->bcast_id ||
+                            $file->m3u8_index != $files->get($i-1)->m3u8_index ||
+                            $file->file_index != ($files->get($i-1)->file_index+1) )
+                        {
+                            $rtn.='#EXT-X-DISCONTINUITY'.PHP_EOL;
+                        }
+                    }
+
                     $rtn.='#EXTINF:'.$file->duration.','.PHP_EOL.$file->url.PHP_EOL;
                 }
 
