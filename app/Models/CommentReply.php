@@ -14,15 +14,16 @@ class CommentReply extends Model
     public $incrementing = true;
     public $guarded = ['id'];
     protected $casts = [
+        'id' => 'integer',
         'user_id' => 'integer',
-        'thread_id' => 'integer'
+        'thread_id' => 'integer',
     ];
     protected $fillable = [
         'user_id',
         'thread_id',
         'message',
         'created_at',
-        'updated_at'
+        'updated_at',
     ];
     protected $hidden = [
     ];

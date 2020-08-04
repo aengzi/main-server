@@ -11,14 +11,15 @@ class Dislike extends Model
     public $incrementing = true;
     public $guarded = ['id'];
     protected $casts = [
+        'id' => 'integer',
         'user_id' => 'integer',
-        'related_id' => 'integer'
+        'related_id' => 'integer',
     ];
     protected $fillable = [
         'user_id',
         'related_id',
         'related_type',
-        'created_at'
+        'created_at',
     ];
     protected $hidden = [
     ];

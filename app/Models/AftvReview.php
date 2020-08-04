@@ -11,10 +11,8 @@ use App\Models\Vod;
 class AftvReview extends Model
 {
     public $incrementing = false;
-    protected $keyType = 'integer';
-    protected $appends = ['iframe_url'];
     protected $casts = [
-        'bcast_id' => 'integer'
+        'bcast_id' => 'integer',
     ];
     protected $fillable = [
         'id',
@@ -23,12 +21,13 @@ class AftvReview extends Model
         'info',
         'm3u8_count',
         'duration',
+        'playlist_id',
         'registered_at',
         'started_at',
-        'ended_at'
+        'ended_at',
     ];
     protected $hidden = [
-        // 'info'
+        'info',
     ];
 
     public function bcast()
@@ -49,13 +48,6 @@ class AftvReview extends Model
     public function vod()
     {
         return $this->morphOne(Vod::class, 'related');
-    }
-
-    public function getIframeUrlAttribute()
-    {
-        $bj = $this->bj;
-
-        return 'http://vod.afreecatv.com/embed.php?autoPlay=true&showChat=false&szBjId='.$bj->getKey().'&nStationNo='.$bj->station_id.'&nBbsNo='.$bj->bbs_id.'&nTitleNo='.$this->getKey();
     }
 
     public function getExpandable()

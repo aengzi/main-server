@@ -11,17 +11,17 @@ class AftvBj extends Model
     protected $keyType = 'string';
     protected $casts = [
         'station_id' => 'integer',
-        'bbs_id' => 'integer'
+        'bbs_id' => 'integer',
     ];
     protected $fillable = [
         'id',
         'nick',
         'station_id',
         'bbs_id',
-        'gdrive_id'
+        'gdrive_id',
     ];
     protected $hidden = [
-        'gdrive_id'
+        'gdrive_id',
     ];
 
     public function bcasts()

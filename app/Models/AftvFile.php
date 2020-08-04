@@ -10,10 +10,13 @@ use Illuminate\Database\Eloquent\Builder;
 class AftvFile extends Model
 {
     public $incrementing = false;
+    protected $appends = [
+        'url',
+    ];
     protected $casts = [
         'bcast_id' => 'integer',
         'm3u8_index' => 'integer',
-        'file_index' => 'integer'
+        'file_index' => 'integer',
     ];
     protected $fillable = [
         'bcast_id',
@@ -22,10 +25,10 @@ class AftvFile extends Model
         'duration',
         'started_at',
         'ended_at',
-        'gdrive_id'
+        'gdrive_id',
     ];
     protected $hidden = [
-        'gdrive_id'
+        'gdrive_id',
     ];
 
     public function bcast()

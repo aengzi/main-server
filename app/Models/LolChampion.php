@@ -7,13 +7,13 @@ use App\Model;
 class LolChampion extends Model
 {
     public $incrementing = true;
-    public $guarded = ['id'];
-    protected $keyType = 'integer';
     protected $casts = [
+        'id' => 'integer',
     ];
     protected $fillable = [
+        'id',
         'key',
-        'name'
+        'name',
     ];
     protected $hidden = [
     ];

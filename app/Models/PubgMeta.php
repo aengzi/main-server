@@ -8,13 +8,15 @@ use App\Models\PubgGame;
 class PubgMeta extends Model
 {
     public $incrementing = true;
+    public $guarded = ['id'];
     protected $casts = [
-        'game_id' => 'integer'
+        'id' => 'integer',
+        'game_id' => 'integer',
     ];
     protected $fillable = [
         'game_id',
         'property',
-        'value'
+        'value',
     ];
     protected $hidden = [
     ];

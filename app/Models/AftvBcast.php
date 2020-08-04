@@ -6,6 +6,7 @@ use App\Model;
 use App\Models\AftvBj;
 use App\Models\AftvFile;
 use App\Models\AftvM3u8;
+use App\Models\AftvReview;
 use App\Models\Vod;
 
 class AftvBcast extends Model
@@ -20,10 +21,10 @@ class AftvBcast extends Model
         'duration',
         'started_at',
         'ended_at',
-        'gdrive_id'
+        'gdrive_id',
     ];
     protected $hidden = [
-        'gdrive_id'
+        'gdrive_id',
     ];
 
     public function bj()
@@ -39,6 +40,11 @@ class AftvBcast extends Model
     public function m3u8s()
     {
         return $this->hasMany(AftvM3u8::class, 'bcast_id', 'id');
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(AftvReview::class, 'bcast_id', 'id');
     }
 
     public function vod()

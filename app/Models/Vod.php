@@ -11,9 +11,13 @@ class Vod extends Model
 {
     public $incrementing = true;
     public $guarded = ['id'];
-    protected $appends = ['m3u8_url', 'thumbnail'];
+    protected $appends = [
+        'm3u8_url',
+        'thumbnail',
+    ];
     protected $casts = [
-        'bcast_id' => 'integer'
+        'id' => 'integer',
+        'bcast_id' => 'integer',
     ];
     protected $fillable = [
         'related_id',
@@ -25,10 +29,10 @@ class Vod extends Model
         'bcast_id',
         'duration',
         'started_at',
-        'ended_at'
+        'ended_at',
     ];
     protected $hidden = [
-        'data'
+        'data',
     ];
 
     public function getExpandable()

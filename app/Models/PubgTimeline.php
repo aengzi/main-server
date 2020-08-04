@@ -9,12 +9,13 @@ class PubgTimeline extends Model
     public $incrementing = true;
     public $guarded = ['id'];
     protected $casts = [
-        'game_id' => 'integer'
+        'id' => 'integer',
+        'game_id' => 'integer',
     ];
     protected $fillable = [
         'game_id',
         'type',
-        'elapsed_sec'
+        'elapsed_sec',
     ];
     protected $hidden = [
     ];

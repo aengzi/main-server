@@ -3,19 +3,20 @@
 namespace App\Models;
 
 use App\Model;
+use App\Models\LolGame;
 
 class LolMeta extends Model
 {
     public $incrementing = true;
     public $guarded = ['id'];
-    protected $keyType = 'integer';
     protected $casts = [
-        'game_id' => 'integer'
+        'id' => 'integer',
+        'game_id' => 'integer',
     ];
     protected $fillable = [
         'game_id',
         'property',
-        'value'
+        'value',
     ];
     protected $hidden = [
     ];

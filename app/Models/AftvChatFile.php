@@ -13,14 +13,14 @@ class AftvChatFile extends Model
     protected $casts = [
         'bcast_id' => 'integer',
         'm3u8_index' => 'integer',
-        'review_id' => 'integer'
+        'offset_sec' => 'integer',
     ];
     protected $fillable = [
+        'key_id',
         'bcast_id',
         'm3u8_index',
-        'review_id',
-        'row_key',
-        'data'
+        'offset_sec',
+        'data',
     ];
     protected $hidden = [
     ];
@@ -44,6 +44,7 @@ class AftvChatFile extends Model
     {
         return $query
             ->where('bcast_id', '=', $this->getAttribute('bcast_id'))
-            ->where('m3u8_index', '=', $this->getAttribute('m3u8_index'));
+            ->where('m3u8_index', '=', $this->getAttribute('m3u8_index'))
+            ->where('offset_sec', '=', $this->getAttribute('offset_sec'));
     }
 }

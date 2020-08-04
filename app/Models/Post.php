@@ -16,6 +16,7 @@ class Post extends Model
     public $incrementing = true;
     public $guarded = ['id'];
     protected $casts = [
+        'id' => 'integer',
         'user_id' => 'integer',
     ];
     protected $fillable = [
@@ -27,7 +28,7 @@ class Post extends Model
         'title',
         'content',
         'created_at',
-        'updated_at'
+        'updated_at',
     ];
     protected $hidden = [
     ];

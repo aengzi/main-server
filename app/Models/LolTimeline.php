@@ -7,15 +7,15 @@ use App\Model;
 class LolTimeline extends Model
 {
     public $incrementing = true;
-    protected $keyType = 'integer';
+    public $guarded = ['id'];
     protected $casts = [
+        'id' => 'integer',
         'game_id' => 'integer',
     ];
     protected $fillable = [
-        'id',
         'game_id',
         'type',
-        'elapsed_timestamp'
+        'elapsed_timestamp',
     ];
     protected $hidden = [
     ];

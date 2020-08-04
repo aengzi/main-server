@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Model;
+use App\Models\YtbCommentReply;
 
 class YtbCommentThread extends Model
 {
@@ -26,7 +27,7 @@ class YtbCommentThread extends Model
         'author_img_url',
         'author_channel_id',
         'created_at',
-        'updated_at'
+        'updated_at',
     ];
     protected $hidden = [
     ];
@@ -34,5 +35,10 @@ class YtbCommentThread extends Model
     public function getExpandable()
     {
         return [];
+    }
+
+    public function replies()
+    {
+        return $this->hasMany(YtbCommentReply::class, 'thread_id', 'id');
     }
 }

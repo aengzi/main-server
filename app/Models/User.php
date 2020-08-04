@@ -16,17 +16,21 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     const CREATED_AT = 'created_at';
     public $incrementing = true;
     public $guarded = ['id'];
-    protected $appends = ['thumbnail'];
+    protected $appends = [
+        'thumbnail',
+    ];
+    protected $casts = [
+        'id' => 'integer',
+    ];
     protected $fillable = [
         'nick',
         'email',
         'password',
         'has_thumbnail',
-        'created_at'
+        'created_at',
     ];
     protected $hidden = [
-        // 'has_thumbnail',
-        'password'
+        'password',
     ];
 
     public function getExpandable()

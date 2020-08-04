@@ -14,24 +14,24 @@ class AftvM3u8 extends Model
     protected $casts = [
         'review_id' => 'integer',
         'bcast_id' => 'integer',
-        'm3u8_index' => 'integer'
+        'm3u8_index' => 'integer',
     ];
     protected $fillable = [
         'review_id',
         'bcast_id',
         'm3u8_index',
-        'path',
         'file_prefix',
-        'chunk_file',
-        'chunk_data',
-        'play_file',
+        'url',
+        'ts_path',
+        'play_path',
         'play_data',
+        'data',
+        'resolution',
         'ts_count',
         'duration',
         'gdrive_id',
     ];
     protected $hidden = [
-        'chunk_data',
         'play_data',
         'gdrive_id',
     ];
@@ -43,8 +43,7 @@ class AftvM3u8 extends Model
 
     public function files()
     {
-        return $this->hasMany(AftvFile::class, 'm3u8_index', 'm3u8_index')
-            ->where('bcast_id', $this->bcast_id);
+        return $this->relation(AftvFile::class, ['bcast_id', 'm3u8_index'], ['bcast_id', 'm3u8_index'], true);
     }
 
     public function review()

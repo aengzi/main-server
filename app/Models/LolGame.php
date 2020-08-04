@@ -10,27 +10,30 @@ use App\Models\Vod;
 class LolGame extends Model
 {
     public $incrementing = false;
-    protected $keyType = 'integer';
     protected $casts = [
+        'id' => 'integer',
+        'vod_id' => 'integer',
     ];
     protected $fillable = [
         'id',
+        'vod_id',
+        'account_id',
         'matches',
         'timelines',
         'created_at',
+        'started_at',
         'participant_id',
         'time_sh_file_id',
         'time_sh_at',
         'time_sh_img',
         'time_sh_elapsed_sec',
-        'started_at'
     ];
     protected $hidden = [
         'timelines',
         'time_sh_file_id',
         'time_sh_at',
         'time_sh_img',
-        'time_sh_elapsed_sec'
+        'time_sh_elapsed_sec',
     ];
 
     public function metas()
@@ -60,6 +63,6 @@ class LolGame extends Model
 
     public function getTimeShImgAttribute($value) // blob data cause error when serializing without this
     {
-    	return base64_encode($value);
+        return base64_encode($value);
     }
 }

@@ -9,25 +9,26 @@ use App\Models\Vod;
 
 class PubgGame extends Model
 {
-    public $incrementing = false;
-    protected $keyType = 'integer';
+    public $incrementing = true;
+    public $guarded = ['id'];
     protected $casts = [
-        'vod_id' => 'integer'
+        'id' => 'integer',
+        'vod_id' => 'integer',
     ];
     protected $fillable = [
-        'id',
+        'vod_id',
         'match_id',
         'participant_id',
         'started_at',
         'offset',
         'summary',
         'match',
-        'deaths'
+        'deaths',
     ];
     protected $hidden = [
         'offset',
         'match',
-        'deaths'
+        'deaths',
     ];
 
     public function metas()

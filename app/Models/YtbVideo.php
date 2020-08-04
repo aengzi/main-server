@@ -7,11 +7,13 @@ use App\Model;
 class YtbVideo extends Model
 {
     const CREATED_AT = 'created_at';
-    const UPDATED_AT = null;
     public $incrementing = true;
     public $guarded = ['id'];
-    protected $appends = ['thumbnail'];
+    protected $appends = [
+        'thumbnail',
+    ];
     protected $casts = [
+        'id' => 'integer',
     ];
     protected $dates = [
         self::CREATED_AT,
@@ -23,7 +25,7 @@ class YtbVideo extends Model
         'like_count',
         'channel_id',
         'title',
-        'created_at'
+        'created_at',
     ];
     protected $hidden = [
     ];

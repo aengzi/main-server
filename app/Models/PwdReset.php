@@ -10,15 +10,18 @@ class PwdReset extends Model {
     const UPDATED_AT = 'updated_at';
     public $incrementing = true;
     public $guarded = ['id'];
+    protected $casts = [
+        'id' => 'integer',
+    ];
     protected $fillable = [
         'email',
         'token',
         'complete',
         'created_at',
-        'updated_at'
+        'updated_at',
     ];
     protected $hidden = [
-        'token'
+        'token',
     ];
 
     public function getExpandable()

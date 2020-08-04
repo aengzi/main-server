@@ -15,8 +15,9 @@ class CommentThread extends Model
     public $incrementing = true;
     public $guarded = ['id'];
     protected $casts = [
+        'id' => 'integer',
         'user_id' => 'integer',
-        'related_id' => 'integer'
+        'related_id' => 'integer',
     ];
     protected $fillable = [
         'user_id',
@@ -27,7 +28,7 @@ class CommentThread extends Model
         'reply_count',
         'message',
         'created_at',
-        'updated_at'
+        'updated_at',
     ];
     protected $hidden = [
     ];
