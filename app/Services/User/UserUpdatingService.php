@@ -45,6 +45,10 @@ class UserUpdatingService extends Service
                 $bucket = $storage->bucket('aengzi.com');
                 $bucket->upload(base64_decode($thumbnail), [
                     'name' => 'users/'.$user->getKey().'/origin.jpg',
+                    'metadata' => [
+                        'Cache-Control' => 'no-cache',
+                        'max-age' => '0',
+                    ],
                 ]);
                 $user->has_thumbnail = true;
             }],

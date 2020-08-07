@@ -41,7 +41,11 @@ class ClipCreatingService extends Service
                 ]);
                 $bucket = $storage->bucket($bucketName);
                 $bucket->upload($m3u8String, [
-                    'name' => 'vods/'.$clipVod->getKey().'/file.m3u8'
+                    'name' => 'vods/'.$clipVod->getKey().'/file.m3u8',
+                    'metadata' => [
+                        'Cache-Control' => 'no-cache',
+                        'max-age' => '0',
+                    ],
                 ]);
 
                 if ( $clipVod->related_type == 'temp' )
@@ -54,7 +58,11 @@ class ClipCreatingService extends Service
                 file_put_contents($prefix.'video.ts', $tsData);
                 exec('ffmpeg -i '.$prefix.'video.ts -ss 00:00:00.000 -vframes 1 -q:v 1 '.$prefix.'origin.jpg -nostats -loglevel 0 -y');
                 $bucket->upload(fopen($prefix.'origin.jpg', 'r'), [
-                    'name' => 'vods/'.$clipVod->getKey().'/origin.jpg'
+                    'name' => 'vods/'.$clipVod->getKey().'/origin.jpg',
+                    'metadata' => [
+                        'Cache-Control' => 'no-cache',
+                        'max-age' => '0',
+                    ],
                 ]);
                 unlink($prefix.'video.ts');
                 unlink($prefix.'origin.jpg');
