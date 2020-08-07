@@ -51,11 +51,6 @@ class AftvM3u8 extends Model
         return $this->belongsTo(AftvReview::class, 'review_id', 'id');
     }
 
-    public function getExpandable()
-    {
-        return ['bcast', 'files', 'review'];
-    }
-
     protected function setKeysForSaveQuery(Builder $query)
     {
         return $query

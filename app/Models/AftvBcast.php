@@ -51,9 +51,4 @@ class AftvBcast extends Model
     {
         return $this->morphOne(Vod::class, 'related');
     }
-
-    public function getExpandable()
-    {
-        return ['bj', 'm3u8s', 'vod', 'vod.like'];
-    }
 }

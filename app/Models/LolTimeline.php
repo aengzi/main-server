@@ -24,9 +24,4 @@ class LolTimeline extends Model
     {
         return $this->belongsTo(LolGame::class, 'game_id', 'id');
     }
-
-    public function getExpandable()
-    {
-        return ['game'];
-    }
 }

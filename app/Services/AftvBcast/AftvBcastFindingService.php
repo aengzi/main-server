@@ -24,6 +24,11 @@ class AftvBcastFindingService extends Service
     public static function getArrLoaders()
     {
         return [
+            'available_expands' => [function () {
+
+                return ['bj', 'm3u8s', 'vod', 'vod.like'];
+            }],
+
             'model_class' => [function () {
 
                 return AftvBcast::class;

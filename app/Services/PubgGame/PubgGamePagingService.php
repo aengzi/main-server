@@ -100,6 +100,11 @@ class PubgGamePagingService extends Service
     public static function getArrLoaders()
     {
         return [
+            'available_expands' => [function () {
+
+                return ['metas', 'vod', 'vod.like', 'vod.bcast', 'vod.bcast.bj', 'timelines'];
+            }],
+
             'available_order_by' => [function () {
 
                 return [

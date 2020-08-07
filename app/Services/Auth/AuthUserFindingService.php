@@ -28,6 +28,11 @@ class AuthUserFindingService extends Service
     public static function getArrLoaders()
     {
         return [
+            'available_expands' => [function () {
+
+                return [];
+            }],
+
             'id' => ['auth_user', function ($authUser) {
 
                 return $authUser->getKey();

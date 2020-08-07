@@ -30,11 +30,6 @@ class YtbVideo extends Model
     protected $hidden = [
     ];
 
-    public function getExpandable()
-    {
-        return ['like'];
-    }
-
     public function like()
     {
         return $this->relation(Like::class, [':model_type:', 'id', ':auth_user_id:'], ['related_type', 'related_id', 'user_id'], false);

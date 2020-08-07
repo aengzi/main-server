@@ -41,11 +41,6 @@ class AftvFile extends Model
         return $this->relation(AftvM3u8::class, ['bcast_id', 'm3u8_index'], ['bcast_id', 'm3u8_index'], false);
     }
 
-    public function getExpandable()
-    {
-        return ['bcast', 'm3u8'];
-    }
-
     public function getUrlAttribute()
     {
         return $this->m3u8->ts_path.'/'.str_replace('###', $this->file_index, $this->m3u8->file_prefix);

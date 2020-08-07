@@ -24,11 +24,6 @@ class Dislike extends Model
     protected $hidden = [
     ];
 
-    public function getExpandable()
-    {
-        return ['user', 'vod', 'related'];
-    }
-
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');

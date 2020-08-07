@@ -22,11 +22,6 @@ class Clip extends Model
     protected $hidden = [
     ];
 
-    public function getExpandable()
-    {
-        return ['user', 'vod', 'vod.like', 'vod.bcast', 'vod.bcast.bj'];
-    }
-
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');

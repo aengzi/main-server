@@ -40,6 +40,11 @@ class CommentThreadPagingService extends Service
     public static function getArrLoaders()
     {
         return [
+            'available_expands' => [function () {
+
+                return ['dislike', 'like', 'related', 'user'];
+            }],
+
             'model_class' => [function () {
 
                 return CommentThread::class;

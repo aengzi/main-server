@@ -51,11 +51,6 @@ class LolGame extends Model
         return $this->hasMany(LolTimeline::class, 'game_id', 'id');
     }
 
-    public function getExpandable()
-    {
-        return ['metas', 'vod', 'vod.like', 'vod.bcast', 'vod.bcast.bj', 'timelines'];
-    }
-
     public function getThumbnailAttribute($value)
     {
         return 'https://storage.googleapis.com/aengzi.com/vods/'.$this->vod_id.'/origin.jpg';

@@ -33,6 +33,11 @@ class CommentReplyCursoringService extends Service
     public static function getArrLoaders()
     {
         return [
+            'available_expands' => [function () {
+
+                return ['user', 'thread'];
+            }],
+
             'model_class' => [function () {
 
                 return CommentReply::class;

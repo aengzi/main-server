@@ -66,6 +66,11 @@ class ClipPagingService extends Service
     public static function getArrLoaders()
     {
         return [
+            'available_expands' => [function () {
+
+                return ['user', 'vod', 'vod.like', 'vod.bcast', 'vod.bcast.bj'];
+            }],
+
             'available_order_by' => [function () {
 
                 return [

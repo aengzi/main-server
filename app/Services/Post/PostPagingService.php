@@ -41,6 +41,11 @@ class PostPagingService extends Service
     public static function getArrLoaders()
     {
         return [
+            'available_expands' => [function () {
+
+                return ['dislike', 'like', 'user'];
+            }],
+
             'available_order_by' => [function () {
 
                 return [

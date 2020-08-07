@@ -16,9 +16,4 @@ class YtbChannel extends Model
     ];
     protected $hidden = [
     ];
-
-    public function getExpandable()
-    {
-        return [];
-    }
 }

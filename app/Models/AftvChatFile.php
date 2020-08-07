@@ -35,11 +35,6 @@ class AftvChatFile extends Model
         return $this->belongsTo(AftvReview::class, 'review_id', 'id');
     }
 
-    public function getExpandable()
-    {
-        return ['bcast', 'review'];
-    }
-
     protected function setKeysForSaveQuery(Builder $query)
     {
         return $query

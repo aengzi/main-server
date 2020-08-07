@@ -24,6 +24,11 @@ class AftvReviewFindingService extends Service
     public static function getArrLoaders()
     {
         return [
+            'available_expands' => [function () {
+
+                return ['bcast', 'bcast.reviews', 'bcast.reviews.vod', 'bj', 'm3u8s', 'vod', 'vod.like'];
+            }],
+
             'model_class' => [function () {
 
                 return AftvReview::class;

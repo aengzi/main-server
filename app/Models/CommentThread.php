@@ -50,11 +50,6 @@ class CommentThread extends Model
         return 'Y-m-d H:i:s.u';
     }
 
-    public function getExpandable()
-    {
-        return ['dislike', 'like', 'related', 'user'];
-    }
-
     public function dislike()
     {
         return $this->relation(Dislike::class, [':model_type:', 'id', ':auth_user_id:'], ['related_type', 'related_id', 'user_id'], false);

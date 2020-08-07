@@ -35,11 +35,6 @@ class Vod extends Model
         'data',
     ];
 
-    public function getExpandable()
-    {
-        return ['like', 'related', 'bcast'];
-    }
-
     public function related()
     {
         return $this->morphTo('related');

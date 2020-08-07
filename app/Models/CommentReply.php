@@ -45,11 +45,6 @@ class CommentReply extends Model
         return 'Y-m-d H:i:s.u';
     }
 
-    public function getExpandable()
-    {
-        return ['user', 'thread'];
-    }
-
     public function thread()
     {
         return $this->belongsTo(CommentThread::class, 'thread_id', 'id');

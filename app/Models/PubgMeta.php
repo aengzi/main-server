@@ -25,9 +25,4 @@ class PubgMeta extends Model
     {
         return $this->belongsTo(PubgGame::class, 'game_id', 'id');
     }
-
-    public function getExpandable()
-    {
-        return ['game'];
-    }
 }

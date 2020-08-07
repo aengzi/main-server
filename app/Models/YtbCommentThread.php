@@ -32,11 +32,6 @@ class YtbCommentThread extends Model
     protected $hidden = [
     ];
 
-    public function getExpandable()
-    {
-        return [];
-    }
-
     public function replies()
     {
         return $this->hasMany(YtbCommentReply::class, 'thread_id', 'id');

@@ -50,6 +50,11 @@ class LikePagingService extends Service
     public static function getArrLoaders()
     {
         return [
+            'available_expands' => [function () {
+
+                return ['user', 'vod', 'related'];
+            }],
+
             'available_related_types' => [function () {
 
                 return ['comment_thread', 'post', 'vod', 'ytb_video'];

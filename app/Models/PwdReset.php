@@ -23,9 +23,4 @@ class PwdReset extends Model {
     protected $hidden = [
         'token',
     ];
-
-    public function getExpandable()
-    {
-        return [];
-    }
 }

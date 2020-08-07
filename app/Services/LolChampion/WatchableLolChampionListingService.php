@@ -7,6 +7,7 @@ use App\Models\LolGame;
 use App\Models\LolMeta;
 use App\Service;
 use App\Services\ListingService;
+use App\Services\LolChampion\LolChampionListingService;
 
 class WatchableLolChampionListingService extends Service
 {
@@ -56,7 +57,7 @@ class WatchableLolChampionListingService extends Service
     public static function getArrTraits()
     {
         return [
-            ListingService::class
+            LolChampionListingService::class
         ];
     }
 }

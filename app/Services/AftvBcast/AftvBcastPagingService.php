@@ -62,6 +62,11 @@ class AftvBcastPagingService extends Service
     public static function getArrLoaders()
     {
         return [
+            'available_expands' => [function () {
+
+                return ['bj', 'm3u8s', 'vod', 'vod.like'];
+            }],
+
             'available_order_by' => [function () {
 
                 return ['started_at desc', 'started_at asc', 'like_count desc'];

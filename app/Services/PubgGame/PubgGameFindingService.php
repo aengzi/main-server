@@ -24,6 +24,11 @@ class PubgGameFindingService extends Service
     public static function getArrLoaders()
     {
         return [
+            'available_expands' => [function () {
+
+                return ['metas', 'vod', 'vod.like', 'vod.bcast', 'vod.bcast.bj', 'timelines'];
+            }],
+
             'model_class' => [function () {
 
                 return PubgGame::class;

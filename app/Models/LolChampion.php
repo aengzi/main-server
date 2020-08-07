@@ -17,9 +17,4 @@ class LolChampion extends Model
     ];
     protected $hidden = [
     ];
-
-    public function getExpandable()
-    {
-        return [];
-    }
 }

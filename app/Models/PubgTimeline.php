@@ -19,9 +19,4 @@ class PubgTimeline extends Model
     ];
     protected $hidden = [
     ];
-
-    public function getExpandable()
-    {
-        return [];
-    }
 }

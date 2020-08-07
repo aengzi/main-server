@@ -31,6 +31,11 @@ class YtbCommentThreadPagingService extends Service
     public static function getArrLoaders()
     {
         return [
+            'available_expands' => [function () {
+
+                return ['replies'];
+            }],
+
             'model_class' => [function () {
 
                 return YtbCommentThread::class;

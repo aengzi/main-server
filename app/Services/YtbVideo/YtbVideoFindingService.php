@@ -24,6 +24,11 @@ class YtbVideoFindingService extends Service
     public static function getArrLoaders()
     {
         return [
+            'available_expands' => [function () {
+
+                return ['like'];
+            }],
+
             'model_class' => [function () {
 
                 return YtbVideo::class;

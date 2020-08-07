@@ -33,6 +33,11 @@ class YtbCommentReplyCursoringService extends Service
     public static function getArrLoaders()
     {
         return [
+            'available_expands' => [function () {
+
+                return ['thread'];
+            }],
+
             'model_class' => [function () {
 
                 return YtbCommentReply::class;

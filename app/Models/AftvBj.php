@@ -28,9 +28,4 @@ class AftvBj extends Model
     {
         return $this->hasMany(AftvBcast::class, 'bj_user_id', 'id');
     }
-
-    public function getExpandable()
-    {
-        return ['bcasts'];
-    }
 }
