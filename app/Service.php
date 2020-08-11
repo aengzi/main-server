@@ -503,7 +503,7 @@ class Service {
         {
             $segs       = explode(':', $promise);
             $promiseKey = array_shift($segs);
-            $isStrict   = array_shift($segs) == 'valid_all';
+            $isStrict   = array_shift($segs) == 'strict';
             $validated  = $this->validate($promiseKey);
 
             if ( !$validated && $isStrict )

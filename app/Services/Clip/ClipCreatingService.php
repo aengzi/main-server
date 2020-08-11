@@ -211,7 +211,7 @@ class ClipCreatingService extends Service
     {
         return [
             'files'
-                => ['diff_sec:valid_all']
+                => ['diff_sec:strict']
         ];
     }
 

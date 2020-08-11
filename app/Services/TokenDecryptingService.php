@@ -115,7 +115,7 @@ class TokenDecryptingService extends Service
     {
         return [
             'payload'
-                => ['valid_token:valid_all']
+                => ['valid_token:strict']
         ];
     }
 

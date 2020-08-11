@@ -66,7 +66,7 @@ class CommentThreadPagingService extends Service
     {
         return [
             'expands'
-                => ['auth_user:valid_all']
+                => ['auth_user:strict']
         ];
     }
 
