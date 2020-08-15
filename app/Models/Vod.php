@@ -64,14 +64,14 @@ class Vod extends Model
     {
         $bucketName = $this->getBucketNameAttribute();
 
-        return 'https://storage.googleapis.com/'.$bucketName.'/vods/'.$this->getKey().'/file.m3u8?ignoreCache=1';
+        return 'https://storage.googleapis.com/'.$bucketName.'/vods/'.$this->getKey().'/file.m3u8';
     }
 
     public function getThumbnailAttribute()
     {
         $bucketName = $this->getBucketNameAttribute();
 
-        return 'https://storage.googleapis.com/'.$bucketName.'/vods/'.$this->getKey().'/origin.jpg?ignoreCache=1';
+        return 'https://storage.googleapis.com/'.$bucketName.'/vods/'.$this->getKey().'/origin.jpg';
     }
 
     public function getBucketNameAttribute()
