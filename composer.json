@@ -31,9 +31,6 @@
         ]
     },
     "scripts": {
-        "post-autoload-dump": [
-            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump"
-        ],
         "post-install-cmd": [
             "chmod -R 777 /tmp"
         ]
