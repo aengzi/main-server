@@ -9,6 +9,7 @@
         "google/apiclient": "*",
         "google/cloud-storage": "*",
         "laravel/lumen-framework": "5.8.*",
+        "nesbot/carbon": "^2.38",
         "phpseclib/phpseclib": "^2.0",
         "web-token/jwt-framework": "*"
     },
