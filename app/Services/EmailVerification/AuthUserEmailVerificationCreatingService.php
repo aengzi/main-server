@@ -5,7 +5,6 @@ namespace App\Services\EmailVerification;
 use App\Service;
 use App\Services\AuthUserRequiringService;
 use App\Services\TokenEncryptingService;
-use Illuminate\Support\Facades\Request;
 
 class AuthUserEmailVerificationCreatingService extends Service
 {

@@ -11,9 +11,6 @@
 |
 */
 
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Request;
-
 $addRoutes = function () use ($router) {
 
     $prefix = str_replace('/', DIRECTORY_SEPARATOR, $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR);

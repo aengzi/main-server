@@ -6,7 +6,6 @@ use App\Service;
 use App\Models\User;
 use App\Services\TokenDecryptingService;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Request;
 
 class AuthUserRequiringService extends Service
 {
