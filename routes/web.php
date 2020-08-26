@@ -31,6 +31,7 @@ $addRoutes = function () use ($router) {
 
         $router->get('auth/user', 'AuthUserController@index');
         $router->patch('auth/user', 'AuthUserController@update');
+        $router->post('auth/user/email-verifications', 'AuthUserEmailVerificationController@store');
         $router->get('aftv-bcasts', 'AftvBcastController@index');
         $router->get('aftv-bcasts/{id}', 'AftvBcastController@show');
         $router->get('aftv-reviews/{id}', 'AftvReviewController@show');
@@ -48,7 +49,6 @@ $addRoutes = function () use ($router) {
         $router->get('dislikes', 'DislikeController@index');
         $router->post('dislikes', 'DislikeController@store');
         $router->delete('dislikes/{id}', 'DislikeController@destroy');
-        $router->post('email/change-email', 'ChangeEmailEmailController@store');
         $router->get('likes', 'LikeController@index');
         $router->post('likes', 'LikeController@store');
         $router->delete('likes/{id}', 'LikeController@destroy');
