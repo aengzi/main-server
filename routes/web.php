@@ -30,6 +30,7 @@ $addRoutes = function () use ($router) {
     ], function () use ($router) {
 
         $router->get('auth/user', 'AuthUserController@index');
+        $router->patch('auth/user', 'AuthUserController@update');
         $router->get('aftv-bcasts', 'AftvBcastController@index');
         $router->get('aftv-bcasts/{id}', 'AftvBcastController@show');
         $router->get('aftv-reviews/{id}', 'AftvReviewController@show');
@@ -68,7 +69,6 @@ $addRoutes = function () use ($router) {
         $router->post('sign-up/email-verifications', 'SignUpEmailVerificationController@store');
         $router->post('temp/clips', 'TempClipController@store');
         $router->get('users', 'UserController@index');
-        $router->patch('users/{id}', 'UserController@update');
         $router->get('users/{id}', 'UserController@show');
         $router->post('user/clips', 'UserClipController@store');
         $router->get('vods/{id}', 'VodController@show');

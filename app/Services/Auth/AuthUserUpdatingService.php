@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\User;
+namespace App\Services\Auth;
 
 use App\Service;
 use App\Models\User;
@@ -8,7 +8,7 @@ use App\Services\AuthUserRequiringService;
 use App\Services\TokenPayloadReturningService;
 use Google\Cloud\Storage\StorageClient;
 
-class UserUpdatingService extends Service
+class AuthUserUpdatingService extends Service
 {
     public static function getArrBindNames()
     {
