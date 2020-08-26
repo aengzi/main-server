@@ -47,7 +47,6 @@ $addRoutes = function () use ($router) {
         $router->get('dislikes', 'DislikeController@index');
         $router->post('dislikes', 'DislikeController@store');
         $router->delete('dislikes/{id}', 'DislikeController@destroy');
-        $router->post('email/sign-up', 'SignUpEmailController@store');
         $router->post('email/change-email', 'ChangeEmailEmailController@store');
         $router->get('likes', 'LikeController@index');
         $router->post('likes', 'LikeController@store');
@@ -66,6 +65,7 @@ $addRoutes = function () use ($router) {
         $router->patch('pwd-resets/{id}', 'PwdResetController@update');
         $router->post('sign-in', 'SignInController@store');
         $router->post('sign-up', 'SignUpController@store');
+        $router->post('sign-up/email-verifications', 'SignUpEmailVerificationController@store');
         $router->post('temp/clips', 'TempClipController@store');
         $router->get('users', 'UserController@index');
         $router->patch('users/{id}', 'UserController@update');

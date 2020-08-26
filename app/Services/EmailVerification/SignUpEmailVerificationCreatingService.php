@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Services\Email;
+namespace App\Services\EmailVerification;
 
 use App\Service;
 use App\Models\User;
 use App\Services\TokenEncryptingService;
 
-class SignUpEmailCreatingService extends Service
+class SignUpEmailVerificationCreatingService extends Service
 {
     public static function getArrBindNames()
     {
