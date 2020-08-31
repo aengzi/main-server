@@ -5,6 +5,7 @@ namespace App\Services\Auth;
 use App\Service;
 use App\Models\User;
 use App\Services\AuthUserRequiringService;
+use App\Services\EmailTokenDecryptingService;
 use Google\Cloud\Storage\StorageClient;
 
 class AuthUserUpdatingService extends Service
@@ -15,48 +16,48 @@ class AuthUserUpdatingService extends Service
             'email'
                 => 'email in payload in {{token}}',
 
-            'user'
-                => 'user for {{id}}',
+            'same_email_user'
+                => 'same email user',
 
-            'user_id'
-                => '{{id}}'
+            'same_nick_user'
+                => 'same nickname user',
         ];
     }
 
     public static function getArrCallbackLists()
     {
         return [
-            'user.nick' => ['user', 'nick', function ($user, $nick) {
+            'auth_user.nick' => ['auth_user', 'nick', function ($authUser, $nick) {
 
-                $user->nick = $nick;
+                $authUser->nick = $nick;
             }],
 
-            'user.password' => ['user', 'password', function ($user, $password) {
+            'auth_user.password' => ['auth_user', 'password', function ($authUser, $password) {
 
-                $user->password = $password;
+                $authUser->password = $password;
             }],
 
-            'user.thumbnail' => ['user', 'thumbnail', function ($user, $thumbnail) {
+            'auth_user.thumbnail' => ['auth_user', 'thumbnail', function ($authUser, $thumbnail) {
 
                 $storage = new StorageClient([
                     'keyFilePath' => storage_path('app/administrator@aengzi.json')
                 ]);
                 $bucket = $storage->bucket('aengzi.com');
                 $bucket->upload(base64_decode($thumbnail), [
-                    'name' => 'users/'.$user->getKey().'/origin.jpg',
+                    'name' => 'users/'.$authUser->getKey().'/origin.jpg',
                     'metadata' => [
                         'Cache-Control' => 'no-cache',
                         'max-age' => '0',
                     ],
                 ]);
-                $user->has_thumbnail = true;
+                $authUser->has_thumbnail = true;
             }],
 
-            'user.email' => ['user', 'email', function ($user, $email) {
+            'auth_user.email' => ['auth_user', 'email', function ($authUser, $email) {
 
-                if ( $email )
+                if ( !empty($email) )
                 {
-                    $user->email = $email;
+                    $authUser->email = $email;
                 }
             }],
 
@@ -72,48 +73,40 @@ class AuthUserUpdatingService extends Service
         return [
             'email' => ['payload', function ($payload) {
 
-                return array_key_exists('email', $payload) ? $payload['email'] : null;
+                return isset($payload['email']) ? $payload['email'] : null;
             }],
 
-            'result' => ['user', function ($user) {
+            'result' => ['auth_user', function ($authUser) {
 
-                return $user;
+                return $authUser;
+            }],
+
+            'same_email_user' => ['email', function ($email) {
+
+                if ( !empty($email) )
+                {
+                    return User::lockForUpdate()->where('email', $email)->first();
+                }
             }],
 
             'same_nick_user' => ['nick', function ($nick) {
 
                 return User::lockForUpdate()->where('nick', $nick)->first();
             }],
-
-            'user' => ['user_id', function ($userId) {
-
-                return User::find($userId);
-            }],
-
-            'user_id' => ['id', function ($id) {
-
-                return (int)$id;
-            }]
         ];
     }
 
     public static function getArrPromiseLists()
     {
-        return [];
+        return [
+            'result'
+                => ['same_email_user:strict', 'same_nick_user:strict'],
+        ];
     }
 
     public static function getArrRuleLists()
     {
         return [
-            'id'
-                => ['required', 'integer'],
-
-            'user'
-                => ['not_null'],
-
-            'user_id'
-                => ['same:{{auth_user_id}}'],
-
             'nick'
                 => ['string', 'min:2', 'max:12'],
 
@@ -123,8 +116,11 @@ class AuthUserUpdatingService extends Service
             'thumbnail'
                 => ['string', 'base64_image', 'max:'.(4096*1024)],
 
-            'email'
-                => ['required_without_all:{{nick}},{{password}},{{thumbnail}}']
+            'same_email_user'
+                => ['null'],
+
+            'same_nick_user'
+                => ['null'],
         ];
     }
 

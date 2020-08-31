@@ -12,7 +12,7 @@ class SignUpCreatingService extends Service
     {
         return [
             'user'
-                => 'user who has same email in token'
+                => 'user who has same email with payload\'s email of {{token}}'
         ];
     }
 
@@ -24,9 +24,17 @@ class SignUpCreatingService extends Service
     public static function getArrLoaders()
     {
         return [
-            'payload_keys' => [function () {
+            'payload' => ['token', function ($token) {
 
-                return ['email', 'password', 'nick'];
+                return [TokenDecryptingService::class, [
+                    'token'
+                        => $token,
+                    'payload_keys'
+                        => ['email', 'password', 'nick', 'verified'],
+                ], [
+                    'token'
+                        => '{{token}}',
+                ]];
             }],
 
             'user' => ['payload', function ($payload) {
@@ -39,7 +47,7 @@ class SignUpCreatingService extends Service
                 $user = User::create([
                     'email'    => $payload['email'],
                     'password' => $payload['password'],
-                    'nick'     => $payload['nick']
+                    'nick'     => $payload['nick'],
                 ]);
 
                 return $user;
@@ -65,8 +73,6 @@ class SignUpCreatingService extends Service
 
     public static function getArrTraits()
     {
-        return [
-            TokenDecryptingService::class
-        ];
+        return [];
     }
 }

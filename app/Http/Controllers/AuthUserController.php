@@ -31,27 +31,27 @@ class AuthUserController extends Controller
     public function update()
     {
         return [AuthUserUpdatingService::class, [
-            'id'
-                => Request::route('id'),
             'nick'
                 => $this->input('nick'),
+            'email'
+                => $this->input('email'),
             'password'
                 => $this->input('password'),
             'thumbnail'
                 => $this->input('thumbnail'),
             'token'
-                => Request::has('token') ? $this->input('token') : Request::bearerToken()
+                => $this->input('token') ? $this->input('token') : (Request::bearerToken() ? Request::bearerToken() : new \stdClass)
         ], [
-            'id'
-                => Request::route('id'),
             'nick'
                 => '[nick]',
+            'email'
+                => '[email]',
             'password'
                 => '[password]',
             'thumbnail'
                 => '[thumbnail]',
             'token'
-                => Request::has('token') ? '[token]' : 'header[authorization bearer]'
+                => $this->input('token') ? '[token]' : 'header[authorization]',
         ]];
     }
 }

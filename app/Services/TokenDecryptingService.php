@@ -77,6 +77,11 @@ class TokenDecryptingService extends Service
                 throw new \Exception;
             }],
 
+            'result' => ['payload', function ($payload) {
+
+                return $payload;
+            }],
+
             'valid_token' => ['token', 'jwk', 'decrypter', 'payload_keys', function ($token, $jwk, $decrypter, $payloadKeys) {
 
                 try

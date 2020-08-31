@@ -12,10 +12,10 @@ class SignUpController extends Controller
     {
         return [SignUpCreatingService::class, [
             'token'
-                => $this->input('token')
+                => Request::bearerToken() ? Request::bearerToken() : $this->input('token'),
         ], [
             'token'
-                => '[token]'
+                => Request::bearerToken() ? 'header[authorization]' : '[token]'
         ]];
     }
 }

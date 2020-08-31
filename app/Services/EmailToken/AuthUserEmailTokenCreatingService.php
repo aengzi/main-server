@@ -1,0 +1,88 @@
+<?php
+
+namespace App\Services\EmailToken;
+
+use App\Service;
+use App\Services\Auth\AuthUserFindingService;
+use App\Services\EmailToken\EmailTokenCreatingService;
+use Carbon\Carbon;
+use Illuminate\Support\Str;
+
+class AuthUserEmailTokenCreatingService extends Service
+{
+    public static function getArrBindNames()
+    {
+        return [];
+    }
+
+    public static function getArrCallbackLists()
+    {
+        return [];
+    }
+
+    public static function getArrLoaders()
+    {
+        return [
+            'auth_user' => ['token', function ($token) {
+
+                return [AuthUserFindingService::class, [
+                    'token'
+                        => $token,
+                ], [
+                    'token'
+                        => '{{token}}',
+                ]];
+            }],
+
+            'body' => ['payload', function ($payload) {
+
+                return '
+                    <p>
+                        이메일 검증 페이지에서 아래 문자열을 입력해주세요
+                    </p>
+                    <p>
+                        '.$payload['code'].'
+                    </p>
+                ';
+            }],
+
+            'payload' => ['auth_user', 'email', function ($authUser, $email) {
+
+                return [
+                    'code'       => Str::random(6),
+                    'email'      => $email,
+                    'expired_at' => Carbon::now('UTC')->addSeconds(300)->format('Y-m-d H:i:s'),
+                    'uid'        => $authUser->getKey(),
+                ];
+            }],
+
+            'subject' => [function () {
+
+                return '이메일 계정 소유자 확인 - aengzi.com';
+            }],
+        ];
+    }
+
+    public static function getArrPromiseLists()
+    {
+        return [];
+    }
+
+    public static function getArrRuleLists()
+    {
+        return [
+            'token'
+                => ['required'],
+
+            'email'
+                => ['required', 'string', 'email'],
+        ];
+    }
+
+    public static function getArrTraits()
+    {
+        return [
+            EmailTokenCreatingService::class,
+        ];
+    }
+}

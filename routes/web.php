@@ -28,7 +28,7 @@ $addRoutes = function () use ($router) {
 
         $router->get('auth/user', 'AuthUserController@index');
         $router->patch('auth/user', 'AuthUserController@update');
-        $router->post('auth/user/email-verifications', 'AuthUserEmailVerificationController@store');
+        $router->post('auth/user/email-tokens', 'AuthUserEmailTokenController@store');
         $router->get('aftv-bcasts', 'AftvBcastController@index');
         $router->get('aftv-bcasts/{id}', 'AftvBcastController@show');
         $router->get('aftv-reviews/{id}', 'AftvReviewController@show');
@@ -46,6 +46,7 @@ $addRoutes = function () use ($router) {
         $router->get('dislikes', 'DislikeController@index');
         $router->post('dislikes', 'DislikeController@store');
         $router->delete('dislikes/{id}', 'DislikeController@destroy');
+        $router->put('email-tokens', 'EmailTokenController@update');
         $router->get('likes', 'LikeController@index');
         $router->post('likes', 'LikeController@store');
         $router->delete('likes/{id}', 'LikeController@destroy');
@@ -59,11 +60,10 @@ $addRoutes = function () use ($router) {
         $router->patch('posts/{id}', 'PostController@update');
         $router->get('pubg-games', 'PubgGameController@index');
         $router->get('pubg-games/{id}', 'PubgGameController@show');
-        $router->post('pwd-resets', 'PwdResetController@store');
-        $router->patch('pwd-resets/{id}', 'PwdResetController@update');
+        $router->post('password-reset/email-tokens', 'PasswordResetEmailTokenController@store');
         $router->post('sign-in', 'SignInController@store');
         $router->post('sign-up', 'SignUpController@store');
-        $router->post('sign-up/email-verifications', 'SignUpEmailVerificationController@store');
+        $router->post('sign-up/email-tokens', 'SignUpEmailTokenController@store');
         $router->post('temp/clips', 'TempClipController@store');
         $router->get('users', 'UserController@index');
         $router->get('users/{id}', 'UserController@show');

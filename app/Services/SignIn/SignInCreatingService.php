@@ -25,22 +25,32 @@ class SignInCreatingService extends Service
     public static function getArrLoaders()
     {
         return [
+            'payload' => ['user', function ($user) {
+
+                return [
+                    'expired_at' => '9999-12-31 12:59:59',
+                    'uid'        => $user->getKey(),
+                    'verified'   => true,
+                ];
+            }],
+
+            'result' => ['payload', function ($payload) {
+
+                return [TokenEncryptingService::class, [
+                    'payload'
+                        => $payload,
+                ]];
+            }],
+
             'user' => ['email', 'password', function ($email, $password) {
 
-                $user = User::where('email', $email)->first();
+                $user = User::lockForUpdate()->where('email', $email)->first();
 
                 if( !empty($user) && Hash::check($password, $user->password) )
                 {
                     return $user;
                 }
             }],
-
-            'payload' => ['user', function ($user) {
-
-                return [
-                    'uid' => $user->getKey()
-                ];
-            }]
         ];
     }
 
@@ -65,8 +75,6 @@ class SignInCreatingService extends Service
 
     public static function getArrTraits()
     {
-        return [
-            TokenEncryptingService::class
-        ];
+        return [];
     }
 }

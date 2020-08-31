@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controller;
-use App\Services\EmailVerification\AuthUserEmailVerificationCreatingService;
+use App\Services\EmailToken\AuthUserEmailTokenCreatingService;
 use Illuminate\Support\Facades\Request;
 
-class AuthUserEmailVerificationController extends Controller
+class AuthUserEmailTokenController extends Controller
 {
     public function store()
     {
-        return [AuthUserEmailVerificationCreatingService::class, [
+        return [AuthUserEmailTokenCreatingService::class, [
             'email'
                 => $this->input('email'),
             'token'
