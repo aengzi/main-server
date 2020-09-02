@@ -27,9 +27,9 @@ $addRoutes = function () use ($router) {
         ]
     ], function () use ($router) {
 
-        $router->get('auth/user', 'AuthUserController@index');
-        $router->patch('auth/user', 'AuthUserController@update');
-        $router->post('auth/user/email-tokens', 'AuthUserEmailTokenController@store');
+        $router->get('auth-user', 'AuthUserController@index');
+        $router->patch('auth-user', 'AuthUserController@update');
+        $router->post('auth-user/email-tokens', 'AuthUserEmailTokenController@store');
         $router->get('aftv-bcasts', 'AftvBcastController@index');
         $router->get('aftv-bcasts/{id}', 'AftvBcastController@show');
         $router->get('aftv-reviews/{id}', 'AftvReviewController@show');
@@ -65,16 +65,16 @@ $addRoutes = function () use ($router) {
         $router->post('sign-in', 'SignInController@store');
         $router->post('sign-up', 'SignUpController@store');
         $router->post('sign-up/email-tokens', 'SignUpEmailTokenController@store');
-        $router->post('temp/clips', 'TempClipController@store');
+        $router->post('temp-clips', 'TempClipController@store');
         $router->get('users', 'UserController@index');
         $router->get('users/{id}', 'UserController@show');
-        $router->post('user/clips', 'UserClipController@store');
+        $router->post('user-clips', 'UserClipController@store');
         $router->get('vods/{id}', 'VodController@show');
-        $router->get('watchable/lol-champions', 'WatchableLolChampionController@index');
-        $router->get('youtube/videos', 'YtbVideoController@index');
-        $router->get('youtube/videos/{id}', 'YtbVideoController@show');
-        $router->get('youtube/comment/threads', 'YtbCommentThreadController@index');
-        $router->get('youtube/comment/replies', 'YtbCommentReplyController@index');
+        $router->get('watchable-lol-champions', 'WatchableLolChampionController@index');
+        $router->get('youtube-videos', 'YtbVideoController@index');
+        $router->get('youtube-videos/{id}', 'YtbVideoController@show');
+        $router->get('youtube-comment-threads', 'YtbCommentThreadController@index');
+        $router->get('youtube-comment-replies', 'YtbCommentReplyController@index');
     });
 };
 
