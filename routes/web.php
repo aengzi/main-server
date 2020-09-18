@@ -20,7 +20,7 @@ $addRoutes = function () use ($router) {
     $prefix = rtrim($prefix, DIRECTORY_SEPARATOR);
 
     $router->group([
-        'prefix' => Str::startsWith(__FILE__, str_replace('/', DIRECTORY_SEPARATOR, $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR)) ? $prefix : '',
+        'prefix' => $_SERVER['DOCUMENT_ROOT'] && Str::startsWith(__FILE__, str_replace('/', DIRECTORY_SEPARATOR, $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR)) ? $prefix : '',
         'middleware' => [
             App\Http\Middleware\ApiMiddleware::class,
             App\Http\Middleware\AuthTokenMiddleware::class
