@@ -29,7 +29,7 @@ $addRoutes = function () use ($router) {
 
         $router->get('auth-user', 'AuthUserController@index');
         $router->patch('auth-user', 'AuthUserController@update');
-        $router->post('auth-user/email-tokens', 'AuthUserEmailTokenController@store');
+        $router->post('auth-user/emails', 'AuthUserEmailTokenController@store');
         $router->get('aftv-bcasts', 'AftvBcastController@index');
         $router->get('aftv-bcasts/{id}', 'AftvBcastController@show');
         $router->get('aftv-reviews/{id}', 'AftvReviewController@show');
@@ -61,10 +61,10 @@ $addRoutes = function () use ($router) {
         $router->patch('posts/{id}', 'PostController@update');
         $router->get('pubg-games', 'PubgGameController@index');
         $router->get('pubg-games/{id}', 'PubgGameController@show');
-        $router->post('password-reset/email-tokens', 'PasswordResetEmailTokenController@store');
+        $router->post('password-reset/emails', 'PasswordResetEmailTokenController@store');
         $router->post('sign-in', 'SignInController@store');
         $router->post('sign-up', 'SignUpController@store');
-        $router->post('sign-up/email-tokens', 'SignUpEmailTokenController@store');
+        $router->post('sign-up/emails', 'SignUpEmailTokenController@store');
         $router->post('temp-clips', 'TempClipController@store');
         $router->get('users', 'UserController@index');
         $router->get('users/{id}', 'UserController@show');
