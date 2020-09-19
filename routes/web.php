@@ -28,7 +28,7 @@ $addRoutes = function () use ($router) {
     ], function () use ($router) {
 
         $router->get('auth-user', 'AuthUserController@index');
-        $router->patch('auth-user', 'AuthUserController@update');
+        $router->put('auth-user', 'AuthUserController@update');
         $router->post('auth-user/emails', 'AuthUserEmailTokenController@store');
         $router->get('aftv-bcasts', 'AftvBcastController@index');
         $router->get('aftv-bcasts/{id}', 'AftvBcastController@show');
@@ -38,11 +38,11 @@ $addRoutes = function () use ($router) {
         $router->get('clips/{id}', 'ClipController@show');
         $router->get('comment-replies', 'CommentReplyController@index');
         $router->post('comment-replies', 'CommentReplyController@store');
-        $router->patch('comment-replies/{id}', 'CommentReplyController@update');
+        $router->put('comment-replies/{id}', 'CommentReplyController@update');
         $router->delete('comment-replies/{id}', 'CommentReplyController@destroy');
         $router->get('comment-threads', 'CommentThreadController@index');
         $router->post('comment-threads', 'CommentThreadController@store');
-        $router->patch('comment-threads/{id}', 'CommentThreadController@update');
+        $router->put('comment-threads/{id}', 'CommentThreadController@update');
         $router->delete('comment-threads/{id}', 'CommentThreadController@destroy');
         $router->get('dislikes', 'DislikeController@index');
         $router->post('dislikes', 'DislikeController@store');
@@ -58,7 +58,7 @@ $addRoutes = function () use ($router) {
         $router->post('posts', 'PostController@store');
         $router->get('posts/{id}', 'PostController@show');
         $router->delete('posts/{id}', 'PostController@destroy');
-        $router->patch('posts/{id}', 'PostController@update');
+        $router->put('posts/{id}', 'PostController@update');
         $router->get('pubg-games', 'PubgGameController@index');
         $router->get('pubg-games/{id}', 'PubgGameController@show');
         $router->post('password-reset/emails', 'PasswordResetEmailTokenController@store');
