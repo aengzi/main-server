@@ -33,6 +33,8 @@ class ModelMorphMapServiceProvider extends ServiceProvider
                 => 'App\Models\AftvReview',
             'clip'
                 => 'App\Models\Clip',
+            'device'
+                => 'App\Models\Device',
             'dislike'
                 => 'App\Models\Dislike',
             'comment_reply'
@@ -49,6 +51,8 @@ class ModelMorphMapServiceProvider extends ServiceProvider
                 => 'App\Models\LolTimeline',
             'like'
                 => 'App\Models\Like',
+            'notification'
+                => 'App\Models\Notification',
             'post'
                 => 'App\Models\Post',
             'pubg_game'

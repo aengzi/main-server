@@ -44,6 +44,8 @@ $addRoutes = function () use ($router) {
         $router->post('comment-threads', 'CommentThreadController@store');
         $router->patch('comment-threads/{id}', 'CommentThreadController@update');
         $router->delete('comment-threads/{id}', 'CommentThreadController@destroy');
+        $router->post('devices', 'DeviceController@store');
+        $router->patch('devices/{id}', 'DeviceController@update');
         $router->get('dislikes', 'DislikeController@index');
         $router->post('dislikes', 'DislikeController@store');
         $router->delete('dislikes/{id}', 'DislikeController@destroy');
@@ -54,6 +56,7 @@ $addRoutes = function () use ($router) {
         $router->get('lol-champions', 'LolChampionController@index');
         $router->get('lol-games', 'LolGameController@index');
         $router->get('lol-games/{id}', 'LolGameController@show');
+        $router->get('notifications', 'NotificationController@index');
         $router->get('posts', 'PostController@index');
         $router->post('posts', 'PostController@store');
         $router->get('posts/{id}', 'PostController@show');
