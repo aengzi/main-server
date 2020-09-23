@@ -10,6 +10,7 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
+use Illuminate\Support\Str;
 
 $addRoutes = function () use ($router) {
 
@@ -19,7 +20,7 @@ $addRoutes = function () use ($router) {
     $prefix = rtrim($prefix, DIRECTORY_SEPARATOR);
 
     $router->group([
-        'prefix' => $prefix,
+        'prefix' => Str::startsWith(__FILE__, str_replace('/', DIRECTORY_SEPARATOR, $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR)) ? $prefix : '',
         'middleware' => [
             App\Http\Middleware\ApiMiddleware::class,
             App\Http\Middleware\AuthTokenMiddleware::class
