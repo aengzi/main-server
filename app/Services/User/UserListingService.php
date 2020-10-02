@@ -20,6 +20,7 @@ class UserListingService extends Service
 
                 $query->where('nick', $nick);
             }],
+
             'query.email' => ['query', 'email', function ($query, $email) {
 
                 $query->where('email', $email);
