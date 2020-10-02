@@ -77,9 +77,9 @@ class ListingService extends Service
                 return inst($modelClass)->getExpandable();
             }],
 
-            'available_fields' => ['model_class', function ($model_class) {
+            'available_fields' => ['model_class', function ($modelClass) {
 
-                $model = inst($model_class);
+                $model = inst($modelClass);
 
                 return array_diff(array_merge($model->getFillable(), $model->getGuarded()), $model->getHidden());
             }],
