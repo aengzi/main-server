@@ -10,12 +10,6 @@ class SignUpController extends Controller
 {
     public function store()
     {
-        return [SignUpCreatingService::class, [
-            'token'
-                => Request::bearerToken() ? Request::bearerToken() : $this->input('token'),
-        ], [
-            'token'
-                => Request::bearerToken() ? 'header[authorization]' : '[token]'
-        ]];
+        return [SignUpCreatingService::class];
     }
 }

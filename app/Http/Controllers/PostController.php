@@ -14,51 +14,17 @@ class PostController extends Controller
 {
     public function destroy()
     {
-        return [PostDeletingService::class, [
-            'id'
-                => Request::route('id'),
-            'token'
-                => Request::bearerToken() ? Request::bearerToken() : ''
-        ], [
-            'id'
-                => Request::route('id'),
-            'token'
-                => 'header[authorization]'
-        ]];
+        return [PostDeletingService::class];
     }
 
     public function index()
     {
         return [PostPagingService::class, [
-            'expands'
-                => $this->input('expands'),
-            'fields'
-                => $this->input('fields'),
-            'limit'
-                => $this->input('limit'),
-            'page'
-                => $this->input('page'),
-            'order_by'
-                => $this->input('order_by'),
-            'token'
-                => Request::bearerToken() ? Request::bearerToken() : '',
             'type'
                 => $this->input('type'),
             'user_id'
                 => $this->input('user_id')
         ], [
-            'expands'
-                => '[expands]',
-            'fields'
-                => '[fields]',
-            'limit'
-                => '[limit]',
-            'page'
-                => '[page]',
-            'order_by'
-                => '[order_by]',
-            'token'
-                => 'header[authorization]',
             'type'
                 => '[type]',
             'user_id'
@@ -68,25 +34,7 @@ class PostController extends Controller
 
     public function show()
     {
-        return [PostFindingService::class, [
-            'expands'
-                => $this->input('expands'),
-            'fields'
-                => $this->input('fields'),
-            'id'
-                => Request::route('id'),
-            'token'
-                => Request::bearerToken() ? Request::bearerToken() : ''
-        ], [
-            'expands'
-                => '[expands]',
-            'fields'
-                => '[fields]',
-            'id'
-                => Request::route('id'),
-            'token'
-                => 'header[authorization]'
-        ]];
+        return [PostFindingService::class];
     }
 
     public function store()
@@ -98,8 +46,6 @@ class PostController extends Controller
                 => $this->input('title'),
             'type'
                 => $this->input('type'),
-            'token'
-                => Request::bearerToken() ? Request::bearerToken() : ''
         ], [
             'content'
                 => '[content]',
@@ -107,8 +53,6 @@ class PostController extends Controller
                 => '[title]',
             'type'
                 => '[type]',
-            'token'
-                => 'header[authorization]'
         ]];
     }
 
@@ -121,10 +65,6 @@ class PostController extends Controller
                 => $this->input('title'),
             'type'
                 => $this->input('type'),
-            'id'
-                => Request::route('id'),
-            'token'
-                => Request::bearerToken() ? Request::bearerToken() : ''
         ], [
             'content'
                 => '[content]',
@@ -132,10 +72,6 @@ class PostController extends Controller
                 => '[title]',
             'type'
                 => '[type]',
-            'id'
-                => Request::route('id'),
-            'token'
-                => 'header[authorization]'
         ]];
     }
 }

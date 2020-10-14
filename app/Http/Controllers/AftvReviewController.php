@@ -10,24 +10,6 @@ class AftvReviewController extends Controller
 {
     public function show()
     {
-        return [AftvReviewFindingService::class, [
-            'expands'
-                => $this->input('expands'),
-            'fields'
-                => $this->input('fields'),
-            'id'
-                => Request::route('id'),
-            'token'
-                => Request::bearerToken() ? Request::bearerToken() : ''
-        ], [
-            'expands'
-                => '[expands]',
-            'fields'
-                => '[fields]',
-            'id'
-                => Request::route('id'),
-            'token'
-                => 'header[authorization]'
-        ]];
+        return [AftvReviewFindingService::class];
     }
 }

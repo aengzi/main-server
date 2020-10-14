@@ -9,16 +9,6 @@ class LolChampionController extends Controller
 {
     public function index()
     {
-        return [LolChampionListingService::class, [
-            'expands'
-                => $this->input('expands'),
-            'fields'
-                => $this->input('fields')
-        ], [
-            'expands'
-                => '[expands]',
-            'fields'
-                => '[fields]'
-        ]];
+        return [LolChampionListingService::class];
     }
 }

@@ -27,15 +27,11 @@ class DeviceController extends Controller
     public function update()
     {
         return [DeviceUpdatingService::class, [
-            'id'
-                => Request::route('id'),
             'related_id'
                 => $this->input('related_id'),
             'related_type'
                 => $this->input('related_type'),
         ], [
-            'id'
-                => Request::route('id'),
             'related_id'
                 => '[related_id]',
             'related_type'

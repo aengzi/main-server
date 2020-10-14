@@ -15,56 +15,32 @@ class DislikeController extends Controller
         return [DislikeDeletingService::class, [
             'dislike_id'
                 => Request::route('id'),
-            'token'
-                => Request::bearerToken() ? Request::bearerToken() : ''
         ], [
             'dislike_id'
                 => Request::route('id'),
-            'token'
-                => 'header[authorization]'
         ]];
     }
 
     public function index()
     {
         return [DislikePagingService::class, [
-            'expands'
-                => $this->input('expands'),
-            'fields'
-                => $this->input('fields'),
-            'limit'
-                => $this->input('limit'),
-            'order_by'
-                => $this->input('order_by'),
-            'page'
-                => $this->input('page'),
-            'user_id'
-                => $this->input('user_id'),
             'related_id'
                 => $this->input('related_id'),
             'related_type'
                 => $this->input('related_type'),
             'related_types'
-                => $this->input('related_types')
-        ], [
-            'expands'
-                => '[expands]',
-            'fields'
-                => '[fields]',
-            'limit'
-                => '[limit]',
-            'order_by'
-                => '[order_by]',
-            'page'
-                => '[page]',
+                => $this->input('related_types'),
             'user_id'
-                => '[user_id]',
+                => $this->input('user_id'),
+        ], [
             'related_id'
                 => '[related_id]',
             'related_type'
                 => '[related_type]',
             'related_types'
-                => '[related_types]'
+                => '[related_types]',
+            'user_id'
+                => '[user_id]',
         ]];
     }
 
@@ -75,15 +51,11 @@ class DislikeController extends Controller
                 => $this->input('related_id'),
             'related_type'
                 => $this->input('related_type'),
-            'token'
-                => Request::bearerToken() ? Request::bearerToken() : ''
         ], [
             'related_id'
                 => '[related_id]',
             'related_type'
                 => '[related_type]',
-            'token'
-                => 'header[authorization]'
         ]];
     }
 }

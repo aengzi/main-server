@@ -19,8 +19,6 @@ class UserClipController extends Controller
                 => $this->input('title'),
             'vod_id'
                 => $this->input('vod_id'),
-            'token'
-                => Request::bearerToken() ? Request::bearerToken() : ''
         ], [
             'end_sec'
                 => '[end_sec]',
@@ -30,8 +28,6 @@ class UserClipController extends Controller
                 => '[title]',
             'vod_id'
                 => '[vod_id]',
-            'token'
-                => 'header[authorization]'
         ]];
     }
 }

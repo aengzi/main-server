@@ -12,13 +12,9 @@ class EmailTokenController extends Controller
         return [EmailTokenUpdatingService::class, [
             'code'
                 => $this->input('code'),
-            'token'
-                => $this->input('token'),
         ], [
             'code'
                 => '[code]',
-            'token'
-                => '[token]',
         ]];
     }
 }

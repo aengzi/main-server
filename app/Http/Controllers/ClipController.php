@@ -12,82 +12,26 @@ class ClipController extends Controller
 {
     public function destroy()
     {
-        return [ClipDeletingService::class, [
-            'id'
-                => Request::route('id'),
-            'token'
-                => Request::bearerToken() ? Request::bearerToken() : ''
-        ], [
-            'id'
-                => Request::route('id'),
-            'token'
-                => 'header[authorization]'
-        ]];
+        return [ClipDeletingService::class];
     }
 
     public function index()
     {
         return [ClipPagingService::class, [
-            'expands'
-                => $this->input('expands'),
-            'fields'
-                => $this->input('fields'),
-            'group_by'
-                => $this->input('group_by'),
-            'limit'
-                => $this->input('limit'),
-            'order_by'
-                => $this->input('order_by'),
-            'page'
-                => $this->input('page'),
-            'token'
-                => Request::bearerToken() ? Request::bearerToken() : '',
             'user_id'
                 => $this->input('user_id'),
             'vod_id'
-                => $this->input('vod_id')
+                => $this->input('vod_id'),
         ], [
-            'expands'
-                => '[expands]',
-            'fields'
-                => '[fields]',
-            'group_by'
-                => '[group_by]',
-            'limit'
-                => '[limit]',
-            'order_by'
-                => '[order_by]',
-            'page'
-                => '[page]',
-            'token'
-                => 'header[authorization]',
             'user_id'
                 => '[user_id]',
             'vod_id'
-                => '[vod_id]'
+                => '[vod_id]',
         ]];
     }
 
     public function show()
     {
-        return [ClipFindingService::class, [
-            'expands'
-                => $this->input('expands'),
-            'fields'
-                => $this->input('fields'),
-            'id'
-                => Request::route('id'),
-            'token'
-                => Request::bearerToken() ? Request::bearerToken() : ''
-        ], [
-            'expands'
-                => '[expands]',
-            'fields'
-                => '[fields]',
-            'id'
-                => Request::route('id'),
-            'token'
-                => 'header[authorization]'
-        ]];
+        return [ClipFindingService::class];
     }
 }

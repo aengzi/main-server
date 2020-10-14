@@ -13,13 +13,9 @@ class AuthUserEmailTokenController extends Controller
         return [AuthUserEmailTokenCreatingService::class, [
             'email'
                 => $this->input('email'),
-            'token'
-                => Request::bearerToken() ? Request::bearerToken() : ''
         ], [
             'email'
                 => '[email]',
-            'token'
-                => 'header[authorization]'
         ]];
     }
 }

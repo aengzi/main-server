@@ -9,16 +9,6 @@ class WatchableLolChampionController extends Controller
 {
     public function index()
     {
-        return [WatchableLolChampionListingService::class, [
-            'expands'
-                => $this->input('expands'),
-            'fields'
-                => $this->input('fields')
-        ], [
-            'expands'
-                => '[expands]',
-            'fields'
-                => '[fields]'
-        ]];
+        return [WatchableLolChampionListingService::class];
     }
 }

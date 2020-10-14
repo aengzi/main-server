@@ -11,21 +11,7 @@ class AuthUserController extends Controller
 {
     public function index()
     {
-        return [AuthUserFindingService::class, [
-            'fields'
-                => $this->input('fields'),
-            'expands'
-                => $this->input('expands'),
-            'token'
-                => Request::bearerToken() ? Request::bearerToken() : ''
-        ], [
-            'fields'
-                => '[fields]',
-            'expands'
-                => '[expands]',
-            'token'
-                => 'header[authorization]'
-        ]];
+        return [AuthUserFindingService::class];
     }
 
     public function update()
@@ -39,8 +25,6 @@ class AuthUserController extends Controller
                 => $this->input('password'),
             'thumbnail'
                 => $this->input('thumbnail'),
-            'token'
-                => $this->input('token') ? $this->input('token') : (Request::bearerToken() ? Request::bearerToken() : '')
         ], [
             'nick'
                 => '[nick]',
@@ -50,8 +34,6 @@ class AuthUserController extends Controller
                 => '[password]',
             'thumbnail'
                 => '[thumbnail]',
-            'token'
-                => $this->input('token') ? '[token]' : 'header[authorization]',
         ]];
     }
 }
