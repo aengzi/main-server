@@ -12,7 +12,7 @@ class UserFindingService extends Service
     {
         return [
             'result'
-                => 'user for {{id}}'
+                => 'user for {{id}}',
         ];
     }
 
@@ -32,7 +32,7 @@ class UserFindingService extends Service
             'model_class' => [function () {
 
                 return User::class;
-            }]
+            }],
         ];
     }
 
@@ -49,7 +49,7 @@ class UserFindingService extends Service
     public static function getArrTraits()
     {
         return [
-            FindingService::class
+            FindingService::class,
         ];
     }
 }

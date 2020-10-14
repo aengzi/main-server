@@ -24,30 +24,7 @@ class LolGamePagingService extends Service
                 $query->whereNotNull('vod_id');
             }],
 
-            'query.is_win' => ['query', 'is_win', function ($query, $isWin) {
-
-                $subQuery = LolMeta::query()
-                    ->select(['game_id'])
-                    ->where('property', 'my_team_win')
-                    ->where('value', $isWin)
-                    ->getQuery();
-
-                $query->whereIn('id', $subQuery);
-            }],
-
-            'query.multi_kill_types' => ['query', 'multi_kill_types', function ($query, $multiKillTypes) {
-
-                $multiKillTypes = preg_split('/\s*,\s*/', $multiKillTypes);
-                $subQuery = LolMeta::query()
-                    ->select(['game_id'])
-                    ->where('property', 'status_has_multi_kill_type')
-                    ->whereIn('value', $multiKillTypes)
-                    ->getQuery();
-
-                $query->whereIn('id', $subQuery);
-            }],
-
-            'query.champion_ids' => ['query', 'champion_ids', function ($query, $championIds) {
+            'query.champion_ids' => ['champion_ids', 'query', function ($championIds, $query) {
 
                 $championIds = preg_split('/\s*,\s*/', $championIds);
                 $subQuery = LolMeta::query()
@@ -59,7 +36,30 @@ class LolGamePagingService extends Service
                 $query->whereIn('id', $subQuery);
             }],
 
-            'query.order_by_array' => ['query', 'order_by_array', function ($query, $orderByArray) {
+            'query.is_win' => ['is_win', 'query', function ($isWin, $query) {
+
+                $subQuery = LolMeta::query()
+                    ->select(['game_id'])
+                    ->where('property', 'my_team_win')
+                    ->where('value', $isWin)
+                    ->getQuery();
+
+                $query->whereIn('id', $subQuery);
+            }],
+
+            'query.multi_kill_types' => ['multi_kill_types', 'query', function ($multiKillTypes, $query) {
+
+                $multiKillTypes = preg_split('/\s*,\s*/', $multiKillTypes);
+                $subQuery = LolMeta::query()
+                    ->select(['game_id'])
+                    ->where('property', 'status_has_multi_kill_type')
+                    ->whereIn('value', $multiKillTypes)
+                    ->getQuery();
+
+                $query->whereIn('id', $subQuery);
+            }],
+
+            'query.order_by_array' => ['order_by_array', 'query', function ($orderByArray, $query) {
 
                 if ( array_keys($orderByArray)[count($orderByArray)-1] == $query->getModel()->getKeyName() )
                 {
@@ -107,7 +107,7 @@ class LolGamePagingService extends Service
                         $query->orderByRaw($alias2.$orderColumn.$order);
                     }
                 }
-            }]
+            }],
         ];
     }
 
@@ -138,7 +138,7 @@ class LolGamePagingService extends Service
             'order_by' => [function () {
 
                 return 'game_creation desc';
-            }]
+            }],
         ];
     }
 

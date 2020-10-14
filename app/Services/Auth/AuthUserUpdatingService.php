@@ -27,6 +27,14 @@ class AuthUserUpdatingService extends Service
     public static function getArrCallbackLists()
     {
         return [
+            'auth_user.email' => ['auth_user', 'email', function ($authUser, $email) {
+
+                if ( !empty($email) )
+                {
+                    $authUser->email = $email;
+                }
+            }],
+
             'auth_user.nick' => ['auth_user', 'nick', function ($authUser, $nick) {
 
                 $authUser->nick = $nick;
@@ -53,18 +61,10 @@ class AuthUserUpdatingService extends Service
                 $authUser->has_thumbnail = true;
             }],
 
-            'auth_user.email' => ['auth_user', 'email', function ($authUser, $email) {
-
-                if ( !empty($email) )
-                {
-                    $authUser->email = $email;
-                }
-            }],
-
             'result' => ['result', function ($result) {
 
                 $result->save();
-            }]
+            }],
         ];
     }
 
@@ -127,7 +127,7 @@ class AuthUserUpdatingService extends Service
     public static function getArrTraits()
     {
         return [
-            AuthUserRequiringService::class
+            AuthUserRequiringService::class,
         ];
     }
 }

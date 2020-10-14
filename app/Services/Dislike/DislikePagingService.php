@@ -21,18 +21,13 @@ class DislikePagingService extends Service
                 => 'related for {{related_id}} and {{related_type}}',
 
             'user'
-                => 'user for {{user_id}}'
+                => 'user for {{user_id}}',
         ];
     }
 
     public static function getArrCallbackLists()
     {
         return [
-            'query.user' => ['query', 'user', function ($query, $user) {
-
-                $query->where('user_id', $user->getKey());
-            }],
-
             'query.related' => ['query', 'related', 'related_type', function ($query, $related, $relatedType) {
 
                 $query->where('related_id', $related->getKey());
@@ -43,7 +38,12 @@ class DislikePagingService extends Service
 
                 $relatedTypes = preg_split('/\s*,\s*/', $relatedTypes);
                 $query->whereIn('related_type', $relatedTypes);
-            }]
+            }],
+
+            'query.user' => ['query', 'user', function ($query, $user) {
+
+                $query->where('user_id', $user->getKey());
+            }],
         ];
     }
 
@@ -73,7 +73,7 @@ class DislikePagingService extends Service
             'user' => ['user_id', function ($userId) {
 
                 return User::find($userId);
-            }]
+            }],
         ];
     }
 

@@ -16,7 +16,7 @@ class PostDeletingService extends Service
                 => 'post for {{id}}',
 
             'post_user_id'
-                => 'user_id of {{post}}'
+                => 'user_id of {{post}}',
         ];
     }
 
@@ -27,14 +27,14 @@ class PostDeletingService extends Service
 
                 $post->content = null;
                 $post->delete();
-            }]
+            }],
         ];
     }
 
     public static function getArrLoaders()
     {
         return [
-            'post' => ['id', function ($postId) {
+            'post' => ['id', function ($id) {
 
                 return Post::find($postId);
             }],
@@ -47,7 +47,7 @@ class PostDeletingService extends Service
             'result' => [function () {
 
                 return null;
-            }]
+            }],
         ];
     }
 
@@ -73,7 +73,7 @@ class PostDeletingService extends Service
     public static function getArrTraits()
     {
         return [
-            AuthUserRequiringService::class
+            AuthUserRequiringService::class,
         ];
     }
 }

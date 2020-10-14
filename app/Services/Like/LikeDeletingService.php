@@ -15,7 +15,7 @@ class LikeDeletingService extends Service
                 => 'like for {{like_id}}',
 
             'like_user_id'
-                => 'user_id of {{like}}'
+                => 'user_id of {{like}}',
         ];
     }
 
@@ -34,7 +34,7 @@ class LikeDeletingService extends Service
                 $related = $like->related;
                 $related->like_count = $count;
                 $related->save();
-            }]
+            }],
         ];
     }
 
@@ -54,7 +54,7 @@ class LikeDeletingService extends Service
             'result' => [function () {
 
                 return null;
-            }]
+            }],
         ];
     }
 
@@ -80,7 +80,7 @@ class LikeDeletingService extends Service
     public static function getArrTraits()
     {
         return [
-            AuthUserRequiringService::class
+            AuthUserRequiringService::class,
         ];
     }
 }

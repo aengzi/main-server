@@ -18,7 +18,7 @@ class DeviceCreatingService extends Service
             'device' => ['device', function ($device) {
 
                 $device->save();
-            }]
+            }],
         ];
     }
 

@@ -11,18 +11,18 @@ class PostUpdatingService extends Service
     public static function getArrBindNames()
     {
         return [
-            'user_id'
-                => 'user_id of {{post}}',
-
             'post'
                 => 'post for {{id}}',
+
+            'user_id'
+                => 'user_id of {{post}}',
         ];
     }
 
     public static function getArrCallbackLists()
     {
         return [
-            'post.content' => ['post', 'content', function ($post, $content) {
+            'post.content' => ['content', 'post', function ($content, $post) {
 
                 $post->content = $content;
             }],
@@ -40,7 +40,7 @@ class PostUpdatingService extends Service
             'result' => ['result', function ($result) {
 
                 $result->save();
-            }]
+            }],
         ];
     }
 
@@ -60,7 +60,7 @@ class PostUpdatingService extends Service
             'user_id' => ['post', function ($post) {
 
                 return $post->user_id;
-            }]
+            }],
         ];
     }
 
@@ -95,7 +95,7 @@ class PostUpdatingService extends Service
     public static function getArrTraits()
     {
         return [
-            AuthUserRequiringService::class
+            AuthUserRequiringService::class,
         ];
     }
 }

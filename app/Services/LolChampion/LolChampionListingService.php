@@ -19,7 +19,7 @@ class LolChampionListingService extends Service
             'query' => ['query', function ($query) {
 
                 $query->orderBy('name', 'asc');
-            }]
+            }],
         ];
     }
 
@@ -34,7 +34,7 @@ class LolChampionListingService extends Service
             'model_class' => [function () {
 
                 return LolChampion::class;
-            }]
+            }],
         ];
     }
 
@@ -51,7 +51,7 @@ class LolChampionListingService extends Service
     public static function getArrTraits()
     {
         return [
-            ListingService::class
+            ListingService::class,
         ];
     }
 }

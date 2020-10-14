@@ -16,10 +16,10 @@ class PostCreatingService extends Service
     public static function getArrCallbackLists()
     {
         return [
-            'result.auth_user' => ['result', 'auth_user', function ($result, $authUser) {
+            'result.auth_user' => ['auth_user', 'result', function ($authUser, $result) {
 
                 $result->setRelation('user', $authUser);
-            }]
+            }],
         ];
     }
 
@@ -38,7 +38,7 @@ class PostCreatingService extends Service
                     'type'
                         => $type
                 ]);
-            }]
+            }],
         ];
     }
 
@@ -64,7 +64,7 @@ class PostCreatingService extends Service
     public static function getArrTraits()
     {
         return [
-            AuthUserRequiringService::class
+            AuthUserRequiringService::class,
         ];
     }
 }

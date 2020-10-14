@@ -12,7 +12,7 @@ class YtbVideoFindingService extends Service
     {
         return [
             'result'
-                => 'youtube_video for {{id}}'
+                => 'youtube_video for {{id}}',
         ];
     }
 
@@ -32,7 +32,7 @@ class YtbVideoFindingService extends Service
             'model_class' => [function () {
 
                 return YtbVideo::class;
-            }]
+            }],
         ];
     }
 
@@ -49,7 +49,7 @@ class YtbVideoFindingService extends Service
     public static function getArrTraits()
     {
         return [
-            FindingService::class
+            FindingService::class,
         ];
     }
 }

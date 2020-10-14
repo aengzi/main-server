@@ -12,7 +12,7 @@ class ClipFindingService extends Service
     {
         return [
             'result'
-                => 'clip for {{id}}'
+                => 'clip for {{id}}',
         ];
     }
 
@@ -32,7 +32,7 @@ class ClipFindingService extends Service
             'model_class' => [function () {
 
                 return Clip::class;
-            }]
+            }],
         ];
     }
 
@@ -49,7 +49,7 @@ class ClipFindingService extends Service
     public static function getArrTraits()
     {
         return [
-            FindingService::class
+            FindingService::class,
         ];
     }
 }

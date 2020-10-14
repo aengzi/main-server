@@ -12,7 +12,7 @@ class SignUpCreatingService extends Service
     {
         return [
             'user'
-                => 'user who has same email with payload\'s email of {{token}}'
+                => 'user who has same email with payload\'s email of {{token}}',
         ];
     }
 
@@ -37,11 +37,6 @@ class SignUpCreatingService extends Service
                 ]];
             }],
 
-            'user' => ['payload', function ($payload) {
-
-                return User::lockForUpdate()->where('email', $payload['email'])->first();
-            }],
-
             'result' => ['payload', function ($payload) {
 
                 $user = User::create([
@@ -51,7 +46,12 @@ class SignUpCreatingService extends Service
                 ]);
 
                 return $user;
-            }]
+            }],
+
+            'user' => ['payload', function ($payload) {
+
+                return User::lockForUpdate()->where('email', $payload['email'])->first();
+            }],
         ];
     }
 
@@ -59,7 +59,7 @@ class SignUpCreatingService extends Service
     {
         return [
             'result'
-                => ['user']
+                => ['user'],
         ];
     }
 

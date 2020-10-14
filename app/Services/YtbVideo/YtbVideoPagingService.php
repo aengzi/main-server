@@ -29,7 +29,7 @@ class YtbVideoPagingService extends Service
             'model_class' => [function () {
 
                 return YtbVideo::class;
-            }]
+            }],
         ];
     }
 

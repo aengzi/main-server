@@ -38,11 +38,6 @@ class PasswordResetEmailTokenCreatingService extends Service
                 ';
             }],
 
-            'same_email_user' => ['email', function ($email) {
-
-                return User::lockForUpdate()->where('email', $email)->first();
-            }],
-
             'payload' => ['same_email_user', function ($sameEmailUser) {
 
                 return [
@@ -50,6 +45,11 @@ class PasswordResetEmailTokenCreatingService extends Service
                     'expired_at' => Carbon::now('UTC')->addSeconds(300)->format('Y-m-d H:i:s'),
                     'uid'        => $sameEmailUser->getKey(),
                 ];
+            }],
+
+            'same_email_user' => ['email', function ($email) {
+
+                return User::lockForUpdate()->where('email', $email)->first();
             }],
 
             'subject' => [function () {

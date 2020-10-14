@@ -34,7 +34,7 @@ class PostPagingService extends Service
             'query.user' => ['query', 'user', function ($query, $user) {
 
                 $query->where('user_id', $user->getKey());
-            }]
+            }],
         ];
     }
 
@@ -62,7 +62,7 @@ class PostPagingService extends Service
             'user' => ['user_id', function ($userId) {
 
                 return User::find($userId);
-            }]
+            }],
         ];
     }
 

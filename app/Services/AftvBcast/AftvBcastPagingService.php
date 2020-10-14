@@ -19,18 +19,7 @@ class AftvBcastPagingService extends Service
     public static function getArrCallbackLists()
     {
         return [
-            'query.vod.related_id' => ['query', function ($query) {
-
-                $type     = array_flip(Relation::morphMap())[AftvBcast::class];
-                $subQuery = Vod::query()
-                    ->select('related_id')
-                    ->where('related_type', $type)
-                    ->getQuery();
-
-                $query->whereIn($query->getModel()->getKeyName(), $subQuery);
-            }],
-
-            'query.order_by_array' => ['query', 'order_by_array', function ($query, $orderByArray) {
+            'query.order_by_array' => ['order_by_array', 'query', function ($orderByArray, $query) {
 
                 foreach ( $orderByArray as $column => $order )
                 {
@@ -55,7 +44,18 @@ class AftvBcastPagingService extends Service
                         $query->orderBy($column, $order);
                     }
                 }
-            }]
+            }],
+
+            'query.vod.related_id' => ['query', function ($query) {
+
+                $type     = array_flip(Relation::morphMap())[AftvBcast::class];
+                $subQuery = Vod::query()
+                    ->select('related_id')
+                    ->where('related_type', $type)
+                    ->getQuery();
+
+                $query->whereIn($query->getModel()->getKeyName(), $subQuery);
+            }],
         ];
     }
 
@@ -80,7 +80,7 @@ class AftvBcastPagingService extends Service
             'order_by' => [function () {
 
                 return 'started_at desc';
-            }]
+            }],
         ];
     }
 

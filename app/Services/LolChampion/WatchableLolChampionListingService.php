@@ -30,7 +30,7 @@ class WatchableLolChampionListingService extends Service
                     ->getQuery();
                 $query->whereIn('id', $subQuery2);
                 $query->orderBy('name', 'asc');
-            }]
+            }],
         ];
     }
 
@@ -40,7 +40,7 @@ class WatchableLolChampionListingService extends Service
             'model_class' => [function () {
 
                 return LolChampion::class;
-            }]
+            }],
         ];
     }
 
@@ -57,7 +57,7 @@ class WatchableLolChampionListingService extends Service
     public static function getArrTraits()
     {
         return [
-            LolChampionListingService::class
+            LolChampionListingService::class,
         ];
     }
 }

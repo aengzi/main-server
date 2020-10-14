@@ -41,7 +41,7 @@ class SignUpEmailTokenCreatingService extends Service
                 ';
             }],
 
-            'payload' => ['email', 'password', 'nick', function ($email, $password, $nick) {
+            'payload' => ['email', 'nick', 'password', function ($email, $nick, $password) {
 
                 return [
                     'email'      => $email,

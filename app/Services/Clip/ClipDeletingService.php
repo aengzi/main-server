@@ -18,7 +18,7 @@ class ClipDeletingService extends Service
                 => 'clip for {{id}}',
 
             'user_id'
-                => 'user_id of {{clip}}'
+                => 'user_id of {{clip}}',
         ];
     }
 
@@ -45,7 +45,7 @@ class ClipDeletingService extends Service
                 foreach ($objects as $object) {
                     $object->delete();
                 }
-            }]
+            }],
         ];
     }
 
@@ -57,15 +57,15 @@ class ClipDeletingService extends Service
                 return Clip::find($id);
             }],
 
+            'result' => [function () {
+
+                return null;
+            }],
+
             'user_id' => ['clip', function ($clip) {
 
                 return $clip->user_id;
             }],
-
-            'result' => [function () {
-
-                return null;
-            }]
         ];
     }
 
@@ -88,7 +88,7 @@ class ClipDeletingService extends Service
     public static function getArrTraits()
     {
         return [
-            AuthUserRequiringService::class
+            AuthUserRequiringService::class,
         ];
     }
 }

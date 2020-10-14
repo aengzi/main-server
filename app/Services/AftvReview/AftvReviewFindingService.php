@@ -12,7 +12,7 @@ class AftvReviewFindingService extends Service
     {
         return [
             'result'
-                => 'aftv_review for {{id}}'
+                => 'aftv_review for {{id}}',
         ];
     }
 
@@ -32,7 +32,7 @@ class AftvReviewFindingService extends Service
             'model_class' => [function () {
 
                 return AftvReview::class;
-            }]
+            }],
         ];
     }
 
@@ -49,7 +49,7 @@ class AftvReviewFindingService extends Service
     public static function getArrTraits()
     {
         return [
-            FindingService::class
+            FindingService::class,
         ];
     }
 }

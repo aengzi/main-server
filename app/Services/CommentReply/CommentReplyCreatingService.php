@@ -13,18 +13,13 @@ class CommentReplyCreatingService extends Service
     {
         return [
             'thread'
-                => 'comment_thread for {{thread_id}}'
+                => 'comment_thread for {{thread_id}}',
         ];
     }
 
     public static function getArrCallbackLists()
     {
         return [
-            'result.auth_user' => ['result', 'auth_user', function ($result, $authUser) {
-
-                $result->setRelation('user', $authUser);
-            }],
-
             'result' => ['result', function ($result) {
 
                 $count = CommentReply::query()
@@ -34,7 +29,12 @@ class CommentReplyCreatingService extends Service
                 $thread = $result->thread;
                 $thread->reply_count = $count;
                 $thread->save();
-            }]
+            }],
+
+            'result.auth_user' => ['auth_user', 'result', function ($authUser, $result) {
+
+                $result->setRelation('user', $authUser);
+            }],
         ];
     }
 
@@ -56,7 +56,7 @@ class CommentReplyCreatingService extends Service
             'thread' => ['thread_id', function ($threadId) {
 
                 return CommentThread::find($threadId);
-            }]
+            }],
         ];
     }
 
@@ -82,7 +82,7 @@ class CommentReplyCreatingService extends Service
     public static function getArrTraits()
     {
         return [
-            AuthUserRequiringService::class
+            AuthUserRequiringService::class,
         ];
     }
 }

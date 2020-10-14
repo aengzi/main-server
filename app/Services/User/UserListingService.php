@@ -16,14 +16,14 @@ class UserListingService extends Service
     public static function getArrCallbackLists()
     {
         return [
-            'query.nick' => ['query', 'nick', function ($query, $nick) {
-
-                $query->where('nick', $nick);
-            }],
-
-            'query.email' => ['query', 'email', function ($query, $email) {
+            'query.email' => ['email', 'query', function ($email, $query) {
 
                 $query->where('email', $email);
+            }],
+
+            'query.nick' => ['nick', 'query', function ($nick, $query) {
+
+                $query->where('nick', $nick);
             }],
         ];
     }
@@ -39,7 +39,7 @@ class UserListingService extends Service
             'model_class' => [function () {
 
                 return User::class;
-            }]
+            }],
         ];
     }
 
@@ -62,7 +62,7 @@ class UserListingService extends Service
     public static function getArrTraits()
     {
         return [
-            ListingService::class
+            ListingService::class,
         ];
     }
 }

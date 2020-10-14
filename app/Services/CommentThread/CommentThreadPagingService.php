@@ -13,27 +13,27 @@ class CommentThreadPagingService extends Service
     public static function getArrBindNames()
     {
         return [
+            'related'
+                => 'model for {{related_type}} and {{related_id}}',
+
             'user'
                 => 'user for {{user_id}}',
-
-            'related'
-                => 'model for {{related_type}} and {{related_id}}'
         ];
     }
 
     public static function getArrCallbackLists()
     {
         return [
-            'query.user' => ['query', 'user', function ($query, $user) {
-
-                $query->where('user_id', $user->getKey());
-            }],
-
             'query.related' => ['query', 'related', 'related_type', function ($query, $related, $relatedType) {
 
                 $query->where('related_id', $related->getKey());
                 $query->where('related_type', $relatedType);
-            }]
+            }],
+
+            'query.user' => ['query', 'user', function ($query, $user) {
+
+                $query->where('user_id', $user->getKey());
+            }],
         ];
     }
 
@@ -50,15 +50,15 @@ class CommentThreadPagingService extends Service
                 return CommentThread::class;
             }],
 
+            'related' => ['related_id', 'related_type', function ($relatedId, $relatedType) {
+
+                return Relation::morphMap()[$relatedType]::find($relatedId);
+            }],
+
             'user' => ['user_id', function ($userId) {
 
                 return User::find($userId);
             }],
-
-            'related' => ['related_id', 'related_type', function ($relatedId, $relatedType) {
-
-                return Relation::morphMap()[$relatedType]::find($relatedId);
-            }]
         ];
     }
 
@@ -66,7 +66,7 @@ class CommentThreadPagingService extends Service
     {
         return [
             'expands'
-                => ['auth_user:strict']
+                => ['auth_user:strict'],
         ];
     }
 

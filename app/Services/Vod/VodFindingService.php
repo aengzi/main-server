@@ -12,7 +12,7 @@ class VodFindingService extends Service
     {
         return [
             'result'
-                => 'vod for {{id}}'
+                => 'vod for {{id}}',
         ];
     }
 
@@ -32,7 +32,7 @@ class VodFindingService extends Service
             'model_class' => [function () {
 
                 return Vod::class;
-            }]
+            }],
         ];
     }
 
@@ -49,7 +49,7 @@ class VodFindingService extends Service
     public static function getArrTraits()
     {
         return [
-            FindingService::class
+            FindingService::class,
         ];
     }
 }

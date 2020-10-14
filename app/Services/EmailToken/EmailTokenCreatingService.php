@@ -16,7 +16,7 @@ class EmailTokenCreatingService extends Service
     {
         return [
             'attempt_count'
-                => 'attempt count in 5 minutes'
+                => 'attempt count in 5 minutes',
         ];
     }
 
@@ -36,14 +36,14 @@ class EmailTokenCreatingService extends Service
                 $message->setId($email);
                 $message->setRaw(base64_encode($msg));
                 $service->users_messages->send('aengzi@llit.kr', $message);
-            }]
+            }],
         ];
     }
 
     public static function getArrLoaders()
     {
         return [
-            'attempt_count' => ['google_client', 'email', function ($googleClient, $email) {
+            'attempt_count' => ['email', 'google_client', function ($email, $googleClient) {
 
                 $service   = new Google_Service_Gmail($googleClient);
                 $timestamp = Carbon::now('UTC')->subSeconds(300)->timestamp;

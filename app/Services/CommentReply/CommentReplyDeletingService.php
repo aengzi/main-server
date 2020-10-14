@@ -15,7 +15,7 @@ class CommentReplyDeletingService extends Service
                 => 'comment_reply for {{id}}',
 
             'user_id'
-                => 'user_id of {{reply}}'
+                => 'user_id of {{reply}}',
         ];
     }
 
@@ -33,7 +33,7 @@ class CommentReplyDeletingService extends Service
                 $thread = $reply->thread;
                 $thread->reply_count = $count;
                 $thread->save();
-            }]
+            }],
         ];
     }
 
@@ -53,7 +53,7 @@ class CommentReplyDeletingService extends Service
             'user_id' => ['reply', function ($reply) {
 
                 return $reply->user_id;
-            }]
+            }],
         ];
     }
 
@@ -61,7 +61,7 @@ class CommentReplyDeletingService extends Service
     {
         return [
             'result'
-                => ['user_id']
+                => ['user_id'],
         ];
     }
 
@@ -82,7 +82,7 @@ class CommentReplyDeletingService extends Service
     public static function getArrTraits()
     {
         return [
-            AuthUserRequiringService::class
+            AuthUserRequiringService::class,
         ];
     }
 }

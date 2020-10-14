@@ -12,7 +12,7 @@ class PubgGameFindingService extends Service
     {
         return [
             'result'
-                => 'pubg_game for {{id}}'
+                => 'pubg_game for {{id}}',
         ];
     }
 
@@ -32,7 +32,7 @@ class PubgGameFindingService extends Service
             'model_class' => [function () {
 
                 return PubgGame::class;
-            }]
+            }],
         ];
     }
 
@@ -49,7 +49,7 @@ class PubgGameFindingService extends Service
     public static function getArrTraits()
     {
         return [
-            FindingService::class
+            FindingService::class,
         ];
     }
 }

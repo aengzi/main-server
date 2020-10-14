@@ -14,7 +14,7 @@ class YtbCommentThreadPagingService extends Service
     {
         return [
             'video'
-                => 'youtube_video for {{video_id}}'
+                => 'youtube_video for {{video_id}}',
         ];
     }
 
@@ -24,7 +24,7 @@ class YtbCommentThreadPagingService extends Service
             'query.video' => ['query', 'video', function ($query, $video) {
 
                 $query->where('video_id', $video->getKey());
-            }]
+            }],
         ];
     }
 
@@ -44,7 +44,7 @@ class YtbCommentThreadPagingService extends Service
             'video' => ['video_id', function ($videoId) {
 
                 return YtbVideo::find($relatedId);
-            }]
+            }],
         ];
     }
 

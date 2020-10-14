@@ -12,7 +12,7 @@ class AftvBcastFindingService extends Service
     {
         return [
             'result'
-                => 'aftv_bcast for {{id}}'
+                => 'aftv_bcast for {{id}}',
         ];
     }
 
@@ -32,7 +32,7 @@ class AftvBcastFindingService extends Service
             'model_class' => [function () {
 
                 return AftvBcast::class;
-            }]
+            }],
         ];
     }
 
@@ -49,7 +49,7 @@ class AftvBcastFindingService extends Service
     public static function getArrTraits()
     {
         return [
-            FindingService::class
+            FindingService::class,
         ];
     }
 }

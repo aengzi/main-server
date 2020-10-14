@@ -13,7 +13,7 @@ class SignInCreatingService extends Service
     {
         return [
             'user'
-                => 'matching user for {{email}} and {{password}}'
+                => 'matching user for {{email}} and {{password}}',
         ];
     }
 

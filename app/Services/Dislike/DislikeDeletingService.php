@@ -15,7 +15,7 @@ class DislikeDeletingService extends Service
                 => 'dislike for {{dislike_id}}',
 
             'dislike_user_id'
-                => 'user_id of {{dislike}}'
+                => 'user_id of {{dislike}}',
         ];
     }
 
@@ -34,7 +34,7 @@ class DislikeDeletingService extends Service
                 $related = $dislike->related;
                 $related->dislike_count = $count;
                 $related->save();
-            }]
+            }],
         ];
     }
 
@@ -54,7 +54,7 @@ class DislikeDeletingService extends Service
             'result' => [function () {
 
                 return null;
-            }]
+            }],
         ];
     }
 
@@ -80,7 +80,7 @@ class DislikeDeletingService extends Service
     public static function getArrTraits()
     {
         return [
-            AuthUserRequiringService::class
+            AuthUserRequiringService::class,
         ];
     }
 }

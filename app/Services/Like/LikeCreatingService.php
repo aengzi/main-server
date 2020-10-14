@@ -16,11 +16,11 @@ class LikeCreatingService extends Service
     public static function getArrBindNames()
     {
         return [
+            'like'
+                => 'like for {{related}}',
+
             'related'
                 => 'related for {{related_id}} and {{related_type}}',
-
-            'like'
-                => 'like for {{related}}'
         ];
     }
 
@@ -37,7 +37,7 @@ class LikeCreatingService extends Service
                 $related = $result->related;
                 $related->like_count = $count;
                 $related->save();
-            }]
+            }],
         ];
     }
 
@@ -67,7 +67,7 @@ class LikeCreatingService extends Service
                     'related_type'
                         => $relatedType
                 ]);
-            }]
+            }],
         ];
     }
 
@@ -75,7 +75,7 @@ class LikeCreatingService extends Service
     {
         return [
             'result'
-                => ['like']
+                => ['like'],
         ];
     }
 
@@ -99,7 +99,7 @@ class LikeCreatingService extends Service
     public static function getArrTraits()
     {
         return [
-            AuthUserRequiringService::class
+            AuthUserRequiringService::class,
         ];
     }
 }

@@ -12,7 +12,7 @@ class PostFindingService extends Service
     {
         return [
             'result'
-                => 'post for {{id}}'
+                => 'post for {{id}}',
         ];
     }
 
@@ -32,7 +32,7 @@ class PostFindingService extends Service
             'model_class' => [function () {
 
                 return Post::class;
-            }]
+            }],
         ];
     }
 
@@ -49,7 +49,7 @@ class PostFindingService extends Service
     public static function getArrTraits()
     {
         return [
-            FindingService::class
+            FindingService::class,
         ];
     }
 }

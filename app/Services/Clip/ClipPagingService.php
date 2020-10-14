@@ -18,24 +18,14 @@ class ClipPagingService extends Service
                 => 'user for {{user_id}}',
 
             'vod'
-                => 'vod for {{vod_id}}'
+                => 'vod for {{vod_id}}',
         ];
     }
 
     public static function getArrCallbackLists()
     {
         return [
-            'query.user' => ['query', 'user', function ($query, $user) {
-
-                $query->where('user_id', $user->getKey());
-            }],
-
-            'query.vod' => ['query', 'vod', function ($query, $vod) {
-
-                $query->where('vod_id', $vod->getKey());
-            }],
-
-            'query.order_by_array' => ['query', 'order_by_array', function ($query, $orderByArray) {
+            'query.order_by_array' => ['order_by_array', 'query', function ($orderByArray, $query) {
 
                 foreach ( $orderByArray as $column => $order )
                 {
@@ -59,7 +49,17 @@ class ClipPagingService extends Service
                         $query->orderBy($column, $order);
                     }
                 }
-            }]
+            }],
+
+            'query.user' => ['query', 'user', function ($query, $user) {
+
+                $query->where('user_id', $user->getKey());
+            }],
+
+            'query.vod' => ['query', 'vod', function ($query, $vod) {
+
+                $query->where('vod_id', $vod->getKey());
+            }],
         ];
     }
 
@@ -93,7 +93,7 @@ class ClipPagingService extends Service
             'vod' => ['vod_id', function ($vodId) {
 
                 return Vod::find($vodId);
-            }]
+            }],
         ];
     }
 

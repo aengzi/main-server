@@ -12,7 +12,7 @@ class LolGameFindingService extends Service
     {
         return [
             'result'
-                => 'lol_game for {{id}}'
+                => 'lol_game for {{id}}',
         ];
     }
 
@@ -32,7 +32,7 @@ class LolGameFindingService extends Service
             'model_class' => [function () {
 
                 return LolGame::class;
-            }]
+            }],
         ];
     }
 
@@ -49,7 +49,7 @@ class LolGameFindingService extends Service
     public static function getArrTraits()
     {
         return [
-            FindingService::class
+            FindingService::class,
         ];
     }
 }

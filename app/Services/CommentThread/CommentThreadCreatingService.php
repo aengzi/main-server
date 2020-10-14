@@ -13,19 +13,19 @@ class CommentThreadCreatingService extends Service
     {
         return [
             'related'
-                => 'model for {{related_type}} and {{related_id}}'
+                => 'model for {{related_type}} and {{related_id}}',
         ];
     }
 
     public static function getArrCallbackLists()
     {
         return [
-            'result.auth_user' => ['result', 'auth_user', function ($result, $authUser) {
+            'result.auth_user' => ['auth_user', 'result', function ($authUser, $result) {
 
                 $result->setRelation('user', $authUser);
             }],
 
-            'result.related' => ['result', 'related', function ($result, $related) {
+            'result.related' => ['related', 'result', function ($related, $result) {
 
                 $count = CommentThread::query()
                     ->where('related_id', $result->related_id)
@@ -34,13 +34,18 @@ class CommentThreadCreatingService extends Service
 
                 $related->thread_count = $count;
                 $related->save();
-            }]
+            }],
         ];
     }
 
     public static function getArrLoaders()
     {
         return [
+            'related' => ['related_id', 'related_type', function ($relatedId, $relatedType) {
+
+                return Relation::morphMap()[$relatedType]::find($relatedId);
+            }],
+
             'result' => ['auth_user', 'message', 'related', 'related_type', function ($authUser, $message, $related, $relatedType) {
 
                 return CommentThread::create([
@@ -54,11 +59,6 @@ class CommentThreadCreatingService extends Service
                         => $relatedType
                 ])->fresh();
             }],
-
-            'related' => ['related_id', 'related_type', function ($relatedId, $relatedType) {
-
-                return Relation::morphMap()[$relatedType]::find($relatedId);
-            }]
         ];
     }
 
@@ -87,7 +87,7 @@ class CommentThreadCreatingService extends Service
     public static function getArrTraits()
     {
         return [
-            AuthUserRequiringService::class
+            AuthUserRequiringService::class,
         ];
     }
 }

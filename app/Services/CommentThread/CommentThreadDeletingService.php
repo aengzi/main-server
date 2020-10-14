@@ -16,7 +16,7 @@ class CommentThreadDeletingService extends Service
                 => 'comment_thread for {{id}}',
 
             'user_id'
-                => 'user_id of {{thread}}'
+                => 'user_id of {{thread}}',
         ];
     }
 
@@ -35,7 +35,7 @@ class CommentThreadDeletingService extends Service
                 $related = Relation::morphMap()[$thread->related_type]::find($thread->related_id);
                 $related->thread_count = $count;
                 $related->save();
-            }]
+            }],
         ];
     }
 
@@ -55,7 +55,7 @@ class CommentThreadDeletingService extends Service
             'user_id' => ['thread', function ($thread) {
 
                 return $thread->user_id;
-            }]
+            }],
         ];
     }
 
@@ -63,7 +63,7 @@ class CommentThreadDeletingService extends Service
     {
         return [
             'result'
-                => ['user_id']
+                => ['user_id'],
         ];
     }
 
@@ -84,7 +84,7 @@ class CommentThreadDeletingService extends Service
     public static function getArrTraits()
     {
         return [
-            AuthUserRequiringService::class
+            AuthUserRequiringService::class,
         ];
     }
 }

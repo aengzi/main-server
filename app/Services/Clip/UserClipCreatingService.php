@@ -23,7 +23,7 @@ class UserClipCreatingService extends Service
     public static function getArrLoaders()
     {
         return [
-            'clip_vod' => ['result', 'm3u8_string', 'files', 'vod', 'title', function ($result, $m3u8String, $files, $vod, $title) {
+            'clip_vod' => ['files', 'm3u8_string', 'result', 'title', 'vod', function ($files, $m3u8String, $result, $title, $vod) {
 
                 return Vod::create([
                     'related_type' => 'clip',
@@ -42,7 +42,7 @@ class UserClipCreatingService extends Service
                 return Clip::create([
                     'user_id' => $authUser->getKey()
                 ]);
-            }]
+            }],
         ];
     }
 
@@ -63,7 +63,7 @@ class UserClipCreatingService extends Service
     {
         return [
             AuthUserRequiringService::class,
-            ClipCreatingService::class
+            ClipCreatingService::class,
         ];
     }
 }

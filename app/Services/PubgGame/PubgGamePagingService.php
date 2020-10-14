@@ -24,19 +24,7 @@ class PubgGamePagingService extends Service
                 $query->whereNotNull('vod_id');
             }],
 
-            'query.queue_sizes' => ['query', 'queue_sizes', function ($query, $queueSizes) {
-
-                $queueSizes = preg_split('/\s*,\s*/', $queueSizes);
-                $subQuery = PubgMeta::query()
-                    ->select(['game_id'])
-                    ->where('property', 'queue_size')
-                    ->whereIn('value', $queueSizes)
-                    ->getQuery();
-
-                $query->whereIn('id', $subQuery);
-            }],
-
-            'query.map_names' => ['query', 'map_names', function ($query, $mapNames) {
+            'query.map_names' => ['map_names', 'query', function ($mapNames, $query) {
 
                 $mapNames = preg_split('/\s*,\s*/', $mapNames);
                 $subQuery = PubgMeta::query()
@@ -48,7 +36,7 @@ class PubgGamePagingService extends Service
                 $query->whereIn('id', $subQuery);
             }],
 
-            'query.order_by_array' => ['query', 'order_by_array', function ($query, $orderByArray) {
+            'query.order_by_array' => ['order_by_array', 'query', function ($orderByArray, $query) {
 
                 unset($orderByArray[$query->getModel()->getKeyName()]);
 
@@ -93,7 +81,19 @@ class PubgGamePagingService extends Service
                         $query->orderByRaw($alias2.$orderColumn.$order);
                     }
                 }
-            }]
+            }],
+
+            'query.queue_sizes' => ['query', 'queue_sizes', function ($query, $queueSizes) {
+
+                $queueSizes = preg_split('/\s*,\s*/', $queueSizes);
+                $subQuery = PubgMeta::query()
+                    ->select(['game_id'])
+                    ->where('property', 'queue_size')
+                    ->whereIn('value', $queueSizes)
+                    ->getQuery();
+
+                $query->whereIn('id', $subQuery);
+            }],
         ];
     }
 
@@ -124,7 +124,7 @@ class PubgGamePagingService extends Service
             'order_by' => [function () {
 
                 return 'started_at desc';
-            }]
+            }],
         ];
     }
 

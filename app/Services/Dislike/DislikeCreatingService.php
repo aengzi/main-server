@@ -12,11 +12,11 @@ class DislikeCreatingService extends Service
     public static function getArrBindNames()
     {
         return [
+            'dislike'
+                => 'dislike for {{related}}',
+
             'related'
                 => 'related for {{related_id}} and {{related_type}}',
-
-            'dislike'
-                => 'dislike for {{related}}'
         ];
     }
 
@@ -33,7 +33,7 @@ class DislikeCreatingService extends Service
                 $related = $result->related;
                 $related->dislike_count = $count;
                 $related->save();
-            }]
+            }],
         ];
     }
 
@@ -63,7 +63,7 @@ class DislikeCreatingService extends Service
                     'related_type'
                         => $relatedType
                 ]);
-            }]
+            }],
         ];
     }
 
@@ -71,7 +71,7 @@ class DislikeCreatingService extends Service
     {
         return [
             'result'
-                => ['dislike']
+                => ['dislike'],
         ];
     }
 
@@ -95,7 +95,7 @@ class DislikeCreatingService extends Service
     public static function getArrTraits()
     {
         return [
-            AuthUserRequiringService::class
+            AuthUserRequiringService::class,
         ];
     }
 }

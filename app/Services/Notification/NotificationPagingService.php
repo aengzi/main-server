@@ -16,10 +16,10 @@ class NotificationPagingService extends Service
     public static function getArrCallbackLists()
     {
         return [
-            'query.after' => ['query', 'after', function ($query, $after) {
+            'query.after' => ['after', 'query', function ($after, $query) {
 
                 $query->where('created_at', '>=', $after);
-            }]
+            }],
         ];
     }
 
