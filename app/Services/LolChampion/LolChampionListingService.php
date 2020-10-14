@@ -3,8 +3,8 @@
 namespace App\Services\LolChampion;
 
 use App\Models\LolChampion;
-use App\Service;
-use App\Services\ListingService;
+use Illuminate\Extend\Service;
+use Illuminate\Extend\Service\Database\ListService;
 
 class LolChampionListingService extends Service
 {
@@ -51,7 +51,7 @@ class LolChampionListingService extends Service
     public static function getArrTraits()
     {
         return [
-            ListingService::class,
+            ListService::class,
         ];
     }
 }

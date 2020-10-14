@@ -22,8 +22,9 @@ $addRoutes = function () use ($router) {
     $router->group([
         'prefix' => $_SERVER['DOCUMENT_ROOT'] && Str::startsWith(__FILE__, str_replace('/', DIRECTORY_SEPARATOR, $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR)) ? $prefix : '',
         'middleware' => [
-            App\Http\Middleware\ApiMiddleware::class,
-            App\Http\Middleware\AuthTokenMiddleware::class
+            Illuminate\Extend\Http\ServiceRunMiddleware::class,
+            Illuminate\Extend\Http\ServiceParameterSettingMiddleware::class,
+            Illuminate\Extend\Http\RequestInputTransformMiddleware::class,
         ]
     ], function () use ($router) {
 

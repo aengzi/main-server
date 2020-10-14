@@ -2,9 +2,9 @@
 
 namespace App\Services\AftvReview;
 
-use App\Service;
 use App\Models\AftvReview;
-use App\Services\FindingService;
+use Illuminate\Extend\Service;
+use Illuminate\Extend\Service\Query\FindService;
 
 class AftvReviewFindingService extends Service
 {
@@ -49,7 +49,7 @@ class AftvReviewFindingService extends Service
     public static function getArrTraits()
     {
         return [
-            FindingService::class,
+            FindService::class,
         ];
     }
 }

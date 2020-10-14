@@ -3,9 +3,9 @@
 namespace App\Services\EmailToken;
 
 use App\Models\User;
-use App\Service;
 use App\Services\EmailToken\EmailTokenCreatingService;
 use Carbon\Carbon;
+use Illuminate\Extend\Service;
 use Illuminate\Support\Str;
 
 class SignUpEmailTokenCreatingService extends Service

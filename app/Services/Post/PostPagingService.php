@@ -2,10 +2,10 @@
 
 namespace App\Services\Post;
 
-use App\Service;
 use App\Models\Post;
 use App\Models\User;
-use App\Services\PagingService;
+use Illuminate\Extend\Service;
+use Illuminate\Extend\Service\Query\PaginationListService;
 
 class PostPagingService extends Service
 {
@@ -54,6 +54,11 @@ class PostPagingService extends Service
                 ];
             }],
 
+            'cursor' => ['cursor_id', 'model_class', function ($cursorId, $modelClass) {
+
+                return $modelClass::find($cursorId);
+            }],
+
             'model_class' => [function () {
 
                 return Post::class;
@@ -88,7 +93,7 @@ class PostPagingService extends Service
     public static function getArrTraits()
     {
         return [
-            PagingService::class
+            PaginationListService::class,
         ];
     }
 }

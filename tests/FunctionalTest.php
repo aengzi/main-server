@@ -1,15 +1,10 @@
 <?php
 
-use App\Service;
-use App\Http\Controller;
-use Laravel\Lumen\Testing\DatabaseMigrations;
-use Laravel\Lumen\Testing\WithoutMiddleware;
+use Illuminate\Extend\Http\ServiceRunMiddleware;
+use Illuminate\Extend\Service;
 
 abstract class FunctionalTest extends TestCase
 {
-    // use DatabaseMigrations;
-    use WithoutMiddleware;
-
     public $uri;
     public $environment = 'functional';
     public $input = [];
@@ -128,18 +123,27 @@ abstract class FunctionalTest extends TestCase
 
     public function runService()
     {
-        $class     = explode('\\', static::class);
-        $class     = array_pop($class);
-        $class     = snake_case($class);
-        $class     = preg_replace('/_test$/', '', $class);
-        $class     = explode('_', $class);
-        $method    = strtoupper(array_pop($class));
-        $response  = $this->call($method, $url = $this->url, $parameters = $this->input, $cookies = [], $files = [], $server = $this->server, $content = null);
-        $content   = $response->getOriginalContent();
-        $isService = is_array($content) && array_key_exists(0, $content) && is_string($content[0]) && preg_match('/Service$/', $content[0]);
+        $this->app->instance(ServiceRunMiddleware::class, new class
+        {
+            public function handle($request, $next)
+            {
+                return $next($request);
+            }
+        });
 
-        $this->assertTrue($isService);
-        $service = Controller::servicify($content);
+        $method     = explode('\\', static::class);
+        $method     = array_pop($method);
+        $method     = snake_case($method);
+        $method     = preg_replace('/_test$/', '', $method);
+        $method     = explode('_', $method);
+        $method     = strtoupper(array_pop($method));
+        $response   = $this->call($method, $url = $this->url, $parameters = $this->input, $cookies = [], $files = [], $server = $this->server, $content = null);
+        $content    = $response->getOriginalContent();
+        $isInitable = Service::isInitable($content);
+
+        $this->assertTrue($isInitable);
+
+        $service = Service::initService($content);
         $service->run();
 
         return $service;

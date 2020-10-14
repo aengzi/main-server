@@ -2,10 +2,10 @@
 
 namespace App\Services\EmailToken;
 
-use App\Service;
 use App\Services\Auth\AuthUserFindingService;
 use App\Services\EmailToken\EmailTokenCreatingService;
 use Carbon\Carbon;
+use Illuminate\Extend\Service;
 use Illuminate\Support\Str;
 
 class AuthUserEmailTokenCreatingService extends Service

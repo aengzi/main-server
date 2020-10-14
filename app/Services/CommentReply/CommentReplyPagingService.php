@@ -2,21 +2,21 @@
 
 namespace App\Services\CommentReply;
 
-use App\Service;
 use App\Models\CommentReply;
 use App\Models\CommentThread;
-use App\Services\CursoringService;
+use Illuminate\Extend\Service;
+use Illuminate\Extend\Service\Query\PaginationListService;
 
-class CommentReplyCursoringService extends Service
+class CommentReplyPagingService extends Service
 {
     public static function getArrBindNames()
     {
         return [
+            'cursor'
+                => 'comment_reply for {{cursor_id}}',
+
             'thread'
                 => 'comment_thread for {{thread_id}}',
-
-            'cursor'
-                => 'comment_reply for {{cursor_id}}'
         ];
     }
 
@@ -26,7 +26,7 @@ class CommentReplyCursoringService extends Service
             'query.thread' => ['query', 'thread', function ($query, $thread) {
 
                 $query->where('thread_id', $thread->getKey());
-            }]
+            }],
         ];
     }
 
@@ -38,6 +38,11 @@ class CommentReplyCursoringService extends Service
                 return ['user', 'thread'];
             }],
 
+            'cursor' => ['cursor_id', 'model_class', function ($cursorId, $modelClass) {
+
+                return $modelClass::find($cursorId);
+            }],
+
             'model_class' => [function () {
 
                 return CommentReply::class;
@@ -46,7 +51,7 @@ class CommentReplyCursoringService extends Service
             'thread' => ['thread_id', function ($threadId) {
 
                 return CommentThread::find($threadId);
-            }]
+            }],
         ];
     }
 
@@ -69,7 +74,7 @@ class CommentReplyCursoringService extends Service
     public static function getArrTraits()
     {
         return [
-            CursoringService::class
+            PaginationListService::class,
         ];
     }
 }

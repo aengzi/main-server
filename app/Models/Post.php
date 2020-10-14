@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use App\Model;
 use App\Models\CommentThread;
 use App\Models\Dislike;
 use App\Models\Like;
 use App\Models\User;
+use Illuminate\Extend\Model;
 
 class Post extends Model
 {

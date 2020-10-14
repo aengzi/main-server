@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controller;
 use App\Services\CommentReply\CommentReplyCreatingService;
-use App\Services\CommentReply\CommentReplyCursoringService;
 use App\Services\CommentReply\CommentReplyDeletingService;
+use App\Services\CommentReply\CommentReplyPagingService;
 use App\Services\CommentReply\CommentReplyUpdatingService;
 use Illuminate\Support\Facades\Request;
 
@@ -17,7 +17,7 @@ class CommentReplyController extends Controller
             'id'
                 => Request::route('id'),
             'token'
-                => Request::bearerToken() ? Request::bearerToken() : new \stdClass
+                => Request::bearerToken() ? Request::bearerToken() : ''
         ], [
             'id'
                 => Request::route('id'),
@@ -28,7 +28,7 @@ class CommentReplyController extends Controller
 
     public function index()
     {
-        return [CommentReplyCursoringService::class, [
+        return [CommentReplyPagingService::class, [
             'cursor_id'
                 => $this->input('cursor_id'),
             'expands'
@@ -42,7 +42,7 @@ class CommentReplyController extends Controller
             'thread_id'
                 => $this->input('thread_id'),
             'token'
-                => Request::bearerToken() ? Request::bearerToken() : new \stdClass
+                => Request::bearerToken() ? Request::bearerToken() : ''
         ], [
             'cursor_id'
                 => '[cursor_id]',
@@ -69,7 +69,7 @@ class CommentReplyController extends Controller
             'message'
                 => $this->input('message'),
             'token'
-                => Request::bearerToken() ? Request::bearerToken() : new \stdClass,
+                => Request::bearerToken() ? Request::bearerToken() : '',
         ], [
             'thread_id'
                 => '[thread_id]',
@@ -88,7 +88,7 @@ class CommentReplyController extends Controller
             'message'
                 => $this->input('message'),
             'token'
-                => Request::bearerToken() ? Request::bearerToken() : new \stdClass
+                => Request::bearerToken() ? Request::bearerToken() : ''
         ], [
             'id'
                 => Request::route('id'),

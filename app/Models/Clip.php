@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use App\Model;
 use App\Models\User;
 use App\Models\Vod;
+use Illuminate\Extend\Model;
 
 class Clip extends Model
 {

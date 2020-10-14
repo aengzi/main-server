@@ -2,12 +2,12 @@
 
 namespace App\Services\Dislike;
 
-use App\Service;
 use App\Models\CommentThread;
 use App\Models\Dislike;
 use App\Models\User;
-use App\Services\PagingService;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Extend\Service;
+use Illuminate\Extend\Service\Query\PaginationListService;
 
 class DislikePagingService extends Service
 {
@@ -60,6 +60,11 @@ class DislikePagingService extends Service
                 return ['comment_thread', 'post'];
             }],
 
+            'cursor' => ['cursor_id', 'model_class', function ($cursorId, $modelClass) {
+
+                return $modelClass::find($cursorId);
+            }],
+
             'model_class' => [function () {
 
                 return Dislike::class;
@@ -108,7 +113,7 @@ class DislikePagingService extends Service
     public static function getArrTraits()
     {
         return [
-            PagingService::class
+            PaginationListService::class,
         ];
     }
 }

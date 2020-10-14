@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use App\Model;
 use App\Models\AftvBcast;
-use App\Models\Like;
 use App\Models\CommentThread;
+use App\Models\Like;
+use Illuminate\Extend\Model;
 
 class Vod extends Model
 {

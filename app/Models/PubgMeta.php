@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\Model;
 use App\Models\PubgGame;
+use Illuminate\Extend\Model;
 
 class PubgMeta extends Model
 {

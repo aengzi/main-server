@@ -16,7 +16,7 @@ class ClipController extends Controller
             'id'
                 => Request::route('id'),
             'token'
-                => Request::bearerToken() ? Request::bearerToken() : new \stdClass
+                => Request::bearerToken() ? Request::bearerToken() : ''
         ], [
             'id'
                 => Request::route('id'),
@@ -41,7 +41,7 @@ class ClipController extends Controller
             'page'
                 => $this->input('page'),
             'token'
-                => Request::bearerToken() ? Request::bearerToken() : new \stdClass,
+                => Request::bearerToken() ? Request::bearerToken() : '',
             'user_id'
                 => $this->input('user_id'),
             'vod_id'
@@ -78,7 +78,7 @@ class ClipController extends Controller
             'id'
                 => Request::route('id'),
             'token'
-                => Request::bearerToken() ? Request::bearerToken() : new \stdClass
+                => Request::bearerToken() ? Request::bearerToken() : ''
         ], [
             'expands'
                 => '[expands]',

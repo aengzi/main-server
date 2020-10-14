@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\Model;
 use App\Models\YtbCommentThread;
+use Illuminate\Extend\Model;
 
 class YtbCommentReply extends Model
 {

@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controller;
-use App\Services\YtbCommentReply\YtbCommentReplyCursoringService;
+use App\Services\YtbCommentReply\YtbCommentReplyPagingService;
 
 class YtbCommentReplyController extends Controller
 {
     public function index()
     {
-        return [YtbCommentReplyCursoringService::class, [
+        return [YtbCommentReplyPagingService::class, [
             'cursor_id'
                 => $this->input('cursor_id'),
             'expands'

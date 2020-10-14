@@ -2,9 +2,9 @@
 
 namespace App\Services\Post;
 
-use App\Service;
 use App\Models\Post;
-use App\Services\FindingService;
+use Illuminate\Extend\Service;
+use Illuminate\Extend\Service\Query\FindService;
 
 class PostFindingService extends Service
 {
@@ -49,7 +49,7 @@ class PostFindingService extends Service
     public static function getArrTraits()
     {
         return [
-            FindingService::class,
+            FindService::class,
         ];
     }
 }

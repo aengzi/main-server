@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use App\Model;
 use App\Models\LolMeta;
 use App\Models\LolTimeline;
 use App\Models\Vod;
+use Illuminate\Extend\Model;
 
 class LolGame extends Model
 {

@@ -23,7 +23,7 @@ class YtbVideoController extends Controller
             'page'
                 => $this->input('page'),
             'token'
-                => Request::bearerToken() ? Request::bearerToken() : new \stdClass
+                => Request::bearerToken() ? Request::bearerToken() : ''
         ], [
             'expands'
                 => '[expands]',
@@ -50,7 +50,7 @@ class YtbVideoController extends Controller
             'id'
                 => Request::route('id'),
             'token'
-                => Request::bearerToken() ? Request::bearerToken() : new \stdClass
+                => Request::bearerToken() ? Request::bearerToken() : ''
         ], [
             'expands'
                 => '[expands]',

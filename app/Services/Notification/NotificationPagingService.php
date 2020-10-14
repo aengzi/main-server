@@ -2,9 +2,9 @@
 
 namespace App\Services\Notification;
 
-use App\Service;
 use App\Models\Notification;
-use App\Services\PagingService;
+use Illuminate\Extend\Service;
+use Illuminate\Extend\Service\Query\PaginationListService;
 
 class NotificationPagingService extends Service
 {
@@ -31,6 +31,11 @@ class NotificationPagingService extends Service
                 return [];
             }],
 
+            'cursor' => ['cursor_id', 'model_class', function ($cursorId, $modelClass) {
+
+                return $modelClass::find($cursorId);
+            }],
+
             'model_class' => [function () {
 
                 return Notification::class;
@@ -54,7 +59,7 @@ class NotificationPagingService extends Service
     public static function getArrTraits()
     {
         return [
-            PagingService::class
+            PaginationListService::class,
         ];
     }
 }

@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\Model;
 use App\Models\LolGame;
+use Illuminate\Extend\Model;
 
 class LolMeta extends Model
 {

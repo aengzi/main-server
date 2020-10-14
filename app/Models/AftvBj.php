@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\Model;
 use App\Models\AftvBcast;
+use Illuminate\Extend\Model;
 
 class AftvBj extends Model
 {

@@ -17,7 +17,7 @@ class AuthUserController extends Controller
             'expands'
                 => $this->input('expands'),
             'token'
-                => Request::bearerToken() ? Request::bearerToken() : new \stdClass
+                => Request::bearerToken() ? Request::bearerToken() : ''
         ], [
             'fields'
                 => '[fields]',
@@ -40,7 +40,7 @@ class AuthUserController extends Controller
             'thumbnail'
                 => $this->input('thumbnail'),
             'token'
-                => $this->input('token') ? $this->input('token') : (Request::bearerToken() ? Request::bearerToken() : new \stdClass)
+                => $this->input('token') ? $this->input('token') : (Request::bearerToken() ? Request::bearerToken() : '')
         ], [
             'nick'
                 => '[nick]',

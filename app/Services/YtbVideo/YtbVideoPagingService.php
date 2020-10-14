@@ -2,9 +2,9 @@
 
 namespace App\Services\YtbVideo;
 
-use App\Service;
 use App\Models\YtbVideo;
-use App\Services\PagingService;
+use Illuminate\Extend\Service;
+use Illuminate\Extend\Service\Query\PaginationListService;
 
 class YtbVideoPagingService extends Service
 {
@@ -24,6 +24,11 @@ class YtbVideoPagingService extends Service
             'available_expands' => [function () {
 
                 return ['like'];
+            }],
+
+            'cursor' => ['cursor_id', 'model_class', function ($cursorId, $modelClass) {
+
+                return $modelClass::find($cursorId);
             }],
 
             'model_class' => [function () {
@@ -46,7 +51,7 @@ class YtbVideoPagingService extends Service
     public static function getArrTraits()
     {
         return [
-            PagingService::class
+            PaginationListService::class,
         ];
     }
 }

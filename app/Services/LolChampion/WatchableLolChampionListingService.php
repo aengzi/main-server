@@ -5,9 +5,8 @@ namespace App\Services\LolChampion;
 use App\Models\LolChampion;
 use App\Models\LolGame;
 use App\Models\LolMeta;
-use App\Service;
-use App\Services\ListingService;
 use App\Services\LolChampion\LolChampionListingService;
+use Illuminate\Extend\Service;
 
 class WatchableLolChampionListingService extends Service
 {

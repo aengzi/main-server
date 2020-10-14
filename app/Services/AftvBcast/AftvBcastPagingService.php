@@ -2,12 +2,12 @@
 
 namespace App\Services\AftvBcast;
 
-use App\Relation;
-use App\Service;
 use App\Models\AftvBcast;
 use App\Models\AftvReview;
 use App\Models\Vod;
-use App\Services\PagingService;
+use Illuminate\Extend\Relation;
+use Illuminate\Extend\Service;
+use Illuminate\Extend\Service\Query\PaginationListService;
 
 class AftvBcastPagingService extends Service
 {
@@ -72,6 +72,11 @@ class AftvBcastPagingService extends Service
                 return ['started_at desc', 'started_at asc', 'like_count desc'];
             }],
 
+            'cursor' => ['cursor_id', 'model_class', function ($cursorId, $modelClass) {
+
+                return $modelClass::find($cursorId);
+            }],
+
             'model_class' => [function () {
 
                 return AftvBcast::class;
@@ -97,7 +102,7 @@ class AftvBcastPagingService extends Service
     public static function getArrTraits()
     {
         return [
-            PagingService::class
+            PaginationListService::class,
         ];
     }
 }

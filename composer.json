@@ -6,6 +6,7 @@
     "type": "project",
     "require": {
         "php": ">=7.1.3",
+        "dbwhddn10/illuminate-extend": "1.0.0",
         "google/apiclient": "*",
         "google/cloud-storage": "*",
         "laravel/lumen-framework": "5.8.*",

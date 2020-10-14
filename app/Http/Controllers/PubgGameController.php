@@ -27,7 +27,7 @@ class PubgGameController extends Controller
             'queue_sizes'
                 => $this->input('queue_sizes'),
             'token'
-                => Request::bearerToken() ? Request::bearerToken() : new \stdClass
+                => Request::bearerToken() ? Request::bearerToken() : ''
         ], [
             'expands'
                 => '[expands]',
@@ -58,7 +58,7 @@ class PubgGameController extends Controller
             'id'
                 => Request::route('id'),
             'token'
-                => Request::bearerToken() ? Request::bearerToken() : new \stdClass
+                => Request::bearerToken() ? Request::bearerToken() : ''
         ], [
             'expands'
                 => 'expands',

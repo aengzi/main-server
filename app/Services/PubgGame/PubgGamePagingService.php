@@ -2,12 +2,12 @@
 
 namespace App\Services\PubgGame;
 
-use App\Relation;
-use App\Service;
 use App\Models\Like;
 use App\Models\PubgGame;
 use App\Models\PubgMeta;
-use App\Services\PagingService;
+use Illuminate\Extend\Relation;
+use Illuminate\Extend\Service;
+use Illuminate\Extend\Service\Query\PaginationListService;
 
 class PubgGamePagingService extends Service
 {
@@ -116,6 +116,11 @@ class PubgGamePagingService extends Service
                 ];
             }],
 
+            'cursor' => ['cursor_id', 'model_class', function ($cursorId, $modelClass) {
+
+                return $modelClass::find($cursorId);
+            }],
+
             'model_class' => [function () {
 
                 return PubgGame::class;
@@ -141,7 +146,7 @@ class PubgGamePagingService extends Service
     public static function getArrTraits()
     {
         return [
-            PagingService::class
+            PaginationListService::class,
         ];
     }
 }

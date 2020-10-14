@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use App\Model;
-use App\Models\User;
-use App\Models\Like;
 use App\Models\Dislike;
+use App\Models\Like;
+use App\Models\User;
+use Illuminate\Extend\Model;
 
 class CommentThread extends Model
 {

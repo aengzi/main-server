@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use App\Model;
 use App\Models\PubgMeta;
 use App\Models\PubgTimeline;
 use App\Models\Vod;
+use Illuminate\Extend\Model;
 
 class PubgGame extends Model
 {

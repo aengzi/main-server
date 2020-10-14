@@ -2,11 +2,10 @@
 
 namespace App\Services\Auth;
 
-use App\Service;
 use App\Models\User;
-use App\Services\AuthUserRequiringService;
-use App\Services\EmailTokenDecryptingService;
+use App\Services\Auth\AuthUserRequiringService;
 use Google\Cloud\Storage\StorageClient;
+use Illuminate\Extend\Service;
 
 class AuthUserUpdatingService extends Service
 {

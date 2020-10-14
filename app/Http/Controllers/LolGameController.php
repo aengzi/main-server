@@ -29,7 +29,7 @@ class LolGameController extends Controller
             'page'
                 => $this->input('page'),
             'token'
-                => Request::bearerToken() ? Request::bearerToken() : new \stdClass
+                => Request::bearerToken() ? Request::bearerToken() : ''
         ], [
             'champion_ids'
                 => '[champion_ids]',
@@ -62,7 +62,7 @@ class LolGameController extends Controller
             'id'
                 => Request::route('id'),
             'token'
-                => Request::bearerToken() ? Request::bearerToken() : new \stdClass
+                => Request::bearerToken() ? Request::bearerToken() : ''
         ], [
             'expands'
                 => '[expands]',

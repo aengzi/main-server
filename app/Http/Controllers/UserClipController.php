@@ -20,7 +20,7 @@ class UserClipController extends Controller
             'vod_id'
                 => $this->input('vod_id'),
             'token'
-                => Request::bearerToken() ? Request::bearerToken() : new \stdClass
+                => Request::bearerToken() ? Request::bearerToken() : ''
         ], [
             'end_sec'
                 => '[end_sec]',

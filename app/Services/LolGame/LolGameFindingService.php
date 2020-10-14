@@ -2,9 +2,9 @@
 
 namespace App\Services\LolGame;
 
-use App\Service;
 use App\Models\LolGame;
-use App\Services\FindingService;
+use Illuminate\Extend\Service;
+use Illuminate\Extend\Service\Query\FindService;
 
 class LolGameFindingService extends Service
 {
@@ -49,7 +49,7 @@ class LolGameFindingService extends Service
     public static function getArrTraits()
     {
         return [
-            FindingService::class,
+            FindService::class,
         ];
     }
 }

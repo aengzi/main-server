@@ -3,8 +3,8 @@
 namespace App\Services\User;
 
 use App\Models\User;
-use App\Service;
-use App\Services\ListingService;
+use Illuminate\Extend\Service;
+use Illuminate\Extend\Service\Database\ListService;
 
 class UserListingService extends Service
 {
@@ -62,7 +62,7 @@ class UserListingService extends Service
     public static function getArrTraits()
     {
         return [
-            ListingService::class,
+            ListService::class,
         ];
     }
 }

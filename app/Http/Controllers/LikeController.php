@@ -16,7 +16,7 @@ class LikeController extends Controller
             'like_id'
                 => Request::route('id'),
             'token'
-                => Request::bearerToken() ? Request::bearerToken() : new \stdClass
+                => Request::bearerToken() ? Request::bearerToken() : ''
         ], [
             'like_id'
                 => Request::route('id'),
@@ -76,7 +76,7 @@ class LikeController extends Controller
             'related_type'
                 => $this->input('related_type'),
             'token'
-                => Request::bearerToken() ? Request::bearerToken() : new \stdClass
+                => Request::bearerToken() ? Request::bearerToken() : ''
         ], [
             'related_id'
                 => '[related_id]',

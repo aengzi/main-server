@@ -2,9 +2,9 @@
 
 namespace App\Services\SignIn;
 
-use App\Service;
 use App\Models\User;
-use App\Services\TokenEncryptingService;
+use Illuminate\Extend\Service;
+use Illuminate\Extend\Service\Token\TokenEncryptionService;
 use Illuminate\Support\Facades\Hash;
 
 class SignInCreatingService extends Service
@@ -36,7 +36,7 @@ class SignInCreatingService extends Service
 
             'result' => ['payload', function ($payload) {
 
-                return [TokenEncryptingService::class, [
+                return [TokenEncryptionService::class, [
                     'payload'
                         => $payload,
                 ]];

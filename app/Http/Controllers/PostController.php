@@ -18,7 +18,7 @@ class PostController extends Controller
             'id'
                 => Request::route('id'),
             'token'
-                => Request::bearerToken() ? Request::bearerToken() : new \stdClass
+                => Request::bearerToken() ? Request::bearerToken() : ''
         ], [
             'id'
                 => Request::route('id'),
@@ -41,7 +41,7 @@ class PostController extends Controller
             'order_by'
                 => $this->input('order_by'),
             'token'
-                => Request::bearerToken() ? Request::bearerToken() : new \stdClass,
+                => Request::bearerToken() ? Request::bearerToken() : '',
             'type'
                 => $this->input('type'),
             'user_id'
@@ -76,7 +76,7 @@ class PostController extends Controller
             'id'
                 => Request::route('id'),
             'token'
-                => Request::bearerToken() ? Request::bearerToken() : new \stdClass
+                => Request::bearerToken() ? Request::bearerToken() : ''
         ], [
             'expands'
                 => '[expands]',
@@ -99,7 +99,7 @@ class PostController extends Controller
             'type'
                 => $this->input('type'),
             'token'
-                => Request::bearerToken() ? Request::bearerToken() : new \stdClass
+                => Request::bearerToken() ? Request::bearerToken() : ''
         ], [
             'content'
                 => '[content]',
@@ -124,7 +124,7 @@ class PostController extends Controller
             'id'
                 => Request::route('id'),
             'token'
-                => Request::bearerToken() ? Request::bearerToken() : new \stdClass
+                => Request::bearerToken() ? Request::bearerToken() : ''
         ], [
             'content'
                 => '[content]',

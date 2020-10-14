@@ -2,9 +2,9 @@
 
 namespace App\Services\PubgGame;
 
-use App\Service;
 use App\Models\PubgGame;
-use App\Services\FindingService;
+use Illuminate\Extend\Service;
+use Illuminate\Extend\Service\Query\FindService;
 
 class PubgGameFindingService extends Service
 {
@@ -49,7 +49,7 @@ class PubgGameFindingService extends Service
     public static function getArrTraits()
     {
         return [
-            FindingService::class,
+            FindService::class,
         ];
     }
 }

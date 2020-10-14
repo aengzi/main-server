@@ -2,69 +2,103 @@
 
 namespace App\Services\Auth;
 
-use App\Service;
 use App\Models\User;
-use App\Services\FindingService;
-use App\Services\AuthUserRequiringService;
+use Carbon\Carbon;
+use Illuminate\Extend\Service;
+use Illuminate\Extend\Service\Query\FindService;
+use Illuminate\Extend\Service\Token\TokenDecryptionService;
+use Illuminate\Support\Facades\Auth;
 
 class AuthUserFindingService extends Service
 {
     public static function getArrBindNames()
     {
         return [
-            'id'
-                => 'id of user for {{token}}',
+            'current_time'
+                => 'current time',
 
-            'result'
-                => 'user for {{token}}'
+            'id'
+                => 'id of {{model}}',
+
+            'model'
+                => 'authorized user',
+
+            'payload_expired_at'
+                => 'expired_at of payload of {{token}}',
         ];
     }
 
     public static function getArrCallbackLists()
     {
-        return [];
+        return [
+            'result' => ['result', function ($result) {
+
+                Auth::setUser($result);
+            }],
+        ];
     }
 
     public static function getArrLoaders()
     {
         return [
-            'available_expands' => [function () {
+            'id' => ['payload', function ($payload) {
 
-                return [];
+                return $payload['uid'];
             }],
 
-            'id' => ['auth_user', function ($authUser) {
+            'current_time' => [function () {
 
-                return $authUser->getKey();
-            }],
-
-            'result' => ['auth_user', function ($authUser) {
-
-                return $authUser;
+                return Carbon::now('UTC')->format('Y-m-d H:i:s');
             }],
 
             'model_class' => [function () {
 
                 return User::class;
-            }]
+            }],
+
+            'payload' => ['token', function ($token) {
+
+                return [TokenDecryptionService::class, [
+                    'token'
+                        => $token,
+                    'payload_keys'
+                        => ['uid', 'expired_at', 'verified'],
+                ], [
+                    'token'
+                        => '{{token}}',
+                ]];
+            }],
+
+            'payload_expired_at' => ['payload', function ($payload) {
+
+                return $payload['expired_at'];
+            }],
         ];
     }
 
     public static function getArrPromiseLists()
     {
-        return [];
+        return [
+            'model'
+                => ['current_time:strict'],
+        ];
     }
 
     public static function getArrRuleLists()
     {
-        return [];
+        return [
+            'current_time'
+                => ['before:{{payload_expired_at}}'],
+
+            'token'
+                => ['required'],
+        ];
     }
 
     public static function getArrTraits()
     {
         return [
-            FindingService::class,
-            AuthUserRequiringService::class
+            FindService::class,
         ];
     }
 }

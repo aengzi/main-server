@@ -2,10 +2,10 @@
 
 namespace App\Services\EmailToken;
 
-use App\Service;
-use App\Services\TokenDecryptingService;
-use App\Services\TokenEncryptingService;
 use Carbon\Carbon;
+use Illuminate\Extend\Service;
+use Illuminate\Extend\Service\Token\TokenDecryptionService;
+use Illuminate\Extend\Service\Token\TokenEncryptionService;
 
 class EmailTokenUpdatingService extends Service
 {
@@ -38,7 +38,7 @@ class EmailTokenUpdatingService extends Service
 
             'payload' => ['token', function ($token) {
 
-                return [TokenDecryptingService::class, [
+                return [TokenDecryptionService::class, [
                     'token'
                         => $token,
                     'payload_keys'
@@ -63,7 +63,7 @@ class EmailTokenUpdatingService extends Service
 
                 unset($payload['code']);
 
-                return [TokenEncryptingService::class, [
+                return [TokenEncryptionService::class, [
                     'payload'
                         => array_merge($payload, ['verified' => true])
                 ]];

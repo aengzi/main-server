@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use App\Model;
 use App\Models\AftvBcast;
 use App\Models\AftvReview;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Extend\Model;
 
 class AftvChatFile extends Model
 {

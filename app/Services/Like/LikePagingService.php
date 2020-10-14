@@ -2,12 +2,12 @@
 
 namespace App\Services\Like;
 
-use App\Service;
 use App\Models\CommentThread;
 use App\Models\Like;
 use App\Models\User;
-use App\Services\PagingService;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Extend\Service;
+use Illuminate\Extend\Service\Query\PaginationListService;
 
 class LikePagingService extends Service
 {
@@ -60,6 +60,11 @@ class LikePagingService extends Service
                 return ['comment_thread', 'post', 'vod', 'ytb_video'];
             }],
 
+            'cursor' => ['cursor_id', 'model_class', function ($cursorId, $modelClass) {
+
+                return $modelClass::find($cursorId);
+            }],
+
             'model_class' => [function () {
 
                 return Like::class;
@@ -108,7 +113,7 @@ class LikePagingService extends Service
     public static function getArrTraits()
     {
         return [
-            PagingService::class
+            PaginationListService::class,
         ];
     }
 }

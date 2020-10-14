@@ -2,10 +2,10 @@
 
 namespace App\Services\Dislike;
 
-use App\Service;
 use App\Models\Dislike;
-use App\Services\AuthUserRequiringService;
+use App\Services\Auth\AuthUserRequiringService;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Extend\Service;
 
 class DislikeCreatingService extends Service
 {

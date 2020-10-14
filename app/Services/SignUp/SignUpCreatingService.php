@@ -2,9 +2,9 @@
 
 namespace App\Services\SignUp;
 
-use App\Service;
 use App\Models\User;
-use App\Services\TokenDecryptingService;
+use Illuminate\Extend\Service;
+use Illuminate\Extend\Service\Token\TokenDecryptionService;
 
 class SignUpCreatingService extends Service
 {
@@ -26,7 +26,7 @@ class SignUpCreatingService extends Service
         return [
             'payload' => ['token', function ($token) {
 
-                return [TokenDecryptingService::class, [
+                return [TokenDecryptionService::class, [
                     'token'
                         => $token,
                     'payload_keys'

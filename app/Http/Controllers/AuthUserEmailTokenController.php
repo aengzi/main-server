@@ -14,7 +14,7 @@ class AuthUserEmailTokenController extends Controller
             'email'
                 => $this->input('email'),
             'token'
-                => Request::bearerToken() ? Request::bearerToken() : new \stdClass
+                => Request::bearerToken() ? Request::bearerToken() : ''
         ], [
             'email'
                 => '[email]',

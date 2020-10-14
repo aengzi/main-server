@@ -2,8 +2,8 @@
 
 namespace App\Services\Device;
 
-use App\Service;
 use App\Models\Device;
+use Illuminate\Extend\Service;
 
 class DeviceUpdatingService extends Service
 {

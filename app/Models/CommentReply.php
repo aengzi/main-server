@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use App\Model;
 use App\Models\CommentThread;
 use App\Models\User;
+use Illuminate\Extend\Model;
 
 class CommentReply extends Model
 {

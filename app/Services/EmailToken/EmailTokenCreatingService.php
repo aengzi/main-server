@@ -2,12 +2,12 @@
 
 namespace App\Services\EmailToken;
 
-use App\Service;
-use App\Services\GoogleClientService;
-use App\Services\TokenEncryptingService;
 use Carbon\Carbon;
 use Google_Service_Gmail;
 use Google_Service_Gmail_Message;
+use Illuminate\Extend\Service;
+use Illuminate\Extend\Service\GoogleClientService;
+use Illuminate\Extend\Service\Token\TokenEncryptionService;
 use Swift_Message;
 
 class EmailTokenCreatingService extends Service
@@ -54,9 +54,21 @@ class EmailTokenCreatingService extends Service
                 return count($list);
             }],
 
+            'google_client' => [function () {
+
+                $model      = GoogleClient::where('user', 'aengzi')->first();
+                $token      = json_decode($model->access_token, true);
+                $credential = json_decode($model->credential, true);
+
+                return [GoogleClientService::class, [
+                    'token'      => $token,
+                    'credential' => $credential,
+                ]];
+            }],
+
             'result' => ['payload', function ($payload) {
 
-                return [TokenEncryptingService::class, [
+                return [TokenEncryptionService::class, [
                     'payload'
                         => $payload
                 ]];
@@ -82,8 +94,6 @@ class EmailTokenCreatingService extends Service
 
     public static function getArrTraits()
     {
-        return [
-            GoogleClientService::class,
-        ];
+        return [];
     }
 }

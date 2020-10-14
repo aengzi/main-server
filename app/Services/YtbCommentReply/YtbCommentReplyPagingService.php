@@ -2,21 +2,21 @@
 
 namespace App\Services\YtbCommentReply;
 
-use App\Service;
 use App\Models\YtbCommentReply;
 use App\Models\YtbCommentThread;
-use App\Services\CursoringService;
+use Illuminate\Extend\Service;
+use Illuminate\Extend\Service\Query\PaginationListService;
 
-class YtbCommentReplyCursoringService extends Service
+class YtbCommentReplyPagingService extends Service
 {
     public static function getArrBindNames()
     {
         return [
+            'cursor'
+                => 'youtube_comment_reply for {{cursor_id}}',
+
             'thread'
                 => 'youtube_comment_thread for {{thread_id}}',
-
-            'cursor'
-                => 'youtube_comment_reply for {{cursor_id}}'
         ];
     }
 
@@ -26,7 +26,7 @@ class YtbCommentReplyCursoringService extends Service
             'query.thread' => ['query', 'thread', function ($query, $thread) {
 
                 $query->where('thread_id', $thread->getKey());
-            }]
+            }],
         ];
     }
 
@@ -38,6 +38,11 @@ class YtbCommentReplyCursoringService extends Service
                 return ['thread'];
             }],
 
+            'cursor' => ['cursor_id', 'model_class', function ($cursorId, $modelClass) {
+
+                return $modelClass::find($cursorId);
+            }],
+
             'model_class' => [function () {
 
                 return YtbCommentReply::class;
@@ -46,7 +51,7 @@ class YtbCommentReplyCursoringService extends Service
             'thread' => ['thread_id', function ($threadId) {
 
                 return YtbCommentThread::find($threadId);
-            }]
+            }],
         ];
     }
 
@@ -69,7 +74,7 @@ class YtbCommentReplyCursoringService extends Service
     public static function getArrTraits()
     {
         return [
-            CursoringService::class
+            PaginationListService::class,
         ];
     }
 }

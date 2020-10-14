@@ -2,9 +2,9 @@
 
 namespace App\Services\Clip;
 
-use App\Service;
 use App\Models\Clip;
-use App\Services\FindingService;
+use Illuminate\Extend\Service;
+use Illuminate\Extend\Service\Query\FindService;
 
 class ClipFindingService extends Service
 {
@@ -49,7 +49,7 @@ class ClipFindingService extends Service
     public static function getArrTraits()
     {
         return [
-            FindingService::class,
+            FindService::class,
         ];
     }
 }

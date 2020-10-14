@@ -17,7 +17,7 @@ class CommentThreadController extends Controller
             'id'
                 => Request::route('id'),
             'token'
-                => Request::bearerToken() ? Request::bearerToken() : new \stdClass
+                => Request::bearerToken() ? Request::bearerToken() : ''
         ], [
             'id'
                 => Request::route('id'),
@@ -44,7 +44,7 @@ class CommentThreadController extends Controller
             'related_type'
                 => $this->input('related_type'),
             'token'
-                => Request::bearerToken() ? Request::bearerToken() : new \stdClass,
+                => Request::bearerToken() ? Request::bearerToken() : '',
             'user_id'
                 => $this->input('user_id'),
         ], [
@@ -79,7 +79,7 @@ class CommentThreadController extends Controller
             'message'
                 => $this->input('message'),
             'token'
-                => Request::bearerToken() ? Request::bearerToken() : new \stdClass
+                => Request::bearerToken() ? Request::bearerToken() : ''
         ], [
             'related_id'
                 => '[related_id]',
@@ -100,7 +100,7 @@ class CommentThreadController extends Controller
             'message'
                 => $this->input('message'),
             'token'
-                => Request::bearerToken() ? Request::bearerToken() : new \stdClass
+                => Request::bearerToken() ? Request::bearerToken() : ''
         ], [
             'id'
                 => Request::route('id'),

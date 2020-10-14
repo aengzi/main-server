@@ -2,14 +2,14 @@
 
 namespace App\Services\Like;
 
-use App\Service;
 use App\Models\CommentThread;
 use App\Models\Like;
 use App\Models\Post;
 use App\Models\Vod;
 use App\Models\YtbVideo;
-use App\Services\AuthUserRequiringService;
+use App\Services\Auth\AuthUserRequiringService;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Extend\Service;
 
 class LikeCreatingService extends Service
 {

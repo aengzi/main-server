@@ -2,12 +2,12 @@
 
 namespace App\Services\Clip;
 
-use App\Relation;
-use App\Service;
 use App\Models\Clip;
 use App\Models\User;
 use App\Models\Vod;
-use App\Services\PagingService;
+use Illuminate\Extend\Relation;
+use Illuminate\Extend\Service;
+use Illuminate\Extend\Service\Query\PaginationListService;
 
 class ClipPagingService extends Service
 {
@@ -80,6 +80,11 @@ class ClipPagingService extends Service
                 ];
             }],
 
+            'cursor' => ['cursor_id', 'model_class', function ($cursorId, $modelClass) {
+
+                return $modelClass::find($cursorId);
+            }],
+
             'model_class' => [function () {
 
                 return Clip::class;
@@ -122,7 +127,7 @@ class ClipPagingService extends Service
     public static function getArrTraits()
     {
         return [
-            PagingService::class
+            PaginationListService::class,
         ];
     }
 }

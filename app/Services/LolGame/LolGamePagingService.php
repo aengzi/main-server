@@ -2,12 +2,12 @@
 
 namespace App\Services\LolGame;
 
-use App\Relation;
-use App\Service;
 use App\Models\Like;
 use App\Models\LolGame;
 use App\Models\LolMeta;
-use App\Services\PagingService;
+use Illuminate\Extend\Relation;
+use Illuminate\Extend\Service;
+use Illuminate\Extend\Service\Query\PaginationListService;
 
 class LolGamePagingService extends Service
 {
@@ -130,6 +130,11 @@ class LolGamePagingService extends Service
                 ];
             }],
 
+            'cursor' => ['cursor_id', 'model_class', function ($cursorId, $modelClass) {
+
+                return $modelClass::find($cursorId);
+            }],
+
             'model_class' => [function () {
 
                 return LolGame::class;
@@ -155,7 +160,7 @@ class LolGamePagingService extends Service
     public static function getArrTraits()
     {
         return [
-            PagingService::class
+            PaginationListService::class,
         ];
     }
 }

@@ -2,9 +2,9 @@
 
 namespace App\Services\YtbVideo;
 
-use App\Service;
 use App\Models\YtbVideo;
-use App\Services\FindingService;
+use Illuminate\Extend\Service;
+use Illuminate\Extend\Service\Query\FindService;
 
 class YtbVideoFindingService extends Service
 {
@@ -49,7 +49,7 @@ class YtbVideoFindingService extends Service
     public static function getArrTraits()
     {
         return [
-            FindingService::class,
+            FindService::class,
         ];
     }
 }

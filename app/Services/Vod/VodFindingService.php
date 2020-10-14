@@ -2,9 +2,9 @@
 
 namespace App\Services\Vod;
 
-use App\Service;
 use App\Models\Vod;
-use App\Services\FindingService;
+use Illuminate\Extend\Service;
+use Illuminate\Extend\Service\Query\FindService;
 
 class VodFindingService extends Service
 {
@@ -49,7 +49,7 @@ class VodFindingService extends Service
     public static function getArrTraits()
     {
         return [
-            FindingService::class,
+            FindService::class,
         ];
     }
 }

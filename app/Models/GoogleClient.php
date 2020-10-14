@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Model;
+use Illuminate\Extend\Model;
 
 class GoogleClient extends Model
 {

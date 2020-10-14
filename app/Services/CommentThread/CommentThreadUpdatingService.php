@@ -2,9 +2,9 @@
 
 namespace App\Services\CommentThread;
 
-use App\Service;
 use App\Models\CommentThread;
-use App\Services\AuthUserRequiringService;
+use App\Services\Auth\AuthUserRequiringService;
+use Illuminate\Extend\Service;
 
 class CommentThreadUpdatingService extends Service
 {
