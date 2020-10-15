@@ -9,13 +9,13 @@ use Illuminate\Support\Facades\Request;
 
 class UserController extends Controller
 {
-    public function index()
+    public static function index()
     {
         return [UserListingService::class, [
             'email'
-                => $this->input('email'),
+                => static::input('email'),
             'nick'
-                => $this->input('nick'),
+                => static::input('nick'),
         ], [
             'email'
                 => '[email]',
@@ -24,7 +24,7 @@ class UserController extends Controller
         ]];
     }
 
-    public function show()
+    public static function show()
     {
         return [UserFindingService::class];
     }

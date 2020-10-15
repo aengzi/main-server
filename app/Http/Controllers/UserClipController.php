@@ -8,17 +8,17 @@ use Illuminate\Support\Facades\Request;
 
 class UserClipController extends Controller
 {
-    public function store()
+    public static function store()
     {
         return [UserClipCreatingService::class, [
             'end_sec'
-                => $this->input('end_sec'),
+                => static::input('end_sec'),
             'start_sec'
-                => $this->input('start_sec'),
+                => static::input('start_sec'),
             'title'
-                => $this->input('title'),
+                => static::input('title'),
             'vod_id'
-                => $this->input('vod_id'),
+                => static::input('vod_id'),
         ], [
             'end_sec'
                 => '[end_sec]',

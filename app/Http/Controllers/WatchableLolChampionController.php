@@ -7,7 +7,7 @@ use App\Services\LolChampion\WatchableLolChampionListingService;
 
 class WatchableLolChampionController extends Controller
 {
-    public function index()
+    public static function index()
     {
         return [WatchableLolChampionListingService::class];
     }

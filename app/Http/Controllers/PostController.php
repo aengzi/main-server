@@ -12,18 +12,18 @@ use Illuminate\Support\Facades\Request;
 
 class PostController extends Controller
 {
-    public function destroy()
+    public static function destroy()
     {
         return [PostDeletingService::class];
     }
 
-    public function index()
+    public static function index()
     {
         return [PostPagingService::class, [
             'type'
-                => $this->input('type'),
+                => static::input('type'),
             'user_id'
-                => $this->input('user_id')
+                => static::input('user_id')
         ], [
             'type'
                 => '[type]',
@@ -32,20 +32,20 @@ class PostController extends Controller
         ]];
     }
 
-    public function show()
+    public static function show()
     {
         return [PostFindingService::class];
     }
 
-    public function store()
+    public static function store()
     {
         return [PostCreatingService::class, [
             'content'
-                => $this->input('content'),
+                => static::input('content'),
             'title'
-                => $this->input('title'),
+                => static::input('title'),
             'type'
-                => $this->input('type'),
+                => static::input('type'),
         ], [
             'content'
                 => '[content]',
@@ -56,15 +56,15 @@ class PostController extends Controller
         ]];
     }
 
-    public function update()
+    public static function update()
     {
         return [PostUpdatingService::class, [
             'content'
-                => $this->input('content'),
+                => static::input('content'),
             'title'
-                => $this->input('title'),
+                => static::input('title'),
             'type'
-                => $this->input('type'),
+                => static::input('type'),
         ], [
             'content'
                 => '[content]',

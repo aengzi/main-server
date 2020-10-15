@@ -9,15 +9,15 @@ use Illuminate\Support\Facades\Request;
 
 class LolGameController extends Controller
 {
-    public function index()
+    public static function index()
     {
         return [LolGamePagingService::class, [
             'champion_ids'
-                => $this->input('champion_ids'),
+                => static::input('champion_ids'),
             'is_win'
-                => $this->input('is_win'),
+                => static::input('is_win'),
             'multi_kill_types'
-                => $this->input('multi_kill_types'),
+                => static::input('multi_kill_types'),
         ], [
             'champion_ids'
                 => '[champion_ids]',
@@ -28,7 +28,7 @@ class LolGameController extends Controller
         ]];
     }
 
-    public function show()
+    public static function show()
     {
         return [LolGameFindingService::class];
     }

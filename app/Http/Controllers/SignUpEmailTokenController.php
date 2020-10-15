@@ -8,15 +8,15 @@ use Illuminate\Support\Facades\Request;
 
 class SignUpEmailTokenController extends Controller
 {
-    public function store()
+    public static function store()
     {
         return [SignUpEmailTokenCreatingService::class, [
             'email'
-                => $this->input('email'),
+                => static::input('email'),
             'password'
-                => $this->input('password'),
+                => static::input('password'),
             'nick'
-                => $this->input('nick')
+                => static::input('nick')
         ], [
             'email'
                 => '[email]',

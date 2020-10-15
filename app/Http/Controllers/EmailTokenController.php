@@ -7,11 +7,11 @@ use App\Services\EmailToken\EmailTokenUpdatingService;
 
 class EmailTokenController extends Controller
 {
-    public function update()
+    public static function update()
     {
         return [EmailTokenUpdatingService::class, [
             'code'
-                => $this->input('code'),
+                => static::input('code'),
         ], [
             'code'
                 => '[code]',

@@ -8,13 +8,13 @@ use Illuminate\Support\Facades\Request;
 
 class SignInController extends Controller
 {
-    public function store()
+    public static function store()
     {
         return [SignInCreatingService::class, [
             'email'
-                => $this->input('email'),
+                => static::input('email'),
             'password'
-                => $this->input('password')
+                => static::input('password')
         ], [
             'email'
                 => '[email]',

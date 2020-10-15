@@ -7,11 +7,11 @@ use App\Services\YtbCommentThread\YtbCommentThreadPagingService;
 
 class YtbCommentThreadController extends Controller
 {
-    public function index()
+    public static function index()
     {
         return [YtbCommentThreadPagingService::class, [
             'video_id'
-                => $this->input('video_id')
+                => static::input('video_id')
         ], [
             'video_id'
                 => '[video_id]'

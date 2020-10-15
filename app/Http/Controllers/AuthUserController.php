@@ -9,22 +9,22 @@ use Illuminate\Support\Facades\Request;
 
 class AuthUserController extends Controller
 {
-    public function index()
+    public static function index()
     {
         return [AuthUserFindingService::class];
     }
 
-    public function update()
+    public static function update()
     {
         return [AuthUserUpdatingService::class, [
             'nick'
-                => $this->input('nick'),
+                => static::input('nick'),
             'email'
-                => $this->input('email'),
+                => static::input('email'),
             'password'
-                => $this->input('password'),
+                => static::input('password'),
             'thumbnail'
-                => $this->input('thumbnail'),
+                => static::input('thumbnail'),
         ], [
             'nick'
                 => '[nick]',

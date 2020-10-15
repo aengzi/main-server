@@ -11,29 +11,29 @@ use Illuminate\Support\Facades\Request;
 
 class CommentReplyController extends Controller
 {
-    public function destroy()
+    public static function destroy()
     {
         return [CommentReplyDeletingService::class];
     }
 
-    public function index()
+    public static function index()
     {
         return [CommentReplyPagingService::class, [
             'thread_id'
-                => $this->input('thread_id'),
+                => static::input('thread_id'),
         ], [
             'thread_id'
                 => '[thread_id]',
         ]];
     }
 
-    public function store()
+    public static function store()
     {
         return [CommentReplyCreatingService::class, [
             'thread_id'
-                => $this->input('thread_id'),
+                => static::input('thread_id'),
             'message'
-                => $this->input('message'),
+                => static::input('message'),
         ], [
             'thread_id'
                 => '[thread_id]',
@@ -42,11 +42,11 @@ class CommentReplyController extends Controller
         ]];
     }
 
-    public function update()
+    public static function update()
     {
         return [CommentReplyUpdatingService::class, [
             'message'
-                => $this->input('message'),
+                => static::input('message'),
         ], [
             'message'
                 => '[message]',

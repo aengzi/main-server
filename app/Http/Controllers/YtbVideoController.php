@@ -9,12 +9,12 @@ use Illuminate\Support\Facades\Request;
 
 class YtbVideoController extends Controller
 {
-    public function index()
+    public static function index()
     {
         return [YtbVideoPagingService::class];
     }
 
-    public function show()
+    public static function show()
     {
         return [YtbVideoFindingService::class];
     }

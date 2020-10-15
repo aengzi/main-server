@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Request;
 
 class VodController extends Controller
 {
-    public function show()
+    public static function show()
     {
         return [VodFindingService::class];
     }

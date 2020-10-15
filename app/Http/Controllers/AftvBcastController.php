@@ -9,12 +9,12 @@ use Illuminate\Support\Facades\Request;
 
 class AftvBcastController extends Controller
 {
-    public function index()
+    public static function index()
     {
         return [AftvBcastPagingService::class];
     }
 
-    public function show()
+    public static function show()
     {
         return [AftvBcastFindingService::class];
     }

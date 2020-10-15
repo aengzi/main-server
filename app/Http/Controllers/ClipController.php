@@ -10,18 +10,18 @@ use Illuminate\Support\Facades\Request;
 
 class ClipController extends Controller
 {
-    public function destroy()
+    public static function destroy()
     {
         return [ClipDeletingService::class];
     }
 
-    public function index()
+    public static function index()
     {
         return [ClipPagingService::class, [
             'user_id'
-                => $this->input('user_id'),
+                => static::input('user_id'),
             'vod_id'
-                => $this->input('vod_id'),
+                => static::input('vod_id'),
         ], [
             'user_id'
                 => '[user_id]',
@@ -30,7 +30,7 @@ class ClipController extends Controller
         ]];
     }
 
-    public function show()
+    public static function show()
     {
         return [ClipFindingService::class];
     }

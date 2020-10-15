@@ -11,20 +11,20 @@ use Illuminate\Support\Facades\Request;
 
 class CommentThreadController extends Controller
 {
-    public function destroy()
+    public static function destroy()
     {
         return [CommentThreadDeletingService::class];
     }
 
-    public function index()
+    public static function index()
     {
         return [CommentThreadPagingService::class, [
             'related_id'
-                => $this->input('related_id'),
+                => static::input('related_id'),
             'related_type'
-                => $this->input('related_type'),
+                => static::input('related_type'),
             'user_id'
-                => $this->input('user_id'),
+                => static::input('user_id'),
         ], [
             'related_id'
                 => '[related_id]',
@@ -35,15 +35,15 @@ class CommentThreadController extends Controller
         ]];
     }
 
-    public function store()
+    public static function store()
     {
         return [CommentThreadCreatingService::class, [
             'related_id'
-                => $this->input('related_id'),
+                => static::input('related_id'),
             'related_type'
-                => $this->input('related_type'),
+                => static::input('related_type'),
             'message'
-                => $this->input('message'),
+                => static::input('message'),
         ], [
             'related_id'
                 => '[related_id]',
@@ -54,11 +54,11 @@ class CommentThreadController extends Controller
         ]];
     }
 
-    public function update()
+    public static function update()
     {
         return [CommentThreadUpdatingService::class, [
             'message'
-                => $this->input('message'),
+                => static::input('message'),
         ], [
             'message'
                 => '[message]',

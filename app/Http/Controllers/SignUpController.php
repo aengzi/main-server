@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Request;
 
 class SignUpController extends Controller
 {
-    public function store()
+    public static function store()
     {
         return [SignUpCreatingService::class];
     }

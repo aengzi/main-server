@@ -8,11 +8,11 @@ use Illuminate\Support\Facades\Request;
 
 class NotificationController extends Controller
 {
-    public function index()
+    public static function index()
     {
         return [NotificationPagingService::class, [
             'after'
-                => $this->input('after'),
+                => static::input('after'),
         ], [
             'after'
                 => '[after]',

@@ -8,11 +8,11 @@ use Illuminate\Support\Facades\Request;
 
 class PasswordResetEmailTokenController extends Controller
 {
-    public function store()
+    public static function store()
     {
         return [PasswordResetEmailTokenCreatingService::class, [
             'email'
-                => $this->input('email'),
+                => static::input('email'),
         ], [
             'email'
                 => '[email]',

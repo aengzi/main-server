@@ -8,11 +8,11 @@ use Illuminate\Support\Facades\Request;
 
 class AuthUserEmailTokenController extends Controller
 {
-    public function store()
+    public static function store()
     {
         return [AuthUserEmailTokenCreatingService::class, [
             'email'
-                => $this->input('email'),
+                => static::input('email'),
         ], [
             'email'
                 => '[email]',

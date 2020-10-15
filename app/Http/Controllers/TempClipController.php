@@ -8,15 +8,15 @@ use Illuminate\Support\Facades\Request;
 
 class TempClipController extends Controller
 {
-    public function store()
+    public static function store()
     {
         return [TempClipCreatingService::class, [
             'start_sec'
-                => $this->input('start_sec'),
+                => static::input('start_sec'),
             'end_sec'
-                => $this->input('end_sec'),
+                => static::input('end_sec'),
             'vod_id'
-                => $this->input('vod_id')
+                => static::input('vod_id')
         ], [
             'start_sec'
                 => '[start_sec]',

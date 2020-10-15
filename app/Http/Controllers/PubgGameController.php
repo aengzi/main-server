@@ -9,13 +9,13 @@ use Illuminate\Support\Facades\Request;
 
 class PubgGameController extends Controller
 {
-    public function index()
+    public static function index()
     {
         return [PubgGamePagingService::class, [
             'map_names'
-                => $this->input('map_names'),
+                => static::input('map_names'),
             'queue_sizes'
-                => $this->input('queue_sizes'),
+                => static::input('queue_sizes'),
         ], [
             'map_names'
                 => '[map_names]',
@@ -24,7 +24,7 @@ class PubgGameController extends Controller
         ]];
     }
 
-    public function show()
+    public static function show()
     {
         return [PubgGameFindingService::class];
     }

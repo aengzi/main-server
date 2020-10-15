@@ -9,13 +9,13 @@ use Illuminate\Support\Facades\Request;
 
 class DeviceController extends Controller
 {
-    public function store()
+    public static function store()
     {
         return [DeviceCreatingService::class, [
             'related_id'
-                => $this->input('related_id'),
+                => static::input('related_id'),
             'related_type'
-                => $this->input('related_type'),
+                => static::input('related_type'),
         ], [
             'related_id'
                 => '[related_id]',
@@ -24,13 +24,13 @@ class DeviceController extends Controller
         ]];
     }
 
-    public function update()
+    public static function update()
     {
         return [DeviceUpdatingService::class, [
             'related_id'
-                => $this->input('related_id'),
+                => static::input('related_id'),
             'related_type'
-                => $this->input('related_type'),
+                => static::input('related_type'),
         ], [
             'related_id'
                 => '[related_id]',
