@@ -15,7 +15,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     const CREATED_AT = 'created_at';
     public $incrementing = true;
-    public $guarded = ['id'];
+    protected $guarded = ['id'];
     protected $appends = [
         'thumbnail',
     ];

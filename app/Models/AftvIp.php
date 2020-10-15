@@ -7,7 +7,8 @@ use Illuminate\Extend\Model;
 class AftvIp extends Model
 {
     public $incrementing = true;
-    public $guarded = ['id'];
+    protected $guarded = ['id'];
+    protected $table = 'aftv_files';
     protected $casts = [
         'id' => 'integer',
     ];

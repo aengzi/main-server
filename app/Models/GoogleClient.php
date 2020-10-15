@@ -7,7 +7,7 @@ use Illuminate\Extend\Model;
 class GoogleClient extends Model
 {
     public $incrementing = true;
-    public $guarded = ['id'];
+    protected $guarded = ['id'];
     protected $casts = [
         'id' => 'integer',
     ];

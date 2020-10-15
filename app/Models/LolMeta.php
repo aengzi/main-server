@@ -8,7 +8,7 @@ use Illuminate\Extend\Model;
 class LolMeta extends Model
 {
     public $incrementing = true;
-    public $guarded = ['id'];
+    protected $guarded = ['id'];
     protected $casts = [
         'id' => 'integer',
         'game_id' => 'integer',

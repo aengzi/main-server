@@ -10,7 +10,7 @@ use Illuminate\Extend\Model;
 class Vod extends Model
 {
     public $incrementing = true;
-    public $guarded = ['id'];
+    protected $guarded = ['id'];
     protected $appends = [
         'm3u8_url',
         'thumbnail',

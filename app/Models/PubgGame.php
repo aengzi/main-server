@@ -10,7 +10,7 @@ use Illuminate\Extend\Model;
 class PubgGame extends Model
 {
     public $incrementing = true;
-    public $guarded = ['id'];
+    protected $guarded = ['id'];
     protected $casts = [
         'id' => 'integer',
         'vod_id' => 'integer',
