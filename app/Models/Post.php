@@ -10,7 +10,6 @@ use Illuminate\Extend\Model;
 
 class Post extends Model
 {
-    protected $table = 'posts';
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
     public $incrementing = true;

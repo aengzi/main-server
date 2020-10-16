@@ -8,7 +8,6 @@ use Illuminate\Extend\Model;
 
 class CommentReply extends Model
 {
-    protected $table = 'comment_replies';
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
     public $incrementing = true;

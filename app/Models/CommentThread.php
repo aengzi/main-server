@@ -9,7 +9,6 @@ use Illuminate\Extend\Model;
 
 class CommentThread extends Model
 {
-    protected $table = 'comment_threads';
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
     public $incrementing = true;

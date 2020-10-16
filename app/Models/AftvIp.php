@@ -8,7 +8,6 @@ class AftvIp extends Model
 {
     public $incrementing = true;
     protected $guarded = ['id'];
-    protected $table = 'aftv_files';
     protected $casts = [
         'id' => 'integer',
     ];
