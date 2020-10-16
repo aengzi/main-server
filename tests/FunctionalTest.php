@@ -24,7 +24,7 @@ abstract class FunctionalTest extends TestCase
     public function assertPersistence($model, $existCount = 1)
     {
         $attrs = $model->getAttributes();
-        $query = inst(get_class($model))->query();
+        $query = $model->query();
 
         foreach ( $attrs as $attr => $value )
         {

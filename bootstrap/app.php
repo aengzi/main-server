@@ -2,27 +2,6 @@
 
 require_once __DIR__.'/../vendor/autoload.php';
 
-if ( ! function_exists('inst') )
-{
-    function inst($class, $args = [])
-    {
-        $ref     = new ReflectionClass($class);
-        $cons    = $ref->getConstructor();
-        $params  = $cons ? $cons->getParameters(): [];
-        $argsDic = [];
-
-        foreach ( $params as $i => $param )
-        {
-            if ( array_key_exists($i, $args) )
-            {
-                $argsDic[$param->getName()] = $args[$i];
-            }
-        }
-
-        return app($class, $argsDic);
-    }
-}
-
 (new Laravel\Lumen\Bootstrap\LoadEnvironmentVariables(
     dirname(__DIR__),
     getenv('APP_ENV') ? '.env.'.getenv('APP_ENV') : '.env.production'
