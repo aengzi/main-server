@@ -7,7 +7,7 @@ use App\Models\Dislike;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Extend\Service;
-use Illuminate\Extend\Service\Query\PaginationListService;
+use Illuminate\Extend\Service\Database\PaginationListService;
 
 class DislikePagingService extends Service
 {

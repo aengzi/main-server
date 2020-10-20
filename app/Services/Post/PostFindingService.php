@@ -4,7 +4,7 @@ namespace App\Services\Post;
 
 use App\Models\Post;
 use Illuminate\Extend\Service;
-use Illuminate\Extend\Service\Query\FindService;
+use Illuminate\Extend\Service\Database\FindService;
 
 class PostFindingService extends Service
 {

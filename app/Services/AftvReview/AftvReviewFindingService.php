@@ -4,7 +4,7 @@ namespace App\Services\AftvReview;
 
 use App\Models\AftvReview;
 use Illuminate\Extend\Service;
-use Illuminate\Extend\Service\Query\FindService;
+use Illuminate\Extend\Service\Database\FindService;
 
 class AftvReviewFindingService extends Service
 {

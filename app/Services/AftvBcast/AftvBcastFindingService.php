@@ -4,7 +4,7 @@ namespace App\Services\AftvBcast;
 
 use App\Models\AftvBcast;
 use Illuminate\Extend\Service;
-use Illuminate\Extend\Service\Query\FindService;
+use Illuminate\Extend\Service\Database\FindService;
 
 class AftvBcastFindingService extends Service
 {
