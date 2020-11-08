@@ -9,7 +9,7 @@
         "dbwhddn10/illuminate-extend": "1.1.0",
         "google/apiclient": "*",
         "google/cloud-storage": "*",
-        "laravel/lumen-framework": "5.8.*",
+        "laravel/lumen-framework": "^8.0",
         "nesbot/carbon": "^2.38",
         "phpseclib/phpseclib": "^2.0",
         "swiftmailer/swiftmailer": "^6.0",
