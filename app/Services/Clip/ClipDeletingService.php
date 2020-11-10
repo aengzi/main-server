@@ -25,7 +25,7 @@ class ClipDeletingService extends Service
     public static function getArrCallbackLists()
     {
         return [
-            'result' => ['auth_user', 'clip', function ($authUser, $clip) {
+            'result' => function ($authUser, $clip) {
 
                 $clip->vod->data = null;
                 $clip->vod->save();
@@ -45,27 +45,27 @@ class ClipDeletingService extends Service
                 foreach ($objects as $object) {
                     $object->delete();
                 }
-            }],
+            },
         ];
     }
 
     public static function getArrLoaders()
     {
         return [
-            'clip' => ['id', function ($id) {
+            'clip' => function ($id) {
 
                 return Clip::find($id);
-            }],
+            },
 
-            'result' => [function () {
+            'result' => function () {
 
                 return null;
-            }],
+            },
 
-            'user_id' => ['clip', function ($clip) {
+            'user_id' => function ($clip) {
 
                 return $clip->user_id;
-            }],
+            },
         ];
     }
 

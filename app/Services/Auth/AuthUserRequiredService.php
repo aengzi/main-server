@@ -20,7 +20,7 @@ class AuthUserRequiredService extends Service
     public static function getArrLoaders()
     {
         return [
-            'auth_user' => ['token', function ($token) {
+            'auth_user' => function ($token) {
 
                 return [AuthUserFindingService::class, [
                     'token'
@@ -29,12 +29,12 @@ class AuthUserRequiredService extends Service
                     'token'
                         => '{{token}}',
                 ]];
-            }],
+            },
 
-            'auth_user_id' => ['auth_user', function ($authUser) {
+            'auth_user_id' => function ($authUser) {
 
                 return $authUser->getKey();
-            }],
+            },
         ];
     }
 

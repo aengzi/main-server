@@ -19,7 +19,7 @@ class AftvBcastPagingService extends Service
     public static function getArrCallbackLists()
     {
         return [
-            'query.order_by_array' => ['order_by_array', 'query', function ($orderByArray, $query) {
+            'query.order_by_array' => function ($orderByArray, $query) {
 
                 foreach ( $orderByArray as $column => $order )
                 {
@@ -44,9 +44,9 @@ class AftvBcastPagingService extends Service
                         $query->orderBy($column, $order);
                     }
                 }
-            }],
+            },
 
-            'query.vod.related_id' => ['query', function ($query) {
+            'query.vod.related_id' => function ($query) {
 
                 $type     = array_flip(Relation::morphMap())[AftvBcast::class];
                 $subQuery = Vod::query()
@@ -55,37 +55,37 @@ class AftvBcastPagingService extends Service
                     ->getQuery();
 
                 $query->whereIn($query->getModel()->getKeyName(), $subQuery);
-            }],
+            },
         ];
     }
 
     public static function getArrLoaders()
     {
         return [
-            'available_expands' => [function () {
+            'available_expands' => function () {
 
                 return ['bj', 'm3u8s', 'vod', 'vod.like'];
-            }],
+            },
 
-            'available_order_by' => [function () {
+            'available_order_by' => function () {
 
                 return ['started_at desc', 'started_at asc', 'like_count desc'];
-            }],
+            },
 
-            'cursor' => ['cursor_id', 'model_class', function ($cursorId, $modelClass) {
+            'cursor' => function ($cursorId, $modelClass) {
 
                 return $modelClass::find($cursorId);
-            }],
+            },
 
-            'model_class' => [function () {
+            'model_class' => function () {
 
                 return AftvBcast::class;
-            }],
+            },
 
-            'order_by' => [function () {
+            'order_by' => function () {
 
                 return 'started_at desc';
-            }],
+            },
         ];
     }
 

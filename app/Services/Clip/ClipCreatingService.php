@@ -28,7 +28,7 @@ class ClipCreatingService extends Service
     public static function getArrCallbackLists()
     {
         return [
-            'clip_vod.files' => ['clip_vod', 'files', 'm3u8_string', function ($clipVod, $files, $m3u8String) {
+            'clip_vod.files' => function ($clipVod, $files, $m3u8String) {
 
                 $bucketName = $clipVod->getBucketNameAttribute();
                 $storage = new StorageClient([
@@ -61,29 +61,29 @@ class ClipCreatingService extends Service
                 ]);
                 unlink($prefix.'video.ts');
                 unlink($prefix.'origin.jpg');
-            }],
+            },
 
-            'clip_vod.result' => ['clip_vod', 'result', function ($clipVod, $result) {
+            'clip_vod.result' => function ($clipVod, $result) {
 
                 $result->setRelation('vod', $clipVod);
-            }],
+            },
 
-            'files' => ['files', function ($files) {
+            'files' => function ($files) {
 
                 $files->load(['m3u8']);
-            }],
+            },
         ];
     }
 
     public static function getArrLoaders()
     {
         return [
-            'diff_sec' => ['end_sec', 'start_sec', function ($endSec, $startSec) {
+            'diff_sec' => function ($endSec, $startSec) {
 
                 return $endSec - $startSec;
-            }],
+            },
 
-            'ended_at' => ['end_sec', 'vod', function ($endSec, $vod) {
+            'ended_at' => function ($endSec, $vod) {
 
                 $matches = [];
                 preg_match_all('/\#EXTINF:(\d*\.\d*)/', $vod->data, $matches);
@@ -119,9 +119,9 @@ class ClipCreatingService extends Service
                     'm3u8_index' => $m3u8Index,
                     'file_index' => $fileIndex
                 ])->first()->ended_at;
-            }],
+            },
 
-            'files' => ['ended_at', 'started_at', 'vod', function ($endedAt, $startedAt, $vod) {
+            'files' => function ($endedAt, $startedAt, $vod) {
 
                 return AftvFile::query()
                     ->where('bcast_id', $vod->bcast_id)
@@ -129,9 +129,9 @@ class ClipCreatingService extends Service
                     ->where('ended_at', '>=', $startedAt)
                     ->orderBy('started_at', 'asc')
                     ->get();
-            }],
+            },
 
-            'm3u8_string' => ['files', function ($files) {
+            'm3u8_string' => function ($files) {
 
                 $rtn = '#EXTM3U'.PHP_EOL.'#EXT-X-TARGETDURATION:6'.PHP_EOL.'#EXT-X-ALLOW-CACHE:YES'.PHP_EOL.'#EXT-X-PLAYLIST-TYPE:VOD'.PHP_EOL.'#EXT-X-VERSION:3'.PHP_EOL.'#EXT-X-MEDIA-SEQUENCE:1'.PHP_EOL;
 
@@ -155,9 +155,9 @@ class ClipCreatingService extends Service
                 $rtn.='#EXT-X-ENDLIST';
 
                 return $rtn;
-            }],
+            },
 
-            'started_at' => ['start_sec', 'vod', function ($startSec, $vod) {
+            'started_at' => function ($startSec, $vod) {
 
                 $matches = [];
                 preg_match_all('/\#EXTINF:(\d*\.\d*)/', $vod->data, $matches);
@@ -193,17 +193,17 @@ class ClipCreatingService extends Service
                     'm3u8_index' => $m3u8Index,
                     'file_index' => $fileIndex
                 ])->first()->started_at;
-            }],
+            },
 
-            'vod' => ['vod_id', function ($vodId) {
+            'vod' => function ($vodId) {
 
                 return Vod::find($vodId);
-            }],
+            },
 
-            'vod_duration' => ['vod', function ($vod) {
+            'vod_duration' => function ($vod) {
 
                 return $vod->sum('duration');
-            }],
+            },
         ];
     }
 

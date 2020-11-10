@@ -24,15 +24,15 @@ class ClipFindingService extends Service
     public static function getArrLoaders()
     {
         return [
-            'available_expands' => [function () {
+            'available_expands' => function () {
 
                 return ['user', 'vod', 'vod.like', 'vod.bcast', 'vod.bcast.bj'];
-            }],
+            },
 
-            'model_class' => [function () {
+            'model_class' => function () {
 
                 return Clip::class;
-            }],
+            },
         ];
     }
 

@@ -23,31 +23,31 @@ class PostDeletingService extends Service
     public static function getArrCallbackLists()
     {
         return [
-            'result' => ['post', function ($post) {
+            'result' => function ($post) {
 
                 $post->content = null;
                 $post->delete();
-            }],
+            },
         ];
     }
 
     public static function getArrLoaders()
     {
         return [
-            'post' => ['id', function ($id) {
+            'post' => function ($id) {
 
                 return Post::find($postId);
-            }],
+            },
 
-            'post_user_id' => ['post', function ($post) {
+            'post_user_id' => function ($post) {
 
                 return $post->user_id;
-            }],
+            },
 
-            'result' => [function () {
+            'result' => function () {
 
                 return null;
-            }],
+            },
         ];
     }
 

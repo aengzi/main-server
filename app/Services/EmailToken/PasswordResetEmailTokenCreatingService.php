@@ -26,7 +26,7 @@ class PasswordResetEmailTokenCreatingService extends Service
     public static function getArrLoaders()
     {
         return [
-            'body' => ['payload', function ($payload) {
+            'body' => function ($payload) {
 
                 return '
                     <p>
@@ -36,26 +36,26 @@ class PasswordResetEmailTokenCreatingService extends Service
                         '.$payload['code'].'
                     </p>
                 ';
-            }],
+            },
 
-            'payload' => ['same_email_user', function ($sameEmailUser) {
+            'payload' => function ($sameEmailUser) {
 
                 return [
                     'code'       => Str::random(6),
                     'expired_at' => Carbon::now('UTC')->addSeconds(300)->format('Y-m-d H:i:s'),
                     'uid'        => $sameEmailUser->getKey(),
                 ];
-            }],
+            },
 
-            'same_email_user' => ['email', function ($email) {
+            'same_email_user' => function ($email) {
 
                 return User::lockForUpdate()->where('email', $email)->first();
-            }],
+            },
 
-            'subject' => [function () {
+            'subject' => function () {
 
                 return '이메일 계정 소유자 확인 - aengzi.com';
-            }],
+            },
         ];
     }
 

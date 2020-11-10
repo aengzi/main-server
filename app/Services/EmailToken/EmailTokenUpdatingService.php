@@ -31,12 +31,12 @@ class EmailTokenUpdatingService extends Service
     public static function getArrLoaders()
     {
         return [
-            'current_time' => [function () {
+            'current_time' => function () {
 
                 return Carbon::now('UTC')->format('Y-m-d H:i:s');
-            }],
+            },
 
-            'payload' => ['token', function ($token) {
+            'payload' => function ($token) {
 
                 return [TokenDecryptionService::class, [
                     'token'
@@ -47,19 +47,19 @@ class EmailTokenUpdatingService extends Service
                     'token'
                         => '{{token}}',
                 ]];
-            }],
+            },
 
-            'payload_code' => ['payload', function ($payload) {
+            'payload_code' => function ($payload) {
 
                 return $payload['code'];
-            }],
+            },
 
-            'payload_expired_at' => ['payload', function ($payload) {
+            'payload_expired_at' => function ($payload) {
 
                 return $payload['expired_at'];
-            }],
+            },
 
-            'result' => ['payload', function ($payload) {
+            'result' => function ($payload) {
 
                 unset($payload['code']);
 
@@ -67,7 +67,7 @@ class EmailTokenUpdatingService extends Service
                     'payload'
                         => array_merge($payload, ['verified' => true])
                 ]];
-            }],
+            },
         ];
     }
 

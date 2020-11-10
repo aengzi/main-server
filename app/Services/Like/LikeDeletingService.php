@@ -22,7 +22,7 @@ class LikeDeletingService extends Service
     public static function getArrCallbackLists()
     {
         return [
-            'result' => ['like', function ($like) {
+            'result' => function ($like) {
 
                 $like->delete();
 
@@ -34,27 +34,27 @@ class LikeDeletingService extends Service
                 $related = $like->related;
                 $related->like_count = $count;
                 $related->save();
-            }],
+            },
         ];
     }
 
     public static function getArrLoaders()
     {
         return [
-            'like' => ['like_id', function ($likeId) {
+            'like' => function ($likeId) {
 
                 return Like::find($likeId);
-            }],
+            },
 
-            'like_user_id' => ['like', function ($like) {
+            'like_user_id' => function ($like) {
 
                 return $like->user_id;
-            }],
+            },
 
-            'result' => [function () {
+            'result' => function () {
 
                 return null;
-            }],
+            },
         ];
     }
 

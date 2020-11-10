@@ -24,15 +24,15 @@ class PostFindingService extends Service
     public static function getArrLoaders()
     {
         return [
-            'available_expands' => [function () {
+            'available_expands' => function () {
 
                 return ['dislike', 'like', 'user'];
-            }],
+            },
 
-            'model_class' => [function () {
+            'model_class' => function () {
 
                 return Post::class;
-            }],
+            },
         ];
     }
 

@@ -24,15 +24,15 @@ class LolGameFindingService extends Service
     public static function getArrLoaders()
     {
         return [
-            'available_expands' => [function () {
+            'available_expands' => function () {
 
                 return ['metas', 'vod', 'vod.like', 'vod.bcast', 'vod.bcast.bj', 'timelines'];
-            }],
+            },
 
-            'model_class' => [function () {
+            'model_class' => function () {
 
                 return LolGame::class;
-            }],
+            },
         ];
     }
 

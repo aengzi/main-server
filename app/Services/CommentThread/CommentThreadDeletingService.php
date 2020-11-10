@@ -23,7 +23,7 @@ class CommentThreadDeletingService extends Service
     public static function getArrCallbackLists()
     {
         return [
-            'result' => ['thread', function ($thread) {
+            'result' => function ($thread) {
 
                 $thread->delete();
 
@@ -35,27 +35,27 @@ class CommentThreadDeletingService extends Service
                 $related = Relation::morphMap()[$thread->related_type]::find($thread->related_id);
                 $related->thread_count = $count;
                 $related->save();
-            }],
+            },
         ];
     }
 
     public static function getArrLoaders()
     {
         return [
-            'result' => [function () {
+            'result' => function () {
 
                 return null;
-            }],
+            },
 
-            'thread' => ['id', function ($id) {
+            'thread' => function ($id) {
 
                 return CommentThread::find($id);
-            }],
+            },
 
-            'user_id' => ['thread', function ($thread) {
+            'user_id' => function ($thread) {
 
                 return $thread->user_id;
-            }],
+            },
         ];
     }
 

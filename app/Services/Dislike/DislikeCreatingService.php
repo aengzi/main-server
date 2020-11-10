@@ -23,7 +23,7 @@ class DislikeCreatingService extends Service
     public static function getArrCallbackLists()
     {
         return [
-            'result' => ['result', function ($result) {
+            'result' => function ($result) {
 
                 $count = Dislike::query()
                     ->where('related_id', $result->related_id)
@@ -33,27 +33,27 @@ class DislikeCreatingService extends Service
                 $related = $result->related;
                 $related->dislike_count = $count;
                 $related->save();
-            }],
+            },
         ];
     }
 
     public static function getArrLoaders()
     {
         return [
-            'dislike' => ['auth_user', 'related', function ($authUser, $related) {
+            'dislike' => function ($authUser, $related) {
 
                 return Dislike::query()
                     ->where('user_id', $authUser->getKey())
                     ->where('related_id', $related->getKey())
                     ->first();
-            }],
+            },
 
-            'related' => ['related_id', 'related_type', function ($relatedId, $relatedType) {
+            'related' => function ($relatedId, $relatedType) {
 
                 return Relation::morphMap()[$relatedType]::find($relatedId);
-            }],
+            },
 
-            'result' => ['auth_user', 'related', 'related_type', function ($authUser, $related, $relatedType) {
+            'result' => function ($authUser, $related, $relatedType) {
 
                 return Dislike::create([
                     'user_id'
@@ -63,7 +63,7 @@ class DislikeCreatingService extends Service
                     'related_type'
                         => $relatedType
                 ]);
-            }],
+            },
         ];
     }
 

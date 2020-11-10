@@ -24,35 +24,35 @@ class DeviceUpdatingService extends Service
     public static function getArrCallbackLists()
     {
         return [
-            'device' => ['device', function ($device) {
+            'device' => function ($device) {
 
                 $device->touch();
-            }],
+            },
         ];
     }
 
     public static function getArrLoaders()
     {
         return [
-            'device' => ['id', function ($id) {
+            'device' => function ($id) {
 
                 return Device::find($id);
-            }],
+            },
 
-            'device_related_id' => ['device', function ($device) {
+            'device_related_id' => function ($device) {
 
                 return $device->related_id;
-            }],
+            },
 
-            'device_related_type' => ['device', function ($device) {
+            'device_related_type' => function ($device) {
 
                 return $device->related_type;
-            }],
+            },
 
-            'result' => ['device', function ($device) {
+            'result' => function ($device) {
 
                 return $device;
-            }],
+            },
         ];
     }
 

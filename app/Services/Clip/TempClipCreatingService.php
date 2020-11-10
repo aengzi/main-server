@@ -23,7 +23,7 @@ class TempClipCreatingService extends Service
     public static function getArrLoaders()
     {
         return [
-            'clip_vod' => ['files', 'm3u8_string', 'vod', function ($files, $m3u8String, $vod) {
+            'clip_vod' => function ($files, $m3u8String, $vod) {
 
                 $item = new Vod;
                 $item->setKeyType('string');
@@ -40,14 +40,14 @@ class TempClipCreatingService extends Service
                 ]);
 
                 return $item;
-            }],
+            },
 
-            'result' => [function () {
+            'result' => function () {
 
                 return new Clip([
                     'created_at' => (new \DateTime)->format('Y-m-d H:i:s')
                 ]);
-            }],
+            },
         ];
     }
 

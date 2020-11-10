@@ -20,12 +20,12 @@ class CommentThreadCreatingService extends Service
     public static function getArrCallbackLists()
     {
         return [
-            'result.auth_user' => ['auth_user', 'result', function ($authUser, $result) {
+            'result.auth_user' => function ($authUser, $result) {
 
                 $result->setRelation('user', $authUser);
-            }],
+            },
 
-            'result.related' => ['related', 'result', function ($related, $result) {
+            'result.related' => function ($related, $result) {
 
                 $count = CommentThread::query()
                     ->where('related_id', $result->related_id)
@@ -34,19 +34,19 @@ class CommentThreadCreatingService extends Service
 
                 $related->thread_count = $count;
                 $related->save();
-            }],
+            },
         ];
     }
 
     public static function getArrLoaders()
     {
         return [
-            'related' => ['related_id', 'related_type', function ($relatedId, $relatedType) {
+            'related' => function ($relatedId, $relatedType) {
 
                 return Relation::morphMap()[$relatedType]::find($relatedId);
-            }],
+            },
 
-            'result' => ['auth_user', 'message', 'related', 'related_type', function ($authUser, $message, $related, $relatedType) {
+            'result' => function ($authUser, $message, $related, $relatedType) {
 
                 return CommentThread::create([
                     'user_id'
@@ -58,7 +58,7 @@ class CommentThreadCreatingService extends Service
                     'related_type'
                         => $relatedType
                 ])->fresh();
-            }],
+            },
         ];
     }
 

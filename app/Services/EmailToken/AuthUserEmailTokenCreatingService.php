@@ -23,7 +23,7 @@ class AuthUserEmailTokenCreatingService extends Service
     public static function getArrLoaders()
     {
         return [
-            'auth_user' => ['token', function ($token) {
+            'auth_user' => function ($token) {
 
                 return [AuthUserFindingService::class, [
                     'token'
@@ -32,9 +32,9 @@ class AuthUserEmailTokenCreatingService extends Service
                     'token'
                         => '{{token}}',
                 ]];
-            }],
+            },
 
-            'body' => ['payload', function ($payload) {
+            'body' => function ($payload) {
 
                 return '
                     <p>
@@ -44,9 +44,9 @@ class AuthUserEmailTokenCreatingService extends Service
                         '.$payload['code'].'
                     </p>
                 ';
-            }],
+            },
 
-            'payload' => ['auth_user', 'email', function ($authUser, $email) {
+            'payload' => function ($authUser, $email) {
 
                 return [
                     'code'       => Str::random(6),
@@ -54,12 +54,12 @@ class AuthUserEmailTokenCreatingService extends Service
                     'expired_at' => Carbon::now('UTC')->addSeconds(300)->format('Y-m-d H:i:s'),
                     'uid'        => $authUser->getKey(),
                 ];
-            }],
+            },
 
-            'subject' => [function () {
+            'subject' => function () {
 
                 return '이메일 계정 소유자 확인 - aengzi.com';
-            }],
+            },
         ];
     }
 

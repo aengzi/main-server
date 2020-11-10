@@ -19,12 +19,12 @@ class LolGamePagingService extends Service
     public static function getArrCallbackLists()
     {
         return [
-            'query' => ['query', function ($query) {
+            'query' => function ($query) {
 
                 $query->whereNotNull('vod_id');
-            }],
+            },
 
-            'query.champion_ids' => ['champion_ids', 'query', function ($championIds, $query) {
+            'query.champion_ids' => function ($championIds, $query) {
 
                 $championIds = preg_split('/\s*,\s*/', $championIds);
                 $subQuery = LolMeta::query()
@@ -34,9 +34,9 @@ class LolGamePagingService extends Service
                     ->getQuery();
 
                 $query->whereIn('id', $subQuery);
-            }],
+            },
 
-            'query.is_win' => ['is_win', 'query', function ($isWin, $query) {
+            'query.is_win' => function ($isWin, $query) {
 
                 $subQuery = LolMeta::query()
                     ->select(['game_id'])
@@ -45,9 +45,9 @@ class LolGamePagingService extends Service
                     ->getQuery();
 
                 $query->whereIn('id', $subQuery);
-            }],
+            },
 
-            'query.multi_kill_types' => ['multi_kill_types', 'query', function ($multiKillTypes, $query) {
+            'query.multi_kill_types' => function ($multiKillTypes, $query) {
 
                 $multiKillTypes = preg_split('/\s*,\s*/', $multiKillTypes);
                 $subQuery = LolMeta::query()
@@ -57,9 +57,9 @@ class LolGamePagingService extends Service
                     ->getQuery();
 
                 $query->whereIn('id', $subQuery);
-            }],
+            },
 
-            'query.order_by_array' => ['order_by_array', 'query', function ($orderByArray, $query) {
+            'query.order_by_array' => function ($orderByArray, $query) {
 
                 if ( array_keys($orderByArray)[count($orderByArray)-1] == $query->getModel()->getKeyName() )
                 {
@@ -107,19 +107,19 @@ class LolGamePagingService extends Service
                         $query->orderByRaw($alias2.$orderColumn.$order);
                     }
                 }
-            }],
+            },
         ];
     }
 
     public static function getArrLoaders()
     {
         return [
-            'available_expands' => [function () {
+            'available_expands' => function () {
 
                 return ['metas', 'vod', 'vod.like', 'vod.bcast', 'vod.bcast.bj', 'timelines'];
-            }],
+            },
 
-            'available_order_by' => [function () {
+            'available_order_by' => function () {
 
                 return [
                     'game_creation desc',
@@ -128,22 +128,22 @@ class LolGamePagingService extends Service
                     'status_assists desc',
                     'status_gold_earned desc'
                 ];
-            }],
+            },
 
-            'cursor' => ['cursor_id', 'model_class', function ($cursorId, $modelClass) {
+            'cursor' => function ($cursorId, $modelClass) {
 
                 return $modelClass::find($cursorId);
-            }],
+            },
 
-            'model_class' => [function () {
+            'model_class' => function () {
 
                 return LolGame::class;
-            }],
+            },
 
-            'order_by' => [function () {
+            'order_by' => function () {
 
                 return 'game_creation desc';
-            }],
+            },
         ];
     }
 

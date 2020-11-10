@@ -25,7 +25,7 @@ class ClipPagingService extends Service
     public static function getArrCallbackLists()
     {
         return [
-            'query.order_by_array' => ['order_by_array', 'query', function ($orderByArray, $query) {
+            'query.order_by_array' => function ($orderByArray, $query) {
 
                 foreach ( $orderByArray as $column => $order )
                 {
@@ -49,56 +49,56 @@ class ClipPagingService extends Service
                         $query->orderBy($column, $order);
                     }
                 }
-            }],
+            },
 
-            'query.user' => ['query', 'user', function ($query, $user) {
+            'query.user' => function ($query, $user) {
 
                 $query->where('user_id', $user->getKey());
-            }],
+            },
 
-            'query.vod' => ['query', 'vod', function ($query, $vod) {
+            'query.vod' => function ($query, $vod) {
 
                 $query->where('vod_id', $vod->getKey());
-            }],
+            },
         ];
     }
 
     public static function getArrLoaders()
     {
         return [
-            'available_expands' => [function () {
+            'available_expands' => function () {
 
                 return ['user', 'vod', 'vod.like', 'vod.bcast', 'vod.bcast.bj'];
-            }],
+            },
 
-            'available_order_by' => [function () {
+            'available_order_by' => function () {
 
                 return [
                     'created_at asc',
                     'created_at desc',
                     'like_count desc'
                 ];
-            }],
+            },
 
-            'cursor' => ['cursor_id', 'model_class', function ($cursorId, $modelClass) {
+            'cursor' => function ($cursorId, $modelClass) {
 
                 return $modelClass::find($cursorId);
-            }],
+            },
 
-            'model_class' => [function () {
+            'model_class' => function () {
 
                 return Clip::class;
-            }],
+            },
 
-            'user' => ['user_id', function ($userId) {
+            'user' => function ($userId) {
 
                 return User::find($userId);
-            }],
+            },
 
-            'vod' => ['vod_id', function ($vodId) {
+            'vod' => function ($vodId) {
 
                 return Vod::find($vodId);
-            }],
+            },
         ];
     }
 

@@ -29,7 +29,7 @@ class SignUpEmailTokenCreatingService extends Service
     public static function getArrLoaders()
     {
         return [
-            'body' => ['payload', function ($payload) {
+            'body' => function ($payload) {
 
                 return '
                     <p>
@@ -39,9 +39,9 @@ class SignUpEmailTokenCreatingService extends Service
                         '.$payload['code'].'
                     </p>
                 ';
-            }],
+            },
 
-            'payload' => ['email', 'nick', 'password', function ($email, $nick, $password) {
+            'payload' => function ($email, $nick, $password) {
 
                 return [
                     'email'      => $email,
@@ -50,22 +50,22 @@ class SignUpEmailTokenCreatingService extends Service
                     'code'       => Str::random(6),
                     'expired_at' => Carbon::now('UTC')->addSeconds(3600)->format('Y-m-d H:i:s')
                 ];
-            }],
+            },
 
-            'same_email_user' => ['email', function ($email) {
+            'same_email_user' => function ($email) {
 
                 return User::lockForUpdate()->where('email', $email)->first();
-            }],
+            },
 
-            'same_nick_user' => ['nick', function ($nick) {
+            'same_nick_user' => function ($nick) {
 
                 return User::lockForUpdate()->where('nick', $nick)->first();
-            }],
+            },
 
-            'subject' => [function () {
+            'subject' => function () {
 
                 return '가입 이메일 확인 - aengzi.com';
-            }],
+            },
         ];
     }
 

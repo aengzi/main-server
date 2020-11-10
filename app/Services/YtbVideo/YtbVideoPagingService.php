@@ -21,20 +21,20 @@ class YtbVideoPagingService extends Service
     public static function getArrLoaders()
     {
         return [
-            'available_expands' => [function () {
+            'available_expands' => function () {
 
                 return ['like'];
-            }],
+            },
 
-            'cursor' => ['cursor_id', 'model_class', function ($cursorId, $modelClass) {
+            'cursor' => function ($cursorId, $modelClass) {
 
                 return $modelClass::find($cursorId);
-            }],
+            },
 
-            'model_class' => [function () {
+            'model_class' => function () {
 
                 return YtbVideo::class;
-            }],
+            },
         ];
     }
 

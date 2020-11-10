@@ -22,7 +22,7 @@ class CommentReplyDeletingService extends Service
     public static function getArrCallbackLists()
     {
         return [
-            'result' => ['reply', function ($reply) {
+            'result' => function ($reply) {
 
                 $reply->delete();
 
@@ -33,27 +33,27 @@ class CommentReplyDeletingService extends Service
                 $thread = $reply->thread;
                 $thread->reply_count = $count;
                 $thread->save();
-            }],
+            },
         ];
     }
 
     public static function getArrLoaders()
     {
         return [
-            'reply' => ['id', function ($id) {
+            'reply' => function ($id) {
 
                 return CommentReply::find($id);
-            }],
+            },
 
-            'result' => [function () {
+            'result' => function () {
 
                 return null;
-            }],
+            },
 
-            'user_id' => ['reply', function ($reply) {
+            'user_id' => function ($reply) {
 
                 return $reply->user_id;
-            }],
+            },
         ];
     }
 

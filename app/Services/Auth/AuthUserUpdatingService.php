@@ -26,25 +26,25 @@ class AuthUserUpdatingService extends Service
     public static function getArrCallbackLists()
     {
         return [
-            'auth_user.email' => ['auth_user', 'email', function ($authUser, $email) {
+            'auth_user.email' => function ($authUser, $email) {
 
                 if ( !empty($email) )
                 {
                     $authUser->email = $email;
                 }
-            }],
+            },
 
-            'auth_user.nick' => ['auth_user', 'nick', function ($authUser, $nick) {
+            'auth_user.nick' => function ($authUser, $nick) {
 
                 $authUser->nick = $nick;
-            }],
+            },
 
-            'auth_user.password' => ['auth_user', 'password', function ($authUser, $password) {
+            'auth_user.password' => function ($authUser, $password) {
 
                 $authUser->password = $password;
-            }],
+            },
 
-            'auth_user.thumbnail' => ['auth_user', 'thumbnail', function ($authUser, $thumbnail) {
+            'auth_user.thumbnail' => function ($authUser, $thumbnail) {
 
                 $storage = new StorageClient([
                     'keyFilePath' => storage_path('app/administrator@aengzi.json')
@@ -58,40 +58,40 @@ class AuthUserUpdatingService extends Service
                     ],
                 ]);
                 $authUser->has_thumbnail = true;
-            }],
+            },
 
-            'result' => ['result', function ($result) {
+            'result' => function ($result) {
 
                 $result->save();
-            }],
+            },
         ];
     }
 
     public static function getArrLoaders()
     {
         return [
-            'email' => ['payload', function ($payload) {
+            'email' => function ($payload) {
 
                 return isset($payload['email']) ? $payload['email'] : null;
-            }],
+            },
 
-            'result' => ['auth_user', function ($authUser) {
+            'result' => function ($authUser) {
 
                 return $authUser;
-            }],
+            },
 
-            'same_email_user' => ['email', function ($email) {
+            'same_email_user' => function ($email) {
 
                 if ( !empty($email) )
                 {
                     return User::lockForUpdate()->where('email', $email)->first();
                 }
-            }],
+            },
 
-            'same_nick_user' => ['nick', function ($nick) {
+            'same_nick_user' => function ($nick) {
 
                 return User::lockForUpdate()->where('nick', $nick)->first();
-            }],
+            },
         ];
     }
 

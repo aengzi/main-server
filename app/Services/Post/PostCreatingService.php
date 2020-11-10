@@ -16,17 +16,17 @@ class PostCreatingService extends Service
     public static function getArrCallbackLists()
     {
         return [
-            'result.auth_user' => ['auth_user', 'result', function ($authUser, $result) {
+            'result.auth_user' => function ($authUser, $result) {
 
                 $result->setRelation('user', $authUser);
-            }],
+            },
         ];
     }
 
     public static function getArrLoaders()
     {
         return [
-            'result' => ['auth_user', 'content', 'title', 'type', function ($authUser, $content, $title, $type) {
+            'result' => function ($authUser, $content, $title, $type) {
 
                 return Post::create([
                     'user_id'
@@ -38,7 +38,7 @@ class PostCreatingService extends Service
                     'type'
                         => $type
                 ]);
-            }],
+            },
         ];
     }
 

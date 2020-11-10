@@ -19,12 +19,12 @@ class PubgGamePagingService extends Service
     public static function getArrCallbackLists()
     {
         return [
-            'query' => ['query', function ($query) {
+            'query' => function ($query) {
 
                 $query->whereNotNull('vod_id');
-            }],
+            },
 
-            'query.map_names' => ['map_names', 'query', function ($mapNames, $query) {
+            'query.map_names' => function ($mapNames, $query) {
 
                 $mapNames = preg_split('/\s*,\s*/', $mapNames);
                 $subQuery = PubgMeta::query()
@@ -34,9 +34,9 @@ class PubgGamePagingService extends Service
                     ->getQuery();
 
                 $query->whereIn('id', $subQuery);
-            }],
+            },
 
-            'query.order_by_array' => ['order_by_array', 'query', function ($orderByArray, $query) {
+            'query.order_by_array' => function ($orderByArray, $query) {
 
                 unset($orderByArray[$query->getModel()->getKeyName()]);
 
@@ -81,9 +81,9 @@ class PubgGamePagingService extends Service
                         $query->orderByRaw($alias2.$orderColumn.$order);
                     }
                 }
-            }],
+            },
 
-            'query.queue_sizes' => ['query', 'queue_sizes', function ($query, $queueSizes) {
+            'query.queue_sizes' => function ($query, $queueSizes) {
 
                 $queueSizes = preg_split('/\s*,\s*/', $queueSizes);
                 $subQuery = PubgMeta::query()
@@ -93,19 +93,19 @@ class PubgGamePagingService extends Service
                     ->getQuery();
 
                 $query->whereIn('id', $subQuery);
-            }],
+            },
         ];
     }
 
     public static function getArrLoaders()
     {
         return [
-            'available_expands' => [function () {
+            'available_expands' => function () {
 
                 return ['metas', 'vod', 'vod.like', 'vod.bcast', 'vod.bcast.bj', 'timelines'];
-            }],
+            },
 
-            'available_order_by' => [function () {
+            'available_order_by' => function () {
 
                 return [
                     'started_at desc',
@@ -114,22 +114,22 @@ class PubgGamePagingService extends Service
                     'rank asc',
                     'time_survived desc'
                 ];
-            }],
+            },
 
-            'cursor' => ['cursor_id', 'model_class', function ($cursorId, $modelClass) {
+            'cursor' => function ($cursorId, $modelClass) {
 
                 return $modelClass::find($cursorId);
-            }],
+            },
 
-            'model_class' => [function () {
+            'model_class' => function () {
 
                 return PubgGame::class;
-            }],
+            },
 
-            'order_by' => [function () {
+            'order_by' => function () {
 
                 return 'started_at desc';
-            }],
+            },
         ];
     }
 

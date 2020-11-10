@@ -31,32 +31,32 @@ class AuthUserFindingService extends Service
     public static function getArrCallbackLists()
     {
         return [
-            'result' => ['result', function ($result) {
+            'result' => function ($result) {
 
                 Auth::setUser($result);
-            }],
+            },
         ];
     }
 
     public static function getArrLoaders()
     {
         return [
-            'id' => ['payload', function ($payload) {
-
-                return $payload['uid'];
-            }],
-
-            'current_time' => [function () {
+            'current_time' => function () {
 
                 return Carbon::now('UTC')->format('Y-m-d H:i:s');
-            }],
+            },
 
-            'model_class' => [function () {
+            'id' => function ($payload) {
+
+                return $payload['uid'];
+            },
+
+            'model_class' => function () {
 
                 return User::class;
-            }],
+            },
 
-            'payload' => ['token', function ($token) {
+            'payload' => function ($token) {
 
                 return [TokenDecryptionService::class, [
                     'token'
@@ -67,12 +67,12 @@ class AuthUserFindingService extends Service
                     'token'
                         => '{{token}}',
                 ]];
-            }],
+            },
 
-            'payload_expired_at' => ['payload', function ($payload) {
+            'payload_expired_at' => function ($payload) {
 
                 return $payload['expired_at'];
-            }],
+            },
         ];
     }
 

@@ -18,7 +18,7 @@ class WatchableLolChampionListingService extends Service
     public static function getArrCallbackLists()
     {
         return [
-            'query' => ['query', function ($query) {
+            'query' => function ($query) {
 
                 $subQuery1 = LolGame::select('id')
                     ->whereNotNull('vod_id')
@@ -29,17 +29,17 @@ class WatchableLolChampionListingService extends Service
                     ->getQuery();
                 $query->whereIn('id', $subQuery2);
                 $query->orderBy('name', 'asc');
-            }],
+            },
         ];
     }
 
     public static function getArrLoaders()
     {
         return [
-            'model_class' => [function () {
+            'model_class' => function () {
 
                 return LolChampion::class;
-            }],
+            },
         ];
     }
 

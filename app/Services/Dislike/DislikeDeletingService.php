@@ -22,7 +22,7 @@ class DislikeDeletingService extends Service
     public static function getArrCallbackLists()
     {
         return [
-            'result' => ['dislike', function ($dislike) {
+            'result' => function ($dislike) {
 
                 $dislike->delete();
 
@@ -34,27 +34,27 @@ class DislikeDeletingService extends Service
                 $related = $dislike->related;
                 $related->dislike_count = $count;
                 $related->save();
-            }],
+            },
         ];
     }
 
     public static function getArrLoaders()
     {
         return [
-            'dislike' => ['dislike_id', function ($dislikeId) {
+            'dislike' => function ($dislikeId) {
 
                 return Dislike::find($dislikeId);
-            }],
+            },
 
-            'dislike_user_id' => ['dislike', function ($dislike) {
+            'dislike_user_id' => function ($dislike) {
 
                 return $dislike->user_id;
-            }],
+            },
 
-            'result' => [function () {
+            'result' => function () {
 
                 return null;
-            }],
+            },
         ];
     }
 

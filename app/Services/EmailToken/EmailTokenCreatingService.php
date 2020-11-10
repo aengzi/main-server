@@ -23,7 +23,7 @@ class EmailTokenCreatingService extends Service
     public static function getArrCallbackLists()
     {
         return [
-            'body.google_client' => ['body', 'email', 'google_client', 'subject', function ($body, $email, $googleClient, $subject) {
+            'body.google_client' => function ($body, $email, $googleClient, $subject) {
 
                 $msg = (new Swift_Message)
                         ->setTo([$email])
@@ -36,14 +36,14 @@ class EmailTokenCreatingService extends Service
                 $message->setId($email);
                 $message->setRaw(base64_encode($msg));
                 $service->users_messages->send('aengzi@llit.kr', $message);
-            }],
+            },
         ];
     }
 
     public static function getArrLoaders()
     {
         return [
-            'attempt_count' => ['email', 'google_client', function ($email, $googleClient) {
+            'attempt_count' => function ($email, $googleClient) {
 
                 $service   = new Google_Service_Gmail($googleClient);
                 $timestamp = Carbon::now('UTC')->subSeconds(300)->timestamp;
@@ -52,9 +52,9 @@ class EmailTokenCreatingService extends Service
                 ]);
 
                 return count($list);
-            }],
+            },
 
-            'google_client' => [function () {
+            'google_client' => function () {
 
                 $model      = GoogleClient::where('user', 'aengzi')->first();
                 $token      = json_decode($model->access_token, true);
@@ -64,15 +64,15 @@ class EmailTokenCreatingService extends Service
                     'token'      => $token,
                     'credential' => $credential,
                 ]];
-            }],
+            },
 
-            'result' => ['payload', function ($payload) {
+            'result' => function ($payload) {
 
                 return [TokenEncryptionService::class, [
                     'payload'
                         => $payload
                 ]];
-            }],
+            },
         ];
     }
 

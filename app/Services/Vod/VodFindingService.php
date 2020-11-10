@@ -24,15 +24,15 @@ class VodFindingService extends Service
     public static function getArrLoaders()
     {
         return [
-            'available_expands' => [function () {
+            'available_expands' => function () {
 
                 return ['like', 'related', 'bcast'];
-            }],
+            },
 
-            'model_class' => [function () {
+            'model_class' => function () {
 
                 return Vod::class;
-            }],
+            },
         ];
     }
 

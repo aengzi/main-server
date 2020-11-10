@@ -12,6 +12,9 @@
 */
 use Illuminate\Support\Str;
 
+error_reporting(E_ALL);
+ini_set('display_errors', 'on');
+
 $addRoutes = function () use ($router) {
 
     $prefix = str_replace('/', DIRECTORY_SEPARATOR, $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR);
@@ -82,9 +85,9 @@ $addRoutes = function () use ($router) {
     });
 };
 
-$router->group(array('domain' => '//aengzi.{region}.r.appspot.com', 'prefix' => 'api'), function () use ($addRoutes)
-{
-    $addRoutes();
-});
+// $router->group(array('domain' => '//aengzi.{region}.r.appspot.com', 'prefix' => 'api'), function () use ($addRoutes)
+// {
+//     $addRoutes();
+// });
 
 $addRoutes();

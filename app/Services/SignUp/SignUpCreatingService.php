@@ -24,7 +24,7 @@ class SignUpCreatingService extends Service
     public static function getArrLoaders()
     {
         return [
-            'payload' => ['token', function ($token) {
+            'payload' => function ($token) {
 
                 return [TokenDecryptionService::class, [
                     'token'
@@ -35,9 +35,9 @@ class SignUpCreatingService extends Service
                     'token'
                         => '{{token}}',
                 ]];
-            }],
+            },
 
-            'result' => ['payload', function ($payload) {
+            'result' => function ($payload) {
 
                 $user = User::create([
                     'email'    => $payload['email'],
@@ -46,12 +46,12 @@ class SignUpCreatingService extends Service
                 ]);
 
                 return $user;
-            }],
+            },
 
-            'user' => ['payload', function ($payload) {
+            'user' => function ($payload) {
 
                 return User::lockForUpdate()->where('email', $payload['email'])->first();
-            }],
+            },
         ];
     }
 

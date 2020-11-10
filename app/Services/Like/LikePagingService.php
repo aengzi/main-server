@@ -28,57 +28,57 @@ class LikePagingService extends Service
     public static function getArrCallbackLists()
     {
         return [
-            'query.related' => ['query', 'related', 'related_type', function ($query, $related, $relatedType) {
+            'query.related' => function ($query, $related, $relatedType) {
 
                 $query->where('related_id', $related->getKey());
                 $query->where('related_type', $relatedType);
-            }],
+            },
 
-            'query.related_types' => ['query', 'related_types', function ($query, $relatedTypes) {
+            'query.related_types' => function ($query, $relatedTypes) {
 
                 $relatedTypes = preg_split('/\s*,\s*/', $relatedTypes);
                 $query->whereIn('related_type', $relatedTypes);
-            }],
+            },
 
-            'query.user' => ['query', 'user', function ($query, $user) {
+            'query.user' => function ($query, $user) {
 
                 $query->where('user_id', $user->getKey());
-            }],
+            },
         ];
     }
 
     public static function getArrLoaders()
     {
         return [
-            'available_expands' => [function () {
+            'available_expands' => function () {
 
                 return ['user', 'vod', 'related'];
-            }],
+            },
 
-            'available_related_types' => [function () {
+            'available_related_types' => function () {
 
                 return ['comment_thread', 'post', 'vod', 'ytb_video'];
-            }],
+            },
 
-            'cursor' => ['cursor_id', 'model_class', function ($cursorId, $modelClass) {
+            'cursor' => function ($cursorId, $modelClass) {
 
                 return $modelClass::find($cursorId);
-            }],
+            },
 
-            'model_class' => [function () {
+            'model_class' => function () {
 
                 return Like::class;
-            }],
+            },
 
-            'related' => ['related_id', 'related_type', function ($relatedId, $relatedType) {
+            'related' => function ($relatedId, $relatedType) {
 
                 return Relation::morphMap()[$relatedType]::find($relatedId);
-            }],
+            },
 
-            'user' => ['user_id', function ($userId) {
+            'user' => function ($userId) {
 
                 return User::find($userId);
-            }],
+            },
         ];
     }
 

@@ -24,46 +24,46 @@ class CommentThreadPagingService extends Service
     public static function getArrCallbackLists()
     {
         return [
-            'query.related' => ['query', 'related', 'related_type', function ($query, $related, $relatedType) {
+            'query.related' => function ($query, $related, $relatedType) {
 
                 $query->where('related_id', $related->getKey());
                 $query->where('related_type', $relatedType);
-            }],
+            },
 
-            'query.user' => ['query', 'user', function ($query, $user) {
+            'query.user' => function ($query, $user) {
 
                 $query->where('user_id', $user->getKey());
-            }],
+            },
         ];
     }
 
     public static function getArrLoaders()
     {
         return [
-            'available_expands' => [function () {
+            'available_expands' => function () {
 
                 return ['dislike', 'like', 'related', 'user'];
-            }],
+            },
 
-            'cursor' => ['cursor_id', 'model_class', function ($cursorId, $modelClass) {
+            'cursor' => function ($cursorId, $modelClass) {
 
                 return $modelClass::find($cursorId);
-            }],
+            },
 
-            'model_class' => [function () {
+            'model_class' => function () {
 
                 return CommentThread::class;
-            }],
+            },
 
-            'related' => ['related_id', 'related_type', function ($relatedId, $relatedType) {
+            'related' => function ($relatedId, $relatedType) {
 
                 return Relation::morphMap()[$relatedType]::find($relatedId);
-            }],
+            },
 
-            'user' => ['user_id', function ($userId) {
+            'user' => function ($userId) {
 
                 return User::find($userId);
-            }],
+            },
         ];
     }
 

@@ -23,35 +23,35 @@ class CommentReplyPagingService extends Service
     public static function getArrCallbackLists()
     {
         return [
-            'query.thread' => ['query', 'thread', function ($query, $thread) {
+            'query.thread' => function ($query, $thread) {
 
                 $query->where('thread_id', $thread->getKey());
-            }],
+            },
         ];
     }
 
     public static function getArrLoaders()
     {
         return [
-            'available_expands' => [function () {
+            'available_expands' => function () {
 
                 return ['user', 'thread'];
-            }],
+            },
 
-            'cursor' => ['cursor_id', 'model_class', function ($cursorId, $modelClass) {
+            'cursor' => function ($cursorId, $modelClass) {
 
                 return $modelClass::find($cursorId);
-            }],
+            },
 
-            'model_class' => [function () {
+            'model_class' => function () {
 
                 return CommentReply::class;
-            }],
+            },
 
-            'thread' => ['thread_id', function ($threadId) {
+            'thread' => function ($threadId) {
 
                 return CommentThread::find($threadId);
-            }],
+            },
         ];
     }
 

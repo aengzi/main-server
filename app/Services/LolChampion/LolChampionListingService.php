@@ -16,25 +16,25 @@ class LolChampionListingService extends Service
     public static function getArrCallbackLists()
     {
         return [
-            'query' => ['query', function ($query) {
+            'query' => function ($query) {
 
                 $query->orderBy('name', 'asc');
-            }],
+            },
         ];
     }
 
     public static function getArrLoaders()
     {
         return [
-            'available_expands' => [function () {
+            'available_expands' => function () {
 
                 return [];
-            }],
+            },
 
-            'model_class' => [function () {
+            'model_class' => function () {
 
                 return LolChampion::class;
-            }],
+            },
         ];
     }
 

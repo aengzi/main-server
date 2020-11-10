@@ -22,45 +22,45 @@ class PostUpdatingService extends Service
     public static function getArrCallbackLists()
     {
         return [
-            'post.content' => ['content', 'post', function ($content, $post) {
+            'post.content' => function ($content, $post) {
 
                 $post->content = $content;
-            }],
+            },
 
-            'post.title' => ['post', 'title', function ($post, $title) {
+            'post.title' => function ($post, $title) {
 
                 $post->title = $title;
-            }],
+            },
 
-            'post.type' => ['post', 'type', function ($post, $type) {
+            'post.type' => function ($post, $type) {
 
                 $post->type = $type;
-            }],
+            },
 
-            'result' => ['result', function ($result) {
+            'result' => function ($result) {
 
                 $result->save();
-            }],
+            },
         ];
     }
 
     public static function getArrLoaders()
     {
         return [
-            'post' => ['id', function ($id) {
+            'post' => function ($id) {
 
                 return Post::find($id);
-            }],
+            },
 
-            'result' => ['post', function ($post) {
+            'result' => function ($post) {
 
                 return $post;
-            }],
+            },
 
-            'user_id' => ['post', function ($post) {
+            'user_id' => function ($post) {
 
                 return $post->user_id;
-            }],
+            },
         ];
     }
 

@@ -16,30 +16,30 @@ class NotificationPagingService extends Service
     public static function getArrCallbackLists()
     {
         return [
-            'query.after' => ['after', 'query', function ($after, $query) {
+            'query.after' => function ($after, $query) {
 
                 $query->where('created_at', '>=', $after);
-            }],
+            },
         ];
     }
 
     public static function getArrLoaders()
     {
         return [
-            'available_expands' => [function () {
+            'available_expands' => function () {
 
                 return [];
-            }],
+            },
 
-            'cursor' => ['cursor_id', 'model_class', function ($cursorId, $modelClass) {
+            'cursor' => function ($cursorId, $modelClass) {
 
                 return $modelClass::find($cursorId);
-            }],
+            },
 
-            'model_class' => [function () {
+            'model_class' => function () {
 
                 return Notification::class;
-            }],
+            },
         ];
     }
 

@@ -15,17 +15,17 @@ class DeviceCreatingService extends Service
     public static function getArrCallbackLists()
     {
         return [
-            'device' => ['device', function ($device) {
+            'device' => function ($device) {
 
                 $device->save();
-            }],
+            },
         ];
     }
 
     public static function getArrLoaders()
     {
         return [
-            'device' => ['related_id', 'related_type', function ($relatedId, $relatedType) {
+            'device' => function ($relatedId, $relatedType) {
 
                 $device = Device::query()
                     ->lockForUpdate()
@@ -44,12 +44,12 @@ class DeviceCreatingService extends Service
                 }
 
                 return $device;
-            }],
+            },
 
-            'result' => ['device', function ($device) {
+            'result' => function ($device) {
 
                 return $device;
-            }],
+            },
         ];
     }
 

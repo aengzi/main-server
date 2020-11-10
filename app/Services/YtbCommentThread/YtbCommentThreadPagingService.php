@@ -21,35 +21,35 @@ class YtbCommentThreadPagingService extends Service
     public static function getArrCallbackLists()
     {
         return [
-            'query.video' => ['query', 'video', function ($query, $video) {
+            'query.video' => function ($query, $video) {
 
                 $query->where('video_id', $video->getKey());
-            }],
+            },
         ];
     }
 
     public static function getArrLoaders()
     {
         return [
-            'available_expands' => [function () {
+            'available_expands' => function () {
 
                 return ['replies'];
-            }],
+            },
 
-            'cursor' => ['cursor_id', 'model_class', function ($cursorId, $modelClass) {
+            'cursor' => function ($cursorId, $modelClass) {
 
                 return $modelClass::find($cursorId);
-            }],
+            },
 
-            'model_class' => [function () {
+            'model_class' => function () {
 
                 return YtbCommentThread::class;
-            }],
+            },
 
-            'video' => ['video_id', function ($videoId) {
+            'video' => function ($videoId) {
 
                 return YtbVideo::find($relatedId);
-            }],
+            },
         ];
     }
 

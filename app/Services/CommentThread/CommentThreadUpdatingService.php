@@ -22,26 +22,26 @@ class CommentThreadUpdatingService extends Service
     public static function getArrCallbackLists()
     {
         return [
-            'result' => ['message', 'result', function ($message, $result) {
+            'result' => function ($message, $result) {
 
                 $result->message = $message;
                 $result->save();
-            }],
+            },
         ];
     }
 
     public static function getArrLoaders()
     {
         return [
-            'result' => ['id', function ($id) {
+            'result' => function ($id) {
 
                 return CommentThread::find($id);
-            }],
+            },
 
-            'user_id' => ['result', function ($result) {
+            'user_id' => function ($result) {
 
                 return $result->user_id;
-            }],
+            },
         ];
     }
 

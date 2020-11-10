@@ -16,30 +16,30 @@ class UserListingService extends Service
     public static function getArrCallbackLists()
     {
         return [
-            'query.email' => ['email', 'query', function ($email, $query) {
+            'query.email' => function ($email, $query) {
 
                 $query->where('email', $email);
-            }],
+            },
 
-            'query.nick' => ['nick', 'query', function ($nick, $query) {
+            'query.nick' => function ($nick, $query) {
 
                 $query->where('nick', $nick);
-            }],
+            },
         ];
     }
 
     public static function getArrLoaders()
     {
         return [
-            'available_expands' => [function () {
+            'available_expands' => function () {
 
                 return [];
-            }],
+            },
 
-            'model_class' => [function () {
+            'model_class' => function () {
 
                 return User::class;
-            }],
+            },
         ];
     }
 
