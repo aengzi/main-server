@@ -5,7 +5,7 @@ namespace App\Services\Auth;
 use App\Services\Auth\AuthUserFindingService;
 use Illuminate\Extend\Service;
 
-class AuthUserRequiredService extends Service
+class AuthUserRequiringService extends Service
 {
     public static function getArrBindNames()
     {
