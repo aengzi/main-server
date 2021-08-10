@@ -7,7 +7,7 @@ use App\Models\LolGame;
 use App\Models\LolMeta;
 use Illuminate\Extend\Relation;
 use FunctionalCoding\Service;
-use Illuminate\Extend\Service\Database\PaginationListService;
+use FunctionalCoding\Illuminate\Service\PaginationListService;
 
 class LolGamePagingService extends Service
 {

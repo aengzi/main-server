@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Models\YtbCommentThread;
 use App\Models\YtbVideo;
 use FunctionalCoding\Service;
-use Illuminate\Extend\Service\Database\PaginationListService;
+use FunctionalCoding\Illuminate\Service\PaginationListService;
 
 class YtbCommentThreadPagingService extends Service
 {

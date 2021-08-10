@@ -5,7 +5,7 @@ namespace App\Services\Auth;
 use App\Models\User;
 use Carbon\Carbon;
 use FunctionalCoding\Service;
-use Illuminate\Extend\Service\Database\FindService;
+use FunctionalCoding\Illuminate\Service\FindService;
 use Illuminate\Extend\Service\Token\TokenDecryptionService;
 use Illuminate\Support\Facades\Auth;
 

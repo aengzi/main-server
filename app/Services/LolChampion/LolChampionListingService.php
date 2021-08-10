@@ -4,7 +4,7 @@ namespace App\Services\LolChampion;
 
 use App\Models\LolChampion;
 use FunctionalCoding\Service;
-use Illuminate\Extend\Service\Database\ListService;
+use FunctionalCoding\Illuminate\Service\ListService;
 
 class LolChampionListingService extends Service
 {

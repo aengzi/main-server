@@ -4,7 +4,7 @@ namespace App\Services\LolGame;
 
 use App\Models\LolGame;
 use FunctionalCoding\Service;
-use Illuminate\Extend\Service\Database\FindService;
+use FunctionalCoding\Illuminate\Service\FindService;
 
 class LolGameFindingService extends Service
 {

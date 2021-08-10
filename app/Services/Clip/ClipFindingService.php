@@ -4,7 +4,7 @@ namespace App\Services\Clip;
 
 use App\Models\Clip;
 use FunctionalCoding\Service;
-use Illuminate\Extend\Service\Database\FindService;
+use FunctionalCoding\Illuminate\Service\FindService;
 
 class ClipFindingService extends Service
 {

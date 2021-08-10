@@ -7,7 +7,7 @@ use App\Models\User;
 use App\Models\Vod;
 use Illuminate\Extend\Relation;
 use FunctionalCoding\Service;
-use Illuminate\Extend\Service\Database\PaginationListService;
+use FunctionalCoding\Illuminate\Service\PaginationListService;
 
 class ClipPagingService extends Service
 {

@@ -4,7 +4,7 @@ namespace App\Services\User;
 
 use App\Models\User;
 use FunctionalCoding\Service;
-use Illuminate\Extend\Service\Database\FindService;
+use FunctionalCoding\Illuminate\Service\FindService;
 
 class UserFindingService extends Service
 {

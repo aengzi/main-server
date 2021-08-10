@@ -4,7 +4,7 @@ namespace App\Services\YtbVideo;
 
 use App\Models\YtbVideo;
 use FunctionalCoding\Service;
-use Illuminate\Extend\Service\Database\PaginationListService;
+use FunctionalCoding\Illuminate\Service\PaginationListService;
 
 class YtbVideoPagingService extends Service
 {

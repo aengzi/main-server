@@ -4,7 +4,7 @@ namespace App\Services\User;
 
 use App\Models\User;
 use FunctionalCoding\Service;
-use Illuminate\Extend\Service\Database\ListService;
+use FunctionalCoding\Illuminate\Service\ListService;
 
 class UserListingService extends Service
 {
