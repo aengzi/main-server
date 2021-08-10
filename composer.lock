@@ -474,12 +474,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/functional-coding/php-illuminate.git",
-                "reference": "9d0f33d7cb67a8bdb03b486d9313fba18d7db61f"
+                "reference": "a604ee5b04355f831808f20751fd1157c65690b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/functional-coding/php-illuminate/zipball/9d0f33d7cb67a8bdb03b486d9313fba18d7db61f",
-                "reference": "9d0f33d7cb67a8bdb03b486d9313fba18d7db61f",
+                "url": "https://api.github.com/repos/functional-coding/php-illuminate/zipball/a604ee5b04355f831808f20751fd1157c65690b5",
+                "reference": "a604ee5b04355f831808f20751fd1157c65690b5",
                 "shasum": ""
             },
             "require": {
@@ -519,7 +519,7 @@
                 "issues": "https://github.com/functional-coding/php-illuminate/issues",
                 "source": "https://github.com/functional-coding/php-illuminate/tree/master"
             },
-            "time": "2021-08-10T08:12:50+00:00"
+            "time": "2021-08-10T18:40:57+00:00"
         },
         {
             "name": "functional-coding/php-jwt",
@@ -2697,16 +2697,16 @@
         },
         {
             "name": "laravel/lumen-framework",
-            "version": "v8.2.5",
+            "version": "v8.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/lumen-framework.git",
-                "reference": "ae32f7a5249efa1c0159d4bb1ba37ffc6f85a9c7"
+                "reference": "c4dfc89b81e100a7fcf5da8bc3fdd77a8f97bdc7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/lumen-framework/zipball/ae32f7a5249efa1c0159d4bb1ba37ffc6f85a9c7",
-                "reference": "ae32f7a5249efa1c0159d4bb1ba37ffc6f85a9c7",
+                "url": "https://api.github.com/repos/laravel/lumen-framework/zipball/c4dfc89b81e100a7fcf5da8bc3fdd77a8f97bdc7",
+                "reference": "c4dfc89b81e100a7fcf5da8bc3fdd77a8f97bdc7",
                 "shasum": ""
             },
             "require": {
@@ -2790,7 +2790,7 @@
                 "issues": "https://github.com/laravel/lumen-framework/issues",
                 "source": "https://github.com/laravel/lumen-framework"
             },
-            "time": "2021-08-03T13:30:23+00:00"
+            "time": "2021-08-09T19:10:05+00:00"
         },
         {
             "name": "monolog/monolog",
