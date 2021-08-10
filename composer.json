@@ -16,9 +16,10 @@
         "web-token/jwt-framework": "*"
     },
     "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.0",
         "fzaninotto/faker": "^1.4",
-        "phpunit/phpunit": "^7.0",
-        "mockery/mockery": "^1.0"
+        "mockery/mockery": "^1.0",
+        "phpunit/phpunit": "^7.0"
     },
     "autoload": {
         "classmap": [
