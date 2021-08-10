@@ -16,21 +16,20 @@ error_reporting(E_ALL);
 ini_set('display_errors', 'on');
 
 $addRoutes = function () use ($router) {
-
     $prefix = str_replace('/', DIRECTORY_SEPARATOR, $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR);
     $prefix = str_replace($prefix, '', __FILE__);
     $prefix = str_replace('routes'.DIRECTORY_SEPARATOR.'web.php', '', $prefix);
     $prefix = rtrim($prefix, DIRECTORY_SEPARATOR);
+    $prefix = str_replace(DIRECTORY_SEPARATOR, '/', $prefix);
 
     $router->group([
         'prefix' => $_SERVER['DOCUMENT_ROOT'] && Str::startsWith(__FILE__, str_replace('/', DIRECTORY_SEPARATOR, $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR)) ? $prefix : '',
         'middleware' => [
             FunctionalCoding\Illuminate\Http\ServiceRunMiddleware::class,
             FunctionalCoding\Illuminate\Http\ServiceParameterSettingMiddleware::class,
-            FunctionalCoding\Illuminate\Http\RequestInputTransformMiddleware::class,
-        ]
+            FunctionalCoding\Illuminate\Http\RequestInputValueCastingMiddleware::class,
+        ],
     ], function () use ($router) {
-
         $router->get('auth-user', 'AuthUserController@index');
         $router->patch('auth-user', 'AuthUserController@update');
         $router->post('auth-user/emails', 'AuthUserEmailTokenController@store');
