@@ -3,7 +3,6 @@
 namespace App\Services\EmailToken;
 
 use Carbon\Carbon;
-use FunctionalCoding\Illuminate\Service\GoogleClientService;
 use FunctionalCoding\JWT\TokenEncryptionService;
 use FunctionalCoding\Service;
 use Google_Service_Gmail;
@@ -57,10 +56,19 @@ class EmailTokenCreatingService extends Service
                 $token = json_decode($model->access_token, true);
                 $credential = json_decode($model->credential, true);
 
-                return [GoogleClientService::class, [
-                    'token' => $token,
-                    'credential' => $credential,
-                ]];
+                $client = new Google_Client();
+                $created = (int) $token['created'];
+                $expiresIn = (int) $token['expires_in'];
+                $now = (int) Carbon::now('UTC')->timestamp;
+
+                $client->setAccessToken($token);
+                $client->setAuthConfig($credential);
+
+                if ($now > $created + $expiresIn - 60) {
+                    $client->fetchAccessTokenWithRefreshToken($client->getRefreshToken());
+                }
+
+                return $client;
             },
 
             'result' => function ($payload) {
