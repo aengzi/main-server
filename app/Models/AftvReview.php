@@ -6,7 +6,7 @@ use App\Models\AftvBcast;
 use App\Models\AftvBj;
 use App\Models\AftvM3u8;
 use App\Models\Vod;
-use Illuminate\Extend\Model;
+use FunctionalCoding\Illuminate\Model;
 
 class AftvReview extends Model
 {

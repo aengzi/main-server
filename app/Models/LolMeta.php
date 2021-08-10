@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Models\LolGame;
-use Illuminate\Extend\Model;
+use FunctionalCoding\Illuminate\Model;
 
 class LolMeta extends Model
 {

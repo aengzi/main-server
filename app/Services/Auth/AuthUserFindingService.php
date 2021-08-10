@@ -6,7 +6,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use FunctionalCoding\Service;
 use FunctionalCoding\Illuminate\Service\FindService;
-use Illuminate\Extend\Service\Token\TokenDecryptionService;
+use FunctionalCoding\JWT\TokenDecryptionService;
 use Illuminate\Support\Facades\Auth;
 
 class AuthUserFindingService extends Service

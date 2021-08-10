@@ -4,8 +4,8 @@ namespace App\Services\EmailToken;
 
 use Carbon\Carbon;
 use FunctionalCoding\Service;
-use Illuminate\Extend\Service\Token\TokenDecryptionService;
-use Illuminate\Extend\Service\Token\TokenEncryptionService;
+use FunctionalCoding\JWT\TokenDecryptionService;
+use FunctionalCoding\JWT\TokenEncryptionService;
 
 class EmailTokenUpdatingService extends Service
 {

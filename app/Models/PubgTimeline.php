@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Extend\Model;
+use FunctionalCoding\Illuminate\Model;
 
 class PubgTimeline extends Model
 {

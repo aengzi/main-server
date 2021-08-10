@@ -5,7 +5,7 @@ namespace App\Models;
 use App\Models\AftvBcast;
 use App\Models\AftvM3u8;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Extend\Model;
+use FunctionalCoding\Illuminate\Model;
 
 class AftvFile extends Model
 {

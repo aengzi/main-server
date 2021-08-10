@@ -4,7 +4,7 @@ namespace App\Services\SignIn;
 
 use App\Models\User;
 use FunctionalCoding\Service;
-use Illuminate\Extend\Service\Token\TokenEncryptionService;
+use FunctionalCoding\JWT\TokenEncryptionService;
 use Illuminate\Support\Facades\Hash;
 
 class SignInCreatingService extends Service

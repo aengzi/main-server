@@ -6,8 +6,8 @@ use Carbon\Carbon;
 use Google_Service_Gmail;
 use Google_Service_Gmail_Message;
 use FunctionalCoding\Service;
-use Illuminate\Extend\Service\GoogleClientService;
-use Illuminate\Extend\Service\Token\TokenEncryptionService;
+use FunctionalCoding\Illuminate\Service\GoogleClientService;
+use FunctionalCoding\JWT\TokenEncryptionService;
 use Swift_Message;
 
 class EmailTokenCreatingService extends Service

@@ -5,7 +5,7 @@ namespace App\Services\PubgGame;
 use App\Models\Like;
 use App\Models\PubgGame;
 use App\Models\PubgMeta;
-use Illuminate\Extend\Relation;
+use FunctionalCoding\Illuminate\Relation;
 use FunctionalCoding\Service;
 use FunctionalCoding\Illuminate\Service\PaginationListService;
 

@@ -5,7 +5,7 @@ namespace App\Services\Clip;
 use App\Models\Clip;
 use App\Models\User;
 use App\Models\Vod;
-use Illuminate\Extend\Relation;
+use FunctionalCoding\Illuminate\Relation;
 use FunctionalCoding\Service;
 use FunctionalCoding\Illuminate\Service\PaginationListService;
 

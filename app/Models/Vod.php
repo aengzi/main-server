@@ -5,7 +5,7 @@ namespace App\Models;
 use App\Models\AftvBcast;
 use App\Models\CommentThread;
 use App\Models\Like;
-use Illuminate\Extend\Model;
+use FunctionalCoding\Illuminate\Model;
 
 class Vod extends Model
 {

@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Models\YtbCommentThread;
-use Illuminate\Extend\Model;
+use FunctionalCoding\Illuminate\Model;
 
 class YtbCommentReply extends Model
 {

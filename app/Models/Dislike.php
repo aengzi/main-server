@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
-use Illuminate\Extend\Model;
+use FunctionalCoding\Illuminate\Model;
 
 class Dislike extends Model
 {

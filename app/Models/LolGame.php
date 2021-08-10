@@ -5,7 +5,7 @@ namespace App\Models;
 use App\Models\LolMeta;
 use App\Models\LolTimeline;
 use App\Models\Vod;
-use Illuminate\Extend\Model;
+use FunctionalCoding\Illuminate\Model;
 
 class LolGame extends Model
 {

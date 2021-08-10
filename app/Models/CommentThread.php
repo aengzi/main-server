@@ -5,7 +5,7 @@ namespace App\Models;
 use App\Models\Dislike;
 use App\Models\Like;
 use App\Models\User;
-use Illuminate\Extend\Model;
+use FunctionalCoding\Illuminate\Model;
 
 class CommentThread extends Model
 {

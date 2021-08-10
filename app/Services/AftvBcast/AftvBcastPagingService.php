@@ -5,7 +5,7 @@ namespace App\Services\AftvBcast;
 use App\Models\AftvBcast;
 use App\Models\AftvReview;
 use App\Models\Vod;
-use Illuminate\Extend\Relation;
+use FunctionalCoding\Illuminate\Relation;
 use FunctionalCoding\Service;
 use FunctionalCoding\Illuminate\Service\PaginationListService;
 

@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Models\PubgGame;
-use Illuminate\Extend\Model;
+use FunctionalCoding\Illuminate\Model;
 
 class PubgMeta extends Model
 {

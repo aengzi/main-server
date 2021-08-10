@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Models\CommentThread;
 use App\Models\User;
-use Illuminate\Extend\Model;
+use FunctionalCoding\Illuminate\Model;
 
 class CommentReply extends Model
 {

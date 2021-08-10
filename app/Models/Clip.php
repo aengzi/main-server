@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Models\User;
 use App\Models\Vod;
-use Illuminate\Extend\Model;
+use FunctionalCoding\Illuminate\Model;
 
 class Clip extends Model
 {

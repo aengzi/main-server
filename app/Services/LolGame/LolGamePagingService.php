@@ -5,7 +5,7 @@ namespace App\Services\LolGame;
 use App\Models\Like;
 use App\Models\LolGame;
 use App\Models\LolMeta;
-use Illuminate\Extend\Relation;
+use FunctionalCoding\Illuminate\Relation;
 use FunctionalCoding\Service;
 use FunctionalCoding\Illuminate\Service\PaginationListService;
 
