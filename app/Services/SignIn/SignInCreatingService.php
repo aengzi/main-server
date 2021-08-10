@@ -3,7 +3,7 @@
 namespace App\Services\SignIn;
 
 use App\Models\User;
-use FunctionalCoding\JWT\TokenEncryptionService;
+use FunctionalCoding\JWT\Service\TokenEncryptionService;
 use FunctionalCoding\Service;
 use Illuminate\Support\Facades\Hash;
 

@@ -3,7 +3,7 @@
 namespace App\Services\SignUp;
 
 use App\Models\User;
-use FunctionalCoding\JWT\TokenDecryptionService;
+use FunctionalCoding\JWT\Service\TokenDecryptionService;
 use FunctionalCoding\Service;
 
 class SignUpCreatingService extends Service

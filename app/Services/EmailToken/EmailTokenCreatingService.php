@@ -3,7 +3,7 @@
 namespace App\Services\EmailToken;
 
 use Carbon\Carbon;
-use FunctionalCoding\JWT\TokenEncryptionService;
+use FunctionalCoding\JWT\Service\TokenEncryptionService;
 use FunctionalCoding\Service;
 use Google_Service_Gmail;
 use Google_Service_Gmail_Message;
