@@ -5,7 +5,7 @@ namespace App\Services\Post;
 use App\Models\CommentReply;
 use App\Models\Post;
 use App\Services\Auth\AuthUserRequiringService;
-use Illuminate\Extend\Service;
+use FunctionalCoding\Service;
 
 class PostDeletingService extends Service
 {

@@ -6,7 +6,7 @@ use App\Models\Clip;
 use App\Models\CommentReply;
 use App\Services\Auth\AuthUserRequiringService;
 use Google\Cloud\Storage\StorageClient;
-use Illuminate\Extend\Service;
+use FunctionalCoding\Service;
 use Illuminate\Support\Facades\DB;
 
 class ClipDeletingService extends Service

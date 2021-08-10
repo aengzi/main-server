@@ -5,7 +5,7 @@ namespace App\Services\Clip;
 use App\Models\Clip;
 use App\Models\Vod;
 use App\Services\Clip\ClipCreatingService;
-use Illuminate\Extend\Service;
+use FunctionalCoding\Service;
 use Illuminate\Support\Str;
 
 class TempClipCreatingService extends Service

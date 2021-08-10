@@ -3,7 +3,7 @@
 namespace App\Services\AftvReview;
 
 use App\Models\AftvReview;
-use Illuminate\Extend\Service;
+use FunctionalCoding\Service;
 use Illuminate\Extend\Service\Database\FindService;
 
 class AftvReviewFindingService extends Service

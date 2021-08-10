@@ -5,7 +5,7 @@ namespace App\Services\Auth;
 use App\Models\User;
 use App\Services\Auth\AuthUserRequiringService;
 use Google\Cloud\Storage\StorageClient;
-use Illuminate\Extend\Service;
+use FunctionalCoding\Service;
 
 class AuthUserUpdatingService extends Service
 {

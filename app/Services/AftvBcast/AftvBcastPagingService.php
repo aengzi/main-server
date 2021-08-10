@@ -6,7 +6,7 @@ use App\Models\AftvBcast;
 use App\Models\AftvReview;
 use App\Models\Vod;
 use Illuminate\Extend\Relation;
-use Illuminate\Extend\Service;
+use FunctionalCoding\Service;
 use Illuminate\Extend\Service\Database\PaginationListService;
 
 class AftvBcastPagingService extends Service

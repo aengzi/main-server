@@ -3,7 +3,7 @@
 namespace App\Services\EmailToken;
 
 use Carbon\Carbon;
-use Illuminate\Extend\Service;
+use FunctionalCoding\Service;
 use Illuminate\Extend\Service\Token\TokenDecryptionService;
 use Illuminate\Extend\Service\Token\TokenEncryptionService;
 

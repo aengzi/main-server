@@ -6,7 +6,7 @@ use App\Models\LolChampion;
 use App\Models\LolGame;
 use App\Models\LolMeta;
 use App\Services\LolChampion\LolChampionListingService;
-use Illuminate\Extend\Service;
+use FunctionalCoding\Service;
 
 class WatchableLolChampionListingService extends Service
 {

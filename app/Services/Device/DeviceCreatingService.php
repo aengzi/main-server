@@ -3,7 +3,7 @@
 namespace App\Services\Device;
 
 use App\Models\Device;
-use Illuminate\Extend\Service;
+use FunctionalCoding\Service;
 
 class DeviceCreatingService extends Service
 {

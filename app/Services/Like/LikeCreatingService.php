@@ -9,7 +9,7 @@ use App\Models\Vod;
 use App\Models\YtbVideo;
 use App\Services\Auth\AuthUserRequiringService;
 use Illuminate\Database\Eloquent\Relations\Relation;
-use Illuminate\Extend\Service;
+use FunctionalCoding\Service;
 
 class LikeCreatingService extends Service
 {

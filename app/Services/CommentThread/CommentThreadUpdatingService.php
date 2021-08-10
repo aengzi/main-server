@@ -4,7 +4,7 @@ namespace App\Services\CommentThread;
 
 use App\Models\CommentThread;
 use App\Services\Auth\AuthUserRequiringService;
-use Illuminate\Extend\Service;
+use FunctionalCoding\Service;
 
 class CommentThreadUpdatingService extends Service
 {

@@ -3,7 +3,7 @@
 namespace App\Services\Post;
 
 use App\Models\Post;
-use Illuminate\Extend\Service;
+use FunctionalCoding\Service;
 use Illuminate\Extend\Service\Database\FindService;
 
 class PostFindingService extends Service

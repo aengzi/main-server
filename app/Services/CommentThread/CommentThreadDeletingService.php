@@ -5,7 +5,7 @@ namespace App\Services\CommentThread;
 use App\Models\CommentThread;
 use App\Services\Auth\AuthUserRequiringService;
 use Illuminate\Database\Eloquent\Relations\Relation;
-use Illuminate\Extend\Service;
+use FunctionalCoding\Service;
 
 class CommentThreadDeletingService extends Service
 {

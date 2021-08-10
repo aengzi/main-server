@@ -3,7 +3,7 @@
 namespace App\Services\PubgGame;
 
 use App\Models\PubgGame;
-use Illuminate\Extend\Service;
+use FunctionalCoding\Service;
 use Illuminate\Extend\Service\Database\FindService;
 
 class PubgGameFindingService extends Service

@@ -5,7 +5,7 @@ namespace App\Services\CommentThread;
 use App\Models\CommentThread;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\Relation;
-use Illuminate\Extend\Service;
+use FunctionalCoding\Service;
 use Illuminate\Extend\Service\Database\PaginationListService;
 
 class CommentThreadPagingService extends Service

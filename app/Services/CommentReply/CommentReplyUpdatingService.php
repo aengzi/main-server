@@ -4,7 +4,7 @@ namespace App\Services\CommentReply;
 
 use App\Models\CommentReply;
 use App\Services\Auth\AuthUserRequiringService;
-use Illuminate\Extend\Service;
+use FunctionalCoding\Service;
 
 class CommentReplyUpdatingService extends Service
 {

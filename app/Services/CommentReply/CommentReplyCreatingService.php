@@ -5,7 +5,7 @@ namespace App\Services\CommentReply;
 use App\Models\CommentReply;
 use App\Models\CommentThread;
 use App\Services\Auth\AuthUserRequiringService;
-use Illuminate\Extend\Service;
+use FunctionalCoding\Service;
 
 class CommentReplyCreatingService extends Service
 {

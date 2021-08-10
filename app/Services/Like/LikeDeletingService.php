@@ -4,7 +4,7 @@ namespace App\Services\Like;
 
 use App\Models\Like;
 use App\Services\Auth\AuthUserRequiringService;
-use Illuminate\Extend\Service;
+use FunctionalCoding\Service;
 
 class LikeDeletingService extends Service
 {

@@ -3,7 +3,7 @@
 namespace App\Services\Auth;
 
 use App\Services\Auth\AuthUserFindingService;
-use Illuminate\Extend\Service;
+use FunctionalCoding\Service;
 
 class AuthUserRequiringService extends Service
 {

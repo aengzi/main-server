@@ -4,7 +4,7 @@ namespace App\Services\Post;
 
 use App\Models\Post;
 use App\Models\User;
-use Illuminate\Extend\Service;
+use FunctionalCoding\Service;
 use Illuminate\Extend\Service\Database\PaginationListService;
 
 class PostPagingService extends Service

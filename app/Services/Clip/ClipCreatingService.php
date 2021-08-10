@@ -6,7 +6,7 @@ use App\Models\AftvFile;
 use App\Models\AftvM3u8;
 use App\Models\Vod;
 use Google\Cloud\Storage\StorageClient;
-use Illuminate\Extend\Service;
+use FunctionalCoding\Service;
 use Illuminate\Support\Str;
 
 class ClipCreatingService extends Service

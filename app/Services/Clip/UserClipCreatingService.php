@@ -6,7 +6,7 @@ use App\Models\Clip;
 use App\Models\Vod;
 use App\Services\Auth\AuthUserRequiringService;
 use App\Services\Clip\ClipCreatingService;
-use Illuminate\Extend\Service;
+use FunctionalCoding\Service;
 
 class UserClipCreatingService extends Service
 {

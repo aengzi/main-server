@@ -3,7 +3,7 @@
 namespace App\Services\Vod;
 
 use App\Models\Vod;
-use Illuminate\Extend\Service;
+use FunctionalCoding\Service;
 use Illuminate\Extend\Service\Database\FindService;
 
 class VodFindingService extends Service

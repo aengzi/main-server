@@ -6,7 +6,7 @@ use App\Models\Like;
 use App\Models\PubgGame;
 use App\Models\PubgMeta;
 use Illuminate\Extend\Relation;
-use Illuminate\Extend\Service;
+use FunctionalCoding\Service;
 use Illuminate\Extend\Service\Database\PaginationListService;
 
 class PubgGamePagingService extends Service

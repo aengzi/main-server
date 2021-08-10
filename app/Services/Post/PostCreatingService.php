@@ -4,7 +4,7 @@ namespace App\Services\Post;
 
 use App\Models\Post;
 use App\Services\Auth\AuthUserRequiringService;
-use Illuminate\Extend\Service;
+use FunctionalCoding\Service;
 
 class PostCreatingService extends Service
 {

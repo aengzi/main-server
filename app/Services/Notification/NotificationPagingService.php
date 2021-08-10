@@ -3,7 +3,7 @@
 namespace App\Services\Notification;
 
 use App\Models\Notification;
-use Illuminate\Extend\Service;
+use FunctionalCoding\Service;
 use Illuminate\Extend\Service\Database\PaginationListService;
 
 class NotificationPagingService extends Service

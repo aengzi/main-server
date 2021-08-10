@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Extend\Http\ServiceRunMiddleware;
-use Illuminate\Extend\Service;
+use FunctionalCoding\Service;
 
 abstract class FunctionalTest extends TestCase
 {

@@ -3,7 +3,7 @@
 namespace App\Services\SignIn;
 
 use App\Models\User;
-use Illuminate\Extend\Service;
+use FunctionalCoding\Service;
 use Illuminate\Extend\Service\Token\TokenEncryptionService;
 use Illuminate\Support\Facades\Hash;
 

@@ -4,7 +4,7 @@ namespace App\Services\Dislike;
 
 use App\Models\Dislike;
 use App\Services\Auth\AuthUserRequiringService;
-use Illuminate\Extend\Service;
+use FunctionalCoding\Service;
 
 class DislikeDeletingService extends Service
 {

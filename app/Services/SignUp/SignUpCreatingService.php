@@ -3,7 +3,7 @@
 namespace App\Services\SignUp;
 
 use App\Models\User;
-use Illuminate\Extend\Service;
+use FunctionalCoding\Service;
 use Illuminate\Extend\Service\Token\TokenDecryptionService;
 
 class SignUpCreatingService extends Service
