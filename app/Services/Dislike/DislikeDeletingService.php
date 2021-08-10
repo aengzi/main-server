@@ -11,11 +11,9 @@ class DislikeDeletingService extends Service
     public static function getArrBindNames()
     {
         return [
-            'dislike'
-                => 'dislike for {{dislike_id}}',
+            'dislike' => 'dislike for {{dislike_id}}',
 
-            'dislike_user_id'
-                => 'user_id of {{dislike}}',
+            'dislike_user_id' => 'user_id of {{dislike}}',
         ];
     }
 
@@ -23,13 +21,13 @@ class DislikeDeletingService extends Service
     {
         return [
             'result' => function ($dislike) {
-
                 $dislike->delete();
 
                 $count = Dislike::query()
                     ->where('related_id', $dislike->related_id)
                     ->where('related_type', $dislike->related_type)
-                    ->count();
+                    ->count()
+                ;
 
                 $related = $dislike->related;
                 $related->dislike_count = $count;
@@ -42,17 +40,14 @@ class DislikeDeletingService extends Service
     {
         return [
             'dislike' => function ($dislikeId) {
-
                 return Dislike::find($dislikeId);
             },
 
             'dislike_user_id' => function ($dislike) {
-
                 return $dislike->user_id;
             },
 
             'result' => function () {
-
                 return null;
             },
         ];
@@ -66,14 +61,11 @@ class DislikeDeletingService extends Service
     public static function getArrRuleLists()
     {
         return [
-            'dislike'
-                => ['not_null'],
+            'dislike' => ['not_null'],
 
-            'dislike_id'
-                => ['required', 'integer'],
+            'dislike_id' => ['required', 'integer'],
 
-            'dislike_user_id'
-                => ['same:{{auth_user_id}}']
+            'dislike_user_id' => ['same:{{auth_user_id}}'],
         ];
     }
 

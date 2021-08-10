@@ -17,7 +17,6 @@ class PostCreatingService extends Service
     {
         return [
             'result.auth_user' => function ($authUser, $result) {
-
                 $result->setRelation('user', $authUser);
             },
         ];
@@ -27,16 +26,11 @@ class PostCreatingService extends Service
     {
         return [
             'result' => function ($authUser, $content, $title, $type) {
-
                 return Post::create([
-                    'user_id'
-                        => $authUser->getKey(),
-                    'content'
-                        => $content,
-                    'title'
-                        => $title,
-                    'type'
-                        => $type
+                    'user_id' => $authUser->getKey(),
+                    'content' => $content,
+                    'title' => $title,
+                    'type' => $type,
                 ]);
             },
         ];
@@ -50,14 +44,11 @@ class PostCreatingService extends Service
     public static function getArrRuleLists()
     {
         return [
-            'content'
-                => ['required', 'string'],
+            'content' => ['required', 'string'],
 
-            'title'
-                => ['required', 'string'],
+            'title' => ['required', 'string'],
 
-            'type'
-                => ['required', 'string', 'in:free']
+            'type' => ['required', 'string', 'in:free'],
         ];
     }
 

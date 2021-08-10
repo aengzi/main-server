@@ -4,19 +4,17 @@ namespace App\Services\CommentReply;
 
 use App\Models\CommentReply;
 use App\Models\CommentThread;
-use FunctionalCoding\Service;
 use FunctionalCoding\Illuminate\Service\PaginationListService;
+use FunctionalCoding\Service;
 
 class CommentReplyPagingService extends Service
 {
     public static function getArrBindNames()
     {
         return [
-            'cursor'
-                => 'comment_reply for {{cursor_id}}',
+            'cursor' => 'comment_reply for {{cursor_id}}',
 
-            'thread'
-                => 'comment_thread for {{thread_id}}',
+            'thread' => 'comment_thread for {{thread_id}}',
         ];
     }
 
@@ -24,7 +22,6 @@ class CommentReplyPagingService extends Service
     {
         return [
             'query.thread' => function ($query, $thread) {
-
                 $query->where('thread_id', $thread->getKey());
             },
         ];
@@ -34,22 +31,18 @@ class CommentReplyPagingService extends Service
     {
         return [
             'available_expands' => function () {
-
                 return ['user', 'thread'];
             },
 
             'cursor' => function ($cursorId, $modelClass) {
-
                 return $modelClass::find($cursorId);
             },
 
             'model_class' => function () {
-
                 return CommentReply::class;
             },
 
             'thread' => function ($threadId) {
-
                 return CommentThread::find($threadId);
             },
         ];
@@ -63,11 +56,9 @@ class CommentReplyPagingService extends Service
     public static function getArrRuleLists()
     {
         return [
-            'thread'
-                => ['not_null'],
+            'thread' => ['not_null'],
 
-            'thread_id'
-                => ['required', 'integer']
+            'thread_id' => ['required', 'integer'],
         ];
     }
 

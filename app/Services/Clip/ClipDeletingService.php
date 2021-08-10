@@ -3,22 +3,18 @@
 namespace App\Services\Clip;
 
 use App\Models\Clip;
-use App\Models\CommentReply;
 use App\Services\Auth\AuthUserRequiringService;
-use Google\Cloud\Storage\StorageClient;
 use FunctionalCoding\Service;
-use Illuminate\Support\Facades\DB;
+use Google\Cloud\Storage\StorageClient;
 
 class ClipDeletingService extends Service
 {
     public static function getArrBindNames()
     {
         return [
-            'clip'
-                => 'clip for {{id}}',
+            'clip' => 'clip for {{id}}',
 
-            'user_id'
-                => 'user_id of {{clip}}',
+            'user_id' => 'user_id of {{clip}}',
         ];
     }
 
@@ -26,20 +22,17 @@ class ClipDeletingService extends Service
     {
         return [
             'result' => function ($authUser, $clip) {
-
                 $clip->vod->data = null;
                 $clip->vod->save();
                 $clip->delete();
 
                 $storage = new StorageClient([
-                    'keyFilePath' => storage_path('app/administrator@aengzi.json')
+                    'keyFilePath' => storage_path('app/administrator@aengzi.json'),
                 ]);
-                $bucket  = $storage->bucket('aengzi.com');
+                $bucket = $storage->bucket('aengzi.com');
                 $objects = $bucket->objects([
-                    'prefix'
-                        => 'vods/'.$clip->vod->getKey(),
-                    'fields'
-                        => 'items/name'
+                    'prefix' => 'vods/'.$clip->vod->getKey(),
+                    'fields' => 'items/name',
                 ]);
 
                 foreach ($objects as $object) {
@@ -53,17 +46,14 @@ class ClipDeletingService extends Service
     {
         return [
             'clip' => function ($id) {
-
                 return Clip::find($id);
             },
 
             'result' => function () {
-
                 return null;
             },
 
             'user_id' => function ($clip) {
-
                 return $clip->user_id;
             },
         ];
@@ -77,11 +67,9 @@ class ClipDeletingService extends Service
     public static function getArrRuleLists()
     {
         return [
-            'id'
-                => ['required', 'integer'],
+            'id' => ['required', 'integer'],
 
-            'user_id'
-                => ['same:{{auth_user_id}}']
+            'user_id' => ['same:{{auth_user_id}}'],
         ];
     }
 

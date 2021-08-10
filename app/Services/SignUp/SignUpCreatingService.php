@@ -3,16 +3,15 @@
 namespace App\Services\SignUp;
 
 use App\Models\User;
-use FunctionalCoding\Service;
 use FunctionalCoding\JWT\TokenDecryptionService;
+use FunctionalCoding\Service;
 
 class SignUpCreatingService extends Service
 {
     public static function getArrBindNames()
     {
         return [
-            'user'
-                => 'user who has same email with payload\'s email of {{token}}',
+            'user' => 'user who has same email with payload\'s email of {{token}}',
         ];
     }
 
@@ -25,31 +24,23 @@ class SignUpCreatingService extends Service
     {
         return [
             'payload' => function ($token) {
-
                 return [TokenDecryptionService::class, [
-                    'token'
-                        => $token,
-                    'payload_keys'
-                        => ['email', 'password', 'nick', 'verified'],
+                    'token' => $token,
+                    'payload_keys' => ['email', 'password', 'nick', 'verified'],
                 ], [
-                    'token'
-                        => '{{token}}',
+                    'token' => '{{token}}',
                 ]];
             },
 
             'result' => function ($payload) {
-
-                $user = User::create([
-                    'email'    => $payload['email'],
+                return User::create([
+                    'email' => $payload['email'],
                     'password' => $payload['password'],
-                    'nick'     => $payload['nick'],
+                    'nick' => $payload['nick'],
                 ]);
-
-                return $user;
             },
 
             'user' => function ($payload) {
-
                 return User::lockForUpdate()->where('email', $payload['email'])->first();
             },
         ];
@@ -58,16 +49,14 @@ class SignUpCreatingService extends Service
     public static function getArrPromiseLists()
     {
         return [
-            'result'
-                => ['user'],
+            'result' => ['user'],
         ];
     }
 
     public static function getArrRuleLists()
     {
         return [
-            'user'
-                => ['null']
+            'user' => ['null'],
         ];
     }
 

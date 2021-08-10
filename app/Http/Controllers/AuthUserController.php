@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Controller;
 use App\Services\Auth\AuthUserFindingService;
 use App\Services\Auth\AuthUserUpdatingService;
-use Illuminate\Support\Facades\Request;
 
 class AuthUserController extends Controller
 {
@@ -17,23 +16,15 @@ class AuthUserController extends Controller
     public static function update()
     {
         return [AuthUserUpdatingService::class, [
-            'nick'
-                => static::input('nick'),
-            'email'
-                => static::input('email'),
-            'password'
-                => static::input('password'),
-            'thumbnail'
-                => static::input('thumbnail'),
+            'nick' => static::input('nick'),
+            'email' => static::input('email'),
+            'password' => static::input('password'),
+            'thumbnail' => static::input('thumbnail'),
         ], [
-            'nick'
-                => '[nick]',
-            'email'
-                => '[email]',
-            'password'
-                => '[password]',
-            'thumbnail'
-                => '[thumbnail]',
+            'nick' => '[nick]',
+            'email' => '[email]',
+            'password' => '[password]',
+            'thumbnail' => '[thumbnail]',
         ]];
     }
 }

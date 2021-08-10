@@ -2,7 +2,6 @@
 
 namespace App\Services\Auth;
 
-use App\Services\Auth\AuthUserFindingService;
 use FunctionalCoding\Service;
 
 class AuthUserRequiringService extends Service
@@ -21,18 +20,14 @@ class AuthUserRequiringService extends Service
     {
         return [
             'auth_user' => function ($token) {
-
                 return [AuthUserFindingService::class, [
-                    'token'
-                        => $token,
+                    'token' => $token,
                 ], [
-                    'token'
-                        => '{{token}}',
+                    'token' => '{{token}}',
                 ]];
             },
 
             'auth_user_id' => function ($authUser) {
-
                 return $authUser->getKey();
             },
         ];
@@ -46,8 +41,7 @@ class AuthUserRequiringService extends Service
     public static function getArrRuleLists()
     {
         return [
-            'token'
-                => ['required'],
+            'token' => ['required'],
         ];
     }
 

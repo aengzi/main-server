@@ -3,23 +3,19 @@
 namespace App\Services\Auth;
 
 use App\Models\User;
-use App\Services\Auth\AuthUserRequiringService;
-use Google\Cloud\Storage\StorageClient;
 use FunctionalCoding\Service;
+use Google\Cloud\Storage\StorageClient;
 
 class AuthUserUpdatingService extends Service
 {
     public static function getArrBindNames()
     {
         return [
-            'email'
-                => 'email in payload in {{token}}',
+            'email' => 'email in payload in {{token}}',
 
-            'same_email_user'
-                => 'same email user',
+            'same_email_user' => 'same email user',
 
-            'same_nick_user'
-                => 'same nickname user',
+            'same_nick_user' => 'same nickname user',
         ];
     }
 
@@ -27,27 +23,22 @@ class AuthUserUpdatingService extends Service
     {
         return [
             'auth_user.email' => function ($authUser, $email) {
-
-                if ( !empty($email) )
-                {
+                if (!empty($email)) {
                     $authUser->email = $email;
                 }
             },
 
             'auth_user.nick' => function ($authUser, $nick) {
-
                 $authUser->nick = $nick;
             },
 
             'auth_user.password' => function ($authUser, $password) {
-
                 $authUser->password = $password;
             },
 
             'auth_user.thumbnail' => function ($authUser, $thumbnail) {
-
                 $storage = new StorageClient([
-                    'keyFilePath' => storage_path('app/administrator@aengzi.json')
+                    'keyFilePath' => storage_path('app/administrator@aengzi.json'),
                 ]);
                 $bucket = $storage->bucket('aengzi.com');
                 $bucket->upload(base64_decode($thumbnail), [
@@ -61,7 +52,6 @@ class AuthUserUpdatingService extends Service
             },
 
             'result' => function ($result) {
-
                 $result->save();
             },
         ];
@@ -71,25 +61,20 @@ class AuthUserUpdatingService extends Service
     {
         return [
             'email' => function ($payload) {
-
                 return isset($payload['email']) ? $payload['email'] : null;
             },
 
             'result' => function ($authUser) {
-
                 return $authUser;
             },
 
             'same_email_user' => function ($email) {
-
-                if ( !empty($email) )
-                {
+                if (!empty($email)) {
                     return User::lockForUpdate()->where('email', $email)->first();
                 }
             },
 
             'same_nick_user' => function ($nick) {
-
                 return User::lockForUpdate()->where('nick', $nick)->first();
             },
         ];
@@ -98,28 +83,22 @@ class AuthUserUpdatingService extends Service
     public static function getArrPromiseLists()
     {
         return [
-            'result'
-                => ['same_email_user:strict', 'same_nick_user:strict'],
+            'result' => ['same_email_user:strict', 'same_nick_user:strict'],
         ];
     }
 
     public static function getArrRuleLists()
     {
         return [
-            'nick'
-                => ['string', 'min:2', 'max:12'],
+            'nick' => ['string', 'min:2', 'max:12'],
 
-            'password'
-                => ['string', 'min:8', 'max:32'],
+            'password' => ['string', 'min:8', 'max:32'],
 
-            'thumbnail'
-                => ['string', 'base64_image', 'max:'.(4096*1024)],
+            'thumbnail' => ['string', 'base64_image', 'max:'.(4096 * 1024)],
 
-            'same_email_user'
-                => ['null'],
+            'same_email_user' => ['null'],
 
-            'same_nick_user'
-                => ['null'],
+            'same_nick_user' => ['null'],
         ];
     }
 

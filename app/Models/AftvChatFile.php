@@ -2,10 +2,8 @@
 
 namespace App\Models;
 
-use App\Models\AftvBcast;
-use App\Models\AftvReview;
-use Illuminate\Database\Eloquent\Builder;
 use FunctionalCoding\Illuminate\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class AftvChatFile extends Model
 {
@@ -40,6 +38,7 @@ class AftvChatFile extends Model
         return $query
             ->where('bcast_id', '=', $this->getAttribute('bcast_id'))
             ->where('m3u8_index', '=', $this->getAttribute('m3u8_index'))
-            ->where('offset_sec', '=', $this->getAttribute('offset_sec'));
+            ->where('offset_sec', '=', $this->getAttribute('offset_sec'))
+        ;
     }
 }

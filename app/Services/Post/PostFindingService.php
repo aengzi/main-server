@@ -3,16 +3,15 @@
 namespace App\Services\Post;
 
 use App\Models\Post;
-use FunctionalCoding\Service;
 use FunctionalCoding\Illuminate\Service\FindService;
+use FunctionalCoding\Service;
 
 class PostFindingService extends Service
 {
     public static function getArrBindNames()
     {
         return [
-            'result'
-                => 'post for {{id}}',
+            'result' => 'post for {{id}}',
         ];
     }
 
@@ -25,12 +24,10 @@ class PostFindingService extends Service
     {
         return [
             'available_expands' => function () {
-
                 return ['dislike', 'like', 'user'];
             },
 
             'model_class' => function () {
-
                 return Post::class;
             },
         ];

@@ -11,11 +11,9 @@ class CommentThreadUpdatingService extends Service
     public static function getArrBindNames()
     {
         return [
-            'result'
-                => 'comment_thread for {{id}}',
+            'result' => 'comment_thread for {{id}}',
 
-            'user_id'
-                => 'user_id of {{result}}',
+            'user_id' => 'user_id of {{result}}',
         ];
     }
 
@@ -23,7 +21,6 @@ class CommentThreadUpdatingService extends Service
     {
         return [
             'result' => function ($message, $result) {
-
                 $result->message = $message;
                 $result->save();
             },
@@ -34,12 +31,10 @@ class CommentThreadUpdatingService extends Service
     {
         return [
             'result' => function ($id) {
-
                 return CommentThread::find($id);
             },
 
             'user_id' => function ($result) {
-
                 return $result->user_id;
             },
         ];
@@ -53,17 +48,13 @@ class CommentThreadUpdatingService extends Service
     public static function getArrRuleLists()
     {
         return [
-            'id'
-                => ['required', 'integer'],
+            'id' => ['required', 'integer'],
 
-            'message'
-                => ['required', 'string'],
+            'message' => ['required', 'string'],
 
-            'result'
-                => ['not_null'],
+            'result' => ['not_null'],
 
-            'user_id'
-                => ['same:{{auth_user_id}}']
+            'user_id' => ['same:{{auth_user_id}}'],
         ];
     }
 

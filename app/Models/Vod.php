@@ -2,9 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\AftvBcast;
-use App\Models\CommentThread;
-use App\Models\Like;
 use FunctionalCoding\Illuminate\Model;
 
 class Vod extends Model
@@ -76,6 +73,6 @@ class Vod extends Model
 
     public function getBucketNameAttribute()
     {
-        return ($this->related_type == 'temp' ? 'temp.' : '').'aengzi.com';
+        return ('temp' == $this->related_type ? 'temp.' : '').'aengzi.com';
     }
 }

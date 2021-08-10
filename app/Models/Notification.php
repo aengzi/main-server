@@ -6,7 +6,7 @@ use FunctionalCoding\Illuminate\Model;
 
 class Notification extends Model
 {
-    const CREATED_AT = 'created_at';
+    public const CREATED_AT = 'created_at';
 
     public $incrementing = true;
     protected $guarded = ['id'];

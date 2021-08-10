@@ -3,8 +3,8 @@
 namespace App\Services\LolChampion;
 
 use App\Models\LolChampion;
-use FunctionalCoding\Service;
 use FunctionalCoding\Illuminate\Service\ListService;
+use FunctionalCoding\Service;
 
 class LolChampionListingService extends Service
 {
@@ -17,7 +17,6 @@ class LolChampionListingService extends Service
     {
         return [
             'query' => function ($query) {
-
                 $query->orderBy('name', 'asc');
             },
         ];
@@ -27,12 +26,10 @@ class LolChampionListingService extends Service
     {
         return [
             'available_expands' => function () {
-
                 return [];
             },
 
             'model_class' => function () {
-
                 return LolChampion::class;
             },
         ];

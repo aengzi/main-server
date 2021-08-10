@@ -3,11 +3,11 @@
 namespace App\Services\EmailToken;
 
 use Carbon\Carbon;
-use Google_Service_Gmail;
-use Google_Service_Gmail_Message;
-use FunctionalCoding\Service;
 use FunctionalCoding\Illuminate\Service\GoogleClientService;
 use FunctionalCoding\JWT\TokenEncryptionService;
+use FunctionalCoding\Service;
+use Google_Service_Gmail;
+use Google_Service_Gmail_Message;
 use Swift_Message;
 
 class EmailTokenCreatingService extends Service
@@ -15,8 +15,7 @@ class EmailTokenCreatingService extends Service
     public static function getArrBindNames()
     {
         return [
-            'attempt_count'
-                => 'attempt count in 5 minutes',
+            'attempt_count' => 'attempt count in 5 minutes',
         ];
     }
 
@@ -24,15 +23,15 @@ class EmailTokenCreatingService extends Service
     {
         return [
             'body.google_client' => function ($body, $email, $googleClient, $subject) {
-
-                $msg = (new Swift_Message)
-                        ->setTo([$email])
-                        ->setSubject($subject)
-                        ->setContentType('text/html')
-                        ->setBody($body);
+                $msg = (new Swift_Message())
+                    ->setTo([$email])
+                    ->setSubject($subject)
+                    ->setContentType('text/html')
+                    ->setBody($body)
+                ;
 
                 $service = new Google_Service_Gmail($googleClient);
-                $message = new Google_Service_Gmail_Message;
+                $message = new Google_Service_Gmail_Message();
                 $message->setId($email);
                 $message->setRaw(base64_encode($msg));
                 $service->users_messages->send('aengzi@llit.kr', $message);
@@ -44,33 +43,29 @@ class EmailTokenCreatingService extends Service
     {
         return [
             'attempt_count' => function ($email, $googleClient) {
-
-                $service   = new Google_Service_Gmail($googleClient);
+                $service = new Google_Service_Gmail($googleClient);
                 $timestamp = Carbon::now('UTC')->subSeconds(300)->timestamp;
-                $list      = $service->users_messages->listUsersMessages('aengzi@llit.kr', [
-                    'q' => 'in:sent to:'.$email.' after:'.$timestamp
+                $list = $service->users_messages->listUsersMessages('aengzi@llit.kr', [
+                    'q' => 'in:sent to:'.$email.' after:'.$timestamp,
                 ]);
 
                 return count($list);
             },
 
             'google_client' => function () {
-
-                $model      = GoogleClient::where('user', 'aengzi')->first();
-                $token      = json_decode($model->access_token, true);
+                $model = GoogleClient::where('user', 'aengzi')->first();
+                $token = json_decode($model->access_token, true);
                 $credential = json_decode($model->credential, true);
 
                 return [GoogleClientService::class, [
-                    'token'      => $token,
+                    'token' => $token,
                     'credential' => $credential,
                 ]];
             },
 
             'result' => function ($payload) {
-
                 return [TokenEncryptionService::class, [
-                    'payload'
-                        => $payload
+                    'payload' => $payload,
                 ]];
             },
         ];
@@ -79,16 +74,14 @@ class EmailTokenCreatingService extends Service
     public static function getArrPromiseLists()
     {
         return [
-            'body'
-                => ['attempt_count:strict'],
+            'body' => ['attempt_count:strict'],
         ];
     }
 
     public static function getArrRuleLists()
     {
         return [
-            'attempt_count'
-                => ['integer', 'lt:5'],
+            'attempt_count' => ['integer', 'lt:5'],
         ];
     }
 

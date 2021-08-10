@@ -4,19 +4,17 @@ namespace App\Services\CommentThread;
 
 use App\Models\CommentThread;
 use App\Services\Auth\AuthUserRequiringService;
-use Illuminate\Database\Eloquent\Relations\Relation;
 use FunctionalCoding\Service;
+use Illuminate\Database\Eloquent\Relations\Relation;
 
 class CommentThreadDeletingService extends Service
 {
     public static function getArrBindNames()
     {
         return [
-            'thread'
-                => 'comment_thread for {{id}}',
+            'thread' => 'comment_thread for {{id}}',
 
-            'user_id'
-                => 'user_id of {{thread}}',
+            'user_id' => 'user_id of {{thread}}',
         ];
     }
 
@@ -24,13 +22,13 @@ class CommentThreadDeletingService extends Service
     {
         return [
             'result' => function ($thread) {
-
                 $thread->delete();
 
                 $count = CommentThread::query()
                     ->where('related_id', $thread->related_id)
                     ->where('related_type', $thread->related_type)
-                    ->count();
+                    ->count()
+                ;
 
                 $related = Relation::morphMap()[$thread->related_type]::find($thread->related_id);
                 $related->thread_count = $count;
@@ -43,17 +41,14 @@ class CommentThreadDeletingService extends Service
     {
         return [
             'result' => function () {
-
                 return null;
             },
 
             'thread' => function ($id) {
-
                 return CommentThread::find($id);
             },
 
             'user_id' => function ($thread) {
-
                 return $thread->user_id;
             },
         ];
@@ -62,22 +57,18 @@ class CommentThreadDeletingService extends Service
     public static function getArrPromiseLists()
     {
         return [
-            'result'
-                => ['user_id'],
+            'result' => ['user_id'],
         ];
     }
 
     public static function getArrRuleLists()
     {
         return [
-            'id'
-                => ['required', 'integer'],
+            'id' => ['required', 'integer'],
 
-            'thread'
-                => ['not_null'],
+            'thread' => ['not_null'],
 
-            'user_id'
-                => ['same:{{auth_user_id}}']
+            'user_id' => ['same:{{auth_user_id}}'],
         ];
     }
 

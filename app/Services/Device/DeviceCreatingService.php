@@ -16,7 +16,6 @@ class DeviceCreatingService extends Service
     {
         return [
             'device' => function ($device) {
-
                 $device->save();
             },
         ];
@@ -26,20 +25,17 @@ class DeviceCreatingService extends Service
     {
         return [
             'device' => function ($relatedId, $relatedType) {
-
                 $device = Device::query()
                     ->lockForUpdate()
                     ->where('related_id', $relatedId)
                     ->where('related_type', $relatedType)
-                    ->first();
+                    ->first()
+                ;
 
-                if ( empty($device) )
-                {
+                if (empty($device)) {
                     $device = Device::create([
-                        'related_id'
-                            => $relatedId,
-                        'related_type'
-                            => $relatedType,
+                        'related_id' => $relatedId,
+                        'related_type' => $relatedType,
                     ]);
                 }
 
@@ -47,7 +43,6 @@ class DeviceCreatingService extends Service
             },
 
             'result' => function ($device) {
-
                 return $device;
             },
         ];
@@ -61,11 +56,9 @@ class DeviceCreatingService extends Service
     public static function getArrRuleLists()
     {
         return [
-            'related_id'
-                => ['required', 'string'],
+            'related_id' => ['required', 'string'],
 
-            'related_type'
-                => ['required', 'string', 'in:chrome'],
+            'related_type' => ['required', 'string', 'in:chrome'],
         ];
     }
 

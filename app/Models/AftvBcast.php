@@ -2,11 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\AftvBj;
-use App\Models\AftvFile;
-use App\Models\AftvM3u8;
-use App\Models\AftvReview;
-use App\Models\Vod;
 use FunctionalCoding\Illuminate\Model;
 
 class AftvBcast extends Model

@@ -10,14 +10,11 @@ class DeviceUpdatingService extends Service
     public static function getArrBindNames()
     {
         return [
-            'device'
-                => 'device for {{id}}',
+            'device' => 'device for {{id}}',
 
-            'device_related_id'
-                => 'related_id of {{device}}',
+            'device_related_id' => 'related_id of {{device}}',
 
-            'device_related_type'
-                => 'related_type of {{device}}',
+            'device_related_type' => 'related_type of {{device}}',
         ];
     }
 
@@ -25,7 +22,6 @@ class DeviceUpdatingService extends Service
     {
         return [
             'device' => function ($device) {
-
                 $device->touch();
             },
         ];
@@ -35,22 +31,18 @@ class DeviceUpdatingService extends Service
     {
         return [
             'device' => function ($id) {
-
                 return Device::find($id);
             },
 
             'device_related_id' => function ($device) {
-
                 return $device->related_id;
             },
 
             'device_related_type' => function ($device) {
-
                 return $device->related_type;
             },
 
             'result' => function ($device) {
-
                 return $device;
             },
         ];
@@ -64,11 +56,9 @@ class DeviceUpdatingService extends Service
     public static function getArrRuleLists()
     {
         return [
-            'related_id'
-                => ['required', 'string', 'same:{{device_related_id}}'],
+            'related_id' => ['required', 'string', 'same:{{device_related_id}}'],
 
-            'related_type'
-                => ['required', 'string', 'same:{{device_related_type}}'],
+            'related_type' => ['required', 'string', 'same:{{device_related_type}}'],
         ];
     }
 

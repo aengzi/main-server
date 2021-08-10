@@ -4,10 +4,10 @@ namespace App\Models;
 
 use FunctionalCoding\Illuminate\Model;
 
-class PwdReset extends Model {
-
-    const CREATED_AT = 'created_at';
-    const UPDATED_AT = 'updated_at';
+class PwdReset extends Model
+{
+    public const CREATED_AT = 'created_at';
+    public const UPDATED_AT = 'updated_at';
     public $incrementing = true;
     protected $guarded = ['id'];
     protected $casts = [

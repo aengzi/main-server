@@ -3,7 +3,6 @@
 namespace App\Services\EmailToken;
 
 use App\Services\Auth\AuthUserFindingService;
-use App\Services\EmailToken\EmailTokenCreatingService;
 use Carbon\Carbon;
 use FunctionalCoding\Service;
 use Illuminate\Support\Str;
@@ -24,18 +23,14 @@ class AuthUserEmailTokenCreatingService extends Service
     {
         return [
             'auth_user' => function ($token) {
-
                 return [AuthUserFindingService::class, [
-                    'token'
-                        => $token,
+                    'token' => $token,
                 ], [
-                    'token'
-                        => '{{token}}',
+                    'token' => '{{token}}',
                 ]];
             },
 
             'body' => function ($payload) {
-
                 return '
                     <p>
                         이메일 검증 페이지에서 아래 문자열을 입력해주세요
@@ -47,17 +42,15 @@ class AuthUserEmailTokenCreatingService extends Service
             },
 
             'payload' => function ($authUser, $email) {
-
                 return [
-                    'code'       => Str::random(6),
-                    'email'      => $email,
+                    'code' => Str::random(6),
+                    'email' => $email,
                     'expired_at' => Carbon::now('UTC')->addSeconds(300)->format('Y-m-d H:i:s'),
-                    'uid'        => $authUser->getKey(),
+                    'uid' => $authUser->getKey(),
                 ];
             },
 
             'subject' => function () {
-
                 return '이메일 계정 소유자 확인 - aengzi.com';
             },
         ];
@@ -71,11 +64,9 @@ class AuthUserEmailTokenCreatingService extends Service
     public static function getArrRuleLists()
     {
         return [
-            'token'
-                => ['required'],
+            'token' => ['required'],
 
-            'email'
-                => ['required', 'string', 'email'],
+            'email' => ['required', 'string', 'email'],
         ];
     }
 

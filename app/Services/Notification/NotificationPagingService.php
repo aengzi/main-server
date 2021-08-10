@@ -3,8 +3,8 @@
 namespace App\Services\Notification;
 
 use App\Models\Notification;
-use FunctionalCoding\Service;
 use FunctionalCoding\Illuminate\Service\PaginationListService;
+use FunctionalCoding\Service;
 
 class NotificationPagingService extends Service
 {
@@ -17,7 +17,6 @@ class NotificationPagingService extends Service
     {
         return [
             'query.after' => function ($after, $query) {
-
                 $query->where('created_at', '>=', $after);
             },
         ];
@@ -27,17 +26,14 @@ class NotificationPagingService extends Service
     {
         return [
             'available_expands' => function () {
-
                 return [];
             },
 
             'cursor' => function ($cursorId, $modelClass) {
-
                 return $modelClass::find($cursorId);
             },
 
             'model_class' => function () {
-
                 return Notification::class;
             },
         ];
@@ -51,8 +47,7 @@ class NotificationPagingService extends Service
     public static function getArrRuleLists()
     {
         return [
-            'after'
-                => ['date_format:Y-m-d H:i:s'],
+            'after' => ['date_format:Y-m-d H:i:s'],
         ];
     }
 

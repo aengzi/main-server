@@ -11,11 +11,9 @@ class LikeDeletingService extends Service
     public static function getArrBindNames()
     {
         return [
-            'like'
-                => 'like for {{like_id}}',
+            'like' => 'like for {{like_id}}',
 
-            'like_user_id'
-                => 'user_id of {{like}}',
+            'like_user_id' => 'user_id of {{like}}',
         ];
     }
 
@@ -23,13 +21,13 @@ class LikeDeletingService extends Service
     {
         return [
             'result' => function ($like) {
-
                 $like->delete();
 
                 $count = Like::query()
                     ->where('related_id', $like->related_id)
                     ->where('related_type', $like->related_type)
-                    ->count();
+                    ->count()
+                ;
 
                 $related = $like->related;
                 $related->like_count = $count;
@@ -42,17 +40,14 @@ class LikeDeletingService extends Service
     {
         return [
             'like' => function ($likeId) {
-
                 return Like::find($likeId);
             },
 
             'like_user_id' => function ($like) {
-
                 return $like->user_id;
             },
 
             'result' => function () {
-
                 return null;
             },
         ];
@@ -66,14 +61,11 @@ class LikeDeletingService extends Service
     public static function getArrRuleLists()
     {
         return [
-            'like'
-                => ['not_null'],
+            'like' => ['not_null'],
 
-            'like_id'
-                => ['required', 'integer'],
+            'like_id' => ['required', 'integer'],
 
-            'like_user_id'
-                => ['same:{{auth_user_id}}']
+            'like_user_id' => ['same:{{auth_user_id}}'],
         ];
     }
 

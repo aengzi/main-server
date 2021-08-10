@@ -2,20 +2,19 @@
 
 namespace App\Models;
 
-use App\Models\YtbCommentReply;
 use FunctionalCoding\Illuminate\Model;
 
 class YtbCommentThread extends Model
 {
-    const CREATED_AT = 'created_at';
-    const UPDATED_AT = 'updated_at';
+    public const CREATED_AT = 'created_at';
+    public const UPDATED_AT = 'updated_at';
     public $incrementing = false;
     protected $keyType = 'string';
     protected $casts = [
     ];
     protected $dates = [
         self::CREATED_AT,
-        self::UPDATED_AT
+        self::UPDATED_AT,
     ];
     protected $fillable = [
         'id',

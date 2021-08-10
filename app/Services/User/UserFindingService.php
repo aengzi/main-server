@@ -3,16 +3,15 @@
 namespace App\Services\User;
 
 use App\Models\User;
-use FunctionalCoding\Service;
 use FunctionalCoding\Illuminate\Service\FindService;
+use FunctionalCoding\Service;
 
 class UserFindingService extends Service
 {
     public static function getArrBindNames()
     {
         return [
-            'result'
-                => 'user for {{id}}',
+            'result' => 'user for {{id}}',
         ];
     }
 
@@ -25,12 +24,10 @@ class UserFindingService extends Service
     {
         return [
             'available_expands' => function () {
-
                 return [];
             },
 
             'model_class' => function () {
-
                 return User::class;
             },
         ];

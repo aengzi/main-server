@@ -2,12 +2,11 @@
 
 namespace App\Models;
 
-use App\Models\User;
 use FunctionalCoding\Illuminate\Model;
 
 class Dislike extends Model
 {
-    const CREATED_AT = 'created_at';
+    public const CREATED_AT = 'created_at';
     public $incrementing = true;
     protected $guarded = ['id'];
     protected $casts = [

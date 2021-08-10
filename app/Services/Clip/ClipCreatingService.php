@@ -5,8 +5,8 @@ namespace App\Services\Clip;
 use App\Models\AftvFile;
 use App\Models\AftvM3u8;
 use App\Models\Vod;
-use Google\Cloud\Storage\StorageClient;
 use FunctionalCoding\Service;
+use Google\Cloud\Storage\StorageClient;
 use Illuminate\Support\Str;
 
 class ClipCreatingService extends Service
@@ -14,14 +14,11 @@ class ClipCreatingService extends Service
     public static function getArrBindNames()
     {
         return [
-            'diff_sec'
-                => 'second between {{start_sec}} and {{end_sec}}',
+            'diff_sec' => 'second between {{start_sec}} and {{end_sec}}',
 
-            'vod'
-                => 'vod for {{vod_id}}',
+            'vod' => 'vod for {{vod_id}}',
 
-            'vod_duration'
-                => 'duration of {{vod}}',
+            'vod_duration' => 'duration of {{vod}}',
         ];
     }
 
@@ -29,10 +26,9 @@ class ClipCreatingService extends Service
     {
         return [
             'clip_vod.files' => function ($clipVod, $files, $m3u8String) {
-
                 $bucketName = $clipVod->getBucketNameAttribute();
                 $storage = new StorageClient([
-                    'keyFilePath' => storage_path('app'.DIRECTORY_SEPARATOR.'administrator@aengzi.json')
+                    'keyFilePath' => storage_path('app'.DIRECTORY_SEPARATOR.'administrator@aengzi.json'),
                 ]);
                 $bucket = $storage->bucket($bucketName);
                 $bucket->upload($m3u8String, [
@@ -43,8 +39,7 @@ class ClipCreatingService extends Service
                     ],
                 ]);
 
-                if ( $clipVod->related_type == 'temp' )
-                {
+                if ('temp' == $clipVod->related_type) {
                     return;
                 }
 
@@ -64,12 +59,10 @@ class ClipCreatingService extends Service
             },
 
             'clip_vod.result' => function ($clipVod, $result) {
-
                 $result->setRelation('vod', $clipVod);
             },
 
             'files' => function ($files) {
-
                 $files->load(['m3u8']);
             },
         ];
@@ -79,129 +72,118 @@ class ClipCreatingService extends Service
     {
         return [
             'diff_sec' => function ($endSec, $startSec) {
-
                 return $endSec - $startSec;
             },
 
             'ended_at' => function ($endSec, $vod) {
-
                 $matches = [];
                 preg_match_all('/\#EXTINF:(\d*\.\d*)/', $vod->data, $matches);
-                $minSec  = 0;
+                $minSec = 0;
 
-                foreach ( $matches[1] as $i => $sec )
-                {
+                foreach ($matches[1] as $i => $sec) {
                     $minSec += $sec;
-                    if ( $minSec >= $endSec )
-                    {
+                    if ($minSec >= $endSec) {
                         $index = $i;
+
                         break;
                     }
                 }
 
-                $matches    = [];
+                $matches = [];
                 preg_match_all('/http.+\.ts/', $vod->data, $matches);
-                $url        = $matches[0][$index];
-                $matches    = [];
+                $url = $matches[0][$index];
+                $matches = [];
                 preg_match_all('/(\d{9})_(\d{1,})/', $url, $matches);
-                $bcastId    = $matches[1][0];
-                $m3u8Index  = $matches[2][0];
-                $fM3u8      = AftvM3u8::where([
-                    'bcast_id'   => $bcastId,
-                    'm3u8_index' => $m3u8Index
+                $bcastId = $matches[1][0];
+                $m3u8Index = $matches[2][0];
+                $fM3u8 = AftvM3u8::where([
+                    'bcast_id' => $bcastId,
+                    'm3u8_index' => $m3u8Index,
                 ])->first();
-                $matches    = [];
+                $matches = [];
                 preg_match_all('/'.str_replace('###', '(\d+)', $fM3u8->file_prefix).'/', $url, $matches);
-                $fileIndex  = $matches[1][0];
+                $fileIndex = $matches[1][0];
 
                 return AftvFile::where([
-                    'bcast_id'   => $bcastId,
+                    'bcast_id' => $bcastId,
                     'm3u8_index' => $m3u8Index,
-                    'file_index' => $fileIndex
+                    'file_index' => $fileIndex,
                 ])->first()->ended_at;
             },
 
             'files' => function ($endedAt, $startedAt, $vod) {
-
                 return AftvFile::query()
                     ->where('bcast_id', $vod->bcast_id)
                     ->where('started_at', '<=', $endedAt)
                     ->where('ended_at', '>=', $startedAt)
                     ->orderBy('started_at', 'asc')
-                    ->get();
+                    ->get()
+                ;
             },
 
             'm3u8_string' => function ($files) {
-
                 $rtn = '#EXTM3U'.PHP_EOL.'#EXT-X-TARGETDURATION:6'.PHP_EOL.'#EXT-X-ALLOW-CACHE:YES'.PHP_EOL.'#EXT-X-PLAYLIST-TYPE:VOD'.PHP_EOL.'#EXT-X-VERSION:3'.PHP_EOL.'#EXT-X-MEDIA-SEQUENCE:1'.PHP_EOL;
 
-                for ( $i = 0; $i < $files->count(); $i++ )
-                {
+                for ($i = 0; $i < $files->count(); ++$i) {
                     $file = $files->get($i);
 
-                    if ( $i != 0 )
-                    {
-                        if ( $file->bcast_id != $files->get($i-1)->bcast_id ||
-                            $file->m3u8_index != $files->get($i-1)->m3u8_index ||
-                            $file->file_index != ($files->get($i-1)->file_index+1) )
-                        {
-                            $rtn.='#EXT-X-DISCONTINUITY'.PHP_EOL;
+                    if (0 != $i) {
+                        if ($file->bcast_id != $files->get($i - 1)->bcast_id
+                            || $file->m3u8_index != $files->get($i - 1)->m3u8_index
+                            || $file->file_index != ($files->get($i - 1)->file_index + 1)) {
+                            $rtn .= '#EXT-X-DISCONTINUITY'.PHP_EOL;
                         }
                     }
 
-                    $rtn.='#EXTINF:'.$file->duration.','.PHP_EOL.$file->url.PHP_EOL;
+                    $rtn .= '#EXTINF:'.$file->duration.','.PHP_EOL.$file->url.PHP_EOL;
                 }
 
-                $rtn.='#EXT-X-ENDLIST';
+                $rtn .= '#EXT-X-ENDLIST';
 
                 return $rtn;
             },
 
             'started_at' => function ($startSec, $vod) {
-
                 $matches = [];
                 preg_match_all('/\#EXTINF:(\d*\.\d*)/', $vod->data, $matches);
-                $minSec  = 0;
+                $minSec = 0;
 
-                foreach ( $matches[1] as $i => $sec )
-                {
+                foreach ($matches[1] as $i => $sec) {
                     $minSec += $sec;
-                    if ( $minSec >= $startSec )
-                    {
+                    if ($minSec >= $startSec) {
                         $index = $i;
+
                         break;
                     }
                 }
 
-                $matches    = [];
+                $matches = [];
                 preg_match_all('/http.+\.ts/', $vod->data, $matches);
-                $url        = $matches[0][$index];
-                $matches    = [];
+                $url = $matches[0][$index];
+                $matches = [];
                 preg_match_all('/(\d{9})_(\d{1,})/', $url, $matches);
-                $bcastId    = $matches[1][0];
-                $m3u8Index  = $matches[2][0];
-                $fM3u8      = AftvM3u8::where([
-                    'bcast_id'   => $bcastId,
-                    'm3u8_index' => $m3u8Index
+                $bcastId = $matches[1][0];
+                $m3u8Index = $matches[2][0];
+                $fM3u8 = AftvM3u8::where([
+                    'bcast_id' => $bcastId,
+                    'm3u8_index' => $m3u8Index,
                 ])->first();
-                $matches    = [];
+                $matches = [];
                 preg_match_all('/'.str_replace('###', '(\d+)', $fM3u8->file_prefix).'/', $url, $matches);
-                $fileIndex  = $matches[1][0];
+                $fileIndex = $matches[1][0];
 
                 return AftvFile::where([
-                    'bcast_id'   => $bcastId,
+                    'bcast_id' => $bcastId,
                     'm3u8_index' => $m3u8Index,
-                    'file_index' => $fileIndex
+                    'file_index' => $fileIndex,
                 ])->first()->started_at;
             },
 
             'vod' => function ($vodId) {
-
                 return Vod::find($vodId);
             },
 
             'vod_duration' => function ($vod) {
-
                 return $vod->sum('duration');
             },
         ];
@@ -210,28 +192,22 @@ class ClipCreatingService extends Service
     public static function getArrPromiseLists()
     {
         return [
-            'files'
-                => ['diff_sec:strict'],
+            'files' => ['diff_sec:strict'],
         ];
     }
 
     public static function getArrRuleLists()
     {
         return [
-            'diff_sec'
-                => ['integer', 'min:15', 'max:300'],
+            'diff_sec' => ['integer', 'min:15', 'max:300'],
 
-            'end_sec'
-                => ['required', 'integer', 'gt:{{start_sec}}', 'lte:{{vod_duration}}'],
+            'end_sec' => ['required', 'integer', 'gt:{{start_sec}}', 'lte:{{vod_duration}}'],
 
-            'start_sec'
-                => ['required', 'integer', 'gt:0'],
+            'start_sec' => ['required', 'integer', 'gt:0'],
 
-            'vod'
-                => ['not_null'],
+            'vod' => ['not_null'],
 
-            'vod_id'
-                => ['required', 'integer'],
+            'vod_id' => ['required', 'integer'],
         ];
     }
 

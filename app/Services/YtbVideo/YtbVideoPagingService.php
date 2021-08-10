@@ -3,8 +3,8 @@
 namespace App\Services\YtbVideo;
 
 use App\Models\YtbVideo;
-use FunctionalCoding\Service;
 use FunctionalCoding\Illuminate\Service\PaginationListService;
+use FunctionalCoding\Service;
 
 class YtbVideoPagingService extends Service
 {
@@ -22,17 +22,14 @@ class YtbVideoPagingService extends Service
     {
         return [
             'available_expands' => function () {
-
                 return ['like'];
             },
 
             'cursor' => function ($cursorId, $modelClass) {
-
                 return $modelClass::find($cursorId);
             },
 
             'model_class' => function () {
-
                 return YtbVideo::class;
             },
         ];

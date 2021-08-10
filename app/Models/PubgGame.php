@@ -2,9 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\PubgMeta;
-use App\Models\PubgTimeline;
-use App\Models\Vod;
 use FunctionalCoding\Illuminate\Model;
 
 class PubgGame extends Model

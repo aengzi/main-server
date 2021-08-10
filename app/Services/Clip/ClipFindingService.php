@@ -3,16 +3,15 @@
 namespace App\Services\Clip;
 
 use App\Models\Clip;
-use FunctionalCoding\Service;
 use FunctionalCoding\Illuminate\Service\FindService;
+use FunctionalCoding\Service;
 
 class ClipFindingService extends Service
 {
     public static function getArrBindNames()
     {
         return [
-            'result'
-                => 'clip for {{id}}',
+            'result' => 'clip for {{id}}',
         ];
     }
 
@@ -25,12 +24,10 @@ class ClipFindingService extends Service
     {
         return [
             'available_expands' => function () {
-
                 return ['user', 'vod', 'vod.like', 'vod.bcast', 'vod.bcast.bj'];
             },
 
             'model_class' => function () {
-
                 return Clip::class;
             },
         ];

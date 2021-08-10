@@ -3,16 +3,15 @@
 namespace App\Services\Vod;
 
 use App\Models\Vod;
-use FunctionalCoding\Service;
 use FunctionalCoding\Illuminate\Service\FindService;
+use FunctionalCoding\Service;
 
 class VodFindingService extends Service
 {
     public static function getArrBindNames()
     {
         return [
-            'result'
-                => 'vod for {{id}}',
+            'result' => 'vod for {{id}}',
         ];
     }
 
@@ -25,12 +24,10 @@ class VodFindingService extends Service
     {
         return [
             'available_expands' => function () {
-
                 return ['like', 'related', 'bcast'];
             },
 
             'model_class' => function () {
-
                 return Vod::class;
             },
         ];

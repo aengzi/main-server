@@ -2,25 +2,19 @@
 
 namespace App\Services\Like;
 
-use App\Models\CommentThread;
 use App\Models\Like;
-use App\Models\Post;
-use App\Models\Vod;
-use App\Models\YtbVideo;
 use App\Services\Auth\AuthUserRequiringService;
-use Illuminate\Database\Eloquent\Relations\Relation;
 use FunctionalCoding\Service;
+use Illuminate\Database\Eloquent\Relations\Relation;
 
 class LikeCreatingService extends Service
 {
     public static function getArrBindNames()
     {
         return [
-            'like'
-                => 'like for {{related}}',
+            'like' => 'like for {{related}}',
 
-            'related'
-                => 'related for {{related_id}} and {{related_type}}',
+            'related' => 'related for {{related_id}} and {{related_type}}',
         ];
     }
 
@@ -28,11 +22,11 @@ class LikeCreatingService extends Service
     {
         return [
             'result' => function ($result) {
-
                 $count = Like::query()
                     ->where('related_id', $result->related_id)
                     ->where('related_type', $result->related_type)
-                    ->count();
+                    ->count()
+                ;
 
                 $related = $result->related;
                 $related->like_count = $count;
@@ -45,27 +39,22 @@ class LikeCreatingService extends Service
     {
         return [
             'like' => function ($authUser, $related) {
-
                 return Like::query()
                     ->where('user_id', $authUser->getKey())
                     ->where('related_id', $related->getKey())
-                    ->first();
+                    ->first()
+                ;
             },
 
             'related' => function ($relatedId, $relatedType) {
-
                 return Relation::morphMap()[$relatedType]::find($relatedId);
             },
 
             'result' => function ($authUser, $related, $relatedType) {
-
                 return Like::create([
-                    'user_id'
-                        => $authUser->getKey(),
-                    'related_id'
-                        => $related->getKey(),
-                    'related_type'
-                        => $relatedType
+                    'user_id' => $authUser->getKey(),
+                    'related_id' => $related->getKey(),
+                    'related_type' => $relatedType,
                 ]);
             },
         ];
@@ -74,25 +63,20 @@ class LikeCreatingService extends Service
     public static function getArrPromiseLists()
     {
         return [
-            'result'
-                => ['like'],
+            'result' => ['like'],
         ];
     }
 
     public static function getArrRuleLists()
     {
         return [
-            'like'
-                => ['null'],
+            'like' => ['null'],
 
-            'related'
-                => ['not_null'],
+            'related' => ['not_null'],
 
-            'related_id'
-                => ['required', 'integer'],
+            'related_id' => ['required', 'integer'],
 
-            'related_type'
-                => ['required', 'string', 'in:comment_thread,post,vod,ytb_video']
+            'related_type' => ['required', 'string', 'in:comment_thread,post,vod,ytb_video'],
         ];
     }
 

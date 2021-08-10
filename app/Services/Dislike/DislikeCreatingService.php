@@ -4,19 +4,17 @@ namespace App\Services\Dislike;
 
 use App\Models\Dislike;
 use App\Services\Auth\AuthUserRequiringService;
-use Illuminate\Database\Eloquent\Relations\Relation;
 use FunctionalCoding\Service;
+use Illuminate\Database\Eloquent\Relations\Relation;
 
 class DislikeCreatingService extends Service
 {
     public static function getArrBindNames()
     {
         return [
-            'dislike'
-                => 'dislike for {{related}}',
+            'dislike' => 'dislike for {{related}}',
 
-            'related'
-                => 'related for {{related_id}} and {{related_type}}',
+            'related' => 'related for {{related_id}} and {{related_type}}',
         ];
     }
 
@@ -24,11 +22,11 @@ class DislikeCreatingService extends Service
     {
         return [
             'result' => function ($result) {
-
                 $count = Dislike::query()
                     ->where('related_id', $result->related_id)
                     ->where('related_type', $result->related_type)
-                    ->count();
+                    ->count()
+                ;
 
                 $related = $result->related;
                 $related->dislike_count = $count;
@@ -41,27 +39,22 @@ class DislikeCreatingService extends Service
     {
         return [
             'dislike' => function ($authUser, $related) {
-
                 return Dislike::query()
                     ->where('user_id', $authUser->getKey())
                     ->where('related_id', $related->getKey())
-                    ->first();
+                    ->first()
+                ;
             },
 
             'related' => function ($relatedId, $relatedType) {
-
                 return Relation::morphMap()[$relatedType]::find($relatedId);
             },
 
             'result' => function ($authUser, $related, $relatedType) {
-
                 return Dislike::create([
-                    'user_id'
-                        => $authUser->getKey(),
-                    'related_id'
-                        => $related->getKey(),
-                    'related_type'
-                        => $relatedType
+                    'user_id' => $authUser->getKey(),
+                    'related_id' => $related->getKey(),
+                    'related_type' => $relatedType,
                 ]);
             },
         ];
@@ -70,25 +63,20 @@ class DislikeCreatingService extends Service
     public static function getArrPromiseLists()
     {
         return [
-            'result'
-                => ['dislike'],
+            'result' => ['dislike'],
         ];
     }
 
     public static function getArrRuleLists()
     {
         return [
-            'dislike'
-                => ['null'],
+            'dislike' => ['null'],
 
-            'related'
-                => ['not_null'],
+            'related' => ['not_null'],
 
-            'related_id'
-                => ['required', 'integer'],
+            'related_id' => ['required', 'integer'],
 
-            'related_type'
-                => ['required', 'string', 'in:comment_thread,post']
+            'related_type' => ['required', 'string', 'in:comment_thread,post'],
         ];
     }
 

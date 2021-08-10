@@ -5,7 +5,6 @@ namespace App\Services\LolChampion;
 use App\Models\LolChampion;
 use App\Models\LolGame;
 use App\Models\LolMeta;
-use App\Services\LolChampion\LolChampionListingService;
 use FunctionalCoding\Service;
 
 class WatchableLolChampionListingService extends Service
@@ -19,14 +18,15 @@ class WatchableLolChampionListingService extends Service
     {
         return [
             'query' => function ($query) {
-
                 $subQuery1 = LolGame::select('id')
                     ->whereNotNull('vod_id')
-                    ->getQuery();
+                    ->getQuery()
+                ;
                 $subQuery2 = LolMeta::select('value')
                     ->whereIn('game_id', $subQuery1)
                     ->where('property', 'status_champion_id')
-                    ->getQuery();
+                    ->getQuery()
+                ;
                 $query->whereIn('id', $subQuery2);
                 $query->orderBy('name', 'asc');
             },
@@ -37,7 +37,6 @@ class WatchableLolChampionListingService extends Service
     {
         return [
             'model_class' => function () {
-
                 return LolChampion::class;
             },
         ];

@@ -2,18 +2,19 @@
 
 namespace App\Models;
 
+use FunctionalCoding\Illuminate\Model;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use FunctionalCoding\Illuminate\Model;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Lumen\Auth\Authorizable;
 
 class User extends Model implements AuthenticatableContract, AuthorizableContract
 {
-    use Authenticatable, Authorizable;
+    use Authenticatable;
+    use Authorizable;
 
-    const CREATED_AT = 'created_at';
+    public const CREATED_AT = 'created_at';
     public $incrementing = true;
     protected $guarded = ['id'];
     protected $appends = [
@@ -40,10 +41,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     public function getThumbnailAttribute()
     {
-        if ( $this->has_thumbnail )
-        {
+        if ($this->has_thumbnail) {
             return 'https://storage.googleapis.com/aengzi.com/users/'.$this->getKey().'/origin.jpg';
         }
     }
 }
-

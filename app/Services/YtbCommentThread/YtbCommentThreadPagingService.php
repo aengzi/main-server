@@ -2,19 +2,17 @@
 
 namespace App\Services\YtbCommentThread;
 
-use App\Models\User;
 use App\Models\YtbCommentThread;
 use App\Models\YtbVideo;
-use FunctionalCoding\Service;
 use FunctionalCoding\Illuminate\Service\PaginationListService;
+use FunctionalCoding\Service;
 
 class YtbCommentThreadPagingService extends Service
 {
     public static function getArrBindNames()
     {
         return [
-            'video'
-                => 'youtube_video for {{video_id}}',
+            'video' => 'youtube_video for {{video_id}}',
         ];
     }
 
@@ -22,7 +20,6 @@ class YtbCommentThreadPagingService extends Service
     {
         return [
             'query.video' => function ($query, $video) {
-
                 $query->where('video_id', $video->getKey());
             },
         ];
@@ -32,22 +29,18 @@ class YtbCommentThreadPagingService extends Service
     {
         return [
             'available_expands' => function () {
-
                 return ['replies'];
             },
 
             'cursor' => function ($cursorId, $modelClass) {
-
                 return $modelClass::find($cursorId);
             },
 
             'model_class' => function () {
-
                 return YtbCommentThread::class;
             },
 
             'video' => function ($videoId) {
-
                 return YtbVideo::find($relatedId);
             },
         ];
@@ -61,11 +54,9 @@ class YtbCommentThreadPagingService extends Service
     public static function getArrRuleLists()
     {
         return [
-            'video'
-                => ['not_null'],
+            'video' => ['not_null'],
 
-            'video_id'
-                => ['integer']
+            'video_id' => ['integer'],
         ];
     }
 

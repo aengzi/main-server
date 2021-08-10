@@ -11,11 +11,9 @@ class PostUpdatingService extends Service
     public static function getArrBindNames()
     {
         return [
-            'post'
-                => 'post for {{id}}',
+            'post' => 'post for {{id}}',
 
-            'user_id'
-                => 'user_id of {{post}}',
+            'user_id' => 'user_id of {{post}}',
         ];
     }
 
@@ -23,22 +21,18 @@ class PostUpdatingService extends Service
     {
         return [
             'post.content' => function ($content, $post) {
-
                 $post->content = $content;
             },
 
             'post.title' => function ($post, $title) {
-
                 $post->title = $title;
             },
 
             'post.type' => function ($post, $type) {
-
                 $post->type = $type;
             },
 
             'result' => function ($result) {
-
                 $result->save();
             },
         ];
@@ -48,17 +42,14 @@ class PostUpdatingService extends Service
     {
         return [
             'post' => function ($id) {
-
                 return Post::find($id);
             },
 
             'result' => function ($post) {
-
                 return $post;
             },
 
             'user_id' => function ($post) {
-
                 return $post->user_id;
             },
         ];
@@ -72,23 +63,17 @@ class PostUpdatingService extends Service
     public static function getArrRuleLists()
     {
         return [
-            'id'
-                => ['required', 'integer'],
+            'id' => ['required', 'integer'],
 
-            'content'
-                => ['required', 'string'],
+            'content' => ['required', 'string'],
 
-            'post'
-                => ['not_null'],
+            'post' => ['not_null'],
 
-            'title'
-                => ['required', 'string'],
+            'title' => ['required', 'string'],
 
-            'type'
-                => ['required', 'string'],
+            'type' => ['required', 'string'],
 
-            'user_id'
-                => ['same:{{auth_user_id}}']
+            'user_id' => ['same:{{auth_user_id}}'],
         ];
     }
 

@@ -2,16 +2,12 @@
 
 namespace App\Models;
 
-use App\Models\CommentThread;
-use App\Models\Dislike;
-use App\Models\Like;
-use App\Models\User;
 use FunctionalCoding\Illuminate\Model;
 
 class Post extends Model
 {
-    const CREATED_AT = 'created_at';
-    const UPDATED_AT = 'updated_at';
+    public const CREATED_AT = 'created_at';
+    public const UPDATED_AT = 'updated_at';
     public $incrementing = true;
     protected $guarded = ['id'];
     protected $casts = [
@@ -33,7 +29,7 @@ class Post extends Model
     ];
     protected $dates = [
         self::CREATED_AT,
-        self::UPDATED_AT
+        self::UPDATED_AT,
     ];
 
     public function dislike()

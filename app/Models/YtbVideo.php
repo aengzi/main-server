@@ -6,7 +6,7 @@ use FunctionalCoding\Illuminate\Model;
 
 class YtbVideo extends Model
 {
-    const CREATED_AT = 'created_at';
+    public const CREATED_AT = 'created_at';
     public $incrementing = true;
     protected $guarded = ['id'];
     protected $appends = [
@@ -17,7 +17,7 @@ class YtbVideo extends Model
     ];
     protected $dates = [
         self::CREATED_AT,
-        self::UPDATED_AT
+        self::UPDATED_AT,
     ];
     protected $fillable = [
         'id',

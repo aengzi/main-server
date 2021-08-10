@@ -5,7 +5,6 @@ namespace App\Services\Clip;
 use App\Models\Clip;
 use App\Models\Vod;
 use App\Services\Auth\AuthUserRequiringService;
-use App\Services\Clip\ClipCreatingService;
 use FunctionalCoding\Service;
 
 class UserClipCreatingService extends Service
@@ -24,23 +23,21 @@ class UserClipCreatingService extends Service
     {
         return [
             'clip_vod' => function ($files, $m3u8String, $result, $title, $vod) {
-
                 return Vod::create([
                     'related_type' => 'clip',
-                    'related_id'   => $result->getKey(),
-                    'bcast_id'     => $vod->bcast_id,
-                    'started_at'   => $files->first()->started_at,
-                    'ended_at'     => $files->last()->ended_at,
-                    'data'         => $m3u8String,
-                    'duration'     => $files->sum('duration'),
-                    'title'        => $title
+                    'related_id' => $result->getKey(),
+                    'bcast_id' => $vod->bcast_id,
+                    'started_at' => $files->first()->started_at,
+                    'ended_at' => $files->last()->ended_at,
+                    'data' => $m3u8String,
+                    'duration' => $files->sum('duration'),
+                    'title' => $title,
                 ]);
             },
 
             'result' => function ($authUser) {
-
                 return Clip::create([
-                    'user_id' => $authUser->getKey()
+                    'user_id' => $authUser->getKey(),
                 ]);
             },
         ];
@@ -54,8 +51,7 @@ class UserClipCreatingService extends Service
     public static function getArrRuleLists()
     {
         return [
-            'title'
-                => ['required', 'string', 'max:32']
+            'title' => ['required', 'string', 'max:32'],
         ];
     }
 

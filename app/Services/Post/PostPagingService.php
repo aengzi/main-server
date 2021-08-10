@@ -4,16 +4,15 @@ namespace App\Services\Post;
 
 use App\Models\Post;
 use App\Models\User;
-use FunctionalCoding\Service;
 use FunctionalCoding\Illuminate\Service\PaginationListService;
+use FunctionalCoding\Service;
 
 class PostPagingService extends Service
 {
     public static function getArrBindNames()
     {
         return [
-            'user'
-                => 'user for {{user_id}}',
+            'user' => 'user for {{user_id}}',
         ];
     }
 
@@ -21,18 +20,15 @@ class PostPagingService extends Service
     {
         return [
             'query.content' => function ($query) {
-
                 // deleted post's content is null
                 $query->whereNotNull('content');
             },
 
             'query.type' => function ($query, $type) {
-
                 $query->where('type', $type);
             },
 
             'query.user' => function ($query, $user) {
-
                 $query->where('user_id', $user->getKey());
             },
         ];
@@ -42,30 +38,25 @@ class PostPagingService extends Service
     {
         return [
             'available_expands' => function () {
-
                 return ['dislike', 'like', 'user'];
             },
 
             'available_order_by' => function () {
-
                 return [
                     'created_at desc',
-                    'like_count desc'
+                    'like_count desc',
                 ];
             },
 
             'cursor' => function ($cursorId, $modelClass) {
-
                 return $modelClass::find($cursorId);
             },
 
             'model_class' => function () {
-
                 return Post::class;
             },
 
             'user' => function ($userId) {
-
                 return User::find($userId);
             },
         ];
@@ -79,14 +70,11 @@ class PostPagingService extends Service
     public static function getArrRuleLists()
     {
         return [
-            'user'
-                => ['not_null'],
+            'user' => ['not_null'],
 
-            'user_id'
-                => ['integer'],
+            'user_id' => ['integer'],
 
-            'type'
-                => ['string']
+            'type' => ['string'],
         ];
     }
 

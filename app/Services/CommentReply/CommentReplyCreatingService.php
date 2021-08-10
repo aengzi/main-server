@@ -12,8 +12,7 @@ class CommentReplyCreatingService extends Service
     public static function getArrBindNames()
     {
         return [
-            'thread'
-                => 'comment_thread for {{thread_id}}',
+            'thread' => 'comment_thread for {{thread_id}}',
         ];
     }
 
@@ -21,10 +20,10 @@ class CommentReplyCreatingService extends Service
     {
         return [
             'result' => function ($result) {
-
                 $count = CommentReply::query()
                     ->where('thread_id', $result->thread_id)
-                    ->count();
+                    ->count()
+                ;
 
                 $thread = $result->thread;
                 $thread->reply_count = $count;
@@ -32,7 +31,6 @@ class CommentReplyCreatingService extends Service
             },
 
             'result.auth_user' => function ($authUser, $result) {
-
                 $result->setRelation('user', $authUser);
             },
         ];
@@ -42,19 +40,14 @@ class CommentReplyCreatingService extends Service
     {
         return [
             'result' => function ($authUser, $message, $thread) {
-
                 return CommentReply::create([
-                    'user_id'
-                        => $authUser->getKey(),
-                    'message'
-                        => $message,
-                    'thread_id'
-                        => $thread->getKey(),
+                    'user_id' => $authUser->getKey(),
+                    'message' => $message,
+                    'thread_id' => $thread->getKey(),
                 ]);
             },
 
             'thread' => function ($threadId) {
-
                 return CommentThread::find($threadId);
             },
         ];
@@ -68,14 +61,11 @@ class CommentReplyCreatingService extends Service
     public static function getArrRuleLists()
     {
         return [
-            'message'
-                => ['required', 'string'],
+            'message' => ['required', 'string'],
 
-            'thread'
-                => ['not_null'],
+            'thread' => ['not_null'],
 
-            'thread_id'
-                => ['required', 'integer']
+            'thread_id' => ['required', 'integer'],
         ];
     }
 

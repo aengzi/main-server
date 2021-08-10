@@ -2,26 +2,22 @@
 
 namespace App\Services\Dislike;
 
-use App\Models\CommentThread;
 use App\Models\Dislike;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Relations\Relation;
-use FunctionalCoding\Service;
 use FunctionalCoding\Illuminate\Service\PaginationListService;
+use FunctionalCoding\Service;
+use Illuminate\Database\Eloquent\Relations\Relation;
 
 class DislikePagingService extends Service
 {
     public static function getArrBindNames()
     {
         return [
-            'available_related_types'
-                => 'available options for {{related_types}}',
+            'available_related_types' => 'available options for {{related_types}}',
 
-            'related'
-                => 'related for {{related_id}} and {{related_type}}',
+            'related' => 'related for {{related_id}} and {{related_type}}',
 
-            'user'
-                => 'user for {{user_id}}',
+            'user' => 'user for {{user_id}}',
         ];
     }
 
@@ -29,19 +25,16 @@ class DislikePagingService extends Service
     {
         return [
             'query.related' => function ($query, $related, $relatedType) {
-
                 $query->where('related_id', $related->getKey());
                 $query->where('related_type', $relatedType);
             },
 
             'query.related_types' => function ($query, $relatedTypes) {
-
                 $relatedTypes = preg_split('/\s*,\s*/', $relatedTypes);
                 $query->whereIn('related_type', $relatedTypes);
             },
 
             'query.user' => function ($query, $user) {
-
                 $query->where('user_id', $user->getKey());
             },
         ];
@@ -51,32 +44,26 @@ class DislikePagingService extends Service
     {
         return [
             'available_expands' => function () {
-
                 return ['user', 'vod', 'related'];
             },
 
             'available_related_types' => function () {
-
                 return ['comment_thread', 'post'];
             },
 
             'cursor' => function ($cursorId, $modelClass) {
-
                 return $modelClass::find($cursorId);
             },
 
             'model_class' => function () {
-
                 return Dislike::class;
             },
 
             'related' => function ($relatedId, $relatedType) {
-
                 return Relation::morphMap()[$relatedType]::find($relatedId);
             },
 
             'user' => function ($userId) {
-
                 return User::find($userId);
             },
         ];
@@ -90,23 +77,17 @@ class DislikePagingService extends Service
     public static function getArrRuleLists()
     {
         return [
-            'related'
-                => ['not_null'],
+            'related' => ['not_null'],
 
-            'related_id'
-                => ['integer'],
+            'related_id' => ['integer'],
 
-            'related_type'
-                => ['required_with:{{related_id}}', 'string', 'in_array:{{available_related_types}}.*'],
+            'related_type' => ['required_with:{{related_id}}', 'string', 'in_array:{{available_related_types}}.*'],
 
-            'related_types'
-                => ['string', 'several_in:{{available_related_types}}'],
+            'related_types' => ['string', 'several_in:{{available_related_types}}'],
 
-            'user'
-                => ['not_null'],
+            'user' => ['not_null'],
 
-            'user_id'
-                => ['integer'],
+            'user_id' => ['integer'],
         ];
     }
 

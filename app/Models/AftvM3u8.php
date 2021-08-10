@@ -2,11 +2,8 @@
 
 namespace App\Models;
 
-use App\Models\AftvBcast;
-use App\Models\AftvFile;
-use App\Models\AftvReview;
-use Illuminate\Database\Eloquent\Builder;
 use FunctionalCoding\Illuminate\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class AftvM3u8 extends Model
 {
@@ -57,6 +54,7 @@ class AftvM3u8 extends Model
     {
         return $query
             ->where('bcast_id', '=', $this->getAttribute('bcast_id'))
-            ->where('m3u8_index', '=', $this->getAttribute('m3u8_index'));
+            ->where('m3u8_index', '=', $this->getAttribute('m3u8_index'))
+        ;
     }
 }

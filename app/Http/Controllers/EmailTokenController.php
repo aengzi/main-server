@@ -10,11 +10,9 @@ class EmailTokenController extends Controller
     public static function update()
     {
         return [EmailTokenUpdatingService::class, [
-            'code'
-                => static::input('code'),
+            'code' => static::input('code'),
         ], [
-            'code'
-                => '[code]',
+            'code' => '[code]',
         ]];
     }
 }

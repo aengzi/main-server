@@ -13,7 +13,7 @@ abstract class FunctionalTest extends TestCase
 
     public function assertResult($expect)
     {
-        $serv   = $this->runService();
+        $serv = $this->runService();
         $result = $serv->data()->get('result');
         $errors = $serv->totalErrors()->all();
 
@@ -26,8 +26,7 @@ abstract class FunctionalTest extends TestCase
         $attrs = $model->getAttributes();
         $query = $model->query();
 
-        foreach ( $attrs as $attr => $value )
-        {
+        foreach ($attrs as $attr => $value) {
             $query->where($attr, $value);
         }
 
@@ -41,7 +40,7 @@ abstract class FunctionalTest extends TestCase
 
     public function assertError($msg)
     {
-        $serv   = $this->runService();
+        $serv = $this->runService();
         $errors = $serv->totalErrors()->all();
 
         $this->assertContains($msg, $errors, implode(',', $errors));
@@ -49,23 +48,21 @@ abstract class FunctionalTest extends TestCase
 
     public function assertResultWithPersisting($expects)
     {
-        $serv   = $this->runService();
+        $serv = $this->runService();
         $result = $serv->data()->get('result');
         $errors = $serv->totalErrors()->all();
 
-        if ( $expects instanceof Model )
-        {
+        if ($expects instanceof Model) {
             $this->assertInstanceOf(Model::class, $result);
 
             $expects = collect([$expects]);
-            $result  = collect([$result]);
+            $result = collect([$result]);
         }
 
         $this->assertEquals([], $errors, implode(',', $errors));
         $this->assertEquals(get_class($expects), get_class($result));
 
-        foreach ( $result as $i => $model )
-        {
+        foreach ($result as $i => $model) {
             $expect = $expects[$i];
 
             $this->assertInstanceOf(Model::class, $model);
@@ -76,7 +73,7 @@ abstract class FunctionalTest extends TestCase
 
     public function assertResultWithFinding($expectId)
     {
-        $serv   = $this->runService();
+        $serv = $this->runService();
         $result = $serv->data()->get('result');
         $errors = $serv->totalErrors()->all();
 
@@ -86,23 +83,22 @@ abstract class FunctionalTest extends TestCase
 
     public function assertResultWithListing($expectIds)
     {
-        $serv   = $this->runService();
+        $serv = $this->runService();
         $result = $serv->data()->get('result');
         $errors = $serv->totalErrors()->all();
 
         $this->assertEquals([], $errors, implode(',', $errors));
 
-        foreach ( $expectIds as $expectId )
-        {
+        foreach ($expectIds as $expectId) {
             $this->assertContains($expectId, $result->modelKeys());
         }
     }
 
     public function assertResultWithPaging($expectIds)
     {
-        $serv    = $this->runService();
-        $result  = $serv->data()->get('result')->modelKeys();
-        $errors  = $serv->totalErrors()->all();
+        $serv = $this->runService();
+        $result = $serv->data()->get('result')->modelKeys();
+        $errors = $serv->totalErrors()->all();
 
         sort($expectIds);
         sort($result);
@@ -113,9 +109,9 @@ abstract class FunctionalTest extends TestCase
 
     public function assertResultWithReturning($expect)
     {
-        $serv    = $this->runService();
-        $result  = $serv->data()->get('result');
-        $errors  = $serv->totalErrors()->all();
+        $serv = $this->runService();
+        $result = $serv->data()->get('result');
+        $errors = $serv->totalErrors()->all();
 
         $this->assertEquals([], $errors, implode(',', $errors));
         $this->assertEquals($expect, $result);
@@ -123,22 +119,21 @@ abstract class FunctionalTest extends TestCase
 
     public function runService()
     {
-        $this->app->instance(ServiceRunMiddleware::class, new class
-        {
+        $this->app->instance(ServiceRunMiddleware::class, new class() {
             public function handle($request, $next)
             {
                 return $next($request);
             }
         });
 
-        $method     = explode('\\', static::class);
-        $method     = array_pop($method);
-        $method     = snake_case($method);
-        $method     = preg_replace('/_test$/', '', $method);
-        $method     = explode('_', $method);
-        $method     = strtoupper(array_pop($method));
-        $response   = $this->call($method, $url = $this->url, $parameters = $this->input, $cookies = [], $files = [], $server = $this->server, $content = null);
-        $content    = $response->getOriginalContent();
+        $method = explode('\\', static::class);
+        $method = array_pop($method);
+        $method = snake_case($method);
+        $method = preg_replace('/_test$/', '', $method);
+        $method = explode('_', $method);
+        $method = strtoupper(array_pop($method));
+        $response = $this->call($method, $url = $this->url, $parameters = $this->input, $cookies = [], $files = [], $server = $this->server, $content = null);
+        $content = $response->getOriginalContent();
         $isInitable = Service::isInitable($content);
 
         $this->assertTrue($isInitable);
@@ -163,7 +158,7 @@ abstract class FunctionalTest extends TestCase
     {
         $replace = $value;
         $subject = $this->url;
-        $search  = '{'.$key.'}';
+        $search = '{'.$key.'}';
 
         $this->url = str_replace($search, $replace, $subject);
     }

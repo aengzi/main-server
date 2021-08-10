@@ -3,16 +3,15 @@
 namespace App\Services\AftvReview;
 
 use App\Models\AftvReview;
-use FunctionalCoding\Service;
 use FunctionalCoding\Illuminate\Service\FindService;
+use FunctionalCoding\Service;
 
 class AftvReviewFindingService extends Service
 {
     public static function getArrBindNames()
     {
         return [
-            'result'
-                => 'aftv_review for {{id}}',
+            'result' => 'aftv_review for {{id}}',
         ];
     }
 
@@ -25,12 +24,10 @@ class AftvReviewFindingService extends Service
     {
         return [
             'available_expands' => function () {
-
                 return ['bcast', 'bcast.reviews', 'bcast.reviews.vod', 'bj', 'm3u8s', 'vod', 'vod.like'];
             },
 
             'model_class' => function () {
-
                 return AftvReview::class;
             },
         ];

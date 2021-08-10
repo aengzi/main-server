@@ -3,8 +3,8 @@
 namespace App\Services\User;
 
 use App\Models\User;
-use FunctionalCoding\Service;
 use FunctionalCoding\Illuminate\Service\ListService;
+use FunctionalCoding\Service;
 
 class UserListingService extends Service
 {
@@ -17,12 +17,10 @@ class UserListingService extends Service
     {
         return [
             'query.email' => function ($email, $query) {
-
                 $query->where('email', $email);
             },
 
             'query.nick' => function ($nick, $query) {
-
                 $query->where('nick', $nick);
             },
         ];
@@ -32,12 +30,10 @@ class UserListingService extends Service
     {
         return [
             'available_expands' => function () {
-
                 return [];
             },
 
             'model_class' => function () {
-
                 return User::class;
             },
         ];
@@ -51,11 +47,9 @@ class UserListingService extends Service
     public static function getArrRuleLists()
     {
         return [
-            'email'
-                => ['string', 'email'],
+            'email' => ['string', 'email'],
 
-            'nick'
-                => ['string', 'min:2', 'max:12']
+            'nick' => ['string', 'min:2', 'max:12'],
         ];
     }
 

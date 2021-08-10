@@ -2,7 +2,6 @@
 
 namespace App\Services\Post;
 
-use App\Models\CommentReply;
 use App\Models\Post;
 use App\Services\Auth\AuthUserRequiringService;
 use FunctionalCoding\Service;
@@ -12,11 +11,9 @@ class PostDeletingService extends Service
     public static function getArrBindNames()
     {
         return [
-            'post'
-                => 'post for {{id}}',
+            'post' => 'post for {{id}}',
 
-            'post_user_id'
-                => 'user_id of {{post}}',
+            'post_user_id' => 'user_id of {{post}}',
         ];
     }
 
@@ -24,7 +21,6 @@ class PostDeletingService extends Service
     {
         return [
             'result' => function ($post) {
-
                 $post->content = null;
                 $post->delete();
             },
@@ -35,17 +31,14 @@ class PostDeletingService extends Service
     {
         return [
             'post' => function ($id) {
-
                 return Post::find($postId);
             },
 
             'post_user_id' => function ($post) {
-
                 return $post->user_id;
             },
 
             'result' => function () {
-
                 return null;
             },
         ];
@@ -59,14 +52,11 @@ class PostDeletingService extends Service
     public static function getArrRuleLists()
     {
         return [
-            'post'
-                => ['not_null'],
+            'post' => ['not_null'],
 
-            'id'
-                => ['required', 'integer'],
+            'id' => ['required', 'integer'],
 
-            'post_user_id'
-                => ['same:{{auth_user_id}}']
+            'post_user_id' => ['same:{{auth_user_id}}'],
         ];
     }
 

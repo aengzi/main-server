@@ -3,16 +3,15 @@
 namespace App\Services\YtbVideo;
 
 use App\Models\YtbVideo;
-use FunctionalCoding\Service;
 use FunctionalCoding\Illuminate\Service\FindService;
+use FunctionalCoding\Service;
 
 class YtbVideoFindingService extends Service
 {
     public static function getArrBindNames()
     {
         return [
-            'result'
-                => 'youtube_video for {{id}}',
+            'result' => 'youtube_video for {{id}}',
         ];
     }
 
@@ -25,12 +24,10 @@ class YtbVideoFindingService extends Service
     {
         return [
             'available_expands' => function () {
-
                 return ['like'];
             },
 
             'model_class' => function () {
-
                 return YtbVideo::class;
             },
         ];
