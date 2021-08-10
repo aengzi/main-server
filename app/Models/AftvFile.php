@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use FunctionalCoding\Illuminate\Model;
-use Illuminate\Database\Eloquent\Builder;
 
 class AftvFile extends Model
 {
@@ -44,7 +43,7 @@ class AftvFile extends Model
         return $this->m3u8->ts_path.'/'.str_replace('###', $this->file_index, $this->m3u8->file_prefix);
     }
 
-    protected function setKeysForSaveQuery(Builder $query)
+    protected function setKeysForSaveQuery($query)
     {
         return $query
             ->where('bcast_id', '=', $this->getAttribute('bcast_id'))

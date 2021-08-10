@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use FunctionalCoding\Illuminate\Model;
-use Illuminate\Database\Eloquent\Builder;
 
 class AftvChatFile extends Model
 {
@@ -33,7 +32,7 @@ class AftvChatFile extends Model
         return $this->belongsTo(AftvReview::class, 'review_id', 'id');
     }
 
-    protected function setKeysForSaveQuery(Builder $query)
+    protected function setKeysForSaveQuery($query)
     {
         return $query
             ->where('bcast_id', '=', $this->getAttribute('bcast_id'))

@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use FunctionalCoding\Illuminate\Model;
-use Illuminate\Database\Eloquent\Builder;
 
 class AftvM3u8 extends Model
 {
@@ -50,7 +49,7 @@ class AftvM3u8 extends Model
         return $this->belongsTo(AftvReview::class, 'review_id', 'id');
     }
 
-    protected function setKeysForSaveQuery(Builder $query)
+    protected function setKeysForSaveQuery($query)
     {
         return $query
             ->where('bcast_id', '=', $this->getAttribute('bcast_id'))
