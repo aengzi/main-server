@@ -25,18 +25,17 @@ $app = new Laravel\Lumen\Application(
 $app->withFacades();
 $app->withEloquent();
 
-if ( array_key_exists('GAE_ENV', $_SERVER) )
-{
-    $app->useStoragePath(env('APP_STORAGE', base_path() . '/storage'));
+if (array_key_exists('GAE_ENV', $_SERVER)) {
+    $app->useStoragePath(env('APP_STORAGE', base_path().'/storage'));
 }
 
 config([
     'database.connections.mysql.options' => [
-        PDO::MYSQL_ATTR_SSL_CA   => storage_path('app/database/server-ca.pem'),
+        PDO::MYSQL_ATTR_SSL_CA => storage_path('app/database/server-ca.pem'),
         PDO::MYSQL_ATTR_SSL_CERT => storage_path('app/database/client-cert.pem'),
-        PDO::MYSQL_ATTR_SSL_KEY  => storage_path('app/database/client-key.pem'),
-        PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false
-    ]
+        PDO::MYSQL_ATTR_SSL_KEY => storage_path('app/database/client-key.pem'),
+        PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false,
+    ],
 ]);
 
 /*
@@ -90,10 +89,10 @@ $app->singleton(
 |
 */
 
-$app->register(App\Providers\ModelMorphMapServiceProvider::class);
 $app->register(App\Providers\AppServiceProvider::class);
-$app->register(App\Providers\AuthServiceProvider::class);
-// $app->register(App\Providers\EventServiceProvider::class);
+$app->register(FunctionalCoding\Illuminate\Providers\ServiceValidationProvider::class);
+
+$app->register(FunctionalCoding\Illuminate\Providers\ModelRelationMapProvider::class);
 
 /*
 |--------------------------------------------------------------------------
