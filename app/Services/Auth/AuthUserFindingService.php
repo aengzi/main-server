@@ -36,6 +36,10 @@ class AuthUserFindingService extends Service
     public static function getArrLoaders()
     {
         return [
+            'available_expands' => function () {
+                return [];
+            },
+
             'current_time' => function () {
                 return Carbon::now('UTC')->format('Y-m-d H:i:s');
             },
