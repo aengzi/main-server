@@ -429,12 +429,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/functional-coding/php.git",
-                "reference": "77d957533ca90e0e79d93eed7be46b47093b2b62"
+                "reference": "d7f44926a5af853acdcc70a5daee345d62f803a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/functional-coding/php/zipball/77d957533ca90e0e79d93eed7be46b47093b2b62",
-                "reference": "77d957533ca90e0e79d93eed7be46b47093b2b62",
+                "url": "https://api.github.com/repos/functional-coding/php/zipball/d7f44926a5af853acdcc70a5daee345d62f803a1",
+                "reference": "d7f44926a5af853acdcc70a5daee345d62f803a1",
                 "shasum": ""
             },
             "require": {
@@ -466,7 +466,7 @@
                 "issues": "https://github.com/functional-coding/php/issues",
                 "source": "https://github.com/functional-coding/php/tree/master"
             },
-            "time": "2021-08-10T06:03:37+00:00"
+            "time": "2021-08-11T00:17:07+00:00"
         },
         {
             "name": "functional-coding/php-illuminate",
@@ -474,12 +474,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/functional-coding/php-illuminate.git",
-                "reference": "a604ee5b04355f831808f20751fd1157c65690b5"
+                "reference": "e7dcef96f1d884b3e5b6a506659d8a3c5daefcfb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/functional-coding/php-illuminate/zipball/a604ee5b04355f831808f20751fd1157c65690b5",
-                "reference": "a604ee5b04355f831808f20751fd1157c65690b5",
+                "url": "https://api.github.com/repos/functional-coding/php-illuminate/zipball/e7dcef96f1d884b3e5b6a506659d8a3c5daefcfb",
+                "reference": "e7dcef96f1d884b3e5b6a506659d8a3c5daefcfb",
                 "shasum": ""
             },
             "require": {
@@ -519,7 +519,7 @@
                 "issues": "https://github.com/functional-coding/php-illuminate/issues",
                 "source": "https://github.com/functional-coding/php-illuminate/tree/master"
             },
-            "time": "2021-08-10T18:40:57+00:00"
+            "time": "2021-08-11T04:57:02+00:00"
         },
         {
             "name": "functional-coding/php-jwt",
@@ -527,12 +527,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/functional-coding/php-JWT.git",
-                "reference": "fcf8b7e74a3f6101880a0868f9d839f5b6608f55"
+                "reference": "332ec1939180056f48ffabc48c0ab49064ecfdba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/functional-coding/php-JWT/zipball/fcf8b7e74a3f6101880a0868f9d839f5b6608f55",
-                "reference": "fcf8b7e74a3f6101880a0868f9d839f5b6608f55",
+                "url": "https://api.github.com/repos/functional-coding/php-JWT/zipball/332ec1939180056f48ffabc48c0ab49064ecfdba",
+                "reference": "332ec1939180056f48ffabc48c0ab49064ecfdba",
                 "shasum": ""
             },
             "require": {
@@ -568,7 +568,7 @@
                 "issues": "https://github.com/functional-coding/php-JWT/issues",
                 "source": "https://github.com/functional-coding/php-JWT/tree/master"
             },
-            "time": "2021-08-10T17:09:46+00:00"
+            "time": "2021-08-11T03:33:44+00:00"
         },
         {
             "name": "google/apiclient",
@@ -3753,16 +3753,16 @@
         },
         {
             "name": "ramsey/uuid",
-            "version": "4.2.0",
+            "version": "4.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/uuid.git",
-                "reference": "7231612a5221f5524d3575bebdce20eeef8547a1"
+                "reference": "fe665a03df4f056aa65af552a96e1976df8c8dae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/uuid/zipball/7231612a5221f5524d3575bebdce20eeef8547a1",
-                "reference": "7231612a5221f5524d3575bebdce20eeef8547a1",
+                "url": "https://api.github.com/repos/ramsey/uuid/zipball/fe665a03df4f056aa65af552a96e1976df8c8dae",
+                "reference": "fe665a03df4f056aa65af552a96e1976df8c8dae",
                 "shasum": ""
             },
             "require": {
@@ -3834,7 +3834,7 @@
             ],
             "support": {
                 "issues": "https://github.com/ramsey/uuid/issues",
-                "source": "https://github.com/ramsey/uuid/tree/4.2.0"
+                "source": "https://github.com/ramsey/uuid/tree/4.2.1"
             },
             "funding": [
                 {
@@ -3846,7 +3846,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-08-06T22:30:43+00:00"
+            "time": "2021-08-11T01:06:55+00:00"
         },
         {
             "name": "rize/uri-template",
