@@ -1,12 +1,12 @@
-runtime: php73
+runtime: php74
 service: api
 entrypoint: serve public/index.php
 env_variables:
-  APP_STORAGE: /tmp
-  VIEW_COMPILED_PATH: /tmp
-  APP_SERVICES_CACHE: /tmp/services.php
-  APP_PACKAGES_CACHE: /tmp/packages.php
-  APP_CONFIG_CACHE: /tmp/config.php
-  APP_ROUTES_CACHE: /tmp/routes.php
-  CACHE_DRIVER: database
-  SESSION_DRIVER: database
+    APP_STORAGE: /tmp
+    VIEW_COMPILED_PATH: /tmp
+    APP_SERVICES_CACHE: /tmp/services.php
+    APP_PACKAGES_CACHE: /tmp/packages.php
+    APP_CONFIG_CACHE: /tmp/config.php
+    APP_ROUTES_CACHE: /tmp/routes.php
+    CACHE_DRIVER: database
+    SESSION_DRIVER: database
