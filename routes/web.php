@@ -21,9 +21,10 @@ $addRoutes = function () use ($router) {
     $prefix = str_replace('routes'.DIRECTORY_SEPARATOR.'web.php', '', $prefix);
     $prefix = rtrim($prefix, DIRECTORY_SEPARATOR);
     $prefix = str_replace(DIRECTORY_SEPARATOR, '/', $prefix);
+    $prefix = $_SERVER['DOCUMENT_ROOT'] && Str::startsWith(__FILE__, str_replace('/', DIRECTORY_SEPARATOR, $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR)) ? $prefix : '';
 
     $router->group([
-        'prefix' => $_SERVER['DOCUMENT_ROOT'] && Str::startsWith(__FILE__, str_replace('/', DIRECTORY_SEPARATOR, $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR)) ? $prefix : '',
+        'prefix' => $prefix,
         'middleware' => [
             FunctionalCoding\Illuminate\Http\ServiceRunMiddleware::class,
             FunctionalCoding\Illuminate\Http\ServiceParameterSettingMiddleware::class,
