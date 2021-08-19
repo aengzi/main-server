@@ -10,6 +10,10 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
+
+use App\Http\Middlewares\RequestInputValueCastingMiddleware;
+use App\Http\Middlewares\ServiceParameterSettingMiddleware;
+use App\Http\Middlewares\ServiceRunMiddleware;
 use Illuminate\Support\Str;
 
 error_reporting(E_ALL);
@@ -26,9 +30,9 @@ $addRoutes = function () use ($router) {
     $router->group([
         'prefix' => $prefix,
         'middleware' => [
-            FunctionalCoding\Illuminate\Http\ServiceRunMiddleware::class,
-            FunctionalCoding\Illuminate\Http\ServiceParameterSettingMiddleware::class,
-            FunctionalCoding\Illuminate\Http\RequestInputValueCastingMiddleware::class,
+            ServiceRunMiddleware::class,
+            ServiceParameterSettingMiddleware::class,
+            RequestInputValueCastingMiddleware::class,
         ],
     ], function () use ($router) {
         $router->get('auth-user', 'AuthUserController@index');

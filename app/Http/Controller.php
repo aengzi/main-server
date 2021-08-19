@@ -2,10 +2,23 @@
 
 namespace App\Http;
 
-use FunctionalCoding\Illuminate\Http\ControllerTrait;
-use Laravel\Lumen\Routing\Controller as BaseController;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Request;
 
-class Controller extends BaseController
+class Controller extends \Laravel\Lumen\Routing\Controller
 {
-    use ControllerTrait;
+    public static function bearerToken()
+    {
+        return Request::bearerToken() ? Request::bearerToken() : '';
+    }
+
+    public static function input($key)
+    {
+        return Arr::get(Request::all(), $key, '');
+    }
+
+    public static function route($key)
+    {
+        return Request::route($key);
+    }
 }
