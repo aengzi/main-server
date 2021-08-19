@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use FunctionalCoding\Illuminate\Model;
+use App\Model;
 
 class AftvBcast extends Model
 {
