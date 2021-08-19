@@ -4,7 +4,7 @@ namespace App\Services\CommentThread;
 
 use App\Models\CommentThread;
 use App\Models\User;
-use FunctionalCoding\Illuminate\Service\PaginationListService;
+use FunctionalCoding\ORM\Eloquent\Service\PaginationListService;
 use FunctionalCoding\Service;
 use Illuminate\Database\Eloquent\Relations\Relation;
 

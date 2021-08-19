@@ -4,7 +4,7 @@ namespace App\Services\YtbCommentReply;
 
 use App\Models\YtbCommentReply;
 use App\Models\YtbCommentThread;
-use FunctionalCoding\Illuminate\Service\PaginationListService;
+use FunctionalCoding\ORM\Eloquent\Service\PaginationListService;
 use FunctionalCoding\Service;
 
 class YtbCommentReplyPagingService extends Service

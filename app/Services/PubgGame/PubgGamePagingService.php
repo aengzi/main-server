@@ -5,8 +5,8 @@ namespace App\Services\PubgGame;
 use App\Models\Like;
 use App\Models\PubgGame;
 use App\Models\PubgMeta;
-use FunctionalCoding\Illuminate\Relation;
-use FunctionalCoding\Illuminate\Service\PaginationListService;
+use App\Relation;
+use FunctionalCoding\ORM\Eloquent\Service\PaginationListService;
 use FunctionalCoding\Service;
 
 class PubgGamePagingService extends Service

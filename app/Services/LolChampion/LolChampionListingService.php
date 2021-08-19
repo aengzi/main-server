@@ -3,7 +3,7 @@
 namespace App\Services\LolChampion;
 
 use App\Models\LolChampion;
-use FunctionalCoding\Illuminate\Service\ListService;
+use FunctionalCoding\ORM\Eloquent\Service\ListService;
 use FunctionalCoding\Service;
 
 class LolChampionListingService extends Service

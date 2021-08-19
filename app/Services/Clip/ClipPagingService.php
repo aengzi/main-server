@@ -5,8 +5,8 @@ namespace App\Services\Clip;
 use App\Models\Clip;
 use App\Models\User;
 use App\Models\Vod;
-use FunctionalCoding\Illuminate\Relation;
-use FunctionalCoding\Illuminate\Service\PaginationListService;
+use App\Relation;
+use FunctionalCoding\ORM\Eloquent\Service\PaginationListService;
 use FunctionalCoding\Service;
 
 class ClipPagingService extends Service

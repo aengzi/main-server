@@ -3,7 +3,7 @@
 namespace App\Services\YtbVideo;
 
 use App\Models\YtbVideo;
-use FunctionalCoding\Illuminate\Service\FindService;
+use FunctionalCoding\ORM\Eloquent\Service\FindService;
 use FunctionalCoding\Service;
 
 class YtbVideoFindingService extends Service

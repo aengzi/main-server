@@ -3,7 +3,7 @@
 namespace App\Services\User;
 
 use App\Models\User;
-use FunctionalCoding\Illuminate\Service\ListService;
+use FunctionalCoding\ORM\Eloquent\Service\ListService;
 use FunctionalCoding\Service;
 
 class UserListingService extends Service

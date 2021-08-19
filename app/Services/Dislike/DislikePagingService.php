@@ -4,7 +4,7 @@ namespace App\Services\Dislike;
 
 use App\Models\Dislike;
 use App\Models\User;
-use FunctionalCoding\Illuminate\Service\PaginationListService;
+use FunctionalCoding\ORM\Eloquent\Service\PaginationListService;
 use FunctionalCoding\Service;
 use Illuminate\Database\Eloquent\Relations\Relation;
 

@@ -5,8 +5,8 @@ namespace App\Services\LolGame;
 use App\Models\Like;
 use App\Models\LolGame;
 use App\Models\LolMeta;
-use FunctionalCoding\Illuminate\Relation;
-use FunctionalCoding\Illuminate\Service\PaginationListService;
+use App\Relation;
+use FunctionalCoding\ORM\Eloquent\Service\PaginationListService;
 use FunctionalCoding\Service;
 
 class LolGamePagingService extends Service

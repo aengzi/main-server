@@ -4,7 +4,7 @@ namespace App\Services\CommentReply;
 
 use App\Models\CommentReply;
 use App\Models\CommentThread;
-use FunctionalCoding\Illuminate\Service\PaginationListService;
+use FunctionalCoding\ORM\Eloquent\Service\PaginationListService;
 use FunctionalCoding\Service;
 
 class CommentReplyPagingService extends Service

@@ -4,8 +4,8 @@ namespace App\Services\AftvBcast;
 
 use App\Models\AftvBcast;
 use App\Models\Vod;
-use FunctionalCoding\Illuminate\Relation;
-use FunctionalCoding\Illuminate\Service\PaginationListService;
+use App\Relation;
+use FunctionalCoding\ORM\Eloquent\Service\PaginationListService;
 use FunctionalCoding\Service;
 
 class AftvBcastPagingService extends Service

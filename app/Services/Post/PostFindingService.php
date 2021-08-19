@@ -3,7 +3,7 @@
 namespace App\Services\Post;
 
 use App\Models\Post;
-use FunctionalCoding\Illuminate\Service\FindService;
+use FunctionalCoding\ORM\Eloquent\Service\FindService;
 use FunctionalCoding\Service;
 
 class PostFindingService extends Service

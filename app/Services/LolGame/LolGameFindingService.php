@@ -3,7 +3,7 @@
 namespace App\Services\LolGame;
 
 use App\Models\LolGame;
-use FunctionalCoding\Illuminate\Service\FindService;
+use FunctionalCoding\ORM\Eloquent\Service\FindService;
 use FunctionalCoding\Service;
 
 class LolGameFindingService extends Service

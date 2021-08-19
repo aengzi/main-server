@@ -4,7 +4,7 @@ namespace App\Services\Auth;
 
 use App\Models\User;
 use Carbon\Carbon;
-use FunctionalCoding\Illuminate\Service\FindService;
+use FunctionalCoding\ORM\Eloquent\Service\FindService;
 use FunctionalCoding\JWT\Service\TokenDecryptionService;
 use FunctionalCoding\Service;
 use Illuminate\Support\Facades\Auth;

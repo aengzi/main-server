@@ -3,7 +3,7 @@
 namespace App\Services\AftvBcast;
 
 use App\Models\AftvBcast;
-use FunctionalCoding\Illuminate\Service\FindService;
+use FunctionalCoding\ORM\Eloquent\Service\FindService;
 use FunctionalCoding\Service;
 
 class AftvBcastFindingService extends Service

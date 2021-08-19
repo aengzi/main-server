@@ -3,7 +3,7 @@
 namespace App\Services\Clip;
 
 use App\Models\Clip;
-use FunctionalCoding\Illuminate\Service\FindService;
+use FunctionalCoding\ORM\Eloquent\Service\FindService;
 use FunctionalCoding\Service;
 
 class ClipFindingService extends Service
