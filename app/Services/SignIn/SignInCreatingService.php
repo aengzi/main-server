@@ -35,6 +35,10 @@ class SignInCreatingService extends Service
             'result' => function ($payload) {
                 return [TokenEncryptionService::class, [
                     'payload' => $payload,
+                    'public_key' => file_get_contents(app()->storagePath('app/rsa/id_rsa.pub')),
+                ], [
+                    'payload' => 'payload of {{user}}',
+                    'public_key' => '{public encryption key}',
                 ]];
             },
 
