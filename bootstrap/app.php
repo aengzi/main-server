@@ -4,7 +4,7 @@ require_once __DIR__.'/../vendor/autoload.php';
 
 (new Laravel\Lumen\Bootstrap\LoadEnvironmentVariables(
     dirname(__DIR__),
-    getenv('APP_ENV') ? '.env.'.getenv('APP_ENV') : '.env.production'
+    '.env.'.(getenv('APP_ENV') ?: 'production')
 ))->bootstrap();
 
 /*
