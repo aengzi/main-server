@@ -9,7 +9,6 @@ class PwdReset extends Model
     public const CREATED_AT = 'created_at';
     public const UPDATED_AT = 'updated_at';
     public $incrementing = true;
-    protected $guarded = ['id'];
     protected $casts = [
         'id' => 'integer',
     ];
@@ -20,6 +19,7 @@ class PwdReset extends Model
         'created_at',
         'updated_at',
     ];
+    protected $guarded = ['id'];
     protected $hidden = [
         'token',
     ];

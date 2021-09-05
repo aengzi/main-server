@@ -33,21 +33,6 @@ class LolGame extends Model
         'time_sh_elapsed_sec',
     ];
 
-    public function metas()
-    {
-        return $this->hasMany(LolMeta::class, 'game_id', 'id');
-    }
-
-    public function vod()
-    {
-        return $this->morphOne(Vod::class, 'related');
-    }
-
-    public function timelines()
-    {
-        return $this->hasMany(LolTimeline::class, 'game_id', 'id');
-    }
-
     public function getThumbnailAttribute($value)
     {
         return 'https://storage.googleapis.com/aengzi.com/vods/'.$this->vod_id.'/origin.jpg';
@@ -56,5 +41,20 @@ class LolGame extends Model
     public function getTimeShImgAttribute($value) // blob data cause error when serializing without this
     {
         return base64_encode($value);
+    }
+
+    public function metas()
+    {
+        return $this->hasMany(LolMeta::class, 'game_id', 'id');
+    }
+
+    public function timelines()
+    {
+        return $this->hasMany(LolTimeline::class, 'game_id', 'id');
+    }
+
+    public function vod()
+    {
+        return $this->morphOne(Vod::class, 'related');
     }
 }

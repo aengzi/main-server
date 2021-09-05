@@ -9,10 +9,13 @@ class Post extends Model
     public const CREATED_AT = 'created_at';
     public const UPDATED_AT = 'updated_at';
     public $incrementing = true;
-    protected $guarded = ['id'];
     protected $casts = [
         'id' => 'integer',
         'user_id' => 'integer',
+    ];
+    protected $dates = [
+        self::CREATED_AT,
+        self::UPDATED_AT,
     ];
     protected $fillable = [
         'user_id',
@@ -25,12 +28,14 @@ class Post extends Model
         'created_at',
         'updated_at',
     ];
+    protected $guarded = ['id'];
     protected $hidden = [
     ];
-    protected $dates = [
-        self::CREATED_AT,
-        self::UPDATED_AT,
-    ];
+
+    public function commentThreads()
+    {
+        return $this->morphMany(CommentThread::class, 'related');
+    }
 
     public function dislike()
     {
@@ -50,11 +55,6 @@ class Post extends Model
     public function likes()
     {
         return $this->morphMany(Like::class, 'related');
-    }
-
-    public function commentThreads()
-    {
-        return $this->morphMany(CommentThread::class, 'related');
     }
 
     public function user()

@@ -7,7 +7,6 @@ use App\Model;
 class LolMeta extends Model
 {
     public $incrementing = true;
-    protected $guarded = ['id'];
     protected $casts = [
         'id' => 'integer',
         'game_id' => 'integer',
@@ -17,6 +16,7 @@ class LolMeta extends Model
         'property',
         'value',
     ];
+    protected $guarded = ['id'];
     protected $hidden = [
     ];
 

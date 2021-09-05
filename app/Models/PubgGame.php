@@ -7,7 +7,6 @@ use App\Model;
 class PubgGame extends Model
 {
     public $incrementing = true;
-    protected $guarded = ['id'];
     protected $casts = [
         'id' => 'integer',
         'vod_id' => 'integer',
@@ -22,20 +21,21 @@ class PubgGame extends Model
         'match',
         'deaths',
     ];
+    protected $guarded = ['id'];
     protected $hidden = [
         'offset',
         'match',
         'deaths',
     ];
 
+    public function getThumbnailAttribute($value)
+    {
+        return 'https://storage.googleapis.com/aengzi.com/vods/'.$this->vod_id.'/origin.jpg';
+    }
+
     public function metas()
     {
         return $this->hasMany(PubgMeta::class, 'game_id', 'id');
-    }
-
-    public function vod()
-    {
-        return $this->morphOne(Vod::class, 'related');
     }
 
     public function timelines()
@@ -43,8 +43,8 @@ class PubgGame extends Model
         return $this->hasMany(PubgTimeline::class, 'game_id', 'id');
     }
 
-    public function getThumbnailAttribute($value)
+    public function vod()
     {
-        return 'https://storage.googleapis.com/aengzi.com/vods/'.$this->vod_id.'/origin.jpg';
+        return $this->morphOne(Vod::class, 'related');
     }
 }

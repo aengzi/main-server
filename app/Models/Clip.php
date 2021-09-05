@@ -8,7 +8,6 @@ class Clip extends Model
 {
     public const CREATED_AT = 'created_at';
     public $incrementing = true;
-    protected $guarded = ['id'];
     protected $casts = [
         'id' => 'integer',
         'user_id' => 'integer',
@@ -17,6 +16,7 @@ class Clip extends Model
         'user_id',
         'created_at',
     ];
+    protected $guarded = ['id'];
     protected $hidden = [
     ];
 

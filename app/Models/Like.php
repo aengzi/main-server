@@ -8,7 +8,6 @@ class Like extends Model
 {
     public const CREATED_AT = 'created_at';
     public $incrementing = true;
-    protected $guarded = ['id'];
     protected $casts = [
         'id' => 'integer',
         'user_id' => 'integer',
@@ -20,16 +19,17 @@ class Like extends Model
         'related_type',
         'created_at',
     ];
+    protected $guarded = ['id'];
     protected $hidden = [
     ];
-
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id', 'id');
-    }
 
     public function related()
     {
         return $this->morphTo('related');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 }

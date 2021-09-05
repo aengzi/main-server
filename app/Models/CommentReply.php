@@ -9,11 +9,14 @@ class CommentReply extends Model
     public const CREATED_AT = 'created_at';
     public const UPDATED_AT = 'updated_at';
     public $incrementing = true;
-    protected $guarded = ['id'];
     protected $casts = [
         'id' => 'integer',
         'user_id' => 'integer',
         'thread_id' => 'integer',
+    ];
+    protected $dates = [
+        self::CREATED_AT,
+        self::UPDATED_AT,
     ];
     protected $fillable = [
         'user_id',
@@ -22,11 +25,8 @@ class CommentReply extends Model
         'created_at',
         'updated_at',
     ];
+    protected $guarded = ['id'];
     protected $hidden = [
-    ];
-    protected $dates = [
-        self::CREATED_AT,
-        self::UPDATED_AT,
     ];
 
     public function getCreatedAtAttribute()

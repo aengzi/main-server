@@ -5,33 +5,11 @@ use FunctionalCoding\Service;
 
 abstract class FunctionalTest extends TestCase
 {
-    public $uri;
     public $environment = 'functional';
     public $input = [];
     public $server = [];
+    public $uri;
     public $url;
-
-    public function assertResult($expect)
-    {
-        $serv = $this->runService();
-        $result = $serv->data()->get('result');
-        $errors = $serv->totalErrors()->all();
-
-        $this->assertEquals([], $errors, implode(',', $errors));
-        $this->assertEquals($expect, $result);
-    }
-
-    public function assertPersistence($model, $existCount = 1)
-    {
-        $attrs = $model->getAttributes();
-        $query = $model->query();
-
-        foreach ($attrs as $attr => $value) {
-            $query->where($attr, $value);
-        }
-
-        $this->assertEquals($existCount, $query->count());
-    }
 
     public function assertDeletion($model)
     {
@@ -46,29 +24,26 @@ abstract class FunctionalTest extends TestCase
         $this->assertContains($msg, $errors, implode(',', $errors));
     }
 
-    public function assertResultWithPersisting($expects)
+    public function assertPersistence($model, $existCount = 1)
+    {
+        $attrs = $model->getAttributes();
+        $query = $model->query();
+
+        foreach ($attrs as $attr => $value) {
+            $query->where($attr, $value);
+        }
+
+        $this->assertEquals($existCount, $query->count());
+    }
+
+    public function assertResult($expect)
     {
         $serv = $this->runService();
         $result = $serv->data()->get('result');
         $errors = $serv->totalErrors()->all();
 
-        if ($expects instanceof Model) {
-            $this->assertInstanceOf(Model::class, $result);
-
-            $expects = collect([$expects]);
-            $result = collect([$result]);
-        }
-
         $this->assertEquals([], $errors, implode(',', $errors));
-        $this->assertEquals(get_class($expects), get_class($result));
-
-        foreach ($result as $i => $model) {
-            $expect = $expects[$i];
-
-            $this->assertInstanceOf(Model::class, $model);
-            $this->assertEquals(get_class($expect), get_class($model));
-            $this->assertEquals([], array_diff($expect->toArray(), $model->toArray()));
-        }
+        $this->assertEquals($expect, $result);
     }
 
     public function assertResultWithFinding($expectId)
@@ -105,6 +80,31 @@ abstract class FunctionalTest extends TestCase
 
         $this->assertEquals([], $errors, implode(',', $errors));
         $this->assertEquals($result, $expectIds);
+    }
+
+    public function assertResultWithPersisting($expects)
+    {
+        $serv = $this->runService();
+        $result = $serv->data()->get('result');
+        $errors = $serv->totalErrors()->all();
+
+        if ($expects instanceof Model) {
+            $this->assertInstanceOf(Model::class, $result);
+
+            $expects = collect([$expects]);
+            $result = collect([$result]);
+        }
+
+        $this->assertEquals([], $errors, implode(',', $errors));
+        $this->assertEquals(get_class($expects), get_class($result));
+
+        foreach ($result as $i => $model) {
+            $expect = $expects[$i];
+
+            $this->assertInstanceOf(Model::class, $model);
+            $this->assertEquals(get_class($expect), get_class($model));
+            $this->assertEquals([], array_diff($expect->toArray(), $model->toArray()));
+        }
     }
 
     public function assertResultWithReturning($expect)

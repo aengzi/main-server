@@ -9,7 +9,6 @@ class YtbCommentThread extends Model
     public const CREATED_AT = 'created_at';
     public const UPDATED_AT = 'updated_at';
     public $incrementing = false;
-    protected $keyType = 'string';
     protected $casts = [
     ];
     protected $dates = [
@@ -30,6 +29,7 @@ class YtbCommentThread extends Model
     ];
     protected $hidden = [
     ];
+    protected $keyType = 'string';
 
     public function replies()
     {

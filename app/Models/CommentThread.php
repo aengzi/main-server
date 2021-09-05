@@ -9,11 +9,14 @@ class CommentThread extends Model
     public const CREATED_AT = 'created_at';
     public const UPDATED_AT = 'updated_at';
     public $incrementing = true;
-    protected $guarded = ['id'];
     protected $casts = [
         'id' => 'integer',
         'user_id' => 'integer',
         'related_id' => 'integer',
+    ];
+    protected $dates = [
+        self::CREATED_AT,
+        self::UPDATED_AT,
     ];
     protected $fillable = [
         'user_id',
@@ -26,12 +29,19 @@ class CommentThread extends Model
         'created_at',
         'updated_at',
     ];
+    protected $guarded = ['id'];
     protected $hidden = [
     ];
-    protected $dates = [
-        self::CREATED_AT,
-        self::UPDATED_AT,
-    ];
+
+    public function dislike()
+    {
+        return $this->relation(Dislike::class, [':model_type:', 'id', ':auth_user_id:'], ['related_type', 'related_id', 'user_id'], false);
+    }
+
+    public function dislikes()
+    {
+        return $this->morphMany(Dislike::class, 'related');
+    }
 
     public function getCreatedAtAttribute()
     {
@@ -44,16 +54,6 @@ class CommentThread extends Model
     public function getDateFormat()
     {
         return 'Y-m-d H:i:s.u';
-    }
-
-    public function dislike()
-    {
-        return $this->relation(Dislike::class, [':model_type:', 'id', ':auth_user_id:'], ['related_type', 'related_id', 'user_id'], false);
-    }
-
-    public function dislikes()
-    {
-        return $this->morphMany(Dislike::class, 'related');
     }
 
     public function like()

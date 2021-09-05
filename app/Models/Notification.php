@@ -9,7 +9,6 @@ class Notification extends Model
     public const CREATED_AT = 'created_at';
 
     public $incrementing = true;
-    protected $guarded = ['id'];
     protected $casts = [
         'id' => 'integer',
     ];
@@ -19,6 +18,7 @@ class Notification extends Model
         'description',
         'created_at',
     ];
+    protected $guarded = ['id'];
     protected $hidden = [
     ];
 }

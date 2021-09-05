@@ -16,7 +16,6 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     public const CREATED_AT = 'created_at';
     public $incrementing = true;
-    protected $guarded = ['id'];
     protected $appends = [
         'thumbnail',
     ];
@@ -30,19 +29,20 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'has_thumbnail',
         'created_at',
     ];
+    protected $guarded = ['id'];
     protected $hidden = [
         'password',
     ];
-
-    public function setPasswordAttribute($value)
-    {
-        $this->attributes['password'] = Hash::make($value);
-    }
 
     public function getThumbnailAttribute()
     {
         if ($this->has_thumbnail) {
             return 'https://storage.googleapis.com/aengzi.com/users/'.$this->getKey().'/origin.jpg';
         }
+    }
+
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = Hash::make($value);
     }
 }

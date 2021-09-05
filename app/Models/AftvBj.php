@@ -7,7 +7,6 @@ use App\Model;
 class AftvBj extends Model
 {
     public $incrementing = false;
-    protected $keyType = 'string';
     protected $casts = [
         'station_id' => 'integer',
         'bbs_id' => 'integer',
@@ -22,6 +21,7 @@ class AftvBj extends Model
     protected $hidden = [
         'gdrive_id',
     ];
+    protected $keyType = 'string';
 
     public function bcasts()
     {

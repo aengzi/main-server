@@ -7,7 +7,6 @@ use App\Model;
 class LolTimeline extends Model
 {
     public $incrementing = true;
-    protected $guarded = ['id'];
     protected $casts = [
         'id' => 'integer',
         'game_id' => 'integer',
@@ -17,6 +16,7 @@ class LolTimeline extends Model
         'type',
         'elapsed_timestamp',
     ];
+    protected $guarded = ['id'];
     protected $hidden = [
     ];
 

@@ -10,7 +10,6 @@ class Device extends Model
     public const UPDATED_AT = 'updated_at';
 
     public $incrementing = true;
-    protected $guarded = ['id'];
     protected $casts = [
         'id' => 'integer',
     ];
@@ -21,6 +20,7 @@ class Device extends Model
         'updated_at',
         'created_at',
     ];
+    protected $guarded = ['id'];
     protected $hidden = [
     ];
 }

@@ -8,7 +8,6 @@ class YtbVideo extends Model
 {
     public const CREATED_AT = 'created_at';
     public $incrementing = true;
-    protected $guarded = ['id'];
     protected $appends = [
         'thumbnail',
     ];
@@ -27,16 +26,17 @@ class YtbVideo extends Model
         'title',
         'created_at',
     ];
+    protected $guarded = ['id'];
     protected $hidden = [
     ];
-
-    public function like()
-    {
-        return $this->relation(Like::class, [':model_type:', 'id', ':auth_user_id:'], ['related_type', 'related_id', 'user_id'], false);
-    }
 
     public function getThumbnailAttribute($value)
     {
         return 'https://i.ytimg.com/vi/'.$this->ytb_id.'/mqdefault.jpg'; // maxresdefault
+    }
+
+    public function like()
+    {
+        return $this->relation(Like::class, [':model_type:', 'id', ':auth_user_id:'], ['related_type', 'related_id', 'user_id'], false);
     }
 }

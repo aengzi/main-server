@@ -7,7 +7,6 @@ use App\Model;
 class YtbChannel extends Model
 {
     public $incrementing = false;
-    protected $keyType = 'string';
     protected $casts = [
     ];
     protected $fillable = [
@@ -16,4 +15,5 @@ class YtbChannel extends Model
     ];
     protected $hidden = [
     ];
+    protected $keyType = 'string';
 }

@@ -7,7 +7,6 @@ use App\Model;
 class PubgTimeline extends Model
 {
     public $incrementing = true;
-    protected $guarded = ['id'];
     protected $casts = [
         'id' => 'integer',
         'game_id' => 'integer',
@@ -17,6 +16,7 @@ class PubgTimeline extends Model
         'type',
         'elapsed_sec',
     ];
+    protected $guarded = ['id'];
     protected $hidden = [
     ];
 }
