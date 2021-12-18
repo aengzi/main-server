@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 
 class DislikePagingService extends Service
 {
-    public static function getArrBindNames()
+    public static function getBindNames()
     {
         return [
             'available_related_types' => 'available options for {{related_types}}',
@@ -21,7 +21,7 @@ class DislikePagingService extends Service
         ];
     }
 
-    public static function getArrCallbackLists()
+    public static function getCallbackLists()
     {
         return [
             'query.related' => function ($query, $related, $relatedType) {
@@ -40,7 +40,7 @@ class DislikePagingService extends Service
         ];
     }
 
-    public static function getArrLoaders()
+    public static function getLoaders()
     {
         return [
             'available_expands' => function () {
@@ -69,12 +69,12 @@ class DislikePagingService extends Service
         ];
     }
 
-    public static function getArrPromiseLists()
+    public static function getPromiseLists()
     {
         return [];
     }
 
-    public static function getArrRuleLists()
+    public static function getRuleLists()
     {
         return [
             'related' => ['not_null'],
@@ -91,7 +91,7 @@ class DislikePagingService extends Service
         ];
     }
 
-    public static function getArrTraits()
+    public static function getTraits()
     {
         return [
             PaginationListService::class,

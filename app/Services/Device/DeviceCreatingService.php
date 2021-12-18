@@ -7,12 +7,12 @@ use FunctionalCoding\Service;
 
 class DeviceCreatingService extends Service
 {
-    public static function getArrBindNames()
+    public static function getBindNames()
     {
         return [];
     }
 
-    public static function getArrCallbackLists()
+    public static function getCallbackLists()
     {
         return [
             'device' => function ($device) {
@@ -21,7 +21,7 @@ class DeviceCreatingService extends Service
         ];
     }
 
-    public static function getArrLoaders()
+    public static function getLoaders()
     {
         return [
             'device' => function ($relatedId, $relatedType) {
@@ -48,12 +48,12 @@ class DeviceCreatingService extends Service
         ];
     }
 
-    public static function getArrPromiseLists()
+    public static function getPromiseLists()
     {
         return [];
     }
 
-    public static function getArrRuleLists()
+    public static function getRuleLists()
     {
         return [
             'related_id' => ['required', 'string'],
@@ -62,7 +62,7 @@ class DeviceCreatingService extends Service
         ];
     }
 
-    public static function getArrTraits()
+    public static function getTraits()
     {
         return [];
     }

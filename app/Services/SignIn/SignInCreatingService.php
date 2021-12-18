@@ -9,19 +9,19 @@ use Illuminate\Support\Facades\Hash;
 
 class SignInCreatingService extends Service
 {
-    public static function getArrBindNames()
+    public static function getBindNames()
     {
         return [
             'user' => 'matching user for {{email}} and {{password}}',
         ];
     }
 
-    public static function getArrCallbackLists()
+    public static function getCallbackLists()
     {
         return [];
     }
 
-    public static function getArrLoaders()
+    public static function getLoaders()
     {
         return [
             'payload' => function ($user) {
@@ -52,12 +52,12 @@ class SignInCreatingService extends Service
         ];
     }
 
-    public static function getArrPromiseLists()
+    public static function getPromiseLists()
     {
         return [];
     }
 
-    public static function getArrRuleLists()
+    public static function getRuleLists()
     {
         return [
             'email' => ['required', 'string', 'email'],
@@ -68,7 +68,7 @@ class SignInCreatingService extends Service
         ];
     }
 
-    public static function getArrTraits()
+    public static function getTraits()
     {
         return [];
     }

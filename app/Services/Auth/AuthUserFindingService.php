@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthUserFindingService extends Service
 {
-    public static function getArrBindNames()
+    public static function getBindNames()
     {
         return [
             'current_time' => 'current time',
@@ -24,7 +24,7 @@ class AuthUserFindingService extends Service
         ];
     }
 
-    public static function getArrCallbackLists()
+    public static function getCallbackLists()
     {
         return [
             'result' => function ($result) {
@@ -33,7 +33,7 @@ class AuthUserFindingService extends Service
         ];
     }
 
-    public static function getArrLoaders()
+    public static function getLoaders()
     {
         return [
             'available_expands' => function () {
@@ -68,14 +68,14 @@ class AuthUserFindingService extends Service
         ];
     }
 
-    public static function getArrPromiseLists()
+    public static function getPromiseLists()
     {
         return [
             'model' => ['current_time:strict'],
         ];
     }
 
-    public static function getArrRuleLists()
+    public static function getRuleLists()
     {
         return [
             'current_time' => ['before:{{payload_expired_at}}'],
@@ -84,7 +84,7 @@ class AuthUserFindingService extends Service
         ];
     }
 
-    public static function getArrTraits()
+    public static function getTraits()
     {
         return [
             FindService::class,

@@ -8,7 +8,7 @@ use FunctionalCoding\Service;
 
 class PostUpdatingService extends Service
 {
-    public static function getArrBindNames()
+    public static function getBindNames()
     {
         return [
             'post' => 'post for {{id}}',
@@ -17,7 +17,7 @@ class PostUpdatingService extends Service
         ];
     }
 
-    public static function getArrCallbackLists()
+    public static function getCallbackLists()
     {
         return [
             'post.content' => function ($content, $post) {
@@ -38,7 +38,7 @@ class PostUpdatingService extends Service
         ];
     }
 
-    public static function getArrLoaders()
+    public static function getLoaders()
     {
         return [
             'post' => function ($id) {
@@ -55,12 +55,12 @@ class PostUpdatingService extends Service
         ];
     }
 
-    public static function getArrPromiseLists()
+    public static function getPromiseLists()
     {
         return [];
     }
 
-    public static function getArrRuleLists()
+    public static function getRuleLists()
     {
         return [
             'id' => ['required', 'integer'],
@@ -77,7 +77,7 @@ class PostUpdatingService extends Service
         ];
     }
 
-    public static function getArrTraits()
+    public static function getTraits()
     {
         return [
             AuthUserRequiringService::class,

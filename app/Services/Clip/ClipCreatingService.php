@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 
 class ClipCreatingService extends Service
 {
-    public static function getArrBindNames()
+    public static function getBindNames()
     {
         return [
             'diff_sec' => 'second between {{start_sec}} and {{end_sec}}',
@@ -22,7 +22,7 @@ class ClipCreatingService extends Service
         ];
     }
 
-    public static function getArrCallbackLists()
+    public static function getCallbackLists()
     {
         return [
             'clip_vod.files' => function ($clipVod, $files, $m3u8String) {
@@ -68,7 +68,7 @@ class ClipCreatingService extends Service
         ];
     }
 
-    public static function getArrLoaders()
+    public static function getLoaders()
     {
         return [
             'diff_sec' => function ($endSec, $startSec) {
@@ -189,14 +189,14 @@ class ClipCreatingService extends Service
         ];
     }
 
-    public static function getArrPromiseLists()
+    public static function getPromiseLists()
     {
         return [
             'files' => ['diff_sec:strict'],
         ];
     }
 
-    public static function getArrRuleLists()
+    public static function getRuleLists()
     {
         return [
             'diff_sec' => ['integer', 'min:15', 'max:300'],
@@ -211,7 +211,7 @@ class ClipCreatingService extends Service
         ];
     }
 
-    public static function getArrTraits()
+    public static function getTraits()
     {
         return [];
     }

@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 
 class CommentThreadPagingService extends Service
 {
-    public static function getArrBindNames()
+    public static function getBindNames()
     {
         return [
             'related' => 'model for {{related_type}} and {{related_id}}',
@@ -19,7 +19,7 @@ class CommentThreadPagingService extends Service
         ];
     }
 
-    public static function getArrCallbackLists()
+    public static function getCallbackLists()
     {
         return [
             'query.related' => function ($query, $related, $relatedType) {
@@ -33,7 +33,7 @@ class CommentThreadPagingService extends Service
         ];
     }
 
-    public static function getArrLoaders()
+    public static function getLoaders()
     {
         return [
             'available_expands' => function () {
@@ -58,14 +58,14 @@ class CommentThreadPagingService extends Service
         ];
     }
 
-    public static function getArrPromiseLists()
+    public static function getPromiseLists()
     {
         return [
             'expands' => ['auth_user:strict'],
         ];
     }
 
-    public static function getArrRuleLists()
+    public static function getRuleLists()
     {
         return [
             'related' => ['not_null'],
@@ -80,7 +80,7 @@ class CommentThreadPagingService extends Service
         ];
     }
 
-    public static function getArrTraits()
+    public static function getTraits()
     {
         return [
             PaginationListService::class,

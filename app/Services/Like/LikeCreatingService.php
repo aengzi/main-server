@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 
 class LikeCreatingService extends Service
 {
-    public static function getArrBindNames()
+    public static function getBindNames()
     {
         return [
             'like' => 'like for {{related}}',
@@ -18,7 +18,7 @@ class LikeCreatingService extends Service
         ];
     }
 
-    public static function getArrCallbackLists()
+    public static function getCallbackLists()
     {
         return [
             'result' => function ($result) {
@@ -35,7 +35,7 @@ class LikeCreatingService extends Service
         ];
     }
 
-    public static function getArrLoaders()
+    public static function getLoaders()
     {
         return [
             'like' => function ($authUser, $related) {
@@ -60,14 +60,14 @@ class LikeCreatingService extends Service
         ];
     }
 
-    public static function getArrPromiseLists()
+    public static function getPromiseLists()
     {
         return [
             'result' => ['like'],
         ];
     }
 
-    public static function getArrRuleLists()
+    public static function getRuleLists()
     {
         return [
             'like' => ['null'],
@@ -80,7 +80,7 @@ class LikeCreatingService extends Service
         ];
     }
 
-    public static function getArrTraits()
+    public static function getTraits()
     {
         return [
             AuthUserRequiringService::class,

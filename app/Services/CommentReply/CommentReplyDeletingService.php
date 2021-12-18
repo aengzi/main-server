@@ -8,7 +8,7 @@ use FunctionalCoding\Service;
 
 class CommentReplyDeletingService extends Service
 {
-    public static function getArrBindNames()
+    public static function getBindNames()
     {
         return [
             'reply' => 'comment_reply for {{id}}',
@@ -17,7 +17,7 @@ class CommentReplyDeletingService extends Service
         ];
     }
 
-    public static function getArrCallbackLists()
+    public static function getCallbackLists()
     {
         return [
             'result' => function ($reply) {
@@ -35,7 +35,7 @@ class CommentReplyDeletingService extends Service
         ];
     }
 
-    public static function getArrLoaders()
+    public static function getLoaders()
     {
         return [
             'reply' => function ($id) {
@@ -52,14 +52,14 @@ class CommentReplyDeletingService extends Service
         ];
     }
 
-    public static function getArrPromiseLists()
+    public static function getPromiseLists()
     {
         return [
             'result' => ['user_id'],
         ];
     }
 
-    public static function getArrRuleLists()
+    public static function getRuleLists()
     {
         return [
             'id' => ['required', 'integer'],
@@ -70,7 +70,7 @@ class CommentReplyDeletingService extends Service
         ];
     }
 
-    public static function getArrTraits()
+    public static function getTraits()
     {
         return [
             AuthUserRequiringService::class,

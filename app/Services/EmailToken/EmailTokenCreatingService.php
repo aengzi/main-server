@@ -11,14 +11,14 @@ use Swift_Message;
 
 class EmailTokenCreatingService extends Service
 {
-    public static function getArrBindNames()
+    public static function getBindNames()
     {
         return [
             'attempt_count' => 'attempt count in 5 minutes',
         ];
     }
 
-    public static function getArrCallbackLists()
+    public static function getCallbackLists()
     {
         return [
             'body.google_client' => function ($body, $email, $googleClient, $subject) {
@@ -38,7 +38,7 @@ class EmailTokenCreatingService extends Service
         ];
     }
 
-    public static function getArrLoaders()
+    public static function getLoaders()
     {
         return [
             'attempt_count' => function ($email, $googleClient) {
@@ -79,21 +79,21 @@ class EmailTokenCreatingService extends Service
         ];
     }
 
-    public static function getArrPromiseLists()
+    public static function getPromiseLists()
     {
         return [
             'body' => ['attempt_count:strict'],
         ];
     }
 
-    public static function getArrRuleLists()
+    public static function getRuleLists()
     {
         return [
             'attempt_count' => ['integer', 'lt:5'],
         ];
     }
 
-    public static function getArrTraits()
+    public static function getTraits()
     {
         return [];
     }

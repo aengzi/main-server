@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 
 class SignUpEmailTokenCreatingService extends Service
 {
-    public static function getArrBindNames()
+    public static function getBindNames()
     {
         return [
             'same_email_user' => 'same email user',
@@ -18,12 +18,12 @@ class SignUpEmailTokenCreatingService extends Service
         ];
     }
 
-    public static function getArrCallbackLists()
+    public static function getCallbackLists()
     {
         return [];
     }
 
-    public static function getArrLoaders()
+    public static function getLoaders()
     {
         return [
             'body' => function ($payload) {
@@ -61,14 +61,14 @@ class SignUpEmailTokenCreatingService extends Service
         ];
     }
 
-    public static function getArrPromiseLists()
+    public static function getPromiseLists()
     {
         return [
             'payload' => ['same_email_user', 'same_nick_user'],
         ];
     }
 
-    public static function getArrRuleLists()
+    public static function getRuleLists()
     {
         return [
             'email' => ['required', 'string', 'email'],
@@ -83,7 +83,7 @@ class SignUpEmailTokenCreatingService extends Service
         ];
     }
 
-    public static function getArrTraits()
+    public static function getTraits()
     {
         return [
             EmailTokenCreatingService::class,

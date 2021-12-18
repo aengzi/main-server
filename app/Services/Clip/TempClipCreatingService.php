@@ -9,17 +9,17 @@ use Illuminate\Support\Str;
 
 class TempClipCreatingService extends Service
 {
-    public static function getArrBindNames()
+    public static function getBindNames()
     {
         return [];
     }
 
-    public static function getArrCallbackLists()
+    public static function getCallbackLists()
     {
         return [];
     }
 
-    public static function getArrLoaders()
+    public static function getLoaders()
     {
         return [
             'clip_vod' => function ($files, $m3u8String, $vod) {
@@ -48,17 +48,17 @@ class TempClipCreatingService extends Service
         ];
     }
 
-    public static function getArrPromiseLists()
+    public static function getPromiseLists()
     {
         return [];
     }
 
-    public static function getArrRuleLists()
+    public static function getRuleLists()
     {
         return [];
     }
 
-    public static function getArrTraits()
+    public static function getTraits()
     {
         return [
             ClipCreatingService::class,

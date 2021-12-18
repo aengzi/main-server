@@ -9,14 +9,14 @@ use FunctionalCoding\Service;
 
 class CommentReplyCreatingService extends Service
 {
-    public static function getArrBindNames()
+    public static function getBindNames()
     {
         return [
             'thread' => 'comment_thread for {{thread_id}}',
         ];
     }
 
-    public static function getArrCallbackLists()
+    public static function getCallbackLists()
     {
         return [
             'result' => function ($result) {
@@ -36,7 +36,7 @@ class CommentReplyCreatingService extends Service
         ];
     }
 
-    public static function getArrLoaders()
+    public static function getLoaders()
     {
         return [
             'result' => function ($authUser, $message, $thread) {
@@ -53,12 +53,12 @@ class CommentReplyCreatingService extends Service
         ];
     }
 
-    public static function getArrPromiseLists()
+    public static function getPromiseLists()
     {
         return [];
     }
 
-    public static function getArrRuleLists()
+    public static function getRuleLists()
     {
         return [
             'message' => ['required', 'string'],
@@ -69,7 +69,7 @@ class CommentReplyCreatingService extends Service
         ];
     }
 
-    public static function getArrTraits()
+    public static function getTraits()
     {
         return [
             AuthUserRequiringService::class,

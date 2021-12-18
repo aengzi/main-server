@@ -9,7 +9,7 @@ use FunctionalCoding\Service;
 
 class EmailTokenUpdatingService extends Service
 {
-    public static function getArrBindNames()
+    public static function getBindNames()
     {
         return [
             'current_time' => 'current time',
@@ -20,12 +20,12 @@ class EmailTokenUpdatingService extends Service
         ];
     }
 
-    public static function getArrCallbackLists()
+    public static function getCallbackLists()
     {
         return [];
     }
 
-    public static function getArrLoaders()
+    public static function getLoaders()
     {
         return [
             'current_time' => function () {
@@ -59,12 +59,12 @@ class EmailTokenUpdatingService extends Service
         ];
     }
 
-    public static function getArrPromiseLists()
+    public static function getPromiseLists()
     {
         return [];
     }
 
-    public static function getArrRuleLists()
+    public static function getRuleLists()
     {
         return [
             'current_time' => ['before:{{payload_expired_at}}'],
@@ -75,7 +75,7 @@ class EmailTokenUpdatingService extends Service
         ];
     }
 
-    public static function getArrTraits()
+    public static function getTraits()
     {
         return [];
     }

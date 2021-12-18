@@ -8,7 +8,7 @@ use FunctionalCoding\Service;
 
 class CommentReplyUpdatingService extends Service
 {
-    public static function getArrBindNames()
+    public static function getBindNames()
     {
         return [
             'result' => 'comment_reply for {{id}}',
@@ -17,7 +17,7 @@ class CommentReplyUpdatingService extends Service
         ];
     }
 
-    public static function getArrCallbackLists()
+    public static function getCallbackLists()
     {
         return [
             'result' => function ($message, $result) {
@@ -27,7 +27,7 @@ class CommentReplyUpdatingService extends Service
         ];
     }
 
-    public static function getArrLoaders()
+    public static function getLoaders()
     {
         return [
             'result' => function ($id) {
@@ -40,12 +40,12 @@ class CommentReplyUpdatingService extends Service
         ];
     }
 
-    public static function getArrPromiseLists()
+    public static function getPromiseLists()
     {
         return [];
     }
 
-    public static function getArrRuleLists()
+    public static function getRuleLists()
     {
         return [
             'id' => ['required', 'integer'],
@@ -58,7 +58,7 @@ class CommentReplyUpdatingService extends Service
         ];
     }
 
-    public static function getArrTraits()
+    public static function getTraits()
     {
         return [
             AuthUserRequiringService::class,

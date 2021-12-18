@@ -10,12 +10,12 @@ use FunctionalCoding\Service;
 
 class AftvBcastPagingService extends Service
 {
-    public static function getArrBindNames()
+    public static function getBindNames()
     {
         return [];
     }
 
-    public static function getArrCallbackLists()
+    public static function getCallbackLists()
     {
         return [
             'query.order_by_array' => function ($orderByArray, $query) {
@@ -53,7 +53,7 @@ class AftvBcastPagingService extends Service
         ];
     }
 
-    public static function getArrLoaders()
+    public static function getLoaders()
     {
         return [
             'available_expands' => function () {
@@ -78,17 +78,17 @@ class AftvBcastPagingService extends Service
         ];
     }
 
-    public static function getArrPromiseLists()
+    public static function getPromiseLists()
     {
         return [];
     }
 
-    public static function getArrRuleLists()
+    public static function getRuleLists()
     {
         return [];
     }
 
-    public static function getArrTraits()
+    public static function getTraits()
     {
         return [
             PaginationListService::class,

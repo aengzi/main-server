@@ -8,7 +8,7 @@ use FunctionalCoding\Service;
 
 class LikeDeletingService extends Service
 {
-    public static function getArrBindNames()
+    public static function getBindNames()
     {
         return [
             'like' => 'like for {{like_id}}',
@@ -17,7 +17,7 @@ class LikeDeletingService extends Service
         ];
     }
 
-    public static function getArrCallbackLists()
+    public static function getCallbackLists()
     {
         return [
             'result' => function ($like) {
@@ -36,7 +36,7 @@ class LikeDeletingService extends Service
         ];
     }
 
-    public static function getArrLoaders()
+    public static function getLoaders()
     {
         return [
             'like' => function ($likeId) {
@@ -53,12 +53,12 @@ class LikeDeletingService extends Service
         ];
     }
 
-    public static function getArrPromiseLists()
+    public static function getPromiseLists()
     {
         return [];
     }
 
-    public static function getArrRuleLists()
+    public static function getRuleLists()
     {
         return [
             'like' => ['not_null'],
@@ -69,7 +69,7 @@ class LikeDeletingService extends Service
         ];
     }
 
-    public static function getArrTraits()
+    public static function getTraits()
     {
         return [
             AuthUserRequiringService::class,

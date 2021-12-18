@@ -9,19 +9,19 @@ use Illuminate\Support\Str;
 
 class PasswordResetEmailTokenCreatingService extends Service
 {
-    public static function getArrBindNames()
+    public static function getBindNames()
     {
         return [
             'same_email_user' => 'same email user for {{email}}',
         ];
     }
 
-    public static function getArrCallbackLists()
+    public static function getCallbackLists()
     {
         return [];
     }
 
-    public static function getArrLoaders()
+    public static function getLoaders()
     {
         return [
             'body' => function ($payload) {
@@ -53,12 +53,12 @@ class PasswordResetEmailTokenCreatingService extends Service
         ];
     }
 
-    public static function getArrPromiseLists()
+    public static function getPromiseLists()
     {
         return [];
     }
 
-    public static function getArrRuleLists()
+    public static function getRuleLists()
     {
         return [
             'email' => ['required', 'string', 'email'],
@@ -67,7 +67,7 @@ class PasswordResetEmailTokenCreatingService extends Service
         ];
     }
 
-    public static function getArrTraits()
+    public static function getTraits()
     {
         return [
             EmailTokenCreatingService::class,

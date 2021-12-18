@@ -9,14 +9,14 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 
 class CommentThreadCreatingService extends Service
 {
-    public static function getArrBindNames()
+    public static function getBindNames()
     {
         return [
             'related' => 'model for {{related_type}} and {{related_id}}',
         ];
     }
 
-    public static function getArrCallbackLists()
+    public static function getCallbackLists()
     {
         return [
             'result.auth_user' => function ($authUser, $result) {
@@ -36,7 +36,7 @@ class CommentThreadCreatingService extends Service
         ];
     }
 
-    public static function getArrLoaders()
+    public static function getLoaders()
     {
         return [
             'related' => function ($relatedId, $relatedType) {
@@ -54,12 +54,12 @@ class CommentThreadCreatingService extends Service
         ];
     }
 
-    public static function getArrPromiseLists()
+    public static function getPromiseLists()
     {
         return [];
     }
 
-    public static function getArrRuleLists()
+    public static function getRuleLists()
     {
         return [
             'related' => ['not_null'],
@@ -72,7 +72,7 @@ class CommentThreadCreatingService extends Service
         ];
     }
 
-    public static function getArrTraits()
+    public static function getTraits()
     {
         return [
             AuthUserRequiringService::class,

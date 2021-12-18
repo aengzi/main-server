@@ -6,17 +6,17 @@ use FunctionalCoding\Service;
 
 class AuthUserRequiringService extends Service
 {
-    public static function getArrBindNames()
+    public static function getBindNames()
     {
         return [];
     }
 
-    public static function getArrCallbackLists()
+    public static function getCallbackLists()
     {
         return [];
     }
 
-    public static function getArrLoaders()
+    public static function getLoaders()
     {
         return [
             'auth_user' => function ($token) {
@@ -33,19 +33,19 @@ class AuthUserRequiringService extends Service
         ];
     }
 
-    public static function getArrPromiseLists()
+    public static function getPromiseLists()
     {
         return [];
     }
 
-    public static function getArrRuleLists()
+    public static function getRuleLists()
     {
         return [
             'token' => ['required'],
         ];
     }
 
-    public static function getArrTraits()
+    public static function getTraits()
     {
         return [];
     }

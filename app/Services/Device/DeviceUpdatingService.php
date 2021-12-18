@@ -7,7 +7,7 @@ use FunctionalCoding\Service;
 
 class DeviceUpdatingService extends Service
 {
-    public static function getArrBindNames()
+    public static function getBindNames()
     {
         return [
             'device' => 'device for {{id}}',
@@ -18,7 +18,7 @@ class DeviceUpdatingService extends Service
         ];
     }
 
-    public static function getArrCallbackLists()
+    public static function getCallbackLists()
     {
         return [
             'device' => function ($device) {
@@ -27,7 +27,7 @@ class DeviceUpdatingService extends Service
         ];
     }
 
-    public static function getArrLoaders()
+    public static function getLoaders()
     {
         return [
             'device' => function ($id) {
@@ -48,12 +48,12 @@ class DeviceUpdatingService extends Service
         ];
     }
 
-    public static function getArrPromiseLists()
+    public static function getPromiseLists()
     {
         return [];
     }
 
-    public static function getArrRuleLists()
+    public static function getRuleLists()
     {
         return [
             'related_id' => ['required', 'string', 'same:{{device_related_id}}'],
@@ -62,7 +62,7 @@ class DeviceUpdatingService extends Service
         ];
     }
 
-    public static function getArrTraits()
+    public static function getTraits()
     {
         return [];
     }

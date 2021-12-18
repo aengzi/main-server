@@ -9,7 +9,7 @@ use Google\Cloud\Storage\StorageClient;
 
 class ClipDeletingService extends Service
 {
-    public static function getArrBindNames()
+    public static function getBindNames()
     {
         return [
             'clip' => 'clip for {{id}}',
@@ -18,7 +18,7 @@ class ClipDeletingService extends Service
         ];
     }
 
-    public static function getArrCallbackLists()
+    public static function getCallbackLists()
     {
         return [
             'result' => function ($authUser, $clip) {
@@ -42,7 +42,7 @@ class ClipDeletingService extends Service
         ];
     }
 
-    public static function getArrLoaders()
+    public static function getLoaders()
     {
         return [
             'clip' => function ($id) {
@@ -59,12 +59,12 @@ class ClipDeletingService extends Service
         ];
     }
 
-    public static function getArrPromiseLists()
+    public static function getPromiseLists()
     {
         return [];
     }
 
-    public static function getArrRuleLists()
+    public static function getRuleLists()
     {
         return [
             'id' => ['required', 'integer'],
@@ -73,7 +73,7 @@ class ClipDeletingService extends Service
         ];
     }
 
-    public static function getArrTraits()
+    public static function getTraits()
     {
         return [
             AuthUserRequiringService::class,

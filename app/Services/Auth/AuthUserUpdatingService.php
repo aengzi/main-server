@@ -8,7 +8,7 @@ use Google\Cloud\Storage\StorageClient;
 
 class AuthUserUpdatingService extends Service
 {
-    public static function getArrBindNames()
+    public static function getBindNames()
     {
         return [
             'email' => 'email in payload in {{token}}',
@@ -19,7 +19,7 @@ class AuthUserUpdatingService extends Service
         ];
     }
 
-    public static function getArrCallbackLists()
+    public static function getCallbackLists()
     {
         return [
             'auth_user.email' => function ($authUser, $email) {
@@ -57,7 +57,7 @@ class AuthUserUpdatingService extends Service
         ];
     }
 
-    public static function getArrLoaders()
+    public static function getLoaders()
     {
         return [
             'email' => function ($payload) {
@@ -80,14 +80,14 @@ class AuthUserUpdatingService extends Service
         ];
     }
 
-    public static function getArrPromiseLists()
+    public static function getPromiseLists()
     {
         return [
             'result' => ['same_email_user:strict', 'same_nick_user:strict'],
         ];
     }
 
-    public static function getArrRuleLists()
+    public static function getRuleLists()
     {
         return [
             'nick' => ['string', 'min:2', 'max:12'],
@@ -102,7 +102,7 @@ class AuthUserUpdatingService extends Service
         ];
     }
 
-    public static function getArrTraits()
+    public static function getTraits()
     {
         return [
             AuthUserRequiringService::class,

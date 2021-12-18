@@ -8,12 +8,12 @@ use FunctionalCoding\Service;
 
 class UserListingService extends Service
 {
-    public static function getArrBindNames()
+    public static function getBindNames()
     {
         return [];
     }
 
-    public static function getArrCallbackLists()
+    public static function getCallbackLists()
     {
         return [
             'query.email' => function ($email, $query) {
@@ -26,7 +26,7 @@ class UserListingService extends Service
         ];
     }
 
-    public static function getArrLoaders()
+    public static function getLoaders()
     {
         return [
             'available_expands' => function () {
@@ -39,12 +39,12 @@ class UserListingService extends Service
         ];
     }
 
-    public static function getArrPromiseLists()
+    public static function getPromiseLists()
     {
         return [];
     }
 
-    public static function getArrRuleLists()
+    public static function getRuleLists()
     {
         return [
             'email' => ['string', 'email'],
@@ -53,7 +53,7 @@ class UserListingService extends Service
         ];
     }
 
-    public static function getArrTraits()
+    public static function getTraits()
     {
         return [
             ListService::class,
