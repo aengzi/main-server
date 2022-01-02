@@ -19,7 +19,7 @@ class AuthUserUpdatingService extends Service
         ];
     }
 
-    public static function getCallbackLists()
+    public static function getCallbacks()
     {
         return [
             'auth_user.email' => function ($authUser, $email) {

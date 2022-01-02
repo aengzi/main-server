@@ -16,7 +16,7 @@ class PostPagingService extends Service
         ];
     }
 
-    public static function getCallbackLists()
+    public static function getCallbacks()
     {
         return [
             'query.content' => function ($query) {

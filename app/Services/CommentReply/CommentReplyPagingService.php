@@ -18,7 +18,7 @@ class CommentReplyPagingService extends Service
         ];
     }
 
-    public static function getCallbackLists()
+    public static function getCallbacks()
     {
         return [
             'query.thread' => function ($query, $thread) {

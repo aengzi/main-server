@@ -19,7 +19,7 @@ class CommentThreadPagingService extends Service
         ];
     }
 
-    public static function getCallbackLists()
+    public static function getCallbacks()
     {
         return [
             'query.related' => function ($query, $related, $relatedType) {

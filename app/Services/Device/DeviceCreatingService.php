@@ -12,7 +12,7 @@ class DeviceCreatingService extends Service
         return [];
     }
 
-    public static function getCallbackLists()
+    public static function getCallbacks()
     {
         return [
             'device' => function ($device) {

@@ -18,7 +18,7 @@ class DeviceUpdatingService extends Service
         ];
     }
 
-    public static function getCallbackLists()
+    public static function getCallbacks()
     {
         return [
             'device' => function ($device) {

@@ -16,7 +16,7 @@ class CommentThreadCreatingService extends Service
         ];
     }
 
-    public static function getCallbackLists()
+    public static function getCallbacks()
     {
         return [
             'result.auth_user' => function ($authUser, $result) {

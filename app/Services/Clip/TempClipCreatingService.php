@@ -14,7 +14,7 @@ class TempClipCreatingService extends Service
         return [];
     }
 
-    public static function getCallbackLists()
+    public static function getCallbacks()
     {
         return [];
     }

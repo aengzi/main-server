@@ -17,7 +17,7 @@ class PostUpdatingService extends Service
         ];
     }
 
-    public static function getCallbackLists()
+    public static function getCallbacks()
     {
         return [
             'post.content' => function ($content, $post) {

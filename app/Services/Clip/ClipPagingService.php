@@ -20,7 +20,7 @@ class ClipPagingService extends Service
         ];
     }
 
-    public static function getCallbackLists()
+    public static function getCallbacks()
     {
         return [
             'query.order_by_array' => function ($orderByArray, $query) {

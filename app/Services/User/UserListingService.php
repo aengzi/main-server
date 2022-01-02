@@ -13,7 +13,7 @@ class UserListingService extends Service
         return [];
     }
 
-    public static function getCallbackLists()
+    public static function getCallbacks()
     {
         return [
             'query.email' => function ($email, $query) {

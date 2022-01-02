@@ -18,7 +18,7 @@ class EmailTokenCreatingService extends Service
         ];
     }
 
-    public static function getCallbackLists()
+    public static function getCallbacks()
     {
         return [
             'body.google_client' => function ($body, $email, $googleClient, $subject) {

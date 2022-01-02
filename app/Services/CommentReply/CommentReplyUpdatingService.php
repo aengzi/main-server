@@ -17,7 +17,7 @@ class CommentReplyUpdatingService extends Service
         ];
     }
 
-    public static function getCallbackLists()
+    public static function getCallbacks()
     {
         return [
             'result' => function ($message, $result) {

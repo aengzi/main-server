@@ -17,7 +17,7 @@ class PostDeletingService extends Service
         ];
     }
 
-    public static function getCallbackLists()
+    public static function getCallbacks()
     {
         return [
             'result' => function ($post) {

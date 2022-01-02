@@ -15,7 +15,7 @@ class YtbVideoFindingService extends Service
         ];
     }
 
-    public static function getCallbackLists()
+    public static function getCallbacks()
     {
         return [];
     }

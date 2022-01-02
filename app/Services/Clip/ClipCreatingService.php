@@ -22,7 +22,7 @@ class ClipCreatingService extends Service
         ];
     }
 
-    public static function getCallbackLists()
+    public static function getCallbacks()
     {
         return [
             'clip_vod.files' => function ($clipVod, $files, $m3u8String) {
