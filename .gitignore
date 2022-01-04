@@ -1,4 +1,14 @@
+# dependencies
 /vendor
+
+# misc
+Thumbs.db
+.DS_Store
 /.idea
-Homestead.json
-Homestead.yaml
+/.vscode
+
+# php-cs-fixer
+/.php-cs-fixer.cache
+
+# environment
+.env

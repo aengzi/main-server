@@ -1,3 +1,10 @@
 steps:
-  - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['app', 'deploy', '--version', '1-0-7']
+  - name: gcr.io/cloud-builders/gcloud
+    entrypoint: "bash"
+    args:
+      [
+        "-c",
+        "gcloud secrets versions access latest --secret=main-server-production-env > .env",
+      ]
+  - name: "gcr.io/cloud-builders/gcloud"
+    args: ["app", "deploy", "--version", "1-0-7", "--no-cache"]
