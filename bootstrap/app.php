@@ -25,7 +25,7 @@ if ( ! function_exists('inst') )
 
 (new Laravel\Lumen\Bootstrap\LoadEnvironmentVariables(
     dirname(__DIR__),
-    getenv('APP_ENV') ? '.env.'.getenv('APP_ENV') : '.env.production'
+    getenv('APP_ENV') ? '.env.'.getenv('APP_ENV') : '.env'
 ))->bootstrap();
 
 /*
