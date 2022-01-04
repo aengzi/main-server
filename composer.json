@@ -34,9 +34,6 @@
         ]
     },
     "scripts": {
-        "post-install-cmd": [
-            "chmod -R 777 /tmp"
-        ]
     },
     "config": {
         "preferred-install": "dist",
