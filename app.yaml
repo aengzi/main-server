@@ -2,7 +2,6 @@ runtime: php74
 service: api
 entrypoint: serve public/index.php
 env_variables:
-  APP_ENV: production
   APP_STORAGE: /tmp
   VIEW_COMPILED_PATH: /tmp
   APP_SERVICES_CACHE: /tmp/services.php

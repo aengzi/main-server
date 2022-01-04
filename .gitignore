@@ -9,3 +9,6 @@ Thumbs.db
 
 # php-cs-fixer
 /.php-cs-fixer.cache
+
+# environment
+.env
