@@ -34,7 +34,12 @@ $addRoutes = function () use ($router) {
             ServiceParameterSettingMiddleware::class,
             RequestInputValueCastingMiddleware::class,
         ],
-    ], function () use ($router) {
+    ], function () use ($router, $prefix) {
+        $router->get('/', function () use ($router, $prefix) {
+            return collect($router->getRoutes())->keys()->map(function ($info) use ($prefix) {
+                return str_replace('/'.$prefix, ': ', $info);
+            });
+        });
         $router->get('auth-user', 'AuthUserController@index');
         $router->patch('auth-user', 'AuthUserController@update');
         $router->post('auth-user/emails', 'AuthUserEmailTokenController@store');
