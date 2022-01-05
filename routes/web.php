@@ -13,6 +13,7 @@
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Str;
 
 $addRoutes = function () use ($router) {
 
@@ -20,6 +21,8 @@ $addRoutes = function () use ($router) {
     $prefix = str_replace($prefix, '', __FILE__);
     $prefix = str_replace('routes'.DIRECTORY_SEPARATOR.'web.php', '', $prefix);
     $prefix = rtrim($prefix, DIRECTORY_SEPARATOR);
+    $prefix = str_replace(DIRECTORY_SEPARATOR, '/', $prefix);
+    $prefix = $_SERVER['DOCUMENT_ROOT'] && Str::startsWith(__FILE__, str_replace('/', DIRECTORY_SEPARATOR, $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR)) ? $prefix : '';
 
     $router->group([
         'prefix' => $prefix,
@@ -59,9 +62,13 @@ $addRoutes = function () use ($router) {
         'middleware' => [
             App\Http\Middleware\ApiMiddleware::class,
             App\Http\Middleware\AuthTokenMiddleware::class
-        ]
-    ], function () use ($router) {
-
+        ],
+    ], function () use ($router, $prefix) {
+        $router->get('/', function () use ($router, $prefix) {
+            return collect($router->getRoutes())->keys()->map(function ($info) use ($prefix) {
+                return str_replace('/'.$prefix, ': ', $info);
+            });
+        });
         $router->get('auth/user', 'AuthUserController@index');
         $router->get('aftv-bcasts', 'AftvBcastController@index');
         $router->get('aftv-bcasts/{id}', 'AftvBcastController@show');
