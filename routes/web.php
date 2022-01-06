@@ -26,39 +26,6 @@ $addRoutes = function () use ($router) {
 
     $router->group([
         'prefix' => $prefix,
-    ], function () use ($router) {
-
-        foreach ( ['get', 'post', 'patch', 'delete'] as $method )
-        {
-            $router->{$method}('1.0/{path:.+}', function ($path) use ($method) {
-
-                $curl = curl_init();
-                curl_setopt($curl, CURLOPT_URL, 'http://34.64.94.163/1.0/'.$path.'?'.$_SERVER['QUERY_STRING']);
-                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($curl, CURLOPT_CUSTOMREQUEST, strtoupper($method));
-
-                if ( !empty(Request::all()) )
-                {
-                    curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query(Request::all()));
-                }
-
-                if ( !empty(Request::header()) )
-                {
-                    $headers = [];
-                    foreach ( array_keys(Request::header()) as $key )
-                    {
-                        array_push($headers, $key.':'.Request::header($key));
-                    }
-                    curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-                }
-
-                return htmlspecialchars(curl_exec($curl), ENT_NOQUOTES);
-            });
-        }
-    });
-
-    $router->group([
-        'prefix' => $prefix,
         'middleware' => [
             App\Http\Middleware\ApiMiddleware::class,
             App\Http\Middleware\AuthTokenMiddleware::class
@@ -119,10 +86,5 @@ $addRoutes = function () use ($router) {
         $router->get('youtube/comment/replies', 'YtbCommentReplyController@index');
     });
 };
-
-$router->group(array('domain' => '//aengzi.{region}.r.appspot.com', 'prefix' => 'api'), function () use ($addRoutes)
-{
-    $addRoutes();
-});
 
 $addRoutes();
