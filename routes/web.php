@@ -87,9 +87,4 @@ $addRoutes = function () use ($router) {
     });
 };
 
-$router->group(array('domain' => '//aengzi.{region}.r.appspot.com', 'prefix' => 'api'), function () use ($addRoutes)
-{
-    $addRoutes();
-});
-
 $addRoutes();
