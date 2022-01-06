@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Model;
+use App\Service;
 use App\Http\Controller;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Pagination\AbstractPaginator;
@@ -21,6 +22,14 @@ class ApiMiddleware {
 
         $response = $next($request);
         $arr      = $response->getOriginalContent();
+
+        if (!Service::isInitable($arr)) {
+            $response->setContent([
+                'result' => $arr,
+            ]);
+
+            return $response;
+        }
 
         $service  = Controller::servicify($arr);
         $service->run();
