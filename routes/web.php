@@ -16,9 +16,6 @@ use App\Http\Middlewares\ServiceParameterSettingMiddleware;
 use App\Http\Middlewares\ServiceRunMiddleware;
 use Illuminate\Support\Str;
 
-error_reporting(E_ALL);
-ini_set('display_errors', 'on');
-
 $addRoutes = function () use ($router) {
     $prefix = str_replace('/', DIRECTORY_SEPARATOR, $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR);
     $prefix = str_replace($prefix, '', __FILE__);
