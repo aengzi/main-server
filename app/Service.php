@@ -36,6 +36,11 @@ class Service {
         $this->processed = false;
     }
 
+    public static function isInitable($value)
+    {
+        return is_array($value) && array_key_exists(0, $value) && is_string($value[0]) && is_a($value[0], Service::class, true);
+    }
+
     public function childs()
     {
         return $this->childs;
