@@ -32,7 +32,7 @@ $addRoutes = function () use ($router) {
     ], function () use ($router, $prefix) {
         $router->get('/', function () use ($router, $prefix) {
             return collect($router->getRoutes())->keys()->map(function ($info) use ($prefix) {
-                return str_replace('/'.$prefix, ': ', $info);
+                return preg_replace('/^(GET|POST|PUT|PATCH|DELETE|HEAD)\/('.str_replace('/', '\\/', $prefix).'?)(\/|)/', '[$1] /', $info);
             });
         });
         $router->get('auth/user', 'AuthUserController@index');
