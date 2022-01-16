@@ -11,5 +11,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        putenv('APP_VERSION=2.1.0');
     }
 }
