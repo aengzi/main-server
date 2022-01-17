@@ -3,7 +3,42 @@ steps:
   entrypoint: bash
   args:
     - '-c'
-    - gcloud secrets versions access latest --secret=main-server-production-env > .env
+    - gcloud secrets versions access latest --secret=env-production > .env
+- name: gcr.io/cloud-builders/gcloud
+  entrypoint: bash
+  args:
+    - '-c'
+    - gcloud secrets versions access latest --secret=env-testing > .env.testing
+- name: gcr.io/cloud-builders/gcloud
+  entrypoint: bash
+  args:
+    - '-c'
+    - gcloud secrets versions access latest --secret=service-account > ./storage/app/gcp-credentials.json
+- name: gcr.io/cloud-builders/gcloud
+  entrypoint: bash
+  args:
+    - '-c'
+    - gcloud secrets versions access latest --secret=id_rsa > ./storage/app/id_rsa
+- name: gcr.io/cloud-builders/gcloud
+  entrypoint: bash
+  args:
+    - '-c'
+    - gcloud secrets versions access latest --secret=id_rsa-pub > ./storage/app/id_rsa.pub
+- name: gcr.io/cloud-builders/gcloud
+  entrypoint: bash
+  args:
+    - '-c'
+    - gcloud secrets versions access latest --secret=database-client-cert > ./storage/app/database-client-cert.pem
+- name: gcr.io/cloud-builders/gcloud
+  entrypoint: bash
+  args:
+    - '-c'
+    - gcloud secrets versions access latest --secret=database-client-key > ./storage/app/database-client-key.pem
+- name: gcr.io/cloud-builders/gcloud
+  entrypoint: bash
+  args:
+    - '-c'
+    - gcloud secrets versions access latest --secret=database-server-ca > ./storage/app/database-server-ca.pem
 - name: gcr.io/cloud-builders/gcloud
   entrypoint: bash
   args:
