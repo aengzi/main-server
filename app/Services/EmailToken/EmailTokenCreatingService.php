@@ -2,38 +2,52 @@
 
 namespace App\Services\EmailToken;
 
-use Carbon\Carbon;
 use FunctionalCoding\JWT\Service\TokenEncryptionService;
 use FunctionalCoding\Service;
-use Google_Service_Gmail;
-use Google_Service_Gmail_Message;
-use Swift_Message;
+use Google\Cloud\Tasks\V2\AppEngineHttpRequest;
+use Google\Cloud\Tasks\V2\AppEngineRouting;
+use Google\Cloud\Tasks\V2\CloudTasksClient;
+use Google\Cloud\Tasks\V2\HttpMethod;
+use Google\Cloud\Tasks\V2\Task;
+use Illuminate\Support\Facades\File;
 
 class EmailTokenCreatingService extends Service
 {
     public static function getBindNames()
     {
-        return [
-            'attempt_count' => 'attempt count in 5 minutes',
-        ];
+        return [];
     }
 
     public static function getCallbacks()
     {
         return [
-            'body.google_client' => function ($body, $email, $googleClient, $subject) {
-                $msg = (new Swift_Message())
-                    ->setTo([$email])
-                    ->setSubject($subject)
-                    ->setContentType('text/html')
-                    ->setBody($body)
-                ;
+            'result.email:after_commit' => function ($body, $email, $subject) {
+                $routing = new AppEngineRouting();
+                $routing->setService('api');
+                $routing->setVersion(env('APP_VERSION'));
 
-                $service = new Google_Service_Gmail($googleClient);
-                $message = new Google_Service_Gmail_Message();
-                $message->setId($email);
-                $message->setRaw(base64_encode($msg));
-                $service->users_messages->send('aengzi@llit.kr', $message);
+                $httpRequest = new AppEngineHttpRequest();
+                $httpRequest->setRelativeUri('/emails');
+                $httpRequest->setHttpMethod(HttpMethod::POST);
+                $httpRequest->setBody(json_encode([
+                    'email' => $email,
+                    'subject' => $subject,
+                    'body' => $body,
+                ]));
+                $httpRequest->setHeaders(['content-type' => 'application/json']);
+                $httpRequest->setAppEngineRouting($routing);
+
+                $task = new Task();
+                $task->setAppEngineHttpRequest($httpRequest);
+
+                $client = new CloudTasksClient();
+                $queue = $client->queueName(
+                    env('GCP_PROJECT_ID'),
+                    env('GCP_LOCATION_ID'),
+                    env('GCP_QUEUE_ID'),
+                );
+
+                $client->createTask($queue, $task);
             },
         ];
     }
@@ -41,55 +55,36 @@ class EmailTokenCreatingService extends Service
     public static function getLoaders()
     {
         return [
-            'attempt_count' => function ($email, $googleClient) {
-                $service = new Google_Service_Gmail($googleClient);
-                $timestamp = Carbon::now('UTC')->subSeconds(300)->timestamp;
-                $list = $service->users_messages->listUsersMessages('aengzi@llit.kr', [
-                    'q' => 'in:sent to:'.$email.' after:'.$timestamp,
-                ]);
-
-                return count($list);
+            'body' => function () {
+                throw new \Exception();
             },
 
-            'google_client' => function () {
-                $model = GoogleClient::where('user', 'aengzi')->first();
-                $token = json_decode($model->access_token, true);
-                $credential = json_decode($model->credential, true);
-
-                $client = new Google_Client();
-                $created = (int) $token['created'];
-                $expiresIn = (int) $token['expires_in'];
-                $now = (int) Carbon::now('UTC')->timestamp;
-
-                $client->setAccessToken($token);
-                $client->setAuthConfig($credential);
-
-                if ($now > $created + $expiresIn - 60) {
-                    $client->fetchAccessTokenWithRefreshToken($client->getRefreshToken());
-                }
-
-                return $client;
+            'payload' => function () {
+                throw new \Exception();
             },
 
             'result' => function ($payload) {
                 return [TokenEncryptionService::class, [
                     'payload' => $payload,
+                    'public_key' => File::get(storage_path('app/id_rsa.pub')),
                 ]];
+            },
+
+            'subject' => function () {
+                throw new \Exception();
             },
         ];
     }
 
     public static function getPromiseLists()
     {
-        return [
-            'body' => ['attempt_count:strict'],
-        ];
+        return [];
     }
 
     public static function getRuleLists()
     {
         return [
-            'attempt_count' => ['integer', 'lt:5'],
+            'email' => ['required', 'string', 'email'],
         ];
     }
 

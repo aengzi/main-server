@@ -55,10 +55,9 @@ class AuthUserFindingService extends Service
             'payload' => function ($token) {
                 return [TokenDecryptionService::class, [
                     'token' => $token,
-                    'secret_key' => file_get_contents(app()->storagePath('app/rsa/id_rsa')),
+                    'secret_key' => file_get_contents(app()->storagePath('app/id_rsa')),
                 ], [
                     'token' => '{{token}}',
-                    'secret_key' => '{secret decryption key}',
                 ]];
             },
 

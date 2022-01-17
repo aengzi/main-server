@@ -5,6 +5,7 @@ namespace App\Services\SignIn;
 use App\Models\User;
 use FunctionalCoding\JWT\Service\TokenEncryptionService;
 use FunctionalCoding\Service;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 
 class SignInCreatingService extends Service
@@ -35,10 +36,7 @@ class SignInCreatingService extends Service
             'result' => function ($payload) {
                 return [TokenEncryptionService::class, [
                     'payload' => $payload,
-                    'public_key' => file_get_contents(app()->storagePath('app/rsa/id_rsa.pub')),
-                ], [
-                    'payload' => 'payload of {{user}}',
-                    'public_key' => '{public encryption key}',
+                    'public_key' => File::get(storage_path('app/id_rsa.pub')),
                 ]];
             },
 

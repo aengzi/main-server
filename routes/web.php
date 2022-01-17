@@ -59,6 +59,7 @@ $addRoutes = function () use ($router) {
         $router->get('dislikes', 'DislikeController@index');
         $router->post('dislikes', 'DislikeController@store');
         $router->delete('dislikes/{id}', 'DislikeController@destroy');
+        $router->post('emails', 'EmailController@store');
         $router->patch('email-tokens', 'EmailTokenController@update');
         $router->get('likes', 'LikeController@index');
         $router->post('likes', 'LikeController@store');

@@ -26,10 +26,21 @@ class SignUpCreatingService extends Service
             'payload' => function ($token) {
                 return [TokenDecryptionService::class, [
                     'token' => $token,
-                    'payload_keys' => ['email', 'password', 'nick', 'verified'],
                 ], [
                     'token' => '{{token}}',
                 ]];
+            },
+
+            'payload_email' => function ($payload) {
+                return isset($payload['email']) ? $payload['email'] : '';
+            },
+
+            'payload_nick' => function ($payload) {
+                return isset($payload['nick']) ? $payload['nick'] : '';
+            },
+
+            'payload_password' => function ($payload) {
+                return isset($payload['password']) ? $payload['password'] : '';
             },
 
             'result' => function ($payload) {
@@ -57,6 +68,12 @@ class SignUpCreatingService extends Service
     {
         return [
             'user' => ['null'],
+
+            'payload_email' => ['required', 'string'],
+
+            'payload_nick' => ['required', 'string'],
+
+            'payload_password' => ['required', 'string'],
         ];
     }
 

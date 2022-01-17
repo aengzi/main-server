@@ -12,9 +12,9 @@ class SignUpEmailTokenCreatingService extends Service
     public static function getBindNames()
     {
         return [
-            'same_email_user' => 'same email user',
+            'same_email_user' => 'same email user for {{email}}',
 
-            'same_nick_user' => 'same nickname user',
+            'same_nick_user' => 'same nickname user for {{nick}}',
         ];
     }
 
@@ -71,8 +71,6 @@ class SignUpEmailTokenCreatingService extends Service
     public static function getRuleLists()
     {
         return [
-            'email' => ['required', 'string', 'email'],
-
             'password' => ['required', 'string', 'min:8', 'max:32'],
 
             'nick' => ['required', 'string', 'min:2', 'max:12'],

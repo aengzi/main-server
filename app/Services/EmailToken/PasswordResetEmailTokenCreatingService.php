@@ -61,8 +61,6 @@ class PasswordResetEmailTokenCreatingService extends Service
     public static function getRuleLists()
     {
         return [
-            'email' => ['required', 'string', 'email'],
-
             'same_email_user' => ['required', 'not_null'],
         ];
     }

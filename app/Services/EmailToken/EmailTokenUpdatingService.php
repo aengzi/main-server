@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use FunctionalCoding\JWT\Service\TokenDecryptionService;
 use FunctionalCoding\JWT\Service\TokenEncryptionService;
 use FunctionalCoding\Service;
+use Illuminate\Support\Facades\File;
 
 class EmailTokenUpdatingService extends Service
 {
@@ -35,25 +36,26 @@ class EmailTokenUpdatingService extends Service
             'payload' => function ($token) {
                 return [TokenDecryptionService::class, [
                     'token' => $token,
-                    'payload_keys' => ['code', 'expired_at'],
                 ], [
                     'token' => '{{token}}',
                 ]];
             },
 
             'payload_code' => function ($payload) {
-                return $payload['code'];
+                return isset($payload['code']) ? $payload['code'] : '';
             },
 
             'payload_expired_at' => function ($payload) {
-                return $payload['expired_at'];
+                return isset($payload['expired_at']) ? $payload['expired_at'] : '';
             },
 
             'result' => function ($payload) {
-                unset($payload['code']);
-
                 return [TokenEncryptionService::class, [
-                    'payload' => array_merge($payload, ['verified' => true]),
+                    'payload' => array_diff(
+                        array_merge($payload, ['verified' => true]),
+                        ['code'],
+                    ),
+                    'public_key' => File::get(storage_path('app/id_rsa.pub')),
                 ]];
             },
         ];
@@ -67,9 +69,13 @@ class EmailTokenUpdatingService extends Service
     public static function getRuleLists()
     {
         return [
+            'code' => ['required', 'same:{{payload_code}}'],
+
             'current_time' => ['before:{{payload_expired_at}}'],
 
-            'code' => ['required', 'same:{{payload_code}}'],
+            'payload_code' => ['required', 'string'],
+
+            'payload_expired_at' => ['required', 'string'],
 
             'token' => ['required', 'string'],
         ];
