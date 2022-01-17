@@ -12,5 +12,6 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         putenv('APP_VERSION=2.1.0');
+        putenv('GOOGLE_APPLICATION_CREDENTIALS='.base_path(env('GCP_SERVICE_ACCOUNT')));
     }
 }
