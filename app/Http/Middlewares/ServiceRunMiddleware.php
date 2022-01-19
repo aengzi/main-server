@@ -4,6 +4,7 @@ namespace App\Http\Middlewares;
 
 use App\Model;
 use FunctionalCoding\Service;
+use Google\Cloud\Logging\LoggingClient;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Pagination\AbstractPaginator;
 use Illuminate\Support\Arr;
@@ -27,6 +28,14 @@ class ServiceRunMiddleware
 
             return $response;
         }
+
+        $logging = new LoggingClient([
+            'projectId' => 'aengzi',
+        ]);
+        $logger = $logging->logger('service-parameters');
+        $text = \json_encode($arr);
+        $entry = $logger->entry($text);
+        $logger->write($entry);
 
         $service = Service::initService($arr);
         $result = $service->run();
