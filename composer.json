@@ -13,7 +13,7 @@
         "functional-coding/php": "dev-master",
         "functional-coding/php-eloquent-orm": "dev-master",
         "functional-coding/php-jwt": "dev-master",
-        "google/apiclient": "dev-master",
+        "google/apiclient": "dev-main",
         "google/cloud-storage": "dev-master",
         "google/cloud-tasks": "^1.9",
         "laravel/lumen-framework": "^8.0",
