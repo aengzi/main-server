@@ -1,5 +1,5 @@
 <?php
 
-abstract class UnitTest extends TestCase
+abstract class UnitTest extends \Tests\TestCase
 {
 }

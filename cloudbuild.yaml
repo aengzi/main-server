@@ -1,48 +1,11 @@
 steps:
-- name: gcr.io/cloud-builders/gcloud
+- name: gcr.io/cloud-builders/docker
   entrypoint: bash
   args:
     - '-c'
-    - gcloud secrets versions access latest --secret=env-production > .env
-- name: gcr.io/cloud-builders/gcloud
+    - docker run -t test01 bash /bin/bash -c 'cd / && touch test.txt'
+- name: test01
   entrypoint: bash
   args:
     - '-c'
-    - gcloud secrets versions access latest --secret=env-testing > .env.testing
-- name: gcr.io/cloud-builders/gcloud
-  entrypoint: bash
-  args:
-    - '-c'
-    - gcloud secrets versions access latest --secret=service-account > ./storage/app/gcp-credentials.json
-- name: gcr.io/cloud-builders/gcloud
-  entrypoint: bash
-  args:
-    - '-c'
-    - gcloud secrets versions access latest --secret=id_rsa > ./storage/app/id_rsa
-- name: gcr.io/cloud-builders/gcloud
-  entrypoint: bash
-  args:
-    - '-c'
-    - gcloud secrets versions access latest --secret=id_rsa-pub > ./storage/app/id_rsa.pub
-- name: gcr.io/cloud-builders/gcloud
-  entrypoint: bash
-  args:
-    - '-c'
-    - gcloud secrets versions access latest --secret=database-client-cert > ./storage/app/database-client-cert.pem
-- name: gcr.io/cloud-builders/gcloud
-  entrypoint: bash
-  args:
-    - '-c'
-    - gcloud secrets versions access latest --secret=database-client-key > ./storage/app/database-client-key.pem
-- name: gcr.io/cloud-builders/gcloud
-  entrypoint: bash
-  args:
-    - '-c'
-    - gcloud secrets versions access latest --secret=database-server-ca > ./storage/app/database-server-ca.pem
-- name: gcr.io/cloud-builders/gcloud
-  entrypoint: bash
-  args:
-    - '-c'
-    - gcloud app deploy --version ${BRANCH_NAME//./-} --no-cache
-  env:
-    - BRANCH_NAME=$BRANCH_NAME
+    - ls -al /
