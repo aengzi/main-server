@@ -2,8 +2,12 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 class Model extends \Illuminate\Database\Eloquent\Model
 {
+    use HasFactory;
+
     public const CREATED_AT = null;
     public const UPDATED_AT = null;
 
