@@ -2,9 +2,12 @@
 
 require_once __DIR__.'/../vendor/autoload.php';
 
+if (!env('APP_ENV')) {
+    putenv('APP_ENV=development');
+}
 (new Laravel\Lumen\Bootstrap\LoadEnvironmentVariables(
     dirname(__DIR__),
-    getenv('APP_ENV') ? '.env.'.getenv('APP_ENV') : '.env'
+    '.env.'.getenv('APP_ENV')
 ))->bootstrap();
 
 /*
@@ -30,12 +33,12 @@ if (array_key_exists('GAE_ENV', $_SERVER)) {
 }
 
 config([
-    'database.connections.mysql.options' => [
+    'database.connections.mysql.options' => 'production' == env('APP_ENV') ? [
         PDO::MYSQL_ATTR_SSL_CA => storage_path('app/database/server-ca.pem'),
         PDO::MYSQL_ATTR_SSL_CERT => storage_path('app/database/client-cert.pem'),
         PDO::MYSQL_ATTR_SSL_KEY => storage_path('app/database/client-key.pem'),
         PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false,
-    ],
+    ] : [],
 ]);
 
 /*
@@ -91,8 +94,6 @@ $app->singleton(
 
 $app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\ModelRelationMapProvider::class);
-$app->register(App\Providers\ValidationProvider::class);
-$app->register(FunctionalCoding\Illuminate\ValidationProvider::class);
 
 /*
 |--------------------------------------------------------------------------

@@ -11,7 +11,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app['auth']->viaRequest('api', function () {});
         putenv('APP_VERSION=2.1.0');
-        putenv('GOOGLE_APPLICATION_CREDENTIALS='.base_path(env('GCP_SERVICE_ACCOUNT')));
+        putenv('GOOGLE_APPLICATION_CREDENTIALS='.storage_path(implode(DIRECTORY_SEPARATOR, ['app', 'gcp-credentials.json'])));
     }
 }

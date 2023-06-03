@@ -66,7 +66,7 @@ class EmailTokenCreatingService extends Service
             'result' => function ($payload) {
                 return [TokenEncryptionService::class, [
                     'payload' => $payload,
-                    'public_key' => File::get(storage_path('app/id_rsa.pub')),
+                    'public_key' => File::get(storage_path('app'.DIRECTORY_SEPARATOR.'id_rsa.pub')),
                 ]];
             },
 

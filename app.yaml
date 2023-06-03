@@ -1,7 +1,12 @@
-runtime: php74
+runtime: php82
 service: api
 entrypoint: serve public/index.php
+handlers:
+  - url: /.*
+    script: auto
+    secure: always
 env_variables:
+  APP_ENV: production
   APP_STORAGE: /tmp
   VIEW_COMPILED_PATH: /tmp
   APP_SERVICES_CACHE: /tmp/services.php

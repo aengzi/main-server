@@ -10,12 +10,12 @@
     "type": "project",
     "require": {
         "php": ">=7.4",
-        "functional-coding/php": "dev-master",
-        "functional-coding/php-eloquent-orm": "dev-master",
-        "functional-coding/php-jwt": "dev-master",
-        "google/apiclient": "dev-main",
+        "functional-coding/base": "dev-master",
+        "functional-coding/eloquent-orm": "dev-master",
+        "functional-coding/jwt": "dev-master",
+        "google/apiclient": "^2.14.0",
         "google/cloud-logging": "^1.22",
-        "google/cloud-storage": "dev-master",
+        "google/cloud-storage": "^1.31.2",
         "google/cloud-tasks": "^1.9",
         "laravel/lumen-framework": "^8.0",
         "nesbot/carbon": "^2.38",
@@ -32,7 +32,10 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "classmap": [
+            "database"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
@@ -41,8 +44,7 @@
     },
     "config": {
         "preferred-install": "dist",
-        "sort-packages": true,
-        "optimize-autoloader": true
+        "sort-packages": true
     },
     "minimum-stability": "dev",
     "prefer-stable": true,

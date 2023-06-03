@@ -1,8 +1,22 @@
-Thumbs.db
-.DS_Store
-*.cache
-/.env
-/.env.*
+# dependencies
+/vendor
+
+# editor
 /.idea
 /.vscode
-/vendor
+
+# environment
+/.env.*
+
+# phpunit
+.phpunit.result.cache
+
+# php-cs-fixer
+.php-cs-fixer.cache
+
+# docker
+/wait-for-it.sh
+
+# os generated files
+Thumbs.db
+.DS_Store

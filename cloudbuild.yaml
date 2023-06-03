@@ -1,11 +1,36 @@
 steps:
-- name: gcr.io/cloud-builders/docker
-  entrypoint: bash
-  args:
-    - '-c'
-    - docker run -t test01 bash /bin/bash -c 'cd / && touch test.txt'
-- name: test01
-  entrypoint: bash
-  args:
-    - '-c'
-    - ls -al /
+  - id: "download secret files"
+    name: gcr.io/cloud-builders/gcloud
+    entrypoint: bash
+    args:
+      - "-c"
+      - declare -A secrets=(
+        ["env-production"]=".env.production"
+        ["env-testing"]=".env.testing"
+        ["service-account"]="storage/app/gcp-credentials.json"
+        ["id_rsa"]="storage/app/id_rsa"
+        ["id_rsa-pub"]="storage/app/id_rsa.pub"
+        ["database-client-cert"]="storage/app/database-client-cert.pem"
+        ["database-client-key"]="storage/app/database-client-key.pem"
+        ["database-server-ca"]="storage/app/database-server-ca.pem"
+        ) &&
+        for secret in "${!secrets[@]}";
+        do gcloud secrets versions access latest --secret=$secret > ${secrets[$secret]};
+        done;
+
+  - id: "start docker services"
+    name: "docker/compose"
+    args: ["up", "-d"]
+
+  - id: "check docker services is ready"
+    name: "gcr.io/cloud-builders/docker"
+    args:
+      ["exec", "-t", "nginx", "./wait-for-it.sh", "--timeout=0", "localhost:80"]
+
+  - id: "run tests"
+    name: "gcr.io/cloud-builders/docker"
+    args: ["exec", "-t", "php", "php", "./vendor/bin/phpunit"]
+
+  - id: "deploy application"
+    name: "gcr.io/cloud-builders/gcloud"
+    args: ["app", "deploy", "--version", "0-1-0", "--no-cache"]

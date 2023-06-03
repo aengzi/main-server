@@ -1,0 +1,80 @@
+version: "3.8"
+services:
+  php:
+    # build:
+    #   context: ./.docker/php/
+    image: gcr.io/aengzi/php-fpm:8.2
+    container_name: php
+    ports:
+      - 9000:9000
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    volumes:
+      - ./:/var/www/html
+      - ./.docker/php/zz-docker.conf:/usr/local/etc/php-fpm.d/zz-docker.conf
+    tmpfs:
+      - /var/www/html/vendor:rw
+    entrypoint: bash
+    command:
+      - -c
+      - |
+        curl https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh > wait-for-it.sh
+        chmod +x wait-for-it.sh
+        ./wait-for-it.sh --timeout=0 "db:3306"
+        composer install
+        APP_ENV=testing php artisan migrate
+        APP_ENV=development php artisan migrate
+        php-fpm
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - 80:80
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    volumes:
+      - ./:/var/www/html
+      - ./.docker/nginx/conf.d:/etc/nginx/conf.d/
+    tmpfs:
+      - /var/www/html/vendor:rw
+    entrypoint: bash
+    command:
+      - -c
+      - |
+        curl https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh > wait-for-it.sh
+        chmod +x wait-for-it.sh
+        ./wait-for-it.sh --timeout=0 "php:9000"
+        nginx -g "daemon off;"
+  db:
+    image: mysql:8
+    container_name: db
+    ports:
+      - 3306:3306
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    tmpfs:
+      - /var/lib/mysql:rw
+    volumes:
+      - ./.docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    command:
+      - --skip-innodb-adaptive-hash-index
+      - --innodb-compression-level=0
+      - --innodb-file-per-table=ON
+      - --default-authentication-plugin=mysql_native_password
+      - --skip-character-set-client-handshake
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_general_ci
+      - --character-set-filesystem=binary
+      - --disable-log-bin
+      - --binlog-format=ROW
+      - --sql-mode=TRADITIONAL
+      - --skip-performance-schema
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: phpmyadmin
+    ports:
+      - 8080:80
+    environment:
+      PMA_HOST: host.docker.internal
