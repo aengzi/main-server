@@ -12,8 +12,8 @@
 */
 
 use App\Http\Middlewares\RequestInputValueCastingMiddleware;
-use App\Http\Middlewares\ServiceParameterSettingMiddleware;
-use App\Http\Middlewares\ServiceRunMiddleware;
+use FunctionalCoding\ORM\Eloquent\Http\ServiceParameterMiddleware;
+use FunctionalCoding\ORM\Eloquent\Http\ServiceRunMiddleware;
 use Illuminate\Support\Str;
 
 $addRoutes = function () use ($router) {
@@ -28,7 +28,7 @@ $addRoutes = function () use ($router) {
         'prefix' => $prefix,
         'middleware' => [
             ServiceRunMiddleware::class,
-            ServiceParameterSettingMiddleware::class,
+            ServiceParameterMiddleware::class,
             RequestInputValueCastingMiddleware::class,
         ],
     ], function () use ($router, $prefix) {

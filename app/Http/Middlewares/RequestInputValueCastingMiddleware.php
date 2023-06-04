@@ -15,6 +15,8 @@ class RequestInputValueCastingMiddleware
                 $value = false;
             } elseif ('true' === $value) {
                 $value = true;
+            } elseif (is_numeric($value)) {
+                $value = $value * 1;
             }
 
             $request->offsetSet($key, $value);
