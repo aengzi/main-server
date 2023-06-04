@@ -5,6 +5,7 @@ namespace App\Services\Auth;
 use App\Models\User;
 use FunctionalCoding\Service;
 use Google\Cloud\Storage\StorageClient;
+use Illuminate\Support\Arr;
 
 class AuthUserUpdatingService extends Service
 {
@@ -51,8 +52,12 @@ class AuthUserUpdatingService extends Service
                 $authUser->has_thumbnail = true;
             },
 
-            'result' => function ($result) {
-                $result->save();
+            'result.result' => function ($result) {
+                $attrs = Arr::only($result->getDirty(), $result->getFillable());
+
+                User::where('id', $result->getKey())->update($attrs);
+
+                $result->refresh();
             },
         ];
     }
