@@ -11,7 +11,7 @@ class SignUpCreatingService extends Service
     public static function getBindNames()
     {
         return [
-            'user' => 'user who has same email with payload\'s email of {{token}}',
+            'user' => 'user who has same email with payload\'s email of {{auth_token}}',
         ];
     }
 
@@ -23,11 +23,11 @@ class SignUpCreatingService extends Service
     public static function getLoaders()
     {
         return [
-            'payload' => function ($token) {
+            'payload' => function ($authToken) {
                 return [TokenDecryptionService::class, [
-                    'token' => $token,
+                    'token' => $authToken,
                 ], [
-                    'token' => '{{token}}',
+                    'token' => '{{auth_token}}',
                 ]];
             },
 

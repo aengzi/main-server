@@ -19,11 +19,11 @@ class AuthUserRequiringService extends Service
     public static function getLoaders()
     {
         return [
-            'auth_user' => function ($token) {
+            'auth_user' => function ($authToken) {
                 return [AuthUserFindingService::class, [
-                    'token' => $token,
+                    'auth_token' => $authToken,
                 ], [
-                    'token' => '{{token}}',
+                    'auth_token' => '{{auth_token}}',
                 ]];
             },
 
@@ -41,7 +41,7 @@ class AuthUserRequiringService extends Service
     public static function getRuleLists()
     {
         return [
-            'token' => ['required'],
+            'auth_token' => ['required'],
         ];
     }
 

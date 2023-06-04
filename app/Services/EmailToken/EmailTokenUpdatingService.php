@@ -33,11 +33,11 @@ class EmailTokenUpdatingService extends Service
                 return Carbon::now('UTC')->format('Y-m-d H:i:s');
             },
 
-            'payload' => function ($token) {
+            'payload' => function ($authToken) {
                 return [TokenDecryptionService::class, [
-                    'token' => $token,
+                    'token' => $authToken,
                 ], [
-                    'token' => '{{token}}',
+                    'token' => '{{auth_token}}',
                 ]];
             },
 
@@ -77,7 +77,7 @@ class EmailTokenUpdatingService extends Service
 
             'payload_expired_at' => ['required', 'string'],
 
-            'token' => ['required', 'string'],
+            'auth_token' => ['required', 'string'],
         ];
     }
 

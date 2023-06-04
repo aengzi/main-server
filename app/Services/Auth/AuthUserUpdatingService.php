@@ -11,7 +11,7 @@ class AuthUserUpdatingService extends Service
     public static function getBindNames()
     {
         return [
-            'email' => 'email in payload in {{token}}',
+            'email' => 'email in payload in {{auth_token}}',
 
             'same_email_user' => 'same email user',
 
@@ -83,7 +83,7 @@ class AuthUserUpdatingService extends Service
     public static function getPromiseLists()
     {
         return [
-            'result' => ['same_email_user:strict', 'same_nick_user:strict'],
+            'result' => ['same_email_user', 'same_nick_user'],
         ];
     }
 
