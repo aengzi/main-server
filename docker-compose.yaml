@@ -59,18 +59,15 @@ services:
     volumes:
       - ./.docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
     command:
-      - --skip-innodb-adaptive-hash-index
       - --innodb-compression-level=0
       - --innodb-file-per-table=ON
       - --default-authentication-plugin=mysql_native_password
-      - --skip-character-set-client-handshake
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_general_ci
       - --character-set-filesystem=binary
       - --disable-log-bin
       - --binlog-format=ROW
       - --sql-mode=TRADITIONAL
-      - --skip-performance-schema
   phpmyadmin:
     image: phpmyadmin
     container_name: phpmyadmin
@@ -78,3 +75,5 @@ services:
       - 8080:80
     environment:
       PMA_HOST: host.docker.internal
+      PMA_USER: root
+      PMA_PASSWORD:
