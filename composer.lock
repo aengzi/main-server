@@ -431,12 +431,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/functional-coding/php.git",
-                "reference": "f7bcb2b1f8a167f3a7a7e5d6b591c0590ff38afe"
+                "reference": "92d7fea668396a3458d1107262079b3f097f388e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/functional-coding/php/zipball/f7bcb2b1f8a167f3a7a7e5d6b591c0590ff38afe",
-                "reference": "f7bcb2b1f8a167f3a7a7e5d6b591c0590ff38afe",
+                "url": "https://api.github.com/repos/functional-coding/php/zipball/92d7fea668396a3458d1107262079b3f097f388e",
+                "reference": "92d7fea668396a3458d1107262079b3f097f388e",
                 "shasum": ""
             },
             "require": {
@@ -469,7 +469,7 @@
                 "issues": "https://github.com/functional-coding/php/issues",
                 "source": "https://github.com/functional-coding/php/tree/master"
             },
-            "time": "2023-05-24T01:13:17+00:00"
+            "time": "2023-06-07T09:33:27+00:00"
         },
         {
             "name": "functional-coding/eloquent-orm",
@@ -477,12 +477,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/functional-coding/php-eloquent-ORM.git",
-                "reference": "a9b4d1fca813620bd29c7a55602830157b661982"
+                "reference": "3b460ac2bbb93fe9685ca53d4da69f8cfe28b55a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/functional-coding/php-eloquent-ORM/zipball/a9b4d1fca813620bd29c7a55602830157b661982",
-                "reference": "a9b4d1fca813620bd29c7a55602830157b661982",
+                "url": "https://api.github.com/repos/functional-coding/php-eloquent-ORM/zipball/3b460ac2bbb93fe9685ca53d4da69f8cfe28b55a",
+                "reference": "3b460ac2bbb93fe9685ca53d4da69f8cfe28b55a",
                 "shasum": ""
             },
             "require": {
@@ -518,7 +518,7 @@
                 "issues": "https://github.com/functional-coding/php-eloquent-ORM/issues",
                 "source": "https://github.com/functional-coding/php-eloquent-ORM/tree/master"
             },
-            "time": "2023-05-28T01:56:30+00:00"
+            "time": "2023-06-12T13:17:22+00:00"
         },
         {
             "name": "functional-coding/jwt",
@@ -526,12 +526,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/functional-coding/php-JWT.git",
-                "reference": "f88efb0f5ed1a985f3f5d2af3ed96dcb7c1835db"
+                "reference": "409b898b07c18f5074441a4e72b0f671ccc0fb67"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/functional-coding/php-JWT/zipball/f88efb0f5ed1a985f3f5d2af3ed96dcb7c1835db",
-                "reference": "f88efb0f5ed1a985f3f5d2af3ed96dcb7c1835db",
+                "url": "https://api.github.com/repos/functional-coding/php-JWT/zipball/409b898b07c18f5074441a4e72b0f671ccc0fb67",
+                "reference": "409b898b07c18f5074441a4e72b0f671ccc0fb67",
                 "shasum": ""
             },
             "require": {
@@ -566,7 +566,7 @@
                 "issues": "https://github.com/functional-coding/php-JWT/issues",
                 "source": "https://github.com/functional-coding/php-JWT/tree/master"
             },
-            "time": "2023-05-24T19:20:39+00:00"
+            "time": "2023-06-12T07:11:33+00:00"
         },
         {
             "name": "google/apiclient",
