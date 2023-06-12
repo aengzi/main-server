@@ -9,8 +9,7 @@ class LolMetaSeeder extends Seeder
 {
     public function run(): void
     {
-        for ($i = 0; $i < 100; ++$i) {
-            LolMeta::factory()->create();
-        }
+        for ($i = 0; $i < 100; ++$i);
+        // LolMeta::factory()->create();
     }
 }

@@ -8,10 +8,12 @@ class LolChampionFactory extends Factory
 {
     public function definition()
     {
+        $key = $this->faker->unique()->lexify();
+
         return [
             // 'id',
-            'key' => $this->faker->word,
-            'name' => $this->faker->word,
+            'key' => $key,
+            'name' => $key,
         ];
     }
 }
