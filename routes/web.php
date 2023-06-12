@@ -12,6 +12,7 @@
 */
 
 use App\Http\Middlewares\RequestInputValueCastingMiddleware;
+use App\Http\Middlewares\ResponseHeaderSettingMiddleware;
 use FunctionalCoding\ORM\Eloquent\Http\ServiceParameterMiddleware;
 use FunctionalCoding\ORM\Eloquent\Http\ServiceRunMiddleware;
 use Illuminate\Support\Str;
@@ -30,6 +31,7 @@ $addRoutes = function () use ($router) {
             ServiceRunMiddleware::class,
             ServiceParameterMiddleware::class,
             RequestInputValueCastingMiddleware::class,
+            ResponseHeaderSettingMiddleware::class,
         ],
     ], function () use ($router, $prefix) {
         $router->get('/', function () use ($router, $prefix) {
