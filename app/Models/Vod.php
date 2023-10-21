@@ -51,14 +51,14 @@ class Vod extends Model
     {
         $bucketName = $this->getBucketNameAttribute();
 
-        return 'https://storage.googleapis.com/'.$bucketName.'/vods/'.$this->getKey().'/file.m3u8';
+        return 'production' == env('APP_ENV') ? 'https://storage.googleapis.com/'.$bucketName.'/vods/'.$this->getKey().'/file.m3u8' : 'https://devstreaming-cdn.apple.com/videos/streaming/examples/img_bipbop_adv_example_fmp4/master.m3u8';
     }
 
     public function getThumbnailAttribute()
     {
         $bucketName = $this->getBucketNameAttribute();
 
-        return 'https://storage.googleapis.com/'.$bucketName.'/vods/'.$this->getKey().'/origin.jpg';
+        return 'production' == env('APP_ENV') ? 'https://storage.googleapis.com/'.$bucketName.'/vods/'.$this->getKey().'/origin.jpg' : 'https://via.placeholder.com/300x300';
     }
 
     public function like()

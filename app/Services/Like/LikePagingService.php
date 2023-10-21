@@ -83,7 +83,7 @@ class LikePagingService extends Service
 
             'related_type' => ['required_with:{{related_id}}', 'string', 'in_array:{{available_related_types}}.*'],
 
-            'related_types' => ['string', 'several_in:{{available_related_types}}'],
+            'related_types' => ['string', 'some_of_array:{{available_related_types}}'],
 
             'user' => ['not_null'],
 

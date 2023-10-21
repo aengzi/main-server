@@ -17,7 +17,6 @@ class CreateLolChampionsTable extends Migration
             $table
                 ->integer('id')
                 ->unsigned()
-                ->autoIncrement()
             ;
             $table
                 ->string('key')

@@ -18,13 +18,13 @@ class PubgGame extends Model
         'started_at',
         'offset',
         'summary',
-        'match',
+        'matches',
         'deaths',
     ];
     protected $guarded = ['id'];
     protected $hidden = [
         'offset',
-        'match',
+        'matches',
         'deaths',
     ];
 
