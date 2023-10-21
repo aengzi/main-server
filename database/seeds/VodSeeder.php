@@ -2,15 +2,22 @@
 
 namespace Database\Seeds;
 
-use App\Models\Vod;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class VodSeeder extends Seeder
 {
     public function run(): void
     {
-        for ($i = 0; $i < 100; ++$i) {
-            Vod::factory()->create();
-        }
+        DB::unprepared(
+            file_get_contents(
+                base_path('.docker/mysql/vods(lol_game).sql')
+            )
+        );
+        DB::unprepared(
+            file_get_contents(
+                base_path('.docker/mysql/vods(pubg_game).sql')
+            )
+        );
     }
 }

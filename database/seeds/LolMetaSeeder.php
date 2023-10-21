@@ -2,14 +2,17 @@
 
 namespace Database\Seeds;
 
-use App\Models\LolMeta;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class LolMetaSeeder extends Seeder
 {
     public function run(): void
     {
-        for ($i = 0; $i < 100; ++$i);
-        // LolMeta::factory()->create();
+        DB::unprepared(
+            file_get_contents(
+                base_path('.docker/mysql/lol_metas.sql')
+            )
+        );
     }
 }

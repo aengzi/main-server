@@ -2,15 +2,17 @@
 
 namespace Database\Seeds;
 
-use App\Models\PubgMeta;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class PubgMetaSeeder extends Seeder
 {
     public function run(): void
     {
-        for ($i = 0; $i < 100; ++$i) {
-            PubgMeta::factory()->create();
-        }
+        DB::unprepared(
+            file_get_contents(
+                base_path('.docker/mysql/pubg_metas.sql')
+            )
+        );
     }
 }

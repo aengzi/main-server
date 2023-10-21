@@ -2,15 +2,17 @@
 
 namespace Database\Seeds;
 
-use App\Models\LolTimeline;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class LolTimelineSeeder extends Seeder
 {
     public function run(): void
     {
-        for ($i = 0; $i < 100; ++$i) {
-            LolTimeline::factory()->create();
-        }
+        DB::unprepared(
+            file_get_contents(
+                base_path('.docker/mysql/lol_timelines.sql')
+            )
+        );
     }
 }

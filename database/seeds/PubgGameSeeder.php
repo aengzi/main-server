@@ -2,15 +2,17 @@
 
 namespace Database\Seeds;
 
-use App\Models\PubgGame;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class PubgGameSeeder extends Seeder
 {
     public function run(): void
     {
-        for ($i = 0; $i < 100; ++$i) {
-            PubgGame::factory()->create();
-        }
+        DB::unprepared(
+            file_get_contents(
+                base_path('.docker/mysql/pubg_games.sql')
+            )
+        );
     }
 }
